@@ -1,0 +1,57 @@
+﻿body {
+}
+
+.titolo { font-weight: bold; float:left;}
+.dato { float:left;}
+.riga { margin-bottom: 10px; padding-bottom:10px;float:left; width: 100%; }
+.RisultatiContainer, .risultatiAnagrafeAnimali, .risultatiOrdinanze { float: left; width: 100%; border-bottom: 1px solid #000; margin-top: 10px;}
+.footer { float: left; }
+.ui-popup .ui-content {
+    height: 150px !important;
+}
+.risultati { margin-bottom: 5px; }
+
+
+td.details-control {
+    background: url('../Images/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+ 
+tr.shown td.details-control {
+    background: url('../Images/details_close.png') no-repeat center center;
+}
+ 
+div.slider,  div.sliderResidenti{
+    display: none;
+}
+
+.separatore { background-color: #000099; text-align:center; color:#FFF; }
+ 
+table.dataTable tbody td.no-padding {
+    padding: 0;
+}
+
+.ui-btn-up-b {
+border: 1px solid #044062 /*{b-bup-border}*/;
+background: #396b9e /*{b-bup-background-color}*/;
+font-weight: bold;
+color: #fff /*{b-bup-color}*/;
+text-shadow: 0 /*{b-bup-shadow-x}*/ 1px /*{b-bup-shadow-y}*/ 1px /*{b-bup-shadow-radius}*/ #194b7e /*{b-bup-shadow-color}*/;
+background-image: -webkit-gradient(linear, left top, left bottom, from( #5f9cc5 /*{b-bup-background-start}*/), to( #396b9e /*{b-bup-background-end}*/));
+background-image: -webkit-linear-gradient( #5f9cc5 /*{b-bup-background-start}*/, #396b9e /*{b-bup-background-end}*/);
+background-image: -moz-linear-gradient( #5f9cc5 /*{b-bup-background-start}*/, #396b9e /*{b-bup-background-end}*/);
+background-image: -ms-linear-gradient( #5f9cc5 /*{b-bup-background-start}*/, #396b9e /*{b-bup-background-end}*/);
+background-image: -o-linear-gradient( #5f9cc5 /*{b-bup-background-start}*/, #396b9e /*{b-bup-background-end}*/);
+background-image: linear-gradient( #5f9cc5 /*{b-bup-background-start}*/, #396b9e /*{b-bup-background-end}*/);
+}
+
+#map_canvas { height: 100%; }
+#content {
+                padding: 0;
+                position : absolute !important;
+                top : 140px !important; 
+                right : 0;
+                bottom : 10px !important; 
+                left : 0 !important;    
+            }
+.backButtonMappa { position : absolute !important; top: 85px;}
