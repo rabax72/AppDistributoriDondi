@@ -50,19 +50,18 @@ function ElencoDistributori() {
             //corsiGlobal = response.d;
             //console.log('Caricati!');
             // console.log(Ordinanze);
-            console.log(risultati);
+            //console.log(risultati);
             //$(".menuPrincipale").hide();
             
 
-var distributori = '<ul data-role="listview" data-filter="true" data-filter-placeholder="Cerca il distributore..." data-inset="true">';
+            var distributori = '<ul data-role="listview" data-filter="true" data-filter-placeholder="Cerca il distributore..." data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">';
 
-for (var i = 0; i < risultati.length; i++) {
-    $(".h1DettDistributore").html('Dettaglio Distributore: ' + risultati[i].descrizione);
-                distributori = distributori + '<li><a href="javascript:GetSituazioneDistributore(' + risultati[i].idDistributore + ');" >' + risultati[i].descrizione + ' - ' + risultati[i].indirizzo + '</a></li>';
+            for (var i = 0; i < risultati.length; i++) {
+                $(".h1DettDistributore").html('Dettaglio Distributore: ' + risultati[i].descrizione);
+                distributori = distributori + '<li><a href="javascript:GetSituazioneDistributore(' + risultati[i].idDistributore + ');" class="ui-btn ui-btn-icon-right ui-icon-carat-r" >' + risultati[i].descrizione + ' - ' + risultati[i].indirizzo + '</a></li>';
                 //$("#" + risultati[i]).show();
             }
             distributori = distributori + '</ul>';
-
             //if (risultati == "autenticato") {
             //    location.hash = "ElencoDistributori";
             //} else {
