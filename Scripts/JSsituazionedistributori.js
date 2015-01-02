@@ -62,7 +62,7 @@ function GetSituazioneDistributore(IdDistributore) {
                 //var quantitaRimasta = $("#rimastoLotto" + risultati[i].IdSituazioneDistributore).val();
                 //var prezzoTotale = (quantitaRimasta * risultati[i].prezzo);
                 dettaglio = dettaglio + '<tr>';                
-                dettaglio = dettaglio + '<td><img src="/Immagini/' + risultati[i].foto + '"></td>';
+                dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].quantita + '</td>';
                 dettaglio = dettaglio + '<td>Resi <input type="number" id="resoLotto' + risultati[i].IdSituazioneDistributore + '" data-clear-btn="true"> <a href="#" data-IdSituazioneDistributore="' + risultati[i].IdSituazioneDistributore + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdDistributore="' + risultati[i].IdDistributore + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active resi">Salva</a> </td>';
