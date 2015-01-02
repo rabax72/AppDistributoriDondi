@@ -31,7 +31,7 @@ function ElencoDistributori() {
         contentType: "application/json; charset=utf-8",
         url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetElencoDistributori",
         //url: "WS_OrdinanzeApp.asmx/Hello",
-        url: "WebServiceAppDondi.asmx/GetElencoDistributori",
+        //url: "WebServiceAppDondi.asmx/GetElencoDistributori",
         cache: false,
         //jsonpCallback: 'risposta',
         // jsonp: 'callback',
