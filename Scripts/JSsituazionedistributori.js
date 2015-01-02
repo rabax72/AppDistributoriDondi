@@ -23,8 +23,7 @@ function GetSituazioneDistributore(IdDistributore) {
         data: JSON.stringify({ idDistributore: IdDistributore }),
         //data: { NomeOrdinanza: NomeOrdinanza, DataPubbDa: DataPubbDa, DataPubbA: DataPubbA, DataScadDa: DataScadDa, DataScadA: DataScadA },
         error: function (data) {
-            console.log(data.responseText);
-            $('.DettaglioDistributore').html(data.responseText);
+            console.log(data.responseText)
         },
         beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
         complete: function () { $.mobile.loading('hide'); }, //Hide spinner
