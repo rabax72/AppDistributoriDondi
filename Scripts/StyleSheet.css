@@ -60,10 +60,14 @@ background-image: linear-gradient( #5f9cc5 /*{b-bup-background-start}*/, #396b9e
     color: red;
 }
 
-.resi, .rimasti {
-    width: 100px;
+.resi, .rimasti, .caricaProdInDistributore {
+    width: 60px;
 }
 
 .miniInput {
-    width: 100px;
+    width: 60px;
+}
+
+.evidenziaErrore {
+    border: 2px solid red;
 }
