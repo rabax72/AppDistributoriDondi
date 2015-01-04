@@ -16,17 +16,11 @@ function ElencoProdottiInMagazzino(idDistributore) {
         type: "POST",
         crossDomain: true,
         contentType: "application/json; charset=utf-8",
-        url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiInMagazzino",
-        //url: "WS_OrdinanzeApp.asmx/Hello",
+        url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiInMagazzino",        
         //url: "WebServiceAppDondi.asmx/GetProdottiInMagazzino",
-        cache: false,
-        //jsonpCallback: 'risposta',
-        // jsonp: 'callback',
-        // dataType: "jsonp",            
-        async: true,
-        //            data: "idDisciplina=" + idDisciplina,
-        data: JSON.stringify({  }),
-        //data: { NomeOrdinanza: NomeOrdinanza, DataPubbDa: DataPubbDa, DataPubbA: DataPubbA, DataScadDa: DataScadDa, DataScadA: DataScadA },
+        cache: false,                   
+        async: true,        
+        data: JSON.stringify({  }),        
         error: function (data) {
             console.log(data.responseText)
         },
@@ -34,9 +28,7 @@ function ElencoProdottiInMagazzino(idDistributore) {
         complete: function () { $.mobile.loading('hide'); }, //Hide spinner
         success: function (response) {
             risultati = response.d;
-            //corsiGlobal = response.d;
-            //console.log('Caricati!');
-            // console.log(Ordinanze);
+            
             console.log(risultati);
             //$(".menuPrincipale").hide();
             
@@ -62,8 +54,7 @@ function ElencoProdottiInMagazzino(idDistributore) {
                                         '<tbody>';
             
             for (var i = 0; i < risultati.length; i++) {
-                //var quantitaRimasta = $("#rimastoLotto" + risultati[i].IdSituazioneDistributore).val();
-                //var prezzoTotale = (quantitaRimasta * risultati[i].prezzo);
+                
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
@@ -95,9 +86,23 @@ function ElencoProdottiInMagazzino(idDistributore) {
                 var idOperatore = $(this).attr('data-idOperatore');
                 var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
 
-                //javascript: SalvaRimasti(' + risultati[i].IdSituazioneDistributore + ', ' + risultati[i].IdDistributore + ', ' + risultati[i].idProdotto + ', ' + $(".rimasto").prev().val() + ', ' + prezzoTotale + ', ' + risultati[i].IdOperatore + ', ' + risultati[i].numeroLotto + ');
-                //alert('IdMagazzino=' + IdMagazzino + ' idDistributore=' + idDistributore + ' idProdotto=' + idProdotto + ' prezzo=' + prezzo + ' quantitaCaricati=' + quantitaCaricati + ' quantitaRimasti=' + quantitaRimasti + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto);
-                //console.log(' quantita=' + quantita);
+                //alert('quantitaCaricati=' + quantitaCaricati + ' isUint8(parseInt(quantitaCaricati))=' + isUint8(parseInt(quantitaCaricati)));
+
+                if (quantitaCaricati == "" || isUint8(parseInt(quantitaCaricati)) == false) {
+                    alert("Scegli un valore Numerico prima di caricare");                    
+                    $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
+                    return;
+                } else {
+                    $(this).prev().removeClass("evidenziaErrore");
+                }
+
+                if (parseInt(quantitaCaricati) > parseInt(quantitaAttuale)) {
+                    alert("E' impossibile che ci siano da caricare più prodotti di quelli presenti!");                    
+                    $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
+                    return;
+                } else {
+                    $(this).prev().removeClass("evidenziaErrore");
+                }
 
                 CaricaProdottiInDistributore(IdMagazzino, idDistributore, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto);
 

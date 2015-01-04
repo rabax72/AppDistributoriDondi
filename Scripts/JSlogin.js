@@ -39,6 +39,14 @@
 
 });
 
+function isInt32(n) {
+    return +n === n && !(n % 1) && n < 0x80000000 && n >= -0x80000000;
+}
+
+function isUint8(n) {
+    return +n === n && !(n % 1) && n < 0x100 && n >= 0;
+}
+
 function parseJsonDate(jsonDate) {
     var offset = new Date().getTimezoneOffset() * 60000;
     var parts = /\/Date\((-?\d+)([+-]\d{2})?(\d{2})?.*/.exec(jsonDate);
@@ -72,17 +80,11 @@ function Autenticazione(user, password) {
         type: "POST",
         crossDomain: true,
         contentType: "application/json; charset=utf-8",
-        url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetAuthentication",
-        //url: "WS_OrdinanzeApp.asmx/Hello",
+        url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetAuthentication",        
         //url: "WebServiceAppDondi.asmx/GetAuthentication",
-        cache: false,
-        //jsonpCallback: 'risposta',
-        // jsonp: 'callback',
-        // dataType: "jsonp",            
-        async: true,
-        //            data: "idDisciplina=" + idDisciplina,
-        data: JSON.stringify({ user: user, password: password }),
-        //data: { NomeOrdinanza: NomeOrdinanza, DataPubbDa: DataPubbDa, DataPubbA: DataPubbA, DataScadDa: DataScadDa, DataScadA: DataScadA },
+        cache: false,                   
+        async: true,       
+        data: JSON.stringify({ user: user, password: password }),        
         error: function (data) {
             console.log(data.responseText)
         },
@@ -90,14 +92,8 @@ function Autenticazione(user, password) {
         complete: function () { $.mobile.loading('hide'); }, //Hide spinner
         success: function (response) {
             risultati = response.d;
-            //corsiGlobal = response.d;
-            //console.log('Caricati!');
-            // console.log(Ordinanze);
-            console.log(risultati);
-            //$(".menuPrincipale").hide();
-            //for (var i = 0; i < risultati.length; i++) {
-            //    $("#" + risultati[i]).show();
-            //}
+            
+            console.log(risultati);           
 
             if (risultati == "autenticato") {
                 ElencoDistributori();
@@ -105,7 +101,6 @@ function Autenticazione(user, password) {
             } else {
                 $("#authResult").html('User o Password Errati!!!');
             }
-
 
         }
 

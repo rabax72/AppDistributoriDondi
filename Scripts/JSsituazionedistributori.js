@@ -15,8 +15,7 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
         type: "POST",
         crossDomain: true,
         contentType: "application/json; charset=utf-8",
-        url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetSituazioneDistributore",
-        //url: "WS_OrdinanzeApp.asmx/Hello",
+        url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetSituazioneDistributore",        
         //url: "WebServiceAppDondi.asmx/GetSituazioneDistributore",
         cache: false,
         //jsonpCallback: 'risposta',
@@ -66,7 +65,7 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                 //var prezzoTotale = (quantitaRimasta * risultati[i].prezzo);
                 dettaglio = dettaglio + '<tr>';                
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
+                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '<br>(' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].quantita + '</td>';
                 dettaglio = dettaglio + '<td>Resi <input type="number" id="resoLotto' + risultati[i].IdSituazioneDistributore + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneDistributore="' + risultati[i].IdSituazioneDistributore + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdDistributore="' + risultati[i].IdDistributore + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active resi">Salva</a> </td>';
                 dettaglio = dettaglio + '<td>Rimasti <input type="number" id="rimastoLotto' + risultati[i].IdSituazioneDistributore + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneDistributore="' + risultati[i].IdSituazioneDistributore + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdDistributore="' + risultati[i].IdDistributore + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti">Salva</a> </td>';
@@ -93,13 +92,16 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                 var prezzoTotaleRimasti = (prezzo * quantitaRimasti);
                 var prezzoTotaleVenduti = (prezzo * quantitaVenduti);
                 var idOperatore = $(this).attr('data-idOperatore');
-                var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
+                var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));                
 
-                //javascript: SalvaRimasti(' + risultati[i].IdSituazioneDistributore + ', ' + risultati[i].IdDistributore + ', ' + risultati[i].idProdotto + ', ' + $(".rimasto").prev().val() + ', ' + prezzoTotale + ', ' + risultati[i].IdOperatore + ', ' + risultati[i].numeroLotto + ');
-                //alert('IdSituazioneDistributore=' + IdSituazioneDistributore + ' idProdotto=' + idProdotto + ' prezzo=' + prezzo + ' quantita=' + quantita + ' prezzoTotale=' + prezzoTotale + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto);
-                //console.log(' quantita=' + quantita);
-                //alert('quantitaRimasti=' + quantitaRimasti + 'quantitaAttuale=' + quantitaAttuale);
-                //return;
+                if (quantitaRimasti == "" || isUint8(parseInt(quantitaRimasti)) == false) {
+                    alert("Scegli un valore Numerico prima di caricare");
+                    $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
+                    return;
+                } else {
+                    $(this).prev().removeClass("evidenziaErrore");
+                }
+
                 if (parseInt(quantitaRimasti) > parseInt(quantitaAttuale)) {
                     alert("E' impossibile che siano rimasti più prodotti di quelli presenti!");
                     //$(this).prev().animate({ backgroundcolor: "red" }, 1000);
@@ -135,6 +137,14 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                 var idOperatore = $(this).attr('data-idOperatore');
                 var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));               
                 var quantitaRimasta = (quantitaDist - quantitaResi);
+
+                if (quantitaResi == "" || isUint8(parseInt(quantitaResi)) == false) {
+                    alert("Scegli un valore Numerico prima di caricare");
+                    $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
+                    return;
+                } else {
+                    $(this).prev().removeClass("evidenziaErrore");
+                }
 
                 if (parseInt(quantitaResi) > parseInt(quantitaDist)) {
                     alert("E' impossibile che siano più prodotti Resi di quelli presenti!");
