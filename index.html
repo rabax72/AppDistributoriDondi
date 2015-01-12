@@ -40,9 +40,7 @@
 <!--**** LOGIN *****************************************************-->
 <div data-role="page" id="Login" class="jqm-demos" data-quicklinks="true">
         <div data-role="header">
-            <h1>Area Riservata - App Dondi</h1>
-
-            
+            <h1>Area Riservata - App Doldi</h1>            
 
         </div><!-- /header -->
         <div role="main" class="ui-content">
@@ -300,8 +298,18 @@
 <div data-role="page" id="formProdottiInMagazzino">
         <div data-role="header">
             <h1>Elenco Prodotti in Magazzino</h1>
-            <a href="#ElencoDistributori" data-icon="grid" class="ui-corner-all ui-shadow ui-btn-active ui-btn-left">Elenco Distributori</a>            
-            <a href="#" data-icon="arrow-l" class="ui-corner-all ui-shadow ui-btn-active backDistributore">Back</a>
+            <div>
+            <a href="#popupMenu6" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-left ui-btn-a">MENU</a>
+	            <div data-role="popup" id="Div2" data-theme="b">
+			        <ul data-role="listview" data-inset="true" style="min-width:210px;">
+				        <li data-role="list-divider">Menu</li>
+				        <li><a href="#ElencoDistributori">Elenco Distributori</a></li>
+				        <li><a href="#ElencoClienti">Elenco Clienti</a></li>				            
+				        <li><a href="#Login">Log Out</a></li>
+			        </ul>
+	            </div>
+            </div><!--/Menu -->
+            <a href="#" data-icon="arrow-l" class="ui-corner-all ui-shadow ui-btn-active ui-btn-right backDistributore">Back</a>
             <!--<div data-role="navbar">
                 <ul>
                     <li><a href="#ElencoDistributori" data-icon="grid" class="ui-corner-all ui-shadow ui-btn-active">Elenco Distributori</a></li>
