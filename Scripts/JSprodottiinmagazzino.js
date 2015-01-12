@@ -5,7 +5,7 @@
         $(".descDistributore").html('Carica per:' + descDistributore);
         var desc = '\'' + descDistributore + '\'';
         var linkBack = 'javascript:GetSituazioneDistributore(' + idDistributore + ', ' + desc + ');'
-        $("#backDistributore").attr("href", linkBack);
+        $(".backDistributore").attr("href", linkBack);
 
         ElencoProdottiInMagazzino(idDistributore);
     });
@@ -16,8 +16,8 @@ function ElencoProdottiInMagazzino(idDistributore) {
         type: "POST",
         crossDomain: true,
         contentType: "application/json; charset=utf-8",
-        url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiInMagazzino",        
-        //url: "WebServiceAppDondi.asmx/GetProdottiInMagazzino",
+        //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiInMagazzino",        
+        url: urlGetProdottiInMagazzino,
         cache: false,                   
         async: true,        
         data: JSON.stringify({  }),        
@@ -123,15 +123,16 @@ function ElencoProdottiInMagazzino(idDistributore) {
 
 }
 
-function CaricaProdottiInDistributore(IdMagazzino, idDistributore, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto) {
+//questa era quella che usavo quando caricavo da Magazzino a distributore, ora si carica da magazzzino a camion e da camion a distributore
+function CaricaProdottiInDistributoreOld(IdMagazzino, idDistributore, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto) {
 
     // Storicizzo Prodotti in magazzino ************************************************
     $.ajax({
         type: "POST",
         crossDomain: true,
         contentType: "application/json; charset=utf-8",
-        url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/StoricizzoProdottoInMagazzino",        
-        //url: "WebServiceAppDondi.asmx/StoricizzoProdottoInMagazzino",
+        //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/StoricizzoProdottoInMagazzino",        
+        url: urlStoricizzoProdottiInMagazzino,
         cache: false,
                    
         async: true,
@@ -158,8 +159,8 @@ function CaricaProdottiInDistributore(IdMagazzino, idDistributore, idProdotto, q
         type: "POST",
         crossDomain: true,
         contentType: "application/json; charset=utf-8",
-        url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzino",
-        //url: "WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzino",
+        //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzino",
+        url: urlQuantitaProdottiInMagazzino,
         cache: false,
         async: true,        
         data: JSON.stringify({ idProdotto: idProdotto, quantita: quantitaRimasti, prezzoTotale: prezzoTotaleRimasti, idOperatore: idOperatore, numeroLotto: numeroLotto }),

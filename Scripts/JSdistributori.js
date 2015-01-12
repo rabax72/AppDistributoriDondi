@@ -15,9 +15,8 @@ function ElencoDistributori() {
         type: "POST",
         crossDomain: true,
         contentType: "application/json; charset=utf-8",
-        url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetElencoDistributori",
-        //url: "WS_OrdinanzeApp.asmx/Hello",
-        //url: "WebServiceAppDondi.asmx/GetElencoDistributori",
+        //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetElencoDistributori",        
+        url: urlGetElencoDistributori,
         cache: false,
         //jsonpCallback: 'risposta',
         // jsonp: 'callback',
@@ -36,7 +35,7 @@ function ElencoDistributori() {
             //corsiGlobal = response.d;
             //console.log('Caricati!');
             // console.log(Ordinanze);
-            console.log(risultati);
+            //console.log(risultati);
             //$(".menuPrincipale").hide();
             
 
