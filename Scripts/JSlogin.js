@@ -48,6 +48,7 @@ $(function () {
     //$(".menuNavigazione").load("Include/NavBar.htm");
     ElencoMezziPerDistributori();
     ElencoMezziPerClienti();
+    ElencoMezziPerCaricareMerce();
     ElencoDistributori();
     ElencoClienti();
     
@@ -156,6 +157,54 @@ function Autenticazione(user, password) {
 
     });
 
+}
+
+function ElencoMezziPerCaricareMerce() {
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        url: urlGetElencoMezzi,
+        cache: false,
+        async: true,
+        data: JSON.stringify({}),
+        error: function (data) {
+            console.log(data.responseText)
+        },
+        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+        success: function (response) {
+            risultati = response.d;
+            //console.log('elenco mezzi');
+            //console.log(risultati);
+
+            var mezzi = '<li data-role="list-divider">Scegli il mezzo su cui caricare la merce:</li>'
+            for (var i = 0; i < risultati.length; i++) {
+                mezzi = mezzi + '<li><a href="#formPerCaricareMerceSuCamion" class="caricaDaMagazzinoPerCamion" data-idMezzo="' + risultati[i].idMezzo + '" data-descMezzo="' + risultati[i].descrizione + '">' + risultati[i].descrizione + '</a></li>';
+            }
+            $(".mezziDisponibiliPerCaricamentoDaMagazzino").html(mezzi);
+
+            $(".caricaDaMagazzinoPerCamion").on('click', function () {
+
+                var idMezzo = $(this).attr('data-idMezzo');
+                var descMezzo = $(this).attr('data-descMezzo');
+                //var IdCliente = $(this).attr('data-IdCliente');
+                //var descCliente = $(this).attr('data-descCliente');
+                //$("#titoloProdottiInCamionPerCliente").html('Elenco prodotti su:' + descMezzo);
+                $(".h1DettCamion").html('Carica per:' + descMezzo);
+               
+                //alert(idMezzo);
+                //return;
+                ElencoProdottiInMagazzino(idMezzo);
+
+                //ElencoProdottiSuCamionPerCliente(idMezzo, IdCliente);
+            });
+
+            //console.log(risultati);
+
+        }
+
+    });
 }
 
 function ElencoMezziPerClienti() {

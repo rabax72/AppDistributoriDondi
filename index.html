@@ -83,6 +83,65 @@
 </div>
 <!--***************************************************************-->
 
+<!--**** Pagina di Admin - Elenco Mezzi su cui caricare la merce **-->
+<div data-role="page" id="paginaElencoMezzi">
+  <div data-role="header">
+    <h1 id="h1">Mezzi su cui caricare la Merce</h1>
+      <div>
+        <a href="#popupMenuElencoMezzi" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>
+	        <div data-role="popup" id="popupMenuElencoMezzi" data-theme="b">
+			        <ul data-role="listview" data-inset="true" style="min-width:210px;">
+				        <li data-role="list-divider">Menu</li>
+				        <li><a href="#ElencoDistributori">Elenco Distributori</a></li>
+				        <li><a href="#ElencoClienti">Elenco Clienti</a></li>				            
+				        <li><a href="#Login">Log Out</a></li>
+			        </ul>
+	        </div>
+
+        </div>    
+  </div>
+
+    <div>
+	    <ul data-role="listview" data-inset="true" data-divider-theme="a" class="mezziDisponibiliPerCaricamentoDaMagazzino">
+		    <li data-role="list-divider" class="ui-active">Scegli il mezzo su cui caricare la merce:</li>
+		    <li><a href="#">Camion</a></li>									
+	    </ul>
+    </div><!--/Mezzi Disponibili -->   
+
+</div>
+<!--***************************************************************-->
+
+<!--**** Form per caricare Merce su Camion ************************-->
+<div data-role="page" id="formPerCaricareMerceSuCamion">
+        <div data-role="header">
+            <h1 class="h1DettCamion"></h1>
+            <!--<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a> -->
+            <!--<a href="#formProdottiInMagazzino" data-icon="arrow-r" class="ui-corner-all ui-shadow ui-btn-active ui-btn-left caricaDaMagazzino" >Carica</a>-->            
+            <!--<a href="#ElencoClienti" data-icon="grid" class="ui-corner-all ui-shadow ui-btn-active ui-btn-right">Elenco Clienti</a>-->
+            <div>
+            <a href="#popupMenuPerCaricareMerceSuCamion" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>
+	            <div data-role="popup" id="popupMenuPerCaricareMerceSuCamion" data-theme="b">
+			            <ul data-role="listview" data-inset="true" style="min-width:210px;">
+				            <li data-role="list-divider">Menu</li>
+				            <li><a href="#ElencoDistributori">Elenco Distributori</a></li>
+				            <li><a href="#ElencoClienti">Elenco Clienti</a></li>
+				            
+				            <li><a href="#Login">Log Out</a></li>
+			            </ul>
+	            </div>
+            </div>
+            <a href="#paginaElencoMezzi" data-icon="arrow-l" class="ui-corner-all ui-shadow ui-btn-active ui-btn-right">Back</a>
+        </div><!-- /header -->                
+
+        <div role="main" class="ui-content jqm-content">                
+                                   
+            <div class="MerceDaCaricareSuCamion">Dist 1</div>
+            
+        </div><!-- /content -->        
+    
+    </div><!-- /page -->
+<!--************************************************************************************-->
+
 <!--**** Elenco Clienti *****************************************************-->
 <div data-role="page" id="ElencoClienti" class="ui-responsive-panel">
         <div data-role="header">
@@ -91,17 +150,18 @@
             <a href="#Login" data-icon="gear" class="ui-btn-right ui-corner-all ui-shadow ui-btn-active">LogOut</a>-->
             <!--<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a> -->
             <div>
-            <a href="#popupMenu1" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a">MENU</a>
+            <a href="#popupMenu1" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>
 	            <div data-role="popup" id="popupMenu1" data-theme="b">
 			            <ul data-role="listview" data-inset="true" style="min-width:210px;">
 				            <li data-role="list-divider">Menu</li>
 				            <li><a href="#ElencoDistributori">Elenco Distributori</a></li>
-				            <!--<li><a href="#ElencoClienti">Elenco Clienti</a></li>-->
-				            
+				            <li><a href="#paginaElencoMezzi">Carica la merce su un Mezzo</a></li>				            
 				            <li><a href="#Login">Log Out</a></li>
 			            </ul>
 	            </div>
+
             </div>
+            
         </div><!-- /header -->        
         <div role="main" class="ui-content">  
                                 
@@ -120,13 +180,13 @@
             <!--<a href="#formProdottiInMagazzino" data-icon="arrow-r" class="ui-corner-all ui-shadow ui-btn-active ui-btn-left caricaDaMagazzino" >Carica</a>-->            
             <!--<a href="#ElencoClienti" data-icon="grid" class="ui-corner-all ui-shadow ui-btn-active ui-btn-right">Elenco Clienti</a>-->
             <div>
-            <a href="#popupMenu2" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-left ui-btn-a">MENU</a>
+            <a href="#popupMenu2" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>
 	            <div data-role="popup" id="popupMenu2" data-theme="b">
 			            <ul data-role="listview" data-inset="true" style="min-width:210px;">
 				            <li data-role="list-divider">Menu</li>
 				            <li><a href="#ElencoDistributori">Elenco Distributori</a></li>
 				            <li><a href="#ElencoClienti">Elenco Clienti</a></li>
-				            
+				            <li><a href="#paginaElencoMezzi">Carica la merce su un Mezzo</a></li>		
 				            <li><a href="#Login">Log Out</a></li>
 			            </ul>
 	            </div>
@@ -159,13 +219,13 @@
             <h1>Elenco Distributori</h1>            
             <!--<a href="#nav-panel" data-icon="bars">Menu</a> -->
             <div>
-            <a href="#popupMenu3" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-left ui-btn-a">MENU</a>
+            <a href="#popupMenu3" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>
 	            <div data-role="popup" id="popupMenu3" data-theme="b">
 			            <ul data-role="listview" data-inset="true" style="min-width:210px;">
 				            <li data-role="list-divider">Menu</li>
 				            <!--<li><a href="#ElencoDistributori">Elenco Distributori</a></li>-->
 				            <li><a href="#ElencoClienti">Elenco Clienti</a></li>
-				            
+				            <li><a href="#paginaElencoMezzi">Carica la merce su un Mezzo</a></li>		
 				            <li><a href="#Login">Log Out</a></li>
 			            </ul>
 	            </div>
@@ -188,12 +248,13 @@
             <!--<a href="#formProdottiInMagazzino" data-icon="arrow-r" class="ui-corner-all ui-shadow ui-btn-active ui-btn-left caricaDaMagazzino" >Carica</a>-->            
             <!--<a href="#ElencoDistributori" data-icon="grid" class="ui-corner-all ui-shadow ui-btn-active ui-btn-right">Elenco Distributori</a>                        -->
             <div>
-            <a href="#popupMenu4" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-left ui-btn-a">MENU</a>
+            <a href="#popupMenu4" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>
 	            <div data-role="popup" id="popupMenu4" data-theme="b">
 			        <ul data-role="listview" data-inset="true" style="min-width:210px;">
 				        <li data-role="list-divider">Menu</li>
 				        <li><a href="#ElencoDistributori">Elenco Distributori</a></li>
-				        <li><a href="#ElencoClienti">Elenco Clienti</a></li>				            
+				        <li><a href="#ElencoClienti">Elenco Clienti</a></li>	
+                        <li><a href="#paginaElencoMezzi">Carica la merce su un Mezzo</a></li>					            
 				        <li><a href="#Login">Log Out</a></li>
 			        </ul>
 	            </div>
@@ -227,12 +288,13 @@
         <!--<a href="#ElencoDistributori" data-icon="grid" class="ui-corner-all ui-shadow ui-btn-active ui-btn-left">Elenco Distributori</a>-->            
         <!--<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a>-->
         <div>
-        <a href="#popupMenu5" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-left ui-btn-a">MENU</a>
+        <a href="#popupMenu5" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>
 	        <div data-role="popup" id="popupMenu5" data-theme="b">
 			    <ul data-role="listview" data-inset="true" style="min-width:210px;">
 				    <li data-role="list-divider">Menu</li>
 				    <li><a href="#ElencoDistributori">Elenco Distributori</a></li>
-				    <li><a href="#ElencoClienti">Elenco Clienti</a></li>				            
+				    <li><a href="#ElencoClienti">Elenco Clienti</a></li>	
+                    <li><a href="#paginaElencoMezzi">Carica la merce su un Mezzo</a></li>					            
 				    <li><a href="#Login">Log Out</a></li>
 			    </ul>
 	        </div>
@@ -264,12 +326,13 @@
         <!--<a href="#ElencoDistributori" data-icon="grid" class="ui-corner-all ui-shadow ui-btn-active ui-btn-left">Elenco Distributori</a>-->            
         <!--<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a> -->   
         <div>
-        <a href="#popupMenu6" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-left ui-btn-a">MENU</a>
+        <a href="#popupMenu6" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>
 	        <div data-role="popup" id="popupMenu6" data-theme="b">
 			    <ul data-role="listview" data-inset="true" style="min-width:210px;">
 				    <li data-role="list-divider">Menu</li>
 				    <li><a href="#ElencoDistributori">Elenco Distributori</a></li>
-				    <li><a href="#ElencoClienti">Elenco Clienti</a></li>				            
+				    <li><a href="#ElencoClienti">Elenco Clienti</a></li>		
+                    <li><a href="#paginaElencoMezzi">Carica la merce su un Mezzo</a></li>				            
 				    <li><a href="#Login">Log Out</a></li>
 			    </ul>
 	        </div>
@@ -299,12 +362,13 @@
         <div data-role="header">
             <h1>Elenco Prodotti in Magazzino</h1>
             <div>
-            <a href="#popupMenu6" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-left ui-btn-a">MENU</a>
-	            <div data-role="popup" id="Div2" data-theme="b">
+            <a href="#popupMenu7" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>
+	            <div data-role="popup" id="popupMenu7" data-theme="b">
 			        <ul data-role="listview" data-inset="true" style="min-width:210px;">
 				        <li data-role="list-divider">Menu</li>
 				        <li><a href="#ElencoDistributori">Elenco Distributori</a></li>
-				        <li><a href="#ElencoClienti">Elenco Clienti</a></li>				            
+				        <li><a href="#ElencoClienti">Elenco Clienti</a></li>		
+                        <li><a href="#paginaElencoMezzi">Carica la merce su un Mezzo</a></li>				            
 				        <li><a href="#Login">Log Out</a></li>
 			        </ul>
 	            </div>

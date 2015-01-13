@@ -1,17 +1,17 @@
 ﻿$(function () {
-    $(".caricaDaMagazzino").on('click', function () {
-        var idDistributore = $(this).attr('data-IdDistributore');
-        var descDistributore = $(this).attr('data-descDistributore');
-        $(".descDistributore").html('Carica per:' + descDistributore);
-        var desc = '\'' + descDistributore + '\'';
-        var linkBack = 'javascript:GetSituazioneDistributore(' + idDistributore + ', ' + desc + ');'
-        $(".backDistributore").attr("href", linkBack);
+    //$(".caricaDaMagazzinoSuCamion").on('click', function () {
+    //    var idDistributore = $(this).attr('data-IdDistributore');
+    //    var descDistributore = $(this).attr('data-descDistributore');
+    //    $(".descDistributore").html('Carica per:' + descDistributore);
+    //    var desc = '\'' + descDistributore + '\'';
+    //    var linkBack = 'javascript:GetSituazioneDistributore(' + idDistributore + ', ' + desc + ');'
+    //    $(".backDistributore").attr("href", linkBack);
 
-        ElencoProdottiInMagazzino(idDistributore);
-    });
+    //    ElencoProdottiInMagazzino(idDistributore);
+    //});
 });
 
-function ElencoProdottiInMagazzino(idDistributore) {
+function ElencoProdottiInMagazzino(idMezzo) {
     $.ajax({
         type: "POST",
         crossDomain: true,
@@ -32,23 +32,27 @@ function ElencoProdottiInMagazzino(idDistributore) {
             console.log(risultati);
             //$(".menuPrincipale").hide();
             
-            var dettaglio = '<table id="tabellaProdottiInMagazzino" class="display" cellspacing="0" width="100%">' +
+            var dettaglio = '<table id="tabellaProdottiInMagazzinoPerCamion" class="display" cellspacing="0" width="100%">' +
                                         '<thead>' +
                                             '<tr>' +
                                                 '<th>Foto</th>' +
-                                                '<th>Descrizione</th>' +
-                                                '<th>Lotto</th>' +
-                                                '<th>Quantita</th>' +
-                                                '<th>Carica</th>' +                                                
+                                                '<th>Descrizione</th>' +                                                
+                                                '<th>Giacenza</th>' +
+                                                '<th>N° DDL</th>' +
+                                                '<th>Data DDL</th>' +
+                                                '<th>Quantità</th>' +
+                                                '<th> </th>' +
                                             '</tr>' +
                                         '</thead>' +
                                         '<tfoot>' +
                                             '<tr>' +
                                                 '<th>Foto</th>' +
-                                                '<th>Descrizione</th>' +
-                                                '<th>Lotto</th>' +
-                                                '<th>Quantita</th>' +
-                                                '<th>Carica</th>' +                                                
+                                                '<th>Descrizione</th>' +                                                
+                                                '<th>Giacenza</th>' +
+                                                '<th>N° DDL</th>' +
+                                                '<th>Data DDL</th>' +
+                                                '<th>Quantità</th>' +
+                                                '<th> </th>' +
                                             '</tr>' +
                                         '</tfoot>' +
                                         '<tbody>';
@@ -57,28 +61,39 @@ function ElencoProdottiInMagazzino(idDistributore) {
                 
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
-                dettaglio = dettaglio + '<td>' + parseJsonDate(risultati[i].numeroLotto) + '</td>';
+                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].quantita + '</td>';                
-                dettaglio = dettaglio + '<td><input type="number" data-clear-btn="true" class="miniInput"> <a href="#" data-IdMagazzino="' + risultati[i].IdMagazzino + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdInDistributore">Carica</a> </td>';
+                dettaglio = dettaglio + '<td><input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
+                dettaglio = dettaglio + '<td><input type="text" data-role="date" class="dataDDl accentraInput"></td>';
+                dettaglio = dettaglio + '<td><input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
+                dettaglio = dettaglio + '<td><a href="#" data-IdMagazzino="' + risultati[i].IdMagazzino + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdInCamion">Carica</a> </td>';
                 dettaglio = dettaglio + '</tr>';
 
             }
             dettaglio = dettaglio + '</tbody> </table>';
 
-            $('#elencoProdottiInMagazzino').html(dettaglio);
+            console.log(dettaglio);
 
-            var table = $('#tabellaProdottiInMagazzino').DataTable(
+            $('.MerceDaCaricareSuCamion').html(dettaglio);
+
+            $(".dataDDl").datepicker({
+                dateFormat: "dd-mm-yy"
+            });
+
+            var table = $('#tabellaProdottiInMagazzinoPerCamion').DataTable(
                 { "paging": false }
             );
 
-            $(".caricaProdInDistributore").on('click', function () {
+            $(".caricaProdInCamion").on('click', function () {
 
                 var IdMagazzino = $(this).attr('data-IdMagazzino');                
                 var idProdotto = $(this).attr('data-idProdotto');
                 var prezzo = $(this).attr('data-prezzo');
-                var quantitaAttuale = $(this).closest('td').prev('td').text();
-                var quantitaCaricati = $(this).prev().val();
+                var quantitaAttuale = $(this).closest('td').prev('td').prev('td').prev('td').prev('td').text();
+                var quantitaCaricati = $(this).closest('td').prev('td')[0].children[0].value;
+                var numeroDDL = $(this).closest('td').prev('td').prev('td').prev('td')[0].children[0].value;
+                var dataDDL = $(this).closest('td').prev('td').prev('td')[0].children[0].value;
+
                 var quantitaRimasti = (quantitaAttuale - quantitaCaricati);
                 //var quantitaVenduti = (quantitaAttuale - quantitaRimasti);
                 var prezzoTotaleRimasti = (prezzo * quantitaRimasti);
@@ -86,7 +101,8 @@ function ElencoProdottiInMagazzino(idDistributore) {
                 var idOperatore = $(this).attr('data-idOperatore');
                 var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
 
-                //alert('quantitaCaricati=' + quantitaCaricati + ' isUint8(parseInt(quantitaCaricati))=' + isUint8(parseInt(quantitaCaricati)));
+                //alert('quantitaAttuale=' + quantitaAttuale + ' quantitaCaricati=' + quantitaCaricati + ' isUint8(parseInt(quantitaCaricati))=' + isUint8(parseInt(quantitaCaricati)) + ' numeroDDL=' + numeroDDL + ' dataDDL=' + dataDDL);
+                //return;
 
                 if (quantitaCaricati == "" || isUint8(parseInt(quantitaCaricati)) == false) {
                     alert("Scegli un valore Numerico prima di caricare");                    
@@ -104,9 +120,9 @@ function ElencoProdottiInMagazzino(idDistributore) {
                     $(this).prev().removeClass("evidenziaErrore");
                 }
 
-                CaricaProdottiInDistributore(IdMagazzino, idDistributore, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto);
+                CaricaProdottisuCamion(IdMagazzino, idMezzo, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto);
 
-                var labelQuantita = $(this).closest('td').prev('td');
+                var labelQuantita = $(this).closest('td').prev('td').prev('td').prev('td').prev('td');
                 //console.log(labelQuantita);
                 //labelQuantita.switchClass("oldVal", "valoreCambiato", 1000);
                 //labelQuantita.css("background-color", "green");
@@ -123,8 +139,8 @@ function ElencoProdottiInMagazzino(idDistributore) {
 
 }
 
-//questa era quella che usavo quando caricavo da Magazzino a distributore, ora si carica da magazzzino a camion e da camion a distributore
-function CaricaProdottiInDistributoreOld(IdMagazzino, idDistributore, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto) {
+
+function CaricaProdottisuCamion(IdMagazzino, idMezzo, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto) {
 
     // Storicizzo Prodotti in magazzino ************************************************
     $.ajax({
@@ -179,9 +195,36 @@ function CaricaProdottiInDistributoreOld(IdMagazzino, idDistributore, idProdotto
     });
     // *********************************************************************************
 
-    InsertProdottiInDistributore(idDistributore, idProdotto, quantitaCaricati, prezzoTotaleCaricati, idOperatore, numeroLotto);
+    InsertProdottiInCamion(idProdotto, quantitaCaricati, prezzoTotaleCaricati, idOperatore, numeroLotto, idMezzo);
 }
 
+//inserisco in un determinato Cliente una determinata quantita di Prodotto
+function InsertProdottiInCamion(idProdotto, quantita, prezzoTotale, idOperatore, numeroLotto, idMezzo) {
+
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInTrasporto",        
+        url: urlAggiornaQuantInTrasporto,
+        cache: false,
+        async: true,
+        //            data: "idDisciplina=" + idDisciplina,
+        data: JSON.stringify({ idProdotto: idProdotto, quantita: quantita, prezzoTotale: prezzoTotale, idOperatore: idOperatore, numeroLotto: numeroLotto, IdMezzo: idMezzo }),
+        error: function (data) {
+            console.log(data.responseText)
+        },
+        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+        success: function (response) {
+            risultati = response.d;
+
+            console.log(risultati);
+
+        }
+
+    });
+}
 
 
 
