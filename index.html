@@ -98,8 +98,7 @@
 	</div><!-- /leftpanel2 --> 
     <div data-role="header">
         <h1 id="h1">Mezzi su cui caricare la Merce</h1>
-        <a href="#leftpanelElencoMezzi" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>
-          
+        <a href="#leftpanelElencoMezzi" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>          
     </div>
 
     <div>
@@ -108,6 +107,10 @@
 		    <li><a href="#">Camion</a></li>									
 	    </ul>
     </div><!--/Mezzi Disponibili -->   
+
+    <div role="main" class="ui-content jqm-content">                                                   
+        <div></div>            
+    </div><!-- /content -->   
 
 </div>
 <!--***************************************************************-->
@@ -126,11 +129,7 @@
         <a href="#demo-links" data-rel="close" class="ui-btn ui-shadow ui-corner-all ui-btn-a ui-icon-delete ui-btn-icon-left ui-btn-inline">Close</a>
 	</div><!-- /leftpanel2 -->     
     <div data-role="header">
-            <h1 class="h1DettCamion"></h1>
-            <!--<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a> -->
-            <!--<a href="#formProdottiInMagazzino" data-icon="arrow-r" class="ui-corner-all ui-shadow ui-btn-active ui-btn-left caricaDaMagazzino" >Carica</a>-->            
-            <!--<a href="#ElencoClienti" data-icon="grid" class="ui-corner-all ui-shadow ui-btn-active ui-btn-right">Elenco Clienti</a>-->
-           
+            <h1 class="h1DettCamion"></h1>           
             <a href="#leftpanelCaricareMerceSuCamion" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>
             <a href="#paginaElencoMezzi" data-icon="arrow-l" class="ui-corner-all ui-shadow ui-btn-active ui-btn-right">Back</a>
         </div><!-- /header -->                
@@ -160,20 +159,7 @@
         
     <div data-role="header">
             <h1>Elenco Clienti</h1>
-            <!--<a href="#ElencoDistributori" data-icon="grid" class="ui-btn-left ui-corner-all ui-shadow ui-btn-active">Elenco Distributori</a>
-            <a href="#Login" data-icon="gear" class="ui-btn-right ui-corner-all ui-shadow ui-btn-active">LogOut</a>-->
-            <!--<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a> -->
-            <!--<div>
-            <a href="#popupMenu1" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>
-	            <div data-role="popup" id="popupMenu1" data-theme="b">
-			            <ul data-role="listview" data-inset="true" style="min-width:210px;">
-				            <li data-role="list-divider">Menu</li>
-				            <li><a href="#ElencoDistributori">Elenco Distributori</a></li>
-				            <li><a href="#paginaElencoMezzi">Carica la merce su un Mezzo</a></li>				            
-				            <li><a href="#Login">Log Out</a></li>
-			            </ul>
-	            </div>
-            </div>-->
+            
         <a href="#leftpanelElencoClienti" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>
             
         </div><!-- /header -->        
@@ -182,7 +168,7 @@
             <div id="tuttiClienti">Elenco Clienti</div>
 
         </div><!-- /content -->
-        <div class="leftPanel"></div>
+        
     </div><!-- /page -->
 <!--***************************************************************-->
 
@@ -235,7 +221,7 @@
                   Confermi che per questo articolo ci sono dei Resi?</p>
             </div>-->
         </div><!-- /content -->        
-    <div class="leftPanel"></div>
+    
     </div><!-- /page -->
 <!--************************************************************************************-->
 
@@ -305,7 +291,7 @@
                   Confermi che per questo articolo ci sono dei Resi?</p>
             </div>-->
         </div><!-- /content -->        
-    <div class="leftPanel"></div>
+   
     </div><!-- /page -->
 <!--************************************************************************************-->
 
@@ -342,7 +328,7 @@
         <div id="ElencoProdottiSuCamionPerDistributore">Prodotti sul Camion</div>
 
     </div><!-- /content -->
-    <div class="leftPanel"></div>
+    
 </div><!-- /page -->
 <!--************************************************************************************-->
 
@@ -379,7 +365,7 @@
         <div id="ElencoProdottiSuCamionPerCliente">Prodotti sul Camion</div>
 
     </div><!-- /content -->
-    <div class="leftPanel"></div>
+    
 </div><!-- /page -->
 <!--************************************************************************************-->
 
@@ -416,7 +402,7 @@
             <div id="elencoProdottiInMagazzino">Dist 1</div>
 
         </div><!-- /content -->
-        <div class="leftPanel"></div>
+        
     </div><!-- /page -->
 <!--************************************************************************************-->
 
