@@ -44,14 +44,14 @@ if (tipoDiConn == "prod") {
 
 $(function () {
     
-    //$(".leftPanel").load("Include/LeftPanel.html");
+    $(".leftPanel").load("Include/LeftPanel.html");
     //$(".menuNavigazione").load("Include/NavBar.htm");
     ElencoMezziPerDistributori();
     ElencoMezziPerClienti();
     ElencoMezziPerCaricareMerce();
     ElencoDistributori();
-    ElencoClienti();
-    
+    ElencoClienti();        
+
     $("#btn-submit").click(function () {
 
         var email = $("#txt-email").val();
@@ -225,7 +225,7 @@ function ElencoMezziPerClienti() {
             risultati = response.d;
             //console.log('elenco mezzi');
             //console.log(risultati);
-
+            $(".mezziDisponibiliPerCliente").html('');
             var mezzi = '<li data-role="list-divider">Scegli un mezzo da cui caricare la merce:</li>'
             for (var i = 0; i < risultati.length; i++) {
                 mezzi = mezzi + '<li><a href="#formProdottiInCamionPerCliente" class="caricaDaCamionPerCliente" data-idMezzo="' + risultati[i].idMezzo + '" data-descMezzo="' + risultati[i].descrizione + '">Carica da: ' + risultati[i].descrizione + '</a></li>';

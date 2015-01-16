@@ -42,9 +42,9 @@ function ElencoDistributori() {
             var distributori = '<ul data-role="listview" data-filter="true" data-filter-placeholder="Cerca il distributore..." data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">';
 
             for (var i = 0; i < risultati.length; i++) {
-                
+                var indirizzo = risultati[i].indirizzo;
                 var desc = '\'' + risultati[i].descrizione + '\'';
-                distributori = distributori + '<li><a href="javascript:GetSituazioneDistributore(' + risultati[i].idDistributore + ', ' + desc + ');" class="ui-btn ui-btn-icon-right ui-icon-carat-r" >' + risultati[i].descrizione + '</a></li>';
+                distributori = distributori + '<li><a href="javascript:GetSituazioneDistributore(' + risultati[i].idDistributore + ', ' + desc + ');" class="ui-btn ui-btn-icon-right ui-icon-carat-r" >' + risultati[i].descrizione + '<br><span class="miniText">' + indirizzo + '</span></a></li>';
                 //$("#" + risultati[i]).show();
             }
             distributori = distributori + '</ul>';
