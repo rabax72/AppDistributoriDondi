@@ -26,7 +26,8 @@ function ElencoDistributori() {
         data: JSON.stringify({  }),
         //data: { NomeOrdinanza: NomeOrdinanza, DataPubbDa: DataPubbDa, DataPubbA: DataPubbA, DataScadDa: DataScadDa, DataScadA: DataScadA },
         error: function (data) {
-            console.log(data.responseText)
+            console.log(data.responseText);
+            $("#tuttiDistributori").html(data.responseText);
         },
         beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
         complete: function () { $.mobile.loading('hide'); }, //Hide spinner
