@@ -83,3 +83,16 @@ background-image: linear-gradient( #5f9cc5 /*{b-bup-background-start}*/, #396b9e
 .miniText {
     font-weight: normal;
 }
+
+.onlyAdmin {
+    display: none !important;
+}
+
+form h3 {
+min-width:400px;
+/*margin-top: -30px;*/
+}
+
+.labelForm {
+    margin-bottom: -20px !important;
+}

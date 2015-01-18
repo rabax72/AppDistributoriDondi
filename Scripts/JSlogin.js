@@ -20,6 +20,7 @@ if (tipoDiConn == "prod") {
     var urlGetSituazioneDistributore = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetSituazioneDistributore';
     var urlAggiornoQuantitaProdottiInDistributore = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottoInDistributore';
     var urlStoricizzaStatoProdottoInCliente = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/StoricizzoStatoProdottoInCliente';
+    var urlCaricaProdottiInMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/CaricaProdottiInMagazzino';
 } else {
     var urlGetAuthentication = 'WebServiceAppDondi.asmx/GetAuthentication';
     var urlGetElencoMezzi = 'WebServiceAppDondi.asmx/GetElencoMezzi';
@@ -40,6 +41,7 @@ if (tipoDiConn == "prod") {
     var urlGetSituazioneDistributore = 'WebServiceAppDondi.asmx/GetSituazioneDistributore';
     var urlAggiornoQuantitaProdottiInDistributore = 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottoInDistributore';
     var urlStoricizzaStatoProdottoInCliente = 'WebServiceAppDondi.asmx/StoricizzoStatoProdottoInCliente';
+    var urlCaricaProdottiInMagazzino = 'WebServiceAppDondi.asmx/CaricaProdottiInMagazzino';
 }
 
 $(function () {
@@ -60,6 +62,10 @@ $(function () {
         Autenticazione(email, password);
 
     });
+
+    //$("#gestMagazzino").click(function () {
+    //    ElencoProdottiInMagazzino();
+    //});
 
     if ($('#chck-rememberme').is(':checked')) {
         // save username and password
@@ -97,6 +103,19 @@ function isInt32(n) {
 
 function isUint8(n) {
     return +n === n && !(n % 1) && n < 0x100 && n >= 0;
+}
+
+function stringToDate(_date, _format, _delimiter) {
+    var formatLowerCase = _format.toLowerCase();
+    var formatItems = formatLowerCase.split(_delimiter);
+    var dateItems = _date.split(_delimiter);
+    var monthIndex = formatItems.indexOf("mm");
+    var dayIndex = formatItems.indexOf("dd");
+    var yearIndex = formatItems.indexOf("yyyy");
+    var month = parseInt(dateItems[monthIndex]);
+    month -= 1;
+    var formatedDate = new Date(dateItems[yearIndex], month, dateItems[dayIndex]);
+    return formatedDate;
 }
 
 function parseJsonDate(jsonDate) {
@@ -144,10 +163,11 @@ function Autenticazione(user, password) {
         success: function (response) {
             risultati = response.d;
             
-            console.log(risultati);           
-
-            if (risultati == "autenticato") {
-                //ElencoDistributori();
+            //console.log(risultati);                       
+            if (risultati.ruolo != '') {
+                if (risultati.ruolo == 'admin') {
+                    $(".onlyAdmin").switchClass("onlyAdmin", "", 1000);                    
+                }
                 location.hash = "ElencoDistributori";
             } else {
                 $("#authResult").html('User o Password Errati!!!');
@@ -195,7 +215,7 @@ function ElencoMezziPerCaricareMerce() {
                
                 //alert(idMezzo);
                 //return;
-                ElencoProdottiInMagazzino(idMezzo);
+                ElencoProdottiInMagazzinoPerMezzo(idMezzo);
 
                 //ElencoProdottiSuCamionPerCliente(idMezzo, IdCliente);
             });
@@ -270,8 +290,8 @@ function ElencoMezziPerDistributori() {
         complete: function () { $.mobile.loading('hide'); }, //Hide spinner
         success: function (response) {
             risultati = response.d;
-            console.log('elenco mezzi');
-            console.log(risultati);
+            //console.log('elenco mezzi');
+            //console.log(risultati);
 
             var mezzi = '<li data-role="list-divider">Scegli un mezzo da cui caricare la merce:</li>';
             for (var i = 0; i < risultati.length; i++) {
