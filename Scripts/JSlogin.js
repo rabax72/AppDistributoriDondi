@@ -8,6 +8,7 @@ if (tipoDiConn == "prod") {
     var urlInsertProdotto = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/InsertProdotto';
     var urlGetProdottiInMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiInMagazzino';
     var urlStoricizzoProdottiInMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/StoricizzoProdottoInMagazzino';
+    var urlSmaltiscoProdottoInMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/SmaltiscoProdottoInMagazzino';    
     var urlQuantitaProdottiInMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzino';
     var urlGetProdottiSuCamion = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiInCamion';
     var urlStoricizzoProdTrasporto = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/StoricizzoProdottoInTrasporto';
@@ -29,6 +30,7 @@ if (tipoDiConn == "prod") {
     var urlInsertProdotto = 'WebServiceAppDondi.asmx/InsertProdotto';
     var urlGetProdottiInMagazzino = 'WebServiceAppDondi.asmx/GetProdottiInMagazzino';
     var urlStoricizzoProdottiInMagazzino = 'WebServiceAppDondi.asmx/StoricizzoProdottoInMagazzino';
+    var urlSmaltiscoProdottoInMagazzino = 'WebServiceAppDondi.asmx/SmaltiscoProdottoInMagazzino';
     var urlQuantitaProdottiInMagazzino = 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzino';
     var urlGetProdottiSuCamion = 'WebServiceAppDondi.asmx/GetProdottiInCamion';
     var urlStoricizzoProdTrasporto = 'WebServiceAppDondi.asmx/StoricizzoProdottoInTrasporto';
@@ -157,6 +159,7 @@ function Autenticazione(user, password) {
         data: JSON.stringify({ user: user, password: password }),        
         error: function (data) {
             console.log(data.responseText)
+            $("#authResult").html(data.responseText);
         },
         beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
         complete: function () { $.mobile.loading('hide'); }, //Hide spinner
@@ -164,7 +167,7 @@ function Autenticazione(user, password) {
             risultati = response.d;
             
             //console.log(risultati);                       
-            if (risultati.ruolo != '') {
+            if (risultati.ruolo != null) {
                 if (risultati.ruolo == 'admin') {
                     $(".onlyAdmin").switchClass("onlyAdmin", "", 1000);                    
                 }
