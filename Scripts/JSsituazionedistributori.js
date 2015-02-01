@@ -45,8 +45,8 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                                                 '<th>Foto</th>' +
                                                 '<th>Descrizione</th>' +
                                                 '<th>Quantita</th>' +
-                                                '<th>Resi</th>' +
                                                 '<th>Rimasti</th>' +
+                                                '<th>Resi</th>' +
                                             '</tr>' +
                                         '</thead>' +
                                         '<tfoot>' +
@@ -54,8 +54,8 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                                                 '<th>Foto</th>' +
                                                 '<th>Descrizione</th>' +
                                                 '<th>Quantita</th>' +
-                                                '<th>Resi</th>' +
                                                 '<th>Rimasti</th>' +
+                                                '<th>Resi</th>' +
                                             '</tr>' +
                                         '</tfoot>' +
                                         '<tbody>';

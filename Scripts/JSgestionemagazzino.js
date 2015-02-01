@@ -144,10 +144,10 @@ function ElencoProdottiInMagazzino() {
                 finestraDati = finestraDati + '<input type="number" id="quantitaProdDaCaricareInMagazzino" data-theme="a">';
                 finestraDati = finestraDati + '<label for="numeroLotttoCaricareinMagazzino">Numero Lotto</label>';
                 finestraDati = finestraDati + '<input type="text" id="numeroLotttoCaricareinMagazzino" data-theme="a">';
-                finestraDati = finestraDati + '<label for="numeroDDLCaricareinMagazzino">Numero DDL</label>';
-                finestraDati = finestraDati + '<input type="number" id="numeroDDLCaricareinMagazzino" data-theme="a">';
-                finestraDati = finestraDati + '<label for="dataDDLCaricareinMagazzino">Data DDL:</label>';
-                finestraDati = finestraDati + '<input type="text" id="dataDDLCaricareinMagazzino" data-theme="a">';
+                finestraDati = finestraDati + '<label for="numeroDDTCaricareinMagazzino">Numero DDT</label>';
+                finestraDati = finestraDati + '<input type="number" id="numeroDDTCaricareinMagazzino" data-theme="a">';
+                finestraDati = finestraDati + '<label for="dataDDTCaricareinMagazzino">Data DDT:</label>';
+                finestraDati = finestraDati + '<input type="text" id="dataDDTCaricareinMagazzino" data-theme="a">';
                 finestraDati = finestraDati + '<label for="noteCaricareinMagazzino">Note:</label>';
                 finestraDati = finestraDati + '<textarea cols="40" rows="5" id="noteCaricareinMagazzino" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset"></textarea>';
                 finestraDati = finestraDati + '<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdottoInMagazzino">Carica</a>';
@@ -158,7 +158,7 @@ function ElencoProdottiInMagazzino() {
                 $("#numeroLotttoCaricareinMagazzino").datepicker({
                     dateFormat: "dd-mm-yy"
                 });
-                $("#dataDDLCaricareinMagazzino").datepicker({
+                $("#dataDDTCaricareinMagazzino").datepicker({
                     dateFormat: "dd-mm-yy"
                 });
                          
@@ -166,11 +166,11 @@ function ElencoProdottiInMagazzino() {
                 $(".caricaProdottoInMagazzino").on('click', function () {
                     var numeroLotto = $("#numeroLotttoCaricareinMagazzino").val();                    
                     var quantitaCaricati = $("#quantitaProdDaCaricareInMagazzino").val();
-                    var numeroDDL = $("#numeroDDLCaricareinMagazzino").val();
-                    var dataDDL = $("#dataDDLCaricareinMagazzino").val();
+                    var numeroDDT = $("#numeroDDTCaricareinMagazzino").val();
+                    var dataDDT = $("#dataDDTCaricareinMagazzino").val();
                     
                     numeroLotto = stringToDate(numeroLotto, "dd-MM-yyyy", "-");
-                    dataDDL = stringToDate(dataDDL, "dd-MM-yyyy", "-");
+                    dataDDT = stringToDate(dataDDT, "dd-MM-yyyy", "-");
                     var note = $("#noteCaricareinMagazzino").val();
                     var quantitaTotale = (parseInt(quantitaAttuale) + parseInt(quantitaCaricati));
                     //var quantitaVenduti = (quantitaAttuale - quantitaRimasti);
@@ -185,10 +185,10 @@ function ElencoProdottiInMagazzino() {
                     //    $(this).prev().removeClass("evidenziaErrore");
                     }
                     
-                    //alert('idProdotto=' + idProdotto + ' quantitaCaricati=' + quantitaCaricati + ' prezzoTotaleCaricati=' + prezzoTotaleCaricati + ' numeroLotto=' + numeroLotto + ' dataDDL=' + dataDDL + ' numeroDDL=' + numeroDDL + ' idOperatore=' + idOperatore);
+                    //alert('idProdotto=' + idProdotto + ' quantitaCaricati=' + quantitaCaricati + ' prezzoTotaleCaricati=' + prezzoTotaleCaricati + ' numeroLotto=' + numeroLotto + ' dataDDT=' + dataDDT + ' numeroDDT=' + numeroDDT + ' idOperatore=' + idOperatore);
                     //return;
 
-                    CaricaProdottoInMagazzino(idProdotto, quantitaCaricati, prezzoTotaleCaricati, idOperatore, numeroLotto, numeroDDL, dataDDL, note);                    
+                    CaricaProdottoInMagazzino(idProdotto, quantitaCaricati, prezzoTotaleCaricati, idOperatore, numeroLotto, numeroDDT, dataDDT, note);                    
 
                     //var labelQuantita = $(this).closest('td').prev('td').prev('td').prev('td').prev('td');
                     
@@ -225,10 +225,10 @@ function ElencoProdottiInMagazzino() {
                 //finestraDati = finestraDati + '<label for="numeroLotttoCaricareinMagazzino">Numero Lotto</label>';
                 //finestraDati = finestraDati + '<input type="text" id="numeroLotttoCaricareinMagazzino" data-theme="a">';
                 finestraDati = finestraDati + '<br><br>Numero Lotto: ' + parseJsonDate(numeroLotto) + '<br><br>';
-                finestraDati = finestraDati + '<label for="numeroDDLCaricareinMagazzino">Numero DDL</label>';
-                finestraDati = finestraDati + '<input type="number" id="numeroDDLCaricareinMagazzino" data-theme="a">';
-                finestraDati = finestraDati + '<label for="dataDDLCaricareinMagazzino">Data DDL:</label>';
-                finestraDati = finestraDati + '<input type="text" id="dataDDLCaricareinMagazzino" data-theme="a">';
+                finestraDati = finestraDati + '<label for="numeroDDTCaricareinMagazzino">Numero DDT</label>';
+                finestraDati = finestraDati + '<input type="number" id="numeroDDTCaricareinMagazzino" data-theme="a">';
+                finestraDati = finestraDati + '<label for="dataDDTCaricareinMagazzino">Data DDT:</label>';
+                finestraDati = finestraDati + '<input type="text" id="dataDDTCaricareinMagazzino" data-theme="a">';
                 finestraDati = finestraDati + '<label for="noteCaricareinMagazzino">Note:</label>';
                 finestraDati = finestraDati + '<textarea cols="40" rows="5" id="noteCaricareinMagazzino" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset"></textarea>';
                 finestraDati = finestraDati + '<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-active scaricaProdottoDaMagazzino">Scarica</a>';
@@ -239,7 +239,7 @@ function ElencoProdottiInMagazzino() {
                 //$("#numeroLotttoCaricareinMagazzino").datepicker({
                 //    dateFormat: "dd-mm-yy"
                 //});
-                $("#dataDDLCaricareinMagazzino").datepicker({
+                $("#dataDDTCaricareinMagazzino").datepicker({
                     dateFormat: "dd-mm-yy"
                 });
 
@@ -247,11 +247,11 @@ function ElencoProdottiInMagazzino() {
                 $(".scaricaProdottoDaMagazzino").on('click', function () {
                     //var numeroLotto = $("#numeroLotttoCaricareinMagazzino").val();
                     var quantitaDaScaricare = $("#quantitaProdDaScaricareDaMagazzino").val();
-                    var numeroDDL = $("#numeroDDLCaricareinMagazzino").val();
-                    var dataDDL = $("#dataDDLCaricareinMagazzino").val();
+                    var numeroDDT = $("#numeroDDTCaricareinMagazzino").val();
+                    var dataDDT = $("#dataDDTCaricareinMagazzino").val();
 
                     //numeroLotto = stringToDate(numeroLotto, "dd-MM-yyyy", "-");
-                    dataDDL = stringToDate(dataDDL, "dd-MM-yyyy", "-");
+                    dataDDT = stringToDate(dataDDT, "dd-MM-yyyy", "-");
                     var note = $("#noteCaricareinMagazzino").val();
                     var quantitaTotale = (parseInt(quantitaAttuale) - parseInt(quantitaDaScaricare));
                     //var quantitaVenduti = (quantitaAttuale - quantitaRimasti);
@@ -268,17 +268,17 @@ function ElencoProdottiInMagazzino() {
                         //    $(this).prev().removeClass("evidenziaErrore");
                     }
 
-                    //alert('idProdotto=' + idProdotto + ' quantitaCaricati=' + quantitaCaricati + ' prezzoTotaleCaricati=' + prezzoTotaleCaricati + ' numeroLotto=' + numeroLotto + ' dataDDL=' + dataDDL + ' numeroDDL=' + numeroDDL + ' idOperatore=' + idOperatore);
+                    //alert('idProdotto=' + idProdotto + ' quantitaCaricati=' + quantitaCaricati + ' prezzoTotaleCaricati=' + prezzoTotaleCaricati + ' numeroLotto=' + numeroLotto + ' dataDDT=' + dataDDT + ' numeroDDT=' + numeroDDT + ' idOperatore=' + idOperatore);
                     //return;
                     numeroLotto = parseJsonDateToJsDate(numeroLotto);
-                    if (numeroDDL == "" || isUint8(parseInt(numeroDDL)) == false) {
-                        numeroDDL = 0;
+                    if (numeroDDT == "" || isUint8(parseInt(numeroDDT)) == false) {
+                        numeroDDT = 0;
                     }
 
-                    SmaltiscoProdottiDaMagazzino(idProdotto, quantitaTotale, prezzoTotale, numeroLotto, idOperatore, numeroDDL, dataDDL, note, true);
+                    SmaltiscoProdottiDaMagazzino(idProdotto, quantitaTotale, prezzoTotale, numeroLotto, idOperatore, numeroDDT, dataDDT, note, true);
                                                                                 
-                    //dataDDL = null;
-                    //console.log(' idProdotto=' + idProdotto + ' quantitaDaScaricare=' + quantitaDaScaricare + ' prezzoTotale=' + prezzoTotale + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto + ' numeroDDL=' + numeroDDL + ' dataDDL=' + dataDDL + ' note=' + note);
+                    //dataDDT = null;
+                    //console.log(' idProdotto=' + idProdotto + ' quantitaDaScaricare=' + quantitaDaScaricare + ' prezzoTotale=' + prezzoTotale + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto + ' numeroDDT=' + numeroDDT + ' dataDDT=' + dataDDT + ' note=' + note);
                    
 
                     //var labelQuantita = $(this).closest('td').prev('td').prev('td').prev('td').prev('td');
@@ -302,7 +302,7 @@ function ElencoProdottiInMagazzino() {
 }
 
 
-function CaricaProdottoInMagazzino(idProdotto, quantitaCaricati, prezzoTotaleCaricati, idOperatore, numeroLotto, numeroDDL, dataDDL, note) {    
+function CaricaProdottoInMagazzino(idProdotto, quantitaCaricati, prezzoTotaleCaricati, idOperatore, numeroLotto, numeroDDT, dataDDT, note) {    
 
     // Carico Prodotti in magazzino *********************************
     note = '';
@@ -314,7 +314,7 @@ function CaricaProdottoInMagazzino(idProdotto, quantitaCaricati, prezzoTotaleCar
         url: urlCaricaProdottiInMagazzino,
         cache: false,
         async: true,        
-        data: JSON.stringify({ idProdotto: idProdotto, quantita: quantitaCaricati, prezzoTotale: prezzoTotaleCaricati, idOperatore: idOperatore, numeroLotto: numeroLotto, numeroDDL: numeroDDL, dataDDL: dataDDL, note: note }),
+        data: JSON.stringify({ idProdotto: idProdotto, quantita: quantitaCaricati, prezzoTotale: prezzoTotaleCaricati, idOperatore: idOperatore, numeroLotto: numeroLotto, numeroDDT: numeroDDT, dataDDT: dataDDT, note: note }),
         error: function (data) {
             console.log(data.responseText)
         },
@@ -332,7 +332,7 @@ function CaricaProdottoInMagazzino(idProdotto, quantitaCaricati, prezzoTotaleCar
 }
 
 //smaltisco una determinata quantita di Prodotto
-function SmaltiscoProdottiDaMagazzino(IdProdotto, quantitaTotale, prezzoTotale, numeroLotto, IdOperatore, numeroDDL, dataDDL, note, smaltito) {
+function SmaltiscoProdottiDaMagazzino(IdProdotto, quantitaTotale, prezzoTotale, numeroLotto, IdOperatore, numeroDDT, dataDDT, note, smaltito) {
 
     $.ajax({
         type: "POST",
@@ -353,7 +353,7 @@ function SmaltiscoProdottiDaMagazzino(IdProdotto, quantitaTotale, prezzoTotale, 
             risultati = response.d;
 
             console.log(risultati);
-            CaricaProdottoInMagazzino(IdProdotto, quantitaTotale, prezzoTotale, IdOperatore, numeroLotto, numeroDDL, dataDDL, note);
+            CaricaProdottoInMagazzino(IdProdotto, quantitaTotale, prezzoTotale, IdOperatore, numeroLotto, numeroDDT, dataDDT, note);
         }
 
     });

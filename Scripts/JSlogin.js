@@ -203,9 +203,46 @@ function ElencoMezziPerCaricareMerce() {
 
             var mezzi = '<li data-role="list-divider">Scegli il mezzo su cui caricare la merce:</li>'
             for (var i = 0; i < risultati.length; i++) {
-                mezzi = mezzi + '<li><a href="#formPerCaricareMerceSuCamion" class="caricaDaMagazzinoPerCamion" data-idMezzo="' + risultati[i].idMezzo + '" data-descMezzo="' + risultati[i].descrizione + '">' + risultati[i].descrizione + '</a></li>';
+                //mezzi = mezzi + '<li><a href="#formPerCaricareMerceSuCamion" class="caricaDaMagazzinoPerCamion" data-idMezzo="' + risultati[i].idMezzo + '" data-descMezzo="' + risultati[i].descrizione + '">' + risultati[i].descrizione + '</a></li>';
+
+                
+                mezzi = mezzi + '<li><a href="#CaricoScaricoMagazzino" data-idMezzo="' + risultati[i].idMezzo + '" data-descMezzo="' + risultati[i].descrizione + '">' + risultati[i].descrizione + '</a></li>';
             }
-            $(".mezziDisponibiliPerCaricamentoDaMagazzino").html(mezzi);
+
+            var tabellaMezzi = '<table id="tabellaMezzi" class="display" cellspacing="0" width="100%">' +
+                                        '<thead>' +
+                                            '<tr>' +
+                                                '<th>Mezzo</th>' +                                                
+                                                '<th>Carica</th>' +
+                                                '<th>Scarica</th>' +
+                                            '</tr>' +
+                                        '</thead>' +
+                                        '<tfoot>' +
+                                            '<tr>' +
+                                                '<th>Mezzo</th>' +
+                                                '<th>Carica</th>' +
+                                                '<th>Scarica</th>' +
+                                            '</tr>' +
+                                        '</tfoot>' +
+                                        '<tbody>';
+            var righe = '';
+            for (var i = 0; i < risultati.length; i++) {
+                righe = righe + '<tr>' +
+                    '<td>' + risultati[i].descrizione + '</td>' +
+                    '<td><a href="#formPerCaricareMerceSuCamion" data-idMezzo="' + risultati[i].idMezzo + '" data-descMezzo="' + risultati[i].descrizione + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaDaMagazzinoPerCamion">Carica</a></td>' +
+                    '<td><a href="#formPerScaricareMerceDaCamion" data-idMezzo="' + risultati[i].idMezzo + '" data-descMezzo="' + risultati[i].descrizione + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active ScaricaDaCamionInMagazzino">Scarica</a></td>' +
+                    '</tr>';
+            }
+
+            tabellaMezzi = tabellaMezzi + righe + '</tbody> </table>';
+
+
+            $("#tabellaMezziCaricoScarico").html(tabellaMezzi);
+
+            var table = $('#tabellaMezzi').DataTable(
+               { "paging": false }
+           );
+
 
             $(".caricaDaMagazzinoPerCamion").on('click', function () {
 
@@ -218,7 +255,23 @@ function ElencoMezziPerCaricareMerce() {
                
                 //alert(idMezzo);
                 //return;
-                ElencoProdottiInMagazzinoPerMezzo(idMezzo);
+                ElencoProdottiInMagazzinoPerMezzo(idMezzo, 'carica');
+
+                //ElencoProdottiSuCamionPerCliente(idMezzo, IdCliente);
+            });
+
+            $(".ScaricaDaCamionInMagazzino").on('click', function () {
+
+                var idMezzo = $(this).attr('data-idMezzo');
+                var descMezzo = $(this).attr('data-descMezzo');
+                //var IdCliente = $(this).attr('data-IdCliente');
+                //var descCliente = $(this).attr('data-descCliente');
+                //$("#titoloProdottiInCamionPerCliente").html('Elenco prodotti su:' + descMezzo);
+                $(".h1DettCamionScarica").html('Scarica merce da:<br>' + descMezzo);
+
+                //alert(idMezzo);
+                //return;
+                ElencoProdottiInMagazzinoPerMezzo(idMezzo, 'scarica');
 
                 //ElencoProdottiSuCamionPerCliente(idMezzo, IdCliente);
             });

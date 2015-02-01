@@ -91,16 +91,22 @@
         
 	</div><!-- /leftpanel2 --> 
     <div data-role="header">
-        <h1 id="h1">Mezzi su cui caricare la Merce</h1>
+        <h1 id="h1">Elenco Mezzi</h1>
         <a href="#leftpanelElencoMezzi" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>          
     </div>
 
-    <div class="ui-header">
+   <!-- <div class="ui-header">
 	    <ul data-role="listview" data-inset="true" data-divider-theme="a" class="mezziDisponibiliPerCaricamentoDaMagazzino">
 		    <li data-role="list-divider" class="ui-active">Scegli il mezzo su cui caricare la merce:</li>
 		    <li><a href="#">Camion</a></li>									
 	    </ul>
-    </div><!--/Mezzi Disponibili -->        
+    </div>-->
+    <!--/Mezzi Disponibili -->    
+    
+    <div role="main" class="ui-content"> 
+        <div id="tabellaMezziCaricoScarico"></div>
+    </div>    
+
 
 </div>
 <!--***************************************************************-->
@@ -120,6 +126,27 @@
         <div role="main" class="ui-content jqm-content">                
                                    
             <div class="MerceDaCaricareSuCamion">Dist 1</div>
+            
+        </div><!-- /content -->        
+    
+    </div><!-- /page -->
+<!--************************************************************************************-->
+
+<!--**** Form per scaricare Merce da Camion e rimetterla in Magazzino ******************-->
+<div data-role="page" id="formPerScaricareMerceDaCamion">
+    <div data-role="panel" id="leftpanelScaricaMercedaCamion" class="leftPanel" data-position="left" data-display="push" data-theme="a">
+       <!-- <h3>Left Panel: Push</h3>-->       
+        
+	</div><!-- /leftpanel2 -->     
+    <div data-role="header">
+            <h1 class="h1DettCamionScarica"></h1>           
+            <a href="#leftpanelScaricaMercedaCamion" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>
+            <a href="#paginaElencoMezzi" data-icon="arrow-l" class="ui-corner-all ui-shadow ui-btn-active ui-btn-right">Back</a>
+        </div><!-- /header -->                
+
+        <div role="main" class="ui-content jqm-content">                
+                                   
+            <div class="MerceDaScaricareDaCamion">Merce da Scaricare</div>
             
         </div><!-- /content -->        
     
@@ -338,22 +365,7 @@
         </div><!-- /header -->
                     
         <div role="main" class="ui-content">  
-             <div data-role="popup" id="popupCaricaMerceInMagazzino" data-theme="a" class="ui-corner-all">
-            
-                <!--<div style="padding:10px 20px;">
-                    <h3>Carica in Magazzino</h3>                    
-                    <label for="quantitaProdDaCaricareInMagazzino" class="labelForm">Quantita:</label>
-                    <input type="number" id="quantitaProdDaCaricareInMagazzino" data-theme="a">
-                    <label for="numeroLotttoCaricareinMagazzino" class="labelForm">Numero Lotto</label>
-                    <input type="number" id="numeroLotttoCaricareinMagazzino" data-theme="a"> 
-                    <label for="numeroDDLCaricareinMagazzino" class="labelForm">Numero DDL</label>
-                    <input type="number" id="numeroDDLCaricareinMagazzino" data-theme="a">    
-                    <label for="dataDDLCaricareinMagazzino" class="labelForm">Data DDL:</label>                 
-                    <input type="text" id="dataDDLCaricareinMagazzino" data-theme="a">
-                    <label for="noteCaricareinMagazzino">Note:</label>
-                    <textarea cols="40" rows="15" id="noteCaricareinMagazzino" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset"></textarea>                    
-                    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdottoInMagazzino">Carica</a>                    
-                </div>-->
+             <div data-role="popup" id="popupCaricaMerceInMagazzino" data-theme="a" class="ui-corner-all">                           
             
             </div><!-- /popup -->     
             <div data-role="popup" id="popupScaricaMerceDaMagazzino" data-theme="a" class="ui-corner-all">                            
