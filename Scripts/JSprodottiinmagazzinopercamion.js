@@ -263,58 +263,9 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
 
 function CaricaProdottisuCamion(IdMagazzino, idMezzo, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto, numeroDDT, dataDDT) {
 
-    // Storicizzo Prodotti in magazzino ************************************************
-    $.ajax({
-        type: "POST",
-        crossDomain: true,
-        contentType: "application/json; charset=utf-8",
-        //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/StoricizzoProdottoInMagazzino",        
-        url: urlStoricizzoProdottiInMagazzino,
-        cache: false,
-                   
-        async: true,
-        //            data: "idDisciplina=" + idDisciplina,
-        data: JSON.stringify({ IdMagazzino: IdMagazzino, IdOperatore: idOperatore }),
-       
-        error: function (data) {
-            console.log(data.responseText)
-        },
-        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
-        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
-        success: function (response) {
-            risultati = response.d;
-            
-            console.log(risultati);
-                    
-        }
+    storicizzaProdottoInMagazzino(IdMagazzino, idOperatore);
 
-    });
-    // *********************************************************************************
-
-    // Aggiorno quantita Prodotti rimasti in magazzino *********************************
-    $.ajax({
-        type: "POST",
-        crossDomain: true,
-        contentType: "application/json; charset=utf-8",
-        //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzino",
-        url: urlQuantitaProdottiInMagazzino,
-        cache: false,
-        async: true,        
-        data: JSON.stringify({ idProdotto: idProdotto, quantita: quantitaRimasti, prezzoTotale: prezzoTotaleRimasti, idOperatore: idOperatore, numeroLotto: numeroLotto }),
-        error: function (data) {
-            console.log(data.responseText)
-        },
-        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
-        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
-        success: function (response) {
-            risultati = response.d;
-
-            console.log(risultati);
-
-        }
-
-    });
-    // *********************************************************************************
+    AggiornaQuantitaProdottiInMagazzino(idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto);
 
     InsertProdottiInCamion(idProdotto, quantitaCaricati, prezzoTotaleCaricati, idOperatore, numeroLotto, idMezzo, numeroDDT, dataDDT);
 }

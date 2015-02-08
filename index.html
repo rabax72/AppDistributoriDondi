@@ -30,6 +30,8 @@
 <script src="Scripts/JSprodottisucamion.js"></script>
 <script src="Scripts/JSsituazioneclienti.js"></script>
 <script src="Scripts/JSgestionemagazzino.js"></script>
+<script src="Scripts/JSvenditadiretta.js"></script>
+<script src="Scripts/JSriepilogovenduto.js"></script>
 
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script> 
 
@@ -377,6 +379,55 @@
     </div><!-- /page -->
 
     
+<!--************************************************************************************-->
+
+<!--**** Form Vendita Diretta ************************-->
+<div data-role="page" id="VenditaDiretta">
+    <div data-role="panel" id="leftpanelVenditaDiretta" class="leftPanel" data-position="left" data-display="push" data-theme="a">
+       <!-- <h3>Left Panel: Push</h3>-->       
+        
+	</div><!-- /leftpanel2 -->     
+    <div data-role="header">
+            <h1 class="h1VenditaDiretta">Vendita Diretta</h1>           
+            <a href="#leftpanelVenditaDiretta" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>
+            <a href="#paginaElencoMezzi" data-icon="arrow-l" class="ui-corner-all ui-shadow ui-btn-active ui-btn-right">Back</a>
+        </div><!-- /header -->                
+
+        <div role="main" class="ui-content jqm-content">                
+                                   
+            <div class="MercePerVenditaDiretta">Vendita Diretta</div>
+            
+        </div><!-- /content -->        
+    
+    </div><!-- /page -->
+<!--************************************************************************************-->
+
+<!--**** Riepilogo Venduto ************************-->
+<div data-role="page" id="RiepilogoVenduto">
+    <div data-role="panel" id="leftpanelRiepilogoVenduto" class="leftPanel" data-position="left" data-display="push" data-theme="a">
+       <!-- <h3>Left Panel: Push</h3>-->       
+        
+	</div><!-- /leftpanel2 -->     
+    <div data-role="header">
+            <h1 class="h1RiepilogoVenduto">Riepilogo Venduto</h1>           
+            <a href="#leftpanelRiepilogoVenduto" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>
+            <a href="#paginaElencoMezzi" data-icon="arrow-l" class="ui-corner-all ui-shadow ui-btn-active ui-btn-right">Back</a>
+        </div><!-- /header -->                
+
+        <div role="main" class="ui-content jqm-content">                
+                                   
+            <ul data-role="listview" data-filter="true" data-filter-placeholder="Cerca il Cliente..." data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+                <li><a href="javascript:VendutoPerDistributore();" class="ui-btn ui-btn-icon-right ui-icon-carat-r" >Venduto Per Distributore</a></li>
+                <li><a href="javascript:VendutoPerCliente();" class="ui-btn ui-btn-icon-right ui-icon-carat-r" >Venduto Per Cliente</a></li>
+                <li><a href="javascript:VendutoPerProdotto();" class="ui-btn ui-btn-icon-right ui-icon-carat-r" >Venduto Per Prodotto</a></li>
+                <li><a href="javascript:VenditaDiretta();" class="ui-btn ui-btn-icon-right ui-icon-carat-r" >Vendita Diretta</a></li>
+            </ul>
+            
+            <div class="DettRiepilogoVenduto"></div>
+
+        </div><!-- /content -->        
+    
+    </div><!-- /page -->
 <!--************************************************************************************-->
 
 <!--**** Form Inserimento Prodotti *****************************************************-->

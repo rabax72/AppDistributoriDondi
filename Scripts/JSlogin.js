@@ -5,6 +5,7 @@ if (tipoDiConn == "prod") {
     var urlGetElencoMezzi = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetElencoMezzi';
     var urlGetElencoClienti = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetElencoClienti';
     var urlGetElencoDistributori = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetElencoDistributori';
+    var urlGetElencoProdotti = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetElencoProdotti';
     var urlInsertProdotto = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/InsertProdotto';
     var urlGetProdottiInMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiInMagazzino';
     var urlStoricizzoProdottiInMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/StoricizzoProdottoInMagazzino';
@@ -22,11 +23,18 @@ if (tipoDiConn == "prod") {
     var urlAggiornoQuantitaProdottiInDistributore = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottoInDistributore';
     var urlStoricizzaStatoProdottoInCliente = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/StoricizzoStatoProdottoInCliente';
     var urlCaricaProdottiInMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/CaricaProdottiInMagazzino';
+    var urlGetVendutoCliente = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetVendutoCliente';
+    var urlGetVendutoDirettamente = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetVendutoDirettamente';
+    var urlGetVendutoDistributori = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetVendutoDistributori';
+    var urlGetVendutoByIdProdotto = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetVendutoByIdProdotto';
+    var urlGetVendutoByIdDistributore = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetVendutoByIdDistributore';
+    var urlGetVendutoByIdCliente = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetVendutoByIdCliente';
 } else {
     var urlGetAuthentication = 'WebServiceAppDondi.asmx/GetAuthentication';
     var urlGetElencoMezzi = 'WebServiceAppDondi.asmx/GetElencoMezzi';
     var urlGetElencoClienti = 'WebServiceAppDondi.asmx/GetElencoClienti';
     var urlGetElencoDistributori = 'WebServiceAppDondi.asmx/GetElencoDistributori';
+    var urlGetElencoProdotti = 'WebServiceAppDondi.asmx/GetElencoProdotti';
     var urlInsertProdotto = 'WebServiceAppDondi.asmx/InsertProdotto';
     var urlGetProdottiInMagazzino = 'WebServiceAppDondi.asmx/GetProdottiInMagazzino';
     var urlStoricizzoProdottiInMagazzino = 'WebServiceAppDondi.asmx/StoricizzoProdottoInMagazzino';
@@ -44,6 +52,12 @@ if (tipoDiConn == "prod") {
     var urlAggiornoQuantitaProdottiInDistributore = 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottoInDistributore';
     var urlStoricizzaStatoProdottoInCliente = 'WebServiceAppDondi.asmx/StoricizzoStatoProdottoInCliente';
     var urlCaricaProdottiInMagazzino = 'WebServiceAppDondi.asmx/CaricaProdottiInMagazzino';
+    var urlGetVendutoCliente = 'WebServiceAppDondi.asmx/GetVendutoCliente';
+    var urlGetVendutoDirettamente = 'WebServiceAppDondi.asmx/GetVendutoDirettamente';
+    var urlGetVendutoDistributori = 'WebServiceAppDondi.asmx/GetVendutoDistributori';
+    var urlGetVendutoByIdProdotto = 'WebServiceAppDondi.asmx/GetVendutoByIdProdotto';
+    var urlGetVendutoByIdDistributore = 'WebServiceAppDondi.asmx/GetVendutoByIdDistributore';
+    var urlGetVendutoByIdCliente = 'WebServiceAppDondi.asmx/GetVendutoByIdCliente';
 }
 
 $(function () {
@@ -430,7 +444,90 @@ function ElencoClienti() {
     });
 }
 
+// Storicizzo Prodotti in magazzino ************************************************
+function storicizzaProdottoInMagazzino(IdMagazzino, idOperatore) {
+    
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/StoricizzoProdottoInMagazzino",        
+        url: urlStoricizzoProdottiInMagazzino,
+        cache: false,
 
+        async: true,
+        //            data: "idDisciplina=" + idDisciplina,
+        data: JSON.stringify({ IdMagazzino: IdMagazzino, IdOperatore: idOperatore }),
 
+        error: function (data) {
+            console.log(data.responseText)
+        },
+        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+        success: function (response) {
+            risultati = response.d;
 
+            console.log(risultati);
+
+        }
+
+    });
+   
+}
+// *********************************************************************************
+
+// Aggiorno quantita Prodotti rimasti in magazzino *********************************
+function AggiornaQuantitaProdottiInMagazzino(idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto) {
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzino",
+        url: urlQuantitaProdottiInMagazzino,
+        cache: false,
+        async: true,
+        data: JSON.stringify({ idProdotto: idProdotto, quantita: quantitaRimasti, prezzoTotale: prezzoTotaleRimasti, idOperatore: idOperatore, numeroLotto: numeroLotto }),
+        error: function (data) {
+            console.log(data.responseText)
+        },
+        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+        success: function (response) {
+            risultati = response.d;
+
+            console.log(risultati);
+
+        }
+
+    });
+}
+// *********************************************************************************
+
+//Inserisco la quantita di Prodotti Venduti
+function AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, idCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, VenditaDiretta, numeroDDT, DataDDT) {
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottiVenduti",
+        url: urlAggiornaQuantitaProdottiVenduti,
+        cache: false,
+        async: true,
+        //            data: "idDisciplina=" + idDisciplina,
+        data: JSON.stringify({ idProdotto: idProdotto, idDistributore: idDistributore, idCliente: idCliente, quantita: quantitaVenduti, prezzoTotale: prezzoTotaleVenduti, idOperatore: idOperatore, VenditaDiretta: VenditaDiretta, numeroDDT: numeroDDT, DataDDT: DataDDT }),
+        error: function (data) {
+            console.log(data.responseText)
+        },
+        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+        success: function (response) {
+            risultati = response.d;
+
+            console.log(risultati);
+
+        }
+
+    });
+}
+//****************************************************************** 
         
