@@ -90,8 +90,7 @@ function VenditaDiretta(DataDa, DataA) {
                                             '<th>Quantità</th>' +
                                             '<th>Totale Venduto: ' + prezzoTot + '€</th>' +
                                             '<th>N° DDT</th>' +
-                                            '<th>Data DDT</th>' +
-                                            '<th>Distributore</th>' +
+                                            '<th>Data DDT</th>' +                                            
                                             '<th>Operatore</th>' +
                                         '</tr>' +
                                     '</tfoot>' + ' </table>';
@@ -132,7 +131,7 @@ function VendutoPerProdotto() {
         type: "POST",
         crossDomain: true,
         contentType: "application/json; charset=utf-8",
-        url: urlGetElencoProdotti,
+        url: urlGetElencoProdottiVenduti,
         cache: false,
         async: true,
         data: JSON.stringify({}),

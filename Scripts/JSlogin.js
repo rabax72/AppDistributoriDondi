@@ -1,5 +1,5 @@
 ﻿//Connessioni ai WebServices
-var tipoDiConn = "prod";
+var tipoDiConn = "test";
 if (tipoDiConn == "prod") {
     var urlGetAuthentication = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetAuthentication';
     var urlGetClienteById = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetClienteById';
@@ -7,6 +7,7 @@ if (tipoDiConn == "prod") {
     var urlGetElencoClienti = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetElencoClienti';
     var urlGetElencoDistributori = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetElencoDistributori';
     var urlGetElencoProdotti = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetElencoProdotti';
+    var urlGetElencoProdottiVenduti = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetElencoProdottiVenduti';
     var urlInsertProdotto = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/InsertProdotto';
     var urlGetProdottiInMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiInMagazzino';
     var urlGetProdottiInMagazzinoResi = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiInMagazzinoResi';
@@ -39,6 +40,7 @@ if (tipoDiConn == "prod") {
     var urlGetElencoClienti = 'WebServiceAppDondi.asmx/GetElencoClienti';
     var urlGetElencoDistributori = 'WebServiceAppDondi.asmx/GetElencoDistributori';
     var urlGetElencoProdotti = 'WebServiceAppDondi.asmx/GetElencoProdotti';
+    var urlGetElencoProdottiVenduti = 'WebServiceAppDondi.asmx/GetElencoProdottiVenduti';
     var urlInsertProdotto = 'WebServiceAppDondi.asmx/InsertProdotto';
     var urlGetProdottiInMagazzino = 'WebServiceAppDondi.asmx/GetProdottiInMagazzino';
     var urlGetProdottiInMagazzinoResi = 'WebServiceAppDondi.asmx/GetProdottiInMagazzinoResi';
