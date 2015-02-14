@@ -18,6 +18,7 @@
     <link href="Scripts/DatePicker/jquery.mobile.datepicker.css" rel="stylesheet" />
     <link href="Scripts/DatePicker/jquery.mobile.datepicker.theme.css" rel="stylesheet" />
     <script src="Scripts/DatePicker/jquery.mobile.datepicker.js"></script>
+    <script src="Scripts/DatePicker/ui.datepicker-it.js"></script>
 
 <link href="Scripts/StyleSheet.css" rel="stylesheet" type="text/css" />
 
@@ -410,8 +411,7 @@
 	</div><!-- /leftpanel2 -->     
     <div data-role="header">
             <h1 class="h1RiepilogoVenduto">Riepilogo Venduto</h1>           
-            <a href="#leftpanelRiepilogoVenduto" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>
-            <a href="#paginaElencoMezzi" data-icon="arrow-l" class="ui-corner-all ui-shadow ui-btn-active ui-btn-right">Back</a>
+            <a href="#leftpanelRiepilogoVenduto" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>            
         </div><!-- /header -->                
 
         <div role="main" class="ui-content jqm-content">                
@@ -420,10 +420,33 @@
                 <li><a href="javascript:VendutoPerDistributore();" class="ui-btn ui-btn-icon-right ui-icon-carat-r" >Venduto Per Distributore</a></li>
                 <li><a href="javascript:VendutoPerCliente();" class="ui-btn ui-btn-icon-right ui-icon-carat-r" >Venduto Per Cliente</a></li>
                 <li><a href="javascript:VendutoPerProdotto();" class="ui-btn ui-btn-icon-right ui-icon-carat-r" >Venduto Per Prodotto</a></li>
-                <li><a href="javascript:VenditaDiretta();" class="ui-btn ui-btn-icon-right ui-icon-carat-r" >Vendita Diretta</a></li>
+                <li><a href="javascript:VenditaDiretta(null, null);" class="ui-btn ui-btn-icon-right ui-icon-carat-r" >Vendita Diretta</a></li>
             </ul>
             
             <div class="DettRiepilogoVenduto"></div>
+
+        </div><!-- /content -->        
+    
+    </div><!-- /page -->
+<!--************************************************************************************-->
+
+<!--**** Riepilogo Resi ************************-->
+<div data-role="page" id="RiepilogoResi">
+    <div data-role="panel" id="leftpanelRiepilogoResi" class="leftPanel" data-position="left" data-display="push" data-theme="a">
+       <!-- <h3>Left Panel: Push</h3>-->       
+        
+	</div><!-- /leftpanel2 -->     
+    <div data-role="header">
+            <h1 class="h1RiepilogoResi">Riepilogo Resi</h1>           
+            <a href="#leftpanelRiepilogoResi" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>
+            <!--<a href="#" data-rel="back" data-icon="arrow-l" class="ui-corner-all ui-shadow ui-btn-active ui-btn-right">Back</a>-->
+        </div><!-- /header -->                
+
+        <div role="main" class="ui-content jqm-content">                                                               
+            <div>
+                Data Da <input type="text" id="ResiDataDa" data-theme="a" /> Data A <input type="text" id="ResiDataA" data-theme="a" /> <button id="filtraResi" value="Filtra" class="filtraResi">Filtra</button>
+            </div>
+            <div class="DettRiepilogoResi"></div>
 
         </div><!-- /content -->        
     

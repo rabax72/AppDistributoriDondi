@@ -2,12 +2,15 @@
 var tipoDiConn = "prod";
 if (tipoDiConn == "prod") {
     var urlGetAuthentication = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetAuthentication';
+    var urlGetClienteById = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetClienteById';
     var urlGetElencoMezzi = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetElencoMezzi';
     var urlGetElencoClienti = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetElencoClienti';
     var urlGetElencoDistributori = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetElencoDistributori';
     var urlGetElencoProdotti = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetElencoProdotti';
     var urlInsertProdotto = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/InsertProdotto';
     var urlGetProdottiInMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiInMagazzino';
+    var urlGetProdottiInMagazzinoResi = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiInMagazzinoResi';
+    var urlGetProdottiInMagazzinoResiFiltrato = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiInMagazzinoResiFiltrato';
     var urlStoricizzoProdottiInMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/StoricizzoProdottoInMagazzino';
     var urlSmaltiscoProdottoInMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/SmaltiscoProdottoInMagazzino';    
     var urlQuantitaProdottiInMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzino';
@@ -31,12 +34,15 @@ if (tipoDiConn == "prod") {
     var urlGetVendutoByIdCliente = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetVendutoByIdCliente';
 } else {
     var urlGetAuthentication = 'WebServiceAppDondi.asmx/GetAuthentication';
+    var urlGetClienteById = 'WebServiceAppDondi.asmx/GetClienteById';
     var urlGetElencoMezzi = 'WebServiceAppDondi.asmx/GetElencoMezzi';
     var urlGetElencoClienti = 'WebServiceAppDondi.asmx/GetElencoClienti';
     var urlGetElencoDistributori = 'WebServiceAppDondi.asmx/GetElencoDistributori';
     var urlGetElencoProdotti = 'WebServiceAppDondi.asmx/GetElencoProdotti';
     var urlInsertProdotto = 'WebServiceAppDondi.asmx/InsertProdotto';
     var urlGetProdottiInMagazzino = 'WebServiceAppDondi.asmx/GetProdottiInMagazzino';
+    var urlGetProdottiInMagazzinoResi = 'WebServiceAppDondi.asmx/GetProdottiInMagazzinoResi';
+    var urlGetProdottiInMagazzinoResiFiltrato = 'WebServiceAppDondi.asmx/GetProdottiInMagazzinoResiFiltrato';
     var urlStoricizzoProdottiInMagazzino = 'WebServiceAppDondi.asmx/StoricizzoProdottoInMagazzino';
     var urlSmaltiscoProdottoInMagazzino = 'WebServiceAppDondi.asmx/SmaltiscoProdottoInMagazzino';
     var urlQuantitaProdottiInMagazzino = 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzino';
@@ -60,8 +66,8 @@ if (tipoDiConn == "prod") {
     var urlGetVendutoByIdCliente = 'WebServiceAppDondi.asmx/GetVendutoByIdCliente';
 }
 
-$(function () {
-    
+$(function () {    
+
     $(".leftPanel").load("Include/LeftPanel.html");
     //$(".menuNavigazione").load("Include/NavBar.htm");
     ElencoMezziPerDistributori();
@@ -189,6 +195,33 @@ function Autenticazione(user, password) {
             } else {
                 $("#authResult").html('User o Password Errati!!!');
             }
+
+        }
+
+    });
+
+}
+
+function GetClienteById(idCliente) {
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        url: urlGetClienteById,
+        cache: false,
+        async: false,
+        data: JSON.stringify({ idCliente: idCliente }),
+        error: function (data) {
+            console.log(data.responseText)
+            //$("#authResult").html(data.responseText);
+        },
+        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+        success: function (response) {
+            risultati = response.d;
+
+            //console.log(risultati);                       
+            return risultati;
 
         }
 
