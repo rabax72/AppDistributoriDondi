@@ -67,20 +67,9 @@ function VenditaDiretta(DataDa, DataA) {
                                             '<th>Data DDT</th>' +
                                             '<th>Operatore</th>' +                                            
                                         '</tr>' +
-                                    '</thead>' +
-                                    '<tfoot>' +
-                                        '<tr>' +
-                                            '<th>Foto</th>' +
-                                            '<th>Descrizione</th>' +
-                                            '<th>Quantità</th>' +
-                                            '<th>Prezzo Tot.</th>' +
-                                            '<th>N° DDT</th>' +
-                                            '<th>Data DDT</th>' +
-                                            '<th>Operatore</th>' +
-                                        '</tr>' +
-                                    '</tfoot>' +
+                                    '</thead>' +                                    
                                     '<tbody>';
-
+            var prezzoTot = 0;
             for (var i = 0; i < risultati.length; i++) {
 
                 dettaglio = dettaglio + '<tr>';
@@ -92,9 +81,20 @@ function VenditaDiretta(DataDa, DataA) {
                 dettaglio = dettaglio + '<td>' + parseJsonDate(risultati[i].dataDDT) + '</td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
                 dettaglio = dettaglio + '</tr>';
-
+                prezzoTot = prezzoTot + risultati[i].prezzoTotale;
             }
-            dettaglio = dettaglio + '</tbody> </table>';
+            dettaglio = dettaglio + '</tbody>' + '<tfoot>' +
+                                        '<tr>' +
+                                            '<th>Foto</th>' +
+                                            '<th>Descrizione</th>' +
+                                            '<th>Quantità</th>' +
+                                            '<th>Totale Venduto: ' + prezzoTot + '€</th>' +
+                                            '<th>N° DDT</th>' +
+                                            '<th>Data DDT</th>' +
+                                            '<th>Distributore</th>' +
+                                            '<th>Operatore</th>' +
+                                        '</tr>' +
+                                    '</tfoot>' + ' </table>';
 
             //console.log(dettaglio);
 
@@ -168,9 +168,9 @@ function VendutoPerProdotto() {
                                     '<tbody>';
 
             for (var i = 0; i < risultati.length; i++) {
-
+                var desc = '\'' + risultati[i].descrizione + '\'';
                 dettaglio = dettaglio + '<tr>';
-                dettaglio = dettaglio + '<td><a href="javascript:GetVendutoByIdProdotto(' + risultati[i].idProdotto + ', null, null);"><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></a></td>';
+                dettaglio = dettaglio + '<td><a href="javascript:GetVendutoByIdProdotto(' + risultati[i].idProdotto + ', ' + desc + ', null, null);"><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></a></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].prezzo + ' €</td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].aliquota + '</td>';                
@@ -199,7 +199,7 @@ function VendutoPerProdotto() {
 
 }
 
-function GetVendutoByIdProdotto(idProdotto, DataDa, DataA) {
+function GetVendutoByIdProdotto(idProdotto, descrizione, DataDa, DataA) {
     // location.hash = "VenditaDiretta";
     //DataDa = stringToDate(DataDa, "dd-MM-yyyy", "-");
     //DataA = stringToDate(DataA, "dd-MM-yyyy", "-");
@@ -222,7 +222,7 @@ function GetVendutoByIdProdotto(idProdotto, DataDa, DataA) {
 
             //console.log(risultati);
 
-            var dettaglio = '<div>' +
+            var dettaglio = '<h1>Filtro per: ' + descrizione + '</h1>' + '<div>' +
                                 'Data Da <input type="text" id="VendutiByIdProdottoDataDa"  class="calendario" data-theme="a" /> Data A <input type="text" id="VendutiByIdProdottoDataA"  class="calendario" data-theme="a" /> <button id="filtraVendutiByIdProdotto" value="Filtra" class="filtraVendutiByIdProdotto">Filtra</button>' +
                             '</div><table id="tabellaVendutiByIdProdotto" class="display" cellspacing="0" width="100%">' +
                                     '<thead>' +
@@ -237,22 +237,9 @@ function GetVendutoByIdProdotto(idProdotto, DataDa, DataA) {
                                             '<th>Cliente</th>' +
                                             '<th>Operatore</th>' +
                                         '</tr>' +
-                                    '</thead>' +
-                                    '<tfoot>' +
-                                        '<tr>' +
-                                            '<th>Foto</th>' +
-                                            '<th>Descrizione</th>' +
-                                            '<th>Quantità</th>' +
-                                            '<th>Prezzo Tot.</th>' +
-                                            '<th>N° DDT</th>' +
-                                            '<th>Data DDT</th>' +
-                                            '<th>Distributore</th>' +
-                                            '<th>Cliente</th>' +
-                                            '<th>Operatore</th>' +
-                                        '</tr>' +
-                                    '</tfoot>' +
+                                    '</thead>' +                                    
                                     '<tbody>';
-
+            var prezzoTot = 0;
             for (var i = 0; i < risultati.length; i++) {
 
                 dettaglio = dettaglio + '<tr>';
@@ -266,9 +253,20 @@ function GetVendutoByIdProdotto(idProdotto, DataDa, DataA) {
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizioneCliente + '</td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
                 dettaglio = dettaglio + '</tr>';
-
+                prezzoTot = prezzoTot + risultati[i].prezzoTotale;
             }
-            dettaglio = dettaglio + '</tbody> </table>';
+            dettaglio = dettaglio + '</tbody>' + '<tfoot>' +
+                                        '<tr>' +
+                                            '<th>Foto</th>' +
+                                            '<th>Descrizione</th>' +
+                                            '<th>Quantità</th>' +
+                                            '<th>Totale Venduto: ' + prezzoTot + '€</th>' +
+                                            '<th>N° DDT</th>' +
+                                            '<th>Data DDT</th>' +
+                                            '<th>Distributore</th>' +
+                                            '<th>Operatore</th>' +
+                                        '</tr>' +
+                                    '</tfoot>' + ' </table>';
 
             console.log(dettaglio);
 
@@ -290,7 +288,7 @@ function GetVendutoByIdProdotto(idProdotto, DataDa, DataA) {
                 var DataDa = stringToDate($('#VendutiByIdProdottoDataDa').val(), "dd-MM-yyyy", "-");
                 var DataA = stringToDate($('#VendutiByIdProdottoDataA').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
-                GetVendutoByIdProdotto(idProdotto, DataDa, DataA);
+                GetVendutoByIdProdotto(idProdotto, descrizione, DataDa, DataA);
             });
 
         }
@@ -377,21 +375,9 @@ function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) 
                                             '<th>Distributore</th>' +                                            
                                             '<th>Operatore</th>' +
                                         '</tr>' +
-                                    '</thead>' +
-                                    '<tfoot>' +
-                                        '<tr>' +
-                                            '<th>Foto</th>' +
-                                            '<th>Descrizione</th>' +
-                                            '<th>Quantità</th>' +
-                                            '<th>Prezzo Tot.</th>' +
-                                            '<th>N° DDT</th>' +
-                                            '<th>Data DDT</th>' +
-                                            '<th>Distributore</th>' +                                            
-                                            '<th>Operatore</th>' +
-                                        '</tr>' +
-                                    '</tfoot>' +
+                                    '</thead>' +                                    
                                     '<tbody>';
-
+            var prezzoTot = 0;
             for (var i = 0; i < risultati.length; i++) {
 
                 dettaglio = dettaglio + '<tr>';
@@ -404,9 +390,32 @@ function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) 
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizioneDistributore + '</td>';                
                 dettaglio = dettaglio + '<td>' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
                 dettaglio = dettaglio + '</tr>';
+                prezzoTot = prezzoTot + risultati[i].prezzoTotale;
 
             }
-            dettaglio = dettaglio + '</tbody> </table>';
+            
+            //dettaglio = dettaglio + '<tr>' +
+            //                            '<td>-</td>' +
+            //                            '<td>-</td>' +
+            //                            '<td>-</td>' +
+            //                            '<td>Totale Venduto: ' + prezzoTot + '€</td>' +
+            //                            '<td>-</td>' +
+            //                            '<td>-</td>' +
+            //                            '<td>-</td>' +
+            //                            '<td>-</td>' +
+            //                        '</tr>';
+            dettaglio = dettaglio + '</tbody>' + '<tfoot>' +
+                                        '<tr>' +
+                                            '<th>Foto</th>' +
+                                            '<th>Descrizione</th>' +
+                                            '<th>Quantità</th>' +
+                                            '<th>Totale Venduto: ' + prezzoTot + '€</th>' +
+                                            '<th>N° DDT</th>' +
+                                            '<th>Data DDT</th>' +
+                                            '<th>Distributore</th>' +
+                                            '<th>Operatore</th>' +
+                                        '</tr>' +
+                                    '</tfoot>' + ' </table>';
 
             //console.log(dettaglio);
 
@@ -516,21 +525,9 @@ function GetVendutoByIdCliente(idCliente, descrizione, DataDa, DataA) {
                                             '<th>Cliente</th>' +
                                             '<th>Operatore</th>' +
                                         '</tr>' +
-                                    '</thead>' +
-                                    '<tfoot>' +
-                                        '<tr>' +
-                                            '<th>Foto</th>' +
-                                            '<th>Descrizione</th>' +
-                                            '<th>Quantità</th>' +
-                                            '<th>Prezzo Tot.</th>' +
-                                            '<th>N° DDT</th>' +
-                                            '<th>Data DDT</th>' +
-                                            '<th>Cliente</th>' +
-                                            '<th>Operatore</th>' +
-                                        '</tr>' +
-                                    '</tfoot>' +
+                                    '</thead>' +                                    
                                     '<tbody>';
-
+            var prezzoTot = 0;
             for (var i = 0; i < risultati.length; i++) {
 
                 dettaglio = dettaglio + '<tr>';
@@ -543,9 +540,20 @@ function GetVendutoByIdCliente(idCliente, descrizione, DataDa, DataA) {
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizioneCliente + '</td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
                 dettaglio = dettaglio + '</tr>';
-
+                prezzoTot = prezzoTot + risultati[i].prezzoTotale;
             }
-            dettaglio = dettaglio + '</tbody> </table>';
+            dettaglio = dettaglio + '</tbody>' + '<tfoot>' +
+                                        '<tr>' +
+                                            '<th>Foto</th>' +
+                                            '<th>Descrizione</th>' +
+                                            '<th>Quantità</th>' +
+                                            '<th>Totale Venduto: ' + prezzoTot + '€</th>' +
+                                            '<th>N° DDT</th>' +
+                                            '<th>Data DDT</th>' +
+                                            '<th>Distributore</th>' +
+                                            '<th>Operatore</th>' +
+                                        '</tr>' +
+                                    '</tfoot>' + ' </table>';
 
             //console.log(dettaglio);
 
