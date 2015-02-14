@@ -213,7 +213,8 @@ function GetVendutoByIdProdotto(idProdotto, descrizione, DataDa, DataA) {
         async: true,
         data: JSON.stringify({ idProdotto: idProdotto, DataDa: DataDa, DataA: DataA }),
         error: function (data) {
-            console.log(data.responseText)
+            console.log(data.responseText);
+            $('.DettRiepilogoVenduto').html(data.responseText);
         },
         beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
         complete: function () { $.mobile.loading('hide'); }, //Hide spinner
