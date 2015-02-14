@@ -1,5 +1,5 @@
 ﻿//Connessioni ai WebServices
-var tipoDiConn = "test";
+var tipoDiConn = "prod";
 if (tipoDiConn == "prod") {
     var urlGetAuthentication = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetAuthentication';
     var urlGetClienteById = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetClienteById';
