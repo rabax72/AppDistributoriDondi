@@ -212,6 +212,7 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                     //console.log(zzz);
                     //$(".qVenduto").html(data.d.quantita);
                     //v.closest('td').html(data.d.quantita);
+                    alert('q=' + data.d.quantita);
                     v.next('div').html(data.d.quantita);
                 });
 
