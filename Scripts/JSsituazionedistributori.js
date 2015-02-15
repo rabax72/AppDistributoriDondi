@@ -195,6 +195,7 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                     } else {
                         // Tell the user their password was bad
                         console.log('Non ha finito');
+                        alert('r=' + r);
                         v.next('div').html(r);
                     }
 
@@ -202,6 +203,7 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                 .fail(function (x) {
                     // Tell the user something bad happened
                     console.log(x);
+                    alert('x=' + x);
                     v.next('div').html(x);
                 });
                 
