@@ -214,9 +214,9 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
 
             });
             
-            $(".aggiornaVenduto").each(function () {
-                $(this).click();
-            });
+            //$(".aggiornaVenduto").each(function () {
+            //    $(this).click();
+            //});
 
             var table = $('#tabellaDettaglioDistributore').DataTable(
                 { "paging": false }
