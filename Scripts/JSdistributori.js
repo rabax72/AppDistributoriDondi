@@ -1,13 +1,5 @@
 ﻿$(function () {
-
-   //ElencoDistributori();
-    //$(".thisDistributore").on('click', function () {
-
-    //    var idDistributore = $(this).data('id');
-
-    //    console.log('idDistributore=' + idDistributore);
-        
-    //});
+   
 });
 
 function ElencoDistributori() {
@@ -63,6 +55,7 @@ function ElencoDistributori() {
     });
 
 }
+
 
 
 
