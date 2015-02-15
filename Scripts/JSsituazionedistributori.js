@@ -141,7 +141,7 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].quantita + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td>Rimasti <input type="number" id="rimastoLotto' + risultati[i].IdSituazioneDistributore + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneDistributore="' + risultati[i].IdSituazioneDistributore + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdDistributore="' + risultati[i].IdDistributore + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti">Salva</a> </td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td>Resi <input type="number" id="resoLotto' + risultati[i].IdSituazioneDistributore + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneDistributore="' + risultati[i].IdSituazioneDistributore + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdDistributore="' + risultati[i].IdDistributore + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active resi">Salva</a> </td>';                    
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="qVenduto"><input type="button" text="Aggiorna" value="Aggiorna" class="aggiornaVenduto" data-idProdotto="' + idProd + '"></td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="qVenduto"><input type="button" text="Aggiorna" value="Aggiorna" class="aggiornaVenduto" data-idProdotto="' + idProd + '"><div></div></td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
                 } else {
                     if (numLotto != numLottoOld) {
@@ -152,7 +152,7 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].quantita + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>Rimasti <input type="number" id="rimastoLotto' + risultati[i].IdSituazioneDistributore + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneDistributore="' + risultati[i].IdSituazioneDistributore + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdDistributore="' + risultati[i].IdDistributore + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti">Salva</a> </td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>Resi <input type="number" id="resoLotto' + risultati[i].IdSituazioneDistributore + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneDistributore="' + risultati[i].IdSituazioneDistributore + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdDistributore="' + risultati[i].IdDistributore + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active resi">Salva</a> </td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="qVenduto"><input type="button" text="Aggiorna" value="Aggiorna" class="aggiornaVenduto" data-idProdotto="' + idProd + '"></td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="qVenduto"><input type="button" text="Aggiorna" value="Aggiorna" class="aggiornaVenduto" data-idProdotto="' + idProd + '"><div></div></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
                     } else {
                         rigaDettaglio[i - 1] = '';
@@ -163,7 +163,7 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + quantitaTot + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>Rimasti <input type="number" id="rimastoLotto' + risultati[i].IdSituazioneDistributore + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneDistributore="' + risultati[i].IdSituazioneDistributore + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdDistributore="' + risultati[i].IdDistributore + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti">Salva</a> </td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>Resi <input type="number" id="resoLotto' + risultati[i].IdSituazioneDistributore + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneDistributore="' + risultati[i].IdSituazioneDistributore + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdDistributore="' + risultati[i].IdDistributore + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active resi">Salva</a> </td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="qVenduto"><input type="button" text="Aggiorna" value="Aggiorna" class="aggiornaVenduto" data-idProdotto="' + idProd + '"></td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="qVenduto"><input type="button" text="Aggiorna" value="Aggiorna" class="aggiornaVenduto" data-idProdotto="' + idProd + '"><div></div></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
                     }
                 }
@@ -208,8 +208,8 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                     //var zzz = venduto.responseText;
                     //console.log(zzz);
                     //$(".qVenduto").html(data.d.quantita);
-                    v.closest('td').html(data.d.quantita);
-
+                    //v.closest('td').html(data.d.quantita);
+                    v.next('div').html(data.d.quantita);
                 });
 
             });
