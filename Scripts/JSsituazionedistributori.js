@@ -4,8 +4,8 @@
 
 });
 
-function foo(IdDistributore, idProd) {
-    return $.ajax({
+function GetSituazioneVendutoInDistributore(IdDistributore, idProd, obj) {
+    $.ajax({
         type: "POST",
         crossDomain: true,
         contentType: "application/json; charset=utf-8",
@@ -32,8 +32,8 @@ function foo(IdDistributore, idProd) {
             //console.log(risultati);
             //$(".menuPrincipale").hide();
             //venduto = response.d;
-
-            return risultati;
+            obj.next('div').html(risultati.quantita);
+            //return risultati;
 
             //$("#tuttiDistributori").html(distributori);
 
@@ -185,7 +185,8 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
             
             $(".aggiornaVenduto").on('click', function () {
                 var idProdotto = $(this).attr('data-idProdotto');
-                var v = $(this);
+                GetSituazioneVendutoInDistributore(IdDistributore, idProdotto, $(this));
+                //var v = $(this);
                 //var venduto = foo(IdDistributore, idProdotto).done(function (r) {
                 //    if (r) {
                 //        // Tell the user they're logged in
@@ -207,16 +208,16 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                 //    v.next('div').html(x);
                 //});
                 
-                foo(IdDistributore, idProdotto).success(function (data) {
-                    //alert(data);
-                    console.log(data.d.quantita);
-                    //var zzz = venduto.responseText;
-                    //console.log(zzz);
-                    //$(".qVenduto").html(data.d.quantita);
-                    //v.closest('td').html(data.d.quantita);
-                    alert('q=' + data.d.quantita);
-                    v.next('div').html(data.d.quantita);
-                });
+                //foo(IdDistributore, idProdotto).success(function (data) {
+                //    //alert(data);
+                //    console.log(data.d.quantita);
+                //    //var zzz = venduto.responseText;
+                //    //console.log(zzz);
+                //    //$(".qVenduto").html(data.d.quantita);
+                //    //v.closest('td').html(data.d.quantita);
+                //    alert('q=' + data.d.quantita);
+                //    v.next('div').html(data.d.quantita);
+                //});
 
             });
             
@@ -335,41 +336,41 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
 
 }
 
-function GetSituazioneVendutoInDistributore(idDistributore, idProdotto, DataA) {
-    $.ajax({
-        type: "POST",
-        crossDomain: true,
-        contentType: "application/json; charset=utf-8",               
-        url: urlGetSituazioneVendutoInDistributore,
-        cache: false,
-        //jsonpCallback: 'risposta',
-        // jsonp: 'callback',
-        // dataType: "jsonp",            
-        async: false,
-        //            data: "idDisciplina=" + idDisciplina,
-        data: JSON.stringify({ idDistributore: idDistributore, idProdotto: idProdotto, DataA: DataA }),
-        //data: { NomeOrdinanza: NomeOrdinanza, DataPubbDa: DataPubbDa, DataPubbA: DataPubbA, DataScadDa: DataScadDa, DataScadA: DataScadA },
-        error: function (data) {
-            console.log(data.responseText);
-            //$("#tuttiDistributori").html(data.responseText);
-        },
-        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
-        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
-        success: function (response) {
-            //risultati = response.d;
-            //corsiGlobal = response.d;
-            //console.log('Caricati!');
-            // console.log(Ordinanze);
-            //console.log(risultati);
-            //$(".menuPrincipale").hide();
-            return response.d;
+//function GetSituazioneVendutoInDistributore(idDistributore, idProdotto, DataA) {
+//    $.ajax({
+//        type: "POST",
+//        crossDomain: true,
+//        contentType: "application/json; charset=utf-8",               
+//        url: urlGetSituazioneVendutoInDistributore,
+//        cache: false,
+//        //jsonpCallback: 'risposta',
+//        // jsonp: 'callback',
+//        // dataType: "jsonp",            
+//        async: false,
+//        //            data: "idDisciplina=" + idDisciplina,
+//        data: JSON.stringify({ idDistributore: idDistributore, idProdotto: idProdotto, DataA: DataA }),
+//        //data: { NomeOrdinanza: NomeOrdinanza, DataPubbDa: DataPubbDa, DataPubbA: DataPubbA, DataScadDa: DataScadDa, DataScadA: DataScadA },
+//        error: function (data) {
+//            console.log(data.responseText);
+//            //$("#tuttiDistributori").html(data.responseText);
+//        },
+//        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+//        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+//        success: function (response) {
+//            //risultati = response.d;
+//            //corsiGlobal = response.d;
+//            //console.log('Caricati!');
+//            // console.log(Ordinanze);
+//            //console.log(risultati);
+//            //$(".menuPrincipale").hide();
+//            return response.d;
 
-            //$("#tuttiDistributori").html(distributori);
+//            //$("#tuttiDistributori").html(distributori);
 
-        }
+//        }
 
-    });
-}
+//    });
+//}
 
 function ConfermaResi(quantita) {
     var answer = confirm('Confermi che per questo articolo ci sono '+quantita + ' Resi?')
