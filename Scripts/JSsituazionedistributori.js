@@ -4,45 +4,6 @@
 
 });
 
-function GetSituazioneVendutoInDistributore(IdDistributore, idProd, obj) {
-    $.ajax({
-        type: "POST",
-        crossDomain: true,
-        contentType: "application/json; charset=utf-8",
-        url: urlGetSituazioneVendutoInDistributore,
-        cache: false,
-        //jsonpCallback: 'risposta',
-        // jsonp: 'callback',
-        // dataType: "jsonp",            
-        async: true,
-        //            data: "idDisciplina=" + idDisciplina,
-        data: JSON.stringify({ idDistributore: IdDistributore, idProdotto: idProd }),
-        //data: { NomeOrdinanza: NomeOrdinanza, DataPubbDa: DataPubbDa, DataPubbA: DataPubbA, DataScadDa: DataScadDa, DataScadA: DataScadA },
-        error: function (data) {
-            console.log(data.responseText);
-            //$("#tuttiDistributori").html(data.responseText);
-            alert(data.responseText);
-        },
-        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
-        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
-        success: function (response) {
-            risultati = response.d;
-            //corsiGlobal = response.d;
-            //console.log('Caricati!');
-            // console.log(Ordinanze);
-            //console.log(risultati);
-            //$(".menuPrincipale").hide();
-            //venduto = response.d;
-            alert(risultati);
-            obj.next('div').html(risultati.quantita);
-            //return risultati;
-
-            //$("#tuttiDistributori").html(distributori);
-
-        }
-
-    });
-}
 
 function GetSituazioneDistributore(IdDistributore, descDistributore) {
     location.hash = "formDettaglioDistributore";
@@ -184,6 +145,46 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
 
             $('.DettaglioDistributore').html(dettaglio);           
             
+            function GetSituazioneVendutoInDistributore(IdDistributore, idProd, obj) {
+                $.ajax({
+                    type: "POST",
+                    crossDomain: true,
+                    contentType: "application/json; charset=utf-8",
+                    url: urlGetSituazioneVendutoInDistributore,
+                    cache: false,
+                    //jsonpCallback: 'risposta',
+                    // jsonp: 'callback',
+                    // dataType: "jsonp",            
+                    async: true,
+                    //            data: "idDisciplina=" + idDisciplina,
+                    data: JSON.stringify({ idDistributore: IdDistributore, idProdotto: idProd }),
+                    //data: { NomeOrdinanza: NomeOrdinanza, DataPubbDa: DataPubbDa, DataPubbA: DataPubbA, DataScadDa: DataScadDa, DataScadA: DataScadA },
+                    error: function (data) {
+                        console.log(data.responseText);
+                        //$("#tuttiDistributori").html(data.responseText);
+                        alert(data.responseText);
+                    },
+                    beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+                    complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+                    success: function (response) {
+                        risultati = response.d;
+                        //corsiGlobal = response.d;
+                        //console.log('Caricati!');
+                        // console.log(Ordinanze);
+                        //console.log(risultati);
+                        //$(".menuPrincipale").hide();
+                        //venduto = response.d;
+                        alert(risultati);
+                        obj.next('div').html(risultati.quantita);
+                        //return risultati;
+
+                        //$("#tuttiDistributori").html(distributori);
+
+                    }
+
+                });
+            }
+
             
             $(".aggiornaVenduto").on('click', function () {
                 var idProdotto = $(this).attr('data-idProdotto');
