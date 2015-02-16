@@ -32,6 +32,7 @@ function GetSituazioneVendutoInDistributore(IdDistributore, idProd, obj) {
             //console.log(risultati);
             //$(".menuPrincipale").hide();
             //venduto = response.d;
+            alert(risultati);
             obj.next('div').html(risultati.quantita);
             //return risultati;
 
@@ -185,7 +186,8 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
             
             $(".aggiornaVenduto").on('click', function () {
                 var idProdotto = $(this).attr('data-idProdotto');
-                GetSituazioneVendutoInDistributore(IdDistributore, idProdotto, $(this));
+                var vend = $(this);
+                GetSituazioneVendutoInDistributore(IdDistributore, idProdotto, vend);
                 //var v = $(this);
                 //var venduto = foo(IdDistributore, idProdotto).done(function (r) {
                 //    if (r) {
