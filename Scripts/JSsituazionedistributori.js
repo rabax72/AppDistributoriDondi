@@ -21,6 +21,7 @@ function GetSituazioneVendutoInDistributore(IdDistributore, idProd, obj) {
         error: function (data) {
             console.log(data.responseText);
             //$("#tuttiDistributori").html(data.responseText);
+            alert(data.responseText);
         },
         beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
         complete: function () { $.mobile.loading('hide'); }, //Hide spinner
