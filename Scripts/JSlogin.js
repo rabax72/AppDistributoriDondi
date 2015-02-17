@@ -391,7 +391,8 @@ function ElencoMezziPerDistributori() {
         async: true,
         data: JSON.stringify({}),
         error: function (data) {
-            console.log(data.responseText)
+            console.log(data.responseText);
+            $(".mezziDisponibiliPerDistributore").html(data.responseText);
         },
         beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
         complete: function () { $.mobile.loading('hide'); }, //Hide spinner
