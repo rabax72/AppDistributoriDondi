@@ -75,7 +75,7 @@ function VenditaDiretta(DataDa, DataA) {
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].quantita + '</td>';
+                dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].prezzoTotale + '</td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].numeroDDT + '</td>';
                 dettaglio = dettaglio + '<td>' + parseJsonDate(risultati[i].dataDDT) + '</td>';
@@ -245,7 +245,7 @@ function GetVendutoByIdProdotto(idProdotto, descrizione, DataDa, DataA) {
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].quantita + '</td>';
+                dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].prezzoTotale + '</td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].numeroDDT + '</td>';
                 dettaglio = dettaglio + '<td>' + parseJsonDate(risultati[i].dataDDT) + '</td>';
@@ -383,7 +383,7 @@ function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) 
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].quantita + '</td>';
+                dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].prezzoTotale + ' €</td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].numeroDDT + '</td>';
                 dettaglio = dettaglio + '<td>' + parseJsonDate(risultati[i].dataDDT) + '</td>';
@@ -533,7 +533,7 @@ function GetVendutoByIdCliente(idCliente, descrizione, DataDa, DataA) {
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].quantita + '</td>';
+                dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].prezzoTotale + ' €</td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].numeroDDT + '</td>';
                 dettaglio = dettaglio + '<td>' + parseJsonDate(risultati[i].dataDDT) + '</td>';
@@ -637,7 +637,7 @@ function GetProdottiInMagazzinoResi() {
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].quantita + '</td>';
+                dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].prezzoTotale + '</td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizioneDistributore + '</td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizioneCliente + '</td>';
@@ -714,7 +714,7 @@ function GetProdottiInMagazzinoResiFiltrato(dataDa, dataA){
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].quantita + '</td>';
+                dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].prezzoTotale + '</td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizioneDistributore + '</td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizioneCliente + '</td>';

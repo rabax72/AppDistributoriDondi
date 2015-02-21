@@ -106,8 +106,8 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                     var prezzoTotaleRimasti = (prezzo * quantitaRimasti);
                     var prezzoTotaleCaricati = (prezzo * quantitaCaricati);
                     var idOperatore = $(this).attr('data-idOperatore');
-                    var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
-
+                    //var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
+                    var numeroLotto = parseJsonDateToJsDate($(this).attr('data-numeroLotto'));
                     //alert('quantitaAttuale=' + quantitaAttuale + ' quantitaCaricati=' + quantitaCaricati + ' isUint8(parseInt(quantitaCaricati))=' + isUint8(parseInt(quantitaCaricati)) + ' numeroDDT=' + numeroDDT + ' dataDDT=' + dataDDT);
                     //return;
 
@@ -214,15 +214,16 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                     //var dataDDT = $(this).closest('td').prev('td').prev('td')[0].children[0].value;
 
                     var numeroDDT = $(this).attr('data-numeroDDT');
-                    var dataDDT = new Date(parseJsonDateToJsDate($(this).attr('data-dataDDT')));
+                    //var dataDDT = new Date(parseJsonDateToJsDate($(this).attr('data-dataDDT')));
+                    var dataDDT = parseJsonDateToJsDate($(this).attr('data-dataDDT'));
 
                     var quantitaRimasti = (quantitaAttuale - quantitaDaRimettereInMagazzino);
                     //var quantitaVenduti = (quantitaAttuale - quantitaRimasti);
                     var prezzoTotaleRimasti = (prezzo * quantitaRimasti);
                     var prezzoTotaleDaRimettereInMagazzino = (prezzo * quantitaDaRimettereInMagazzino);
                     var idOperatore = $(this).attr('data-idOperatore');
-                    var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
-
+                    //var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
+                    var numeroLotto = parseJsonDateToJsDate($(this).attr('data-numeroLotto'));
                     //alert('quantitaAttuale=' + quantitaAttuale + ' quantitaDaRimettereInMagazzino=' + quantitaDaRimettereInMagazzino + ' isUint8(parseInt(quantitaDaRimettereInMagazzino))=' + isUint8(parseInt(quantitaDaRimettereInMagazzino)) + " numeroDDT=" + numeroDDT + " dataDDT=" + dataDDT);
                     //return;
 

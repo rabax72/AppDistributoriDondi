@@ -89,7 +89,9 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
                 }
                 var dataDDT = $(this).attr('data-dataDDT');
                 if (dataDDT != 'undefined') {
-                    dataDDT = new Date(parseJsonDateToJsDate(dataDDT));
+                    //var dataJs = parseJsonDateToJsDate(dataDDT);
+                    dataDDT = new Date(parseInt(dataDDT.substr(6)));
+                    //dataDDT = new Date(dataJs);
                 } else {
                     dataDDT = new Date();
                 }
@@ -102,8 +104,8 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
                 var prezzoTotaleRimasti = (prezzo * quantitaRimasti);
                 var prezzoTotaleCaricati = (prezzo * quantitaCaricati);
                 var idOperatore = $(this).attr('data-idOperatore');
-                var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
-
+                //var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
+                var numeroLotto = parseJsonDateToJsDate($(this).attr('data-numeroLotto'));
                 var IdMagazzino = $(this).attr('data-IdMagazzino');
                 //console.log(quantitaCaricati);
                 //alert('quantitaAttuale=' + quantitaAttuale + ' quantitaCaricati= ' + quantitaCaricati);
@@ -131,6 +133,9 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
                 } else {
                     $(inputQuantitaCaricati.id).removeClass("evidenziaErrore");
                 }
+
+                //console.log(IdTrasporto + ", " + idDistributore + ", " + idProdotto + ", " + quantitaCaricati + ", " + quantitaRimasti + ", " + prezzoTotaleRimasti + ", " + prezzoTotaleCaricati + ", " + idOperatore + ", " + numeroLotto + ", " + idMezzo + ", " + numeroDDT + ", " + dataDDT);
+                //return;
 
                 CaricaProdottiInDistributore(IdTrasporto, idDistributore, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto, idMezzo, numeroDDT, dataDDT);
 
@@ -237,7 +242,8 @@ function ElencoProdottiSuCamionPerCliente(idMezzo, idCliente) {
                 }
                 var dataDDT = $(this).attr('data-dataDDT');
                 if (dataDDT != 'undefined') {
-                    dataDDT = new Date(parseJsonDateToJsDate(dataDDT));
+                    //dataDDT = new Date(parseJsonDateToJsDate(dataDDT));
+                    dataDDT = parseJsonDateToJsDate(dataDDT);
                 } else {
                     dataDDT = new Date();
                 }
@@ -252,8 +258,8 @@ function ElencoProdottiSuCamionPerCliente(idMezzo, idCliente) {
                 var prezzoTotaleRimasti = (prezzo * quantitaRimasti);
                 var prezzoTotaleCaricati = (prezzo * quantitaCaricati);
                 var idOperatore = $(this).attr('data-idOperatore');
-                var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
-                
+                //var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
+                var numeroLotto = parseJsonDateToJsDate($(this).attr('data-numeroLotto'));
                 var IdMagazzino = $(this).attr('data-IdMagazzino');
                 //console.log(quantitaCaricati);
                 //alert('numeroDDT=' + numeroDDT + ' dataDDT= ' + dataDDT);

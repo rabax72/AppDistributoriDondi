@@ -96,3 +96,18 @@ min-width:400px;
 .labelForm {
     margin-bottom: -20px !important;
 }
+
+.mezziDisponibiliPerDistributore {
+    font-size: 2em;
+}
+
+.caricaDaCamionPerCliente, .caricaDaCamion {
+    font-size: 18px !important;
+}
+
+.quantita {
+    font-size: 24px !important;
+    text-align:center;
+    border-left:1px solid #ddd;
+    border-right:1px solid #ddd;
+}

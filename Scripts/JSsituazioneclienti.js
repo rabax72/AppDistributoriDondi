@@ -89,7 +89,7 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                     rigaDettaglio[i] = '<tr>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br>(' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].quantita + '</td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantita + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td>Rimasti <input type="number" id="rimastoLotto' + risultati[i].IdSituazioneCliente + '" data-clear-btn="true" class="miniInput" min="0" max="3" value="0"> <a href="#" data-IdSituazioneCliente="' + risultati[i].IdSituazioneCliente + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdCliente="' + risultati[i].IdCliente + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti">Salva</a> </td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td>Resi <input type="number" id="resoLotto' + risultati[i].IdSituazioneCliente + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneCliente="' + risultati[i].IdSituazioneCliente + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdCliente="' + risultati[i].IdCliente + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active resi">Salva</a> </td>';                    
                     rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
@@ -99,7 +99,7 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                         rigaDettaglio[i] = '<tr>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br>(' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].quantita + '</td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantita + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>Rimasti <input type="number" id="rimastoLotto' + risultati[i].IdSituazioneCliente + '" data-clear-btn="true" class="miniInput" min="0" max="3" value="0"> <a href="#" data-IdSituazioneCliente="' + risultati[i].IdSituazioneCliente + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdCliente="' + risultati[i].IdCliente + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti">Salva</a> </td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>Resi <input type="number" id="resoLotto' + risultati[i].IdSituazioneCliente + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneCliente="' + risultati[i].IdSituazioneCliente + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdCliente="' + risultati[i].IdCliente + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active resi">Salva</a> </td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
@@ -109,7 +109,7 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                         rigaDettaglio[i] = '<tr>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br>(' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + quantitaTot + '</td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + quantitaTot + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>Rimasti <input type="number" id="rimastoLotto' + risultati[i].IdSituazioneCliente + '" data-clear-btn="true" class="miniInput" min="0" max="3" value="0"> <a href="#" data-IdSituazioneCliente="' + risultati[i].IdSituazioneCliente + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdCliente="' + risultati[i].IdCliente + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti">Salva</a> </td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>Resi <input type="number" id="resoLotto' + risultati[i].IdSituazioneCliente + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneCliente="' + risultati[i].IdSituazioneCliente + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdCliente="' + risultati[i].IdCliente + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active resi">Salva</a> </td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
@@ -146,8 +146,8 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                 var prezzoTotaleRimasti = (prezzo * quantitaRimasti);
                 var prezzoTotaleVenduti = (prezzo * quantitaVenduti);
                 var idOperatore = $(this).attr('data-idOperatore');
-                var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
-                
+                //var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
+                var numeroLotto = parseJsonDateToJsDate($(this).attr('data-numeroLotto'));
 
                 if (quantitaRimasti == "" || isUint8(parseInt(quantitaRimasti)) == false) {
                     alert("Scegli un valore Numerico prima di caricare");
@@ -193,7 +193,8 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                 var quantitaDist = $(this).closest('td').prev('td').prev('td').text();
                 var prezzoTotale = (prezzo * quantitaResi);
                 var idOperatore = $(this).attr('data-idOperatore');
-                var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));               
+                //var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
+                var numeroLotto = parseJsonDateToJsDate($(this).attr('data-numeroLotto'));
                 var quantitaRimasta = (quantitaDist - quantitaResi);
 
                 if (quantitaResi == "" || isUint8(parseInt(quantitaResi)) == false) {

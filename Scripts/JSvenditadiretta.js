@@ -85,6 +85,9 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                 var quantitaAttuale = $(this).closest('td').prev('td').prev('td').prev('td').prev('td').text();
                 var quantitaVenduti = $(this).closest('td').prev('td')[0].children[0].value;
                 var numeroDDT = $(this).closest('td').prev('td').prev('td').prev('td')[0].children[0].value;
+                if (numeroDDT == '') {
+                    numeroDDT = 0;
+                }
                 var dataDDT = $(this).closest('td').prev('td').prev('td')[0].children[0].value;
                 if (dataDDT != '') {
                     dataDDT = stringToDate(dataDDT, "dd-MM-yyyy", "-");
@@ -97,8 +100,8 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                 var prezzoTotaleRimasti = (prezzo * quantitaRimasti);
                 var prezzoTotaleVenduti = (prezzo * quantitaVenduti);
                 var idOperatore = $(this).attr('data-idOperatore');
-                var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
-
+                //var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
+                var numeroLotto = parseJsonDateToJsDate($(this).attr('data-numeroLotto'));
                 //alert('quantitaAttuale=' + quantitaAttuale + ' quantitaVenduti=' + quantitaVenduti + ' isUint8(parseInt(quantitaVenduti))=' + isUint8(parseInt(quantitaVenduti)) + ' numeroDDT=' + numeroDDT + ' dataDDT=' + dataDDT);
                 //return;
 
@@ -119,11 +122,14 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                 }
 
                 storicizzaProdottoInMagazzino(IdMagazzino, idOperatore);
-
+                
                 AggiornaQuantitaProdottiInMagazzino(idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto);
 
                 var idDistributore = 0;
                 var idCliente = 0;
+                
+                //console.log(idProdotto + ', '+idProdotto + ', '+idDistributore + ', '+idCliente + ', '+quantitaVenduti + ', '+prezzoTotaleVenduti + ', '+idOperatore + ', '+numeroDDT + ', '+dataDDT );
+                //return;
                 AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, idCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, true, numeroDDT, dataDDT);
 
                 var labelQuantita = $(this).closest('td').prev('td').prev('td').prev('td').prev('td');
