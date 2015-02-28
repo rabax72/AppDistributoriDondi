@@ -94,6 +94,9 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                     var quantitaAttuale = $(this).closest('td').prev('td').prev('td').prev('td').prev('td').text();
                     var quantitaCaricati = $(this).closest('td').prev('td')[0].children[0].value;
                     var numeroDDT = $(this).closest('td').prev('td').prev('td').prev('td')[0].children[0].value;
+                    if (numeroDDT == '') {
+                        numeroDDT = 0;
+                    }
                     var dataDDT = $(this).closest('td').prev('td').prev('td')[0].children[0].value;
                     if (dataDDT != '') {
                         dataDDT = stringToDate(dataDDT, "dd-MM-yyyy", "-");
@@ -263,10 +266,11 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
 
 
 function CaricaProdottisuCamion(IdMagazzino, idMezzo, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto, numeroDDT, dataDDT) {
-
+    console.log(" idProdotto=" + idProdotto + " quantitaCaricati=" + quantitaCaricati + " prezzoTotaleCaricati=" + prezzoTotaleCaricati + " idOperatore=" + idOperatore + " numeroLotto=" + numeroLotto + " idMezzo=" + idMezzo + " numeroDDT=" + numeroDDT + " dataDDT=" + dataDDT);
+    //return;
     storicizzaProdottoInMagazzino(IdMagazzino, idOperatore);
 
-    AggiornaQuantitaProdottiInMagazzino(idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto);
+    AggiornaQuantitaProdottiInMagazzino(idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto);    
 
     InsertProdottiInCamion(idProdotto, quantitaCaricati, prezzoTotaleCaricati, idOperatore, numeroLotto, idMezzo, numeroDDT, dataDDT);
 }

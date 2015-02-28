@@ -287,7 +287,7 @@ function GetVendutoByIdProdotto(idProdotto, descrizione, DataDa, DataA) {
             $('.filtraVendutiByIdProdotto').click(function () {
                 var DataDa = stringToDate($('#VendutiByIdProdottoDataDa').val(), "dd-MM-yyyy", "-");
                 var DataA = stringToDate($('#VendutiByIdProdottoDataA').val(), "dd-MM-yyyy", "-");
-                //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
+                alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 GetVendutoByIdProdotto(idProdotto, descrizione, DataDa, DataA);
             });
 

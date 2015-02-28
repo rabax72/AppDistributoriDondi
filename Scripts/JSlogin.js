@@ -150,7 +150,7 @@ function parseJsonDate(jsonDate) {
     if (parts[2] == undefined) parts[2] = 0;
     if (parts[3] == undefined) parts[3] = 0;
     d = new Date(+parts[1] + offset + parts[2] * 3600000 + parts[3] * 60000);
-    date = d.getDate() + 1;
+    date = d.getDate();
     date = date < 10 ? "0" + date : date;
     mon = d.getMonth() + 1;
     mon = mon < 10 ? "0" + mon : mon;
@@ -508,7 +508,7 @@ function storicizzaProdottoInMagazzino(IdMagazzino, idOperatore) {
         success: function (response) {
             risultati = response.d;
 
-            console.log(risultati);
+            //console.log(risultati);
 
         }
 
@@ -536,7 +536,7 @@ function AggiornaQuantitaProdottiInMagazzino(idProdotto, quantitaRimasti, prezzo
         success: function (response) {
             risultati = response.d;
 
-            console.log(risultati);
+            //console.log(risultati);
 
         }
 
@@ -545,7 +545,7 @@ function AggiornaQuantitaProdottiInMagazzino(idProdotto, quantitaRimasti, prezzo
 // *********************************************************************************
 
 //Inserisco la quantita di Prodotti Venduti
-function AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, idCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, VenditaDiretta, numeroDDT, DataDDT) {
+function AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, idCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, VenditaDiretta, numeroDDT, DataDDT, NumeroLotto) {
     $.ajax({
         type: "POST",
         crossDomain: true,
@@ -555,7 +555,7 @@ function AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, idCliente, 
         cache: false,
         async: true,
         //            data: "idDisciplina=" + idDisciplina,
-        data: JSON.stringify({ idProdotto: idProdotto, idDistributore: idDistributore, idCliente: idCliente, quantita: quantitaVenduti, prezzoTotale: prezzoTotaleVenduti, idOperatore: idOperatore, VenditaDiretta: VenditaDiretta, numeroDDT: numeroDDT, DataDDT: DataDDT }),
+        data: JSON.stringify({ idProdotto: idProdotto, idDistributore: idDistributore, idCliente: idCliente, quantita: quantitaVenduti, prezzoTotale: prezzoTotaleVenduti, idOperatore: idOperatore, VenditaDiretta: VenditaDiretta, numeroDDT: numeroDDT, DataDDT: DataDDT, NumeroLotto: NumeroLotto }),
         error: function (data) {
             console.log(data.responseText)
         },
@@ -564,7 +564,7 @@ function AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, idCliente, 
         success: function (response) {
             risultati = response.d;
 
-            console.log(risultati);
+            //console.log(risultati);
 
         }
 
