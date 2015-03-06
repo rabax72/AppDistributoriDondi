@@ -267,7 +267,7 @@ function GetVendutoByIdProdotto(idProdotto, descrizione, DataDa, DataA) {
                                         '</tr>' +
                                     '</tfoot>' + ' </table>';
 
-            console.log(dettaglio);
+            //console.log(dettaglio);
 
             $('.DettRiepilogoVenduto').html(dettaglio);
 

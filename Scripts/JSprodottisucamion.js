@@ -21,7 +21,7 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
         success: function (response) {
             risultati = response.d;
             
-            console.log(risultati);
+            //console.log(risultati);
             //$(".menuPrincipale").hide();
             
             var dettaglio = '<table id="tabellaProdottiSuMezzo" class="display" cellspacing="0" width="100%">' +
@@ -186,7 +186,7 @@ function ElencoProdottiSuCamionPerCliente(idMezzo, idCliente) {
         success: function (response) {
             risultati = response.d;
 
-            console.log(risultati);
+            //console.log(risultati);
             //$(".menuPrincipale").hide();
 
             var dettaglio = '<table id="tabellaProdottiSuMezzoPerCliente" class="display" cellspacing="0" width="100%">' +
@@ -355,7 +355,7 @@ function CaricaProdottiInCliente(IdTrasporto, idCliente, idProdotto, quantitaCar
         success: function (response) {
             risultati = response.d;
 
-            console.log(risultati);
+            //console.log(risultati);
 
         }
 
@@ -380,7 +380,7 @@ function CaricaProdottiInCliente(IdTrasporto, idCliente, idProdotto, quantitaCar
         success: function (response) {
             risultati = response.d;
 
-            console.log(risultati);
+            //console.log(risultati);
 
         }
 
@@ -413,7 +413,7 @@ function CaricaProdottiInDistributore(IdTrasporto, idDistributore, idProdotto, q
         success: function (response) {
             risultati = response.d;
             
-            console.log(risultati);
+            //console.log(risultati);
                     
         }
 
@@ -438,7 +438,7 @@ function CaricaProdottiInDistributore(IdTrasporto, idDistributore, idProdotto, q
         success: function (response) {
             risultati = response.d;
 
-            console.log(risultati);
+            //console.log(risultati);
 
         }
 

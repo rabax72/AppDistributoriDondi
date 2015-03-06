@@ -668,7 +668,7 @@ function CaricaProdottoInMagazzino(idProdotto, quantitaCaricati, prezzoTotaleCar
         success: function (response) {
             risultati = response.d;
 
-            console.log(risultati);
+            //console.log(risultati);
             //Ricarico i valori
             GestioneMagazzino();
         }
@@ -698,7 +698,7 @@ function SmaltiscoProdottiDaMagazzino(IdProdotto, quantitaTotale, prezzoTotale, 
         success: function (response) {
             risultati = response.d;
 
-            console.log(risultati);
+            //console.log(risultati);
             CaricaProdottoInMagazzino(IdProdotto, quantitaTotale, prezzoTotale, IdOperatore, numeroLotto, numeroDDT, dataDDT, note);
         }
 

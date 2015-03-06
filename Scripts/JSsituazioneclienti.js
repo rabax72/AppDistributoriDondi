@@ -35,8 +35,8 @@ function GetSituazioneCliente(IdCliente, descCliente) {
             risultati = response.d;
             //corsiGlobal = response.d;
             //console.log('Caricati!');
-            // console.log(Ordinanze);
-            console.log(risultati);
+            //console.log(Ordinanze);
+            //console.log(risultati);
             //$(".menuPrincipale").hide();      
             if (risultati.length > 0) {
                 $(".h1DettCliente").html('Dettaglio Cliente: ' + risultati[0].descrizioneCliente);
@@ -329,7 +329,7 @@ function SalvaResiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaRe
         success: function (response) {
             risultati = response.d;
 
-            console.log(risultati);
+            //console.log(risultati);
             //$(".menuPrincipale").hide();
 
             //$('.DettaglioDistributore').html(dettaglio);
@@ -365,7 +365,7 @@ function StoricizzoStatoProdottoInCliente(IdSituazioneCliente) {
         success: function (response) {
             risultati = response.d;
 
-            console.log(risultati);
+            //console.log(risultati);
             //$(".menuPrincipale").hide();
 
             //$('.DettaglioDistributore').html(dettaglio);
@@ -397,7 +397,7 @@ function InsertProdottiInCliente(IdCliente, idProdotto, quantita, prezzoTotale, 
         success: function (response) {
             risultati = response.d;
 
-            console.log(risultati);
+            //console.log(risultati);
             
         }
 

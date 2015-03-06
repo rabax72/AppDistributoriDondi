@@ -312,7 +312,7 @@ function ScaricaProdottiDaCamion(IdTrasporto, idMezzo, idProdotto, quantitaDaRim
         success: function (response) {
             risultati = response.d;
 
-            console.log(risultati);
+            //console.log(risultati);
 
         }
 
@@ -340,7 +340,7 @@ function ScaricaProdottiDaCamion(IdTrasporto, idMezzo, idProdotto, quantitaDaRim
         success: function (response) {
             risultati = response.d;
 
-            console.log(risultati);
+            //console.log(risultati);
 
         }
 
@@ -375,7 +375,7 @@ function InsertProdottiInCamion(idProdotto, quantita, prezzoTotale, idOperatore,
         success: function (response) {
             risultati = response.d;
 
-            console.log(risultati);
+            //console.log(risultati);
 
         }
 

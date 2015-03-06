@@ -8,12 +8,10 @@
         var dataScad = $("#dataScad").val();
         var dataInserimento = $("#dataInserimento").val();
         var dataModifica = $("#dataModifica").val();
-
         
-        console.log(descrizione);           
+        //console.log(descrizione);           
 
         $('#risultatiProdotti').html('Inserimento in corso...');
-
 
         var col = $('.formInserimentoProdotto');
         col.collapsible("collapse");
@@ -30,7 +28,7 @@ function insertProdotto(descrizione, prezzo, aliquota, dataProd, dataScad, dataI
     //$("#footerRisultati").loader({ html: "<span class='ui-icon ui-icon-loading'><img src='jquery-logo.png' /><h2>is loading for you ...</h2></span>" });
     var risultati;
 
-    console.log('parametro descrizione=' + descrizione);
+    //console.log('parametro descrizione=' + descrizione);
 
     $.ajax({
         type: "POST",
@@ -55,11 +53,10 @@ function insertProdotto(descrizione, prezzo, aliquota, dataProd, dataScad, dataI
             risultati = response.d;
             //corsiGlobal = response.d;
             //console.log('Caricati!');
-            // console.log(Ordinanze);
+            //console.log(Ordinanze);
 
             //var dettaglio = 'Prodotto Correttamente Inserito!';
-                        
-            
+                                    
             $('.risultatiProdotti').html(risultati);
             //$('#headerRicercaOrdinanze').html('Risultati: ' + (risultati.length + 1));
             $('#totRisultatiProdotti').html('Risultati Inseriti: ' + risultati);

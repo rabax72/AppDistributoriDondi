@@ -29,7 +29,7 @@ function GetSituazioneVendutoInDistributore(IdDistributore, idProd, obj, numeroL
             risultati = response.d;
             //corsiGlobal = response.d;
             //console.log('Caricati!');
-            // console.log(Ordinanze);
+            //console.log(Ordinanze);
             //console.log(risultati);
             //$(".menuPrincipale").hide();
             //venduto = response.d;
@@ -71,7 +71,7 @@ function GetStoricoVendutoInDistributore(IdDistributore, idProd, numeroLotto) {
             risultati = response.d;
             //corsiGlobal = response.d;
             //console.log('Caricati!');
-            // console.log(Ordinanze);
+            //console.log(Ordinanze);
             //console.log(risultati);
             //$(".menuPrincipale").hide();
             //venduto = response.d;
@@ -97,7 +97,7 @@ function GetStoricoVendutoInDistributore(IdDistributore, idProd, numeroLotto) {
             datiPopUpStorico = datiPopUpStorico + '<h3>Storico Venduto</h3>';
             datiPopUpStorico = datiPopUpStorico + storicoQuantitaVendute;
             datiPopUpStorico = datiPopUpStorico + '</div>';
-            console.log(datiPopUpStorico);
+            //console.log(datiPopUpStorico);
             $("#popUpStoricoVendutoDaDist").html(datiPopUpStorico);
 
         }
@@ -135,7 +135,7 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
             risultati = response.d;
             //corsiGlobal = response.d;
             //console.log('Caricati!');
-            // console.log(Ordinanze);
+            //console.log(Ordinanze);
             //console.log(risultati);
             //$(".menuPrincipale").hide();                        
 
