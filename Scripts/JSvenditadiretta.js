@@ -54,12 +54,12 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
 
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].quantita + '</td>';
-                dettaglio = dettaglio + '<td><input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
-                dettaglio = dettaglio + '<td><input type="text" data-role="date" class="dataDDT accentraInput"></td>';
-                dettaglio = dettaglio + '<td><input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
-                dettaglio = dettaglio + '<td><a href="#" data-IdMagazzino="' + risultati[i].IdMagazzino + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active venditaDiretta">Vendi</a> </td>';
+                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
+                dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">N° DDT<input type="number" data-clear-btn="true" class="miniInput accentraInput" readonly="true" value="' + risultati[i].numeroDDT + '"></td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">Data DDT<input type="text" class="dataDDT accentraInput" readonly="true" value="' + parseJsonDateLettura(risultati[i].dataDDT) + '"></td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">Quantità<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
+                dettaglio = dettaglio + '<td><a href="#" data-IdMagazzino="' + risultati[i].IdMagazzino + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-note="' + risultati[i].note + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active venditaDiretta">Vendi</a> </td>';
                 dettaglio = dettaglio + '</tr>';
 
             }
@@ -69,9 +69,9 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
 
             $('.MercePerVenditaDiretta').html(dettaglio);
 
-            $(".dataDDT").datepicker({
-                dateFormat: "dd-mm-yy"
-            });
+            //$(".dataDDT").datepicker({
+            //    dateFormat: "dd-mm-yy"
+            //});
 
             var table = $('#tabellaProdottiInMagazzinoPerVenditaDiretta').DataTable(
                 { "paging": false }
@@ -82,6 +82,7 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                 var IdMagazzino = $(this).attr('data-IdMagazzino');
                 var idProdotto = $(this).attr('data-idProdotto');
                 var prezzo = $(this).attr('data-prezzo');
+                var note = $(this).attr('data-note');
                 var quantitaAttuale = $(this).closest('td').prev('td').prev('td').prev('td').prev('td').text();
                 var quantitaVenduti = $(this).closest('td').prev('td')[0].children[0].value;
                 var numeroDDT = $(this).closest('td').prev('td').prev('td').prev('td')[0].children[0].value;
@@ -90,7 +91,7 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                 }
                 var dataDDT = $(this).closest('td').prev('td').prev('td')[0].children[0].value;
                 if (dataDDT != '') {
-                    dataDDT = stringToDate(dataDDT, "dd-MM-yyyy", "-");
+                    dataDDT = stringToDate(dataDDT, "dd/MM/yyyy", "/");
                 } else {
                     dataDDT = new Date();
                 }
@@ -99,7 +100,7 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                 //var quantitaVenduti = (quantitaAttuale - quantitaRimasti);
                 var prezzoTotaleRimasti = (prezzo * quantitaRimasti);
                 var prezzoTotaleVenduti = (prezzo * quantitaVenduti);
-                var idOperatore = $(this).attr('data-idOperatore');
+                var idOperatore = localStorage.idOperatore;
                 //var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
                 var numeroLotto = parseJsonDateToJsDate($(this).attr('data-numeroLotto'));
                 //alert('quantitaAttuale=' + quantitaAttuale + ' quantitaVenduti=' + quantitaVenduti + ' isUint8(parseInt(quantitaVenduti))=' + isUint8(parseInt(quantitaVenduti)) + ' numeroDDT=' + numeroDDT + ' dataDDT=' + dataDDT);
@@ -123,7 +124,7 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
 
                 storicizzaProdottoInMagazzino(IdMagazzino, idOperatore);
                 
-                AggiornaQuantitaProdottiInMagazzino(idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto);
+                AggiornaQuantitaProdottiInMagazzino(idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT, note);
 
                 var idDistributore = 0;
                 var idCliente = 0;

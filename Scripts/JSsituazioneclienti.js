@@ -90,8 +90,8 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br>(' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantita + '</td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td>Rimasti <input type="number" id="rimastoLotto' + risultati[i].IdSituazioneCliente + '" data-clear-btn="true" class="miniInput" min="0" max="3" value="0"> <a href="#" data-IdSituazioneCliente="' + risultati[i].IdSituazioneCliente + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdCliente="' + risultati[i].IdCliente + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti">Salva</a> </td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td>Resi <input type="number" id="resoLotto' + risultati[i].IdSituazioneCliente + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneCliente="' + risultati[i].IdSituazioneCliente + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdCliente="' + risultati[i].IdCliente + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active resi">Salva</a> </td>';                    
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td>Rimasti <input type="number" id="rimastoLotto' + risultati[i].IdSituazioneCliente + '" data-clear-btn="true" class="miniInput" min="0" max="3" value="0"> <a href="#" data-IdSituazioneCliente="' + risultati[i].IdSituazioneCliente + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdCliente="' + risultati[i].IdCliente + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti">Salva</a> </td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td>Resi <input type="number" id="resoLotto' + risultati[i].IdSituazioneCliente + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneCliente="' + risultati[i].IdSituazioneCliente + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdCliente="' + risultati[i].IdCliente + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active resi">Salva</a> </td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
                 } else {
                     if (numLotto != numLottoOld) {
@@ -100,8 +100,8 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br>(' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantita + '</td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td>Rimasti <input type="number" id="rimastoLotto' + risultati[i].IdSituazioneCliente + '" data-clear-btn="true" class="miniInput" min="0" max="3" value="0"> <a href="#" data-IdSituazioneCliente="' + risultati[i].IdSituazioneCliente + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdCliente="' + risultati[i].IdCliente + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti">Salva</a> </td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td>Resi <input type="number" id="resoLotto' + risultati[i].IdSituazioneCliente + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneCliente="' + risultati[i].IdSituazioneCliente + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdCliente="' + risultati[i].IdCliente + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active resi">Salva</a> </td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td>Rimasti <input type="number" id="rimastoLotto' + risultati[i].IdSituazioneCliente + '" data-clear-btn="true" class="miniInput" min="0" max="3" value="0"> <a href="#" data-IdSituazioneCliente="' + risultati[i].IdSituazioneCliente + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdCliente="' + risultati[i].IdCliente + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti">Salva</a> </td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td>Resi <input type="number" id="resoLotto' + risultati[i].IdSituazioneCliente + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneCliente="' + risultati[i].IdSituazioneCliente + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdCliente="' + risultati[i].IdCliente + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '"  class="ui-btn ui-corner-all ui-shadow ui-btn-active resi">Salva</a> </td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
                     } else {
                         rigaDettaglio[i - 1] = '';
@@ -110,8 +110,8 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br>(' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + quantitaTot + '</td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td>Rimasti <input type="number" id="rimastoLotto' + risultati[i].IdSituazioneCliente + '" data-clear-btn="true" class="miniInput" min="0" max="3" value="0"> <a href="#" data-IdSituazioneCliente="' + risultati[i].IdSituazioneCliente + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdCliente="' + risultati[i].IdCliente + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti">Salva</a> </td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td>Resi <input type="number" id="resoLotto' + risultati[i].IdSituazioneCliente + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneCliente="' + risultati[i].IdSituazioneCliente + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdCliente="' + risultati[i].IdCliente + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active resi">Salva</a> </td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td>Rimasti <input type="number" id="rimastoLotto' + risultati[i].IdSituazioneCliente + '" data-clear-btn="true" class="miniInput" min="0" max="3" value="0"> <a href="#" data-IdSituazioneCliente="' + risultati[i].IdSituazioneCliente + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdCliente="' + risultati[i].IdCliente + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti">Salva</a> </td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td>Resi <input type="number" id="resoLotto' + risultati[i].IdSituazioneCliente + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneCliente="' + risultati[i].IdSituazioneCliente + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdCliente="' + risultati[i].IdCliente + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '"  class="ui-btn ui-corner-all ui-shadow ui-btn-active resi">Salva</a> </td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
                     }
                 }
@@ -145,9 +145,15 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                 var quantitaVenduti = (quantitaAttuale - quantitaRimasti);
                 var prezzoTotaleRimasti = (prezzo * quantitaRimasti);
                 var prezzoTotaleVenduti = (prezzo * quantitaVenduti);
-                var idOperatore = $(this).attr('data-idOperatore');
+                var idOperatore = localStorage.idOperatore;
                 //var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
                 var numeroLotto = parseJsonDateToJsDate($(this).attr('data-numeroLotto'));
+
+                var numeroDDT = $(this).attr('data-numeroDDT');
+                var dataDDT = $(this).attr('data-dataDDT');
+                if (dataDDT != null) {
+                    dataDDT = parseJsonDateToJsDate(dataDDT);
+                }
 
                 if (quantitaRimasti == "" || isUint8(parseInt(quantitaRimasti)) == false) {
                     alert("Scegli un valore Numerico prima di caricare");
@@ -170,7 +176,7 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                 //alert('IdSituazioneCliente=' + IdSituazioneCliente + ' IdCliente=' + IdCliente + ' idProdotto=' + idProdotto + ' quantitaVenduti=' + quantitaVenduti + ' quantitaRimasti=' + quantitaRimasti + 'prezzoTotaleRimasti=' + prezzoTotaleRimasti + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto);
                 //return;
 
-                SalvaRimastiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaVenduti, quantitaRimasti, prezzoTotaleVenduti, prezzoTotaleRimasti, idOperatore, numeroLotto);
+                SalvaRimastiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaVenduti, quantitaRimasti, prezzoTotaleVenduti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT);
 
                 var labelQuantita = $(this).closest('td').prev('td');
                 //console.log(labelQuantita);
@@ -192,10 +198,16 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                 var quantitaResi = $(this).prev().val();
                 var quantitaDist = $(this).closest('td').prev('td').prev('td').text();
                 var prezzoTotale = (prezzo * quantitaResi);
-                var idOperatore = $(this).attr('data-idOperatore');
+                var idOperatore = localStorage.idOperatore;
                 //var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
                 var numeroLotto = parseJsonDateToJsDate($(this).attr('data-numeroLotto'));
                 var quantitaRimasta = (quantitaDist - quantitaResi);
+
+                var numeroDDT = $(this).attr('data-numeroDDT');
+                var dataDDT = $(this).attr('data-dataDDT');
+                if (dataDDT != null) {
+                    dataDDT = parseJsonDateToJsDate(dataDDT);
+                }
 
                 if (quantitaResi == "" || isUint8(parseInt(quantitaResi)) == false) {
                     alert("Scegli un valore Numerico prima di caricare");
@@ -220,7 +232,7 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                     return;
                 } 
 
-                SalvaResiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaResi, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto);
+                SalvaResiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaResi, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT);
 
                 var labelQuantita = $(this).closest('td').prev('td').prev('td');
                 //console.log(labelQuantita);
@@ -276,23 +288,23 @@ function ConfermaResi(quantita) {
     //});
 }
 
-function SalvaRimastiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaVenduti, quantitaRimasti, prezzoTotaleVenduti, prezzoTotaleRimasti, idOperatore, numeroLotto) {
+function SalvaRimastiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaVenduti, quantitaRimasti, prezzoTotaleVenduti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT) {
 
     StoricizzoStatoProdottoInCliente(IdSituazioneCliente);
 
     //Inserisco la quantita aggiornata di prodotto nel Distributore
     //console.log('IdCliente=' + IdCliente + ' idProdotto=' + idProdotto + ' quantita=' + quantita + ' prezzoTotale=' + prezzoTotale + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto);
-    InsertProdottiInCliente(IdCliente, idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto);
+    InsertProdottiInCliente(IdCliente, idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT);
     var idDistributore = 0;
 
     //Inserisco la quantita di Prodotti Venduti
     var VenditaDiretta = false;
-    var dataDDT = new Date();
-    AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, IdCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, VenditaDiretta, 0, dataDDT, numeroLotto);
+    
+    AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, IdCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, VenditaDiretta, numeroDDT, dataDDT, numeroLotto);
     //****************************************************************** 
 }
 
-function SalvaResiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaResi, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto) {    
+function SalvaResiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaResi, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT) {    
 
     StoricizzoStatoProdottoInCliente(IdSituazioneCliente);
     
@@ -328,7 +340,7 @@ function SalvaResiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaRe
     });
     //******************************************************************   
 
-    InsertProdottiInCliente(IdCliente, idProdotto, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto);
+    InsertProdottiInCliente(IdCliente, idProdotto, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT);
 
 }
 
@@ -365,7 +377,7 @@ function StoricizzoStatoProdottoInCliente(IdSituazioneCliente) {
 }
 
 //inserisco in un determinato Cliente una determinata quantita di Prodotto
-function InsertProdottiInCliente(IdCliente, idProdotto, quantita, prezzoTotale, idOperatore, numeroLotto) {
+function InsertProdottiInCliente(IdCliente, idProdotto, quantita, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT) {
 
     $.ajax({
         type: "POST",
@@ -376,7 +388,7 @@ function InsertProdottiInCliente(IdCliente, idProdotto, quantita, prezzoTotale, 
         cache: false,
         async: true,
         //            data: "idDisciplina=" + idDisciplina,
-        data: JSON.stringify({ IdCliente: IdCliente, idProdotto: idProdotto, quantita: quantita, prezzoTotale: prezzoTotale, idOperatore: idOperatore, numeroLotto: numeroLotto }),
+        data: JSON.stringify({ IdCliente: IdCliente, idProdotto: idProdotto, quantita: quantita, prezzoTotale: prezzoTotale, idOperatore: idOperatore, numeroLotto: numeroLotto, numeroDDT: numeroDDT, dataDDT: dataDDT }),
         error: function (data) {
             console.log(data.responseText)
         },

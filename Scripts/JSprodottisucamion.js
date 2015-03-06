@@ -57,11 +57,11 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
                 //dettaglio = dettaglio + '<td>' + parseJsonDate(risultati[i].numeroLotto) + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].quantita + '</td>';                
+                dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';                
                 dettaglio = dettaglio + '<td><input id="quantitaDaCaricare' + risultati[i].IdTrasporto + '" type="number" data-clear-btn="true" class="miniInput accentraInput"> </td>';
                 //dettaglio = dettaglio + '<td><input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
                 //dettaglio = dettaglio + '<td><input type="text" data-role="date" class="dataDDT accentraInput"></td>';
-                dettaglio = dettaglio + '<td><a href="#" data-IdTrasporto="' + risultati[i].IdTrasporto + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdInDistributore">Carica</a></td>';
+                dettaglio = dettaglio + '<td><a href="#" data-IdTrasporto="' + risultati[i].IdTrasporto + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" data-numeroDDT_interno="' + risultati[i].numeroDDT_interno + '" data-dataDDT_interno="' + risultati[i].dataDDT_interno + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdInDistributore">Carica</a></td>';
                 dettaglio = dettaglio + '</tr>';
 
             }
@@ -84,6 +84,7 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
                 var idProdotto = $(this).attr('data-idProdotto');
                 var prezzo = $(this).attr('data-prezzo');
                 var numeroDDT = $(this).attr('data-numeroDDT');
+                var numeroDDT_interno = $(this).attr('data-numeroDDT_interno');
                 if (numeroDDT == 'undefined') {
                     numeroDDT = 0;
                 }
@@ -95,6 +96,17 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
                 } else {
                     dataDDT = new Date();
                 }
+
+                var dataDDT_interno = $(this).attr('data-dataDDT_interno');
+                if (dataDDT_interno != 'undefined') {
+                    //var dataJs = parseJsonDateToJsDate(dataDDT);
+                    dataDDT_interno = new Date(parseInt(dataDDT_interno.substr(6)));
+                    //dataDDT = new Date(dataJs);
+                } else {
+                    dataDDT_interno = new Date().toDateString();                    
+                    dataDDT_interno = new Date(dataDDT_interno);
+                }
+
                 var quantitaAttuale = $(this).closest('td').prev('td').prev('td').text();
                 var quantitaCaricati = $(this).closest('td').prev('td')[0].children[0].value;
                 //var quantiC = quantitaCaricati[0].children[0].value;
@@ -103,7 +115,7 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
                 //var dataDDT = $(this).closest('td').prev('td')[0].children[0].value;
                 var prezzoTotaleRimasti = (prezzo * quantitaRimasti);
                 var prezzoTotaleCaricati = (prezzo * quantitaCaricati);
-                var idOperatore = $(this).attr('data-idOperatore');
+                var idOperatore = localStorage.idOperatore;
                 //var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
                 var numeroLotto = parseJsonDateToJsDate($(this).attr('data-numeroLotto'));
                 var IdMagazzino = $(this).attr('data-IdMagazzino');
@@ -137,7 +149,7 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
                 //console.log(IdTrasporto + ", " + idDistributore + ", " + idProdotto + ", " + quantitaCaricati + ", " + quantitaRimasti + ", " + prezzoTotaleRimasti + ", " + prezzoTotaleCaricati + ", " + idOperatore + ", " + numeroLotto + ", " + idMezzo + ", " + numeroDDT + ", " + dataDDT);
                 //return;
 
-                CaricaProdottiInDistributore(IdTrasporto, idDistributore, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto, idMezzo, numeroDDT, dataDDT);
+                CaricaProdottiInDistributore(IdTrasporto, idDistributore, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto, idMezzo, numeroDDT, dataDDT, numeroDDT_interno, dataDDT_interno);
 
                 var labelQuantita = $(this).closest('td').prev('td').prev('td');
                 //console.log(labelQuantita);
@@ -210,11 +222,11 @@ function ElencoProdottiSuCamionPerCliente(idMezzo, idCliente) {
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
                 //dettaglio = dettaglio + '<td>' + parseJsonDate(risultati[i].numeroLotto) + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].quantita + '</td>';
+                dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
                 dettaglio = dettaglio + '<td><input id="quantitaDaCaricare' + risultati[i].IdTrasporto + '" type="number" data-clear-btn="true" class="miniInput accentraInput"> </td>';
                 //dettaglio = dettaglio + '<td><input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
                 //dettaglio = dettaglio + '<td><input type="text" data-role="date" class="dataDDT accentraInput"></td>';
-                dettaglio = dettaglio + '<td><a href="#" data-IdTrasporto="' + risultati[i].IdTrasporto + '" data-IdCliente="' + idCliente + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdInCliente">Carica</a></td>';
+                dettaglio = dettaglio + '<td><a href="#" data-IdTrasporto="' + risultati[i].IdTrasporto + '" data-IdCliente="' + idCliente + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" data-numeroDDT_interno="' + risultati[i].numeroDDT_interno + '" data-dataDDT_interno="' + risultati[i].dataDDT_interno + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdInCliente">Scarica</a></td>';
                 dettaglio = dettaglio + '</tr>';
 
             }
@@ -237,15 +249,25 @@ function ElencoProdottiSuCamionPerCliente(idMezzo, idCliente) {
                 var idProdotto = $(this).attr('data-idProdotto');
                 var prezzo = $(this).attr('data-prezzo');
                 var numeroDDT = $(this).attr('data-numeroDDT');
+                var numeroDDT_interno = $(this).attr('data-numeroDDT_interno');
                 if (numeroDDT == 'undefined') {
                     numeroDDT = 0;
                 }
                 var dataDDT = $(this).attr('data-dataDDT');
+                var dataDDT_interno = $(this).attr('data-dataDDT_interno');
+
                 if (dataDDT != 'undefined') {
                     //dataDDT = new Date(parseJsonDateToJsDate(dataDDT));
                     dataDDT = parseJsonDateToJsDate(dataDDT);
                 } else {
                     dataDDT = new Date();
+                }
+
+                if (dataDDT_interno != 'undefined') {
+                    //dataDDT = new Date(parseJsonDateToJsDate(dataDDT));
+                    dataDDT_interno = parseJsonDateToJsDate(dataDDT_interno);
+                } else {
+                    dataDDT_interno = new Date();
                 }
                 
 
@@ -257,7 +279,7 @@ function ElencoProdottiSuCamionPerCliente(idMezzo, idCliente) {
                 //var dataDDT = $(this).closest('td').prev('td')[0].children[0].value;
                 var prezzoTotaleRimasti = (prezzo * quantitaRimasti);
                 var prezzoTotaleCaricati = (prezzo * quantitaCaricati);
-                var idOperatore = $(this).attr('data-idOperatore');
+                var idOperatore = localStorage.idOperatore;
                 //var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
                 var numeroLotto = parseJsonDateToJsDate($(this).attr('data-numeroLotto'));
                 var IdMagazzino = $(this).attr('data-IdMagazzino');
@@ -291,7 +313,7 @@ function ElencoProdottiSuCamionPerCliente(idMezzo, idCliente) {
                 //alert('idCliente=' + idCliente);
                 //return;
 
-                CaricaProdottiInCliente(IdTrasporto, idCliente, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto, idMezzo, numeroDDT, dataDDT);
+                CaricaProdottiInCliente(IdTrasporto, idCliente, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto, idMezzo, numeroDDT, dataDDT, numeroDDT_interno, dataDDT_interno);
 
                 var labelQuantita = $(this).closest('td').prev('td').prev('td');
                 //console.log(labelQuantita);
@@ -310,7 +332,7 @@ function ElencoProdottiSuCamionPerCliente(idMezzo, idCliente) {
 
 }
 
-function CaricaProdottiInCliente(IdTrasporto, idCliente, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto, IdMezzo, numeroDDT, dataDDT) {
+function CaricaProdottiInCliente(IdTrasporto, idCliente, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto, IdMezzo, numeroDDT, dataDDT, numeroDDT_interno, dataDDT_interno) {
 
     // Storicizzo Prodotti in camion ************************************************
     $.ajax({
@@ -349,7 +371,7 @@ function CaricaProdottiInCliente(IdTrasporto, idCliente, idProdotto, quantitaCar
         url: urlAggiornaQuantInTrasporto,
         cache: false,
         async: true,
-        data: JSON.stringify({ idProdotto: idProdotto, quantita: quantitaRimasti, prezzoTotale: prezzoTotaleRimasti, idOperatore: idOperatore, numeroLotto: numeroLotto, IdMezzo: IdMezzo, numeroDDT:numeroDDT, dataDDT: dataDDT}),
+        data: JSON.stringify({ idProdotto: idProdotto, quantita: quantitaRimasti, prezzoTotale: prezzoTotaleRimasti, idOperatore: idOperatore, numeroLotto: numeroLotto, IdMezzo: IdMezzo, numeroDDT: numeroDDT, dataDDT: dataDDT, numeroDDT_interno: numeroDDT_interno, dataDDT_interno: dataDDT_interno }),
         error: function (data) {
             console.log(data.responseText)
         },
@@ -365,10 +387,10 @@ function CaricaProdottiInCliente(IdTrasporto, idCliente, idProdotto, quantitaCar
     });
     // *********************************************************************************
     
-    InsertProdottiInCliente(idCliente, idProdotto, quantitaCaricati, prezzoTotaleCaricati, idOperatore, numeroLotto);
+    InsertProdottiInCliente(idCliente, idProdotto, quantitaCaricati, prezzoTotaleCaricati, idOperatore, numeroLotto, numeroDDT, dataDDT);
 }
 
-function CaricaProdottiInDistributore(IdTrasporto, idDistributore, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto, IdMezzo, numeroDDT, dataDDT) {
+function CaricaProdottiInDistributore(IdTrasporto, idDistributore, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto, IdMezzo, numeroDDT, dataDDT, numeroDDT_interno, dataDDT_interno) {
 
     // Storicizzo Prodotti in camion ************************************************
     $.ajax({
@@ -407,7 +429,7 @@ function CaricaProdottiInDistributore(IdTrasporto, idDistributore, idProdotto, q
         url: urlAggiornaQuantInTrasporto,
         cache: false,
         async: true,        
-        data: JSON.stringify({ idProdotto: idProdotto, quantita: quantitaRimasti, prezzoTotale: prezzoTotaleRimasti, idOperatore: idOperatore, numeroLotto: numeroLotto, IdMezzo: IdMezzo, numeroDDT: numeroDDT, dataDDT: dataDDT }),
+        data: JSON.stringify({ idProdotto: idProdotto, quantita: quantitaRimasti, prezzoTotale: prezzoTotaleRimasti, idOperatore: idOperatore, numeroLotto: numeroLotto, IdMezzo: IdMezzo, numeroDDT: numeroDDT, dataDDT: dataDDT, numeroDDT_interno:numeroDDT_interno, dataDDT_interno:dataDDT_interno }),
         error: function (data) {
             console.log(data.responseText)
         },
@@ -423,7 +445,7 @@ function CaricaProdottiInDistributore(IdTrasporto, idDistributore, idProdotto, q
     });
     // *********************************************************************************
 
-    InsertProdottiInDistributore(idDistributore, idProdotto, quantitaCaricati, prezzoTotaleCaricati, idOperatore, numeroLotto);
+    InsertProdottiInDistributore(idDistributore, idProdotto, quantitaCaricati, prezzoTotaleCaricati, idOperatore, numeroLotto, numeroDDT, dataDDT);
 }
 
 

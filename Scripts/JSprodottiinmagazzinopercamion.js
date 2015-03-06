@@ -40,8 +40,8 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                                                 '<th>Foto</th>' +
                                                 '<th>Descrizione</th>' +
                                                 '<th>Giacenza</th>' +
-                                                '<th>N° DDT</th>' +
-                                                '<th>Data DDT</th>' +
+                                                '<th>N° DDT interno</th>' +
+                                                '<th>Data DDT interno</th>' +
                                                 '<th>Quantità</th>' +
                                                 '<th> </th>' +
                                             '</tr>' +
@@ -51,8 +51,8 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                                                 '<th>Foto</th>' +
                                                 '<th>Descrizione</th>' +
                                                 '<th>Giacenza</th>' +
-                                                '<th>N° DDT</th>' +
-                                                '<th>Data DDT</th>' +
+                                                '<th>N° DDT interno</th>' +
+                                                '<th>Data DDT interno</th>' +
                                                 '<th>Quantità</th>' +
                                                 '<th> </th>' +
                                             '</tr>' +
@@ -64,11 +64,11 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                     dettaglio = dettaglio + '<tr>';
                     dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                     dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
-                    dettaglio = dettaglio + '<td>' + risultati[i].quantita + '</td>';
-                    dettaglio = dettaglio + '<td><input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
-                    dettaglio = dettaglio + '<td><input type="text" data-role="date" class="dataDDT accentraInput"></td>';
-                    dettaglio = dettaglio + '<td><input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
-                    dettaglio = dettaglio + '<td><a href="#" data-IdMagazzino="' + risultati[i].IdMagazzino + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdInCamion">Carica</a> </td>';
+                    dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
+                    dettaglio = dettaglio + '<td class="storicoVenduto">N° DDT interno<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
+                    dettaglio = dettaglio + '<td class="storicoVenduto">Data DDT interno<input type="text" data-role="date" class="dataDDT accentraInput"></td>';
+                    dettaglio = dettaglio + '<td class="storicoVenduto">Quantità<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
+                    dettaglio = dettaglio + '<td><a href="#" data-IdMagazzino="' + risultati[i].IdMagazzino + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" data-note="' + risultati[i].note + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdInCamion">Carica</a> </td>';
                     dettaglio = dettaglio + '</tr>';
 
                 }
@@ -91,24 +91,34 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                     var IdMagazzino = $(this).attr('data-IdMagazzino');
                     var idProdotto = $(this).attr('data-idProdotto');
                     var prezzo = $(this).attr('data-prezzo');
+                    var note = $(this).attr('data-note');
                     var quantitaAttuale = $(this).closest('td').prev('td').prev('td').prev('td').prev('td').text();
                     var quantitaCaricati = $(this).closest('td').prev('td')[0].children[0].value;
-                    var numeroDDT = $(this).closest('td').prev('td').prev('td').prev('td')[0].children[0].value;
+                    var numeroDDT = $(this).attr('data-numeroDDT');
                     if (numeroDDT == '') {
                         numeroDDT = 0;
                     }
-                    var dataDDT = $(this).closest('td').prev('td').prev('td')[0].children[0].value;
-                    if (dataDDT != '') {
-                        dataDDT = stringToDate(dataDDT, "dd-MM-yyyy", "-");
+
+                    var numeroDDT_interno = $(this).closest('td').prev('td').prev('td').prev('td')[0].children[0].value;
+                    if (numeroDDT_interno == '') {
+                        numeroDDT_interno = 0;
+                    }
+
+                    var dataDDT = parseJsonDateToJsDate($(this).attr('data-dataDDT'));
+                    
+
+                    var dataDDT_interno =$(this).closest('td').prev('td').prev('td')[0].children[0].value;
+                    if (dataDDT_interno != '') {
+                        dataDDT_interno = stringToDate(dataDDT_interno, "dd-MM-yyyy", "-");
                     } else {
-                        dataDDT = new Date();
+                        dataDDT_interno = new Date();
                     }
 
                     var quantitaRimasti = (quantitaAttuale - quantitaCaricati);
                     //var quantitaVenduti = (quantitaAttuale - quantitaRimasti);
                     var prezzoTotaleRimasti = (prezzo * quantitaRimasti);
                     var prezzoTotaleCaricati = (prezzo * quantitaCaricati);
-                    var idOperatore = $(this).attr('data-idOperatore');
+                    var idOperatore = localStorage.idOperatore;
                     //var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
                     var numeroLotto = parseJsonDateToJsDate($(this).attr('data-numeroLotto'));
                     //alert('quantitaAttuale=' + quantitaAttuale + ' quantitaCaricati=' + quantitaCaricati + ' isUint8(parseInt(quantitaCaricati))=' + isUint8(parseInt(quantitaCaricati)) + ' numeroDDT=' + numeroDDT + ' dataDDT=' + dataDDT);
@@ -130,7 +140,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                         $(this).prev().removeClass("evidenziaErrore");
                     }
 
-                    CaricaProdottisuCamion(IdMagazzino, idMezzo, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto, numeroDDT, dataDDT);
+                    CaricaProdottisuCamion(IdMagazzino, idMezzo, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto, numeroDDT, dataDDT, numeroDDT_interno, dataDDT_interno, note);
 
                     var labelQuantita = $(this).closest('td').prev('td').prev('td').prev('td').prev('td');
                     //console.log(labelQuantita);
@@ -192,7 +202,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                     dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
                     dettaglio = dettaglio + '<td>' + risultati[i].quantita + '</td>';                    
                     dettaglio = dettaglio + '<td><input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
-                    dettaglio = dettaglio + '<td><a href="#" data-IdTrasporto="' + risultati[i].IdTrasporto + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scaricaProdDaCamion">Scarica</a> </td>';
+                    dettaglio = dettaglio + '<td><a href="#" data-IdTrasporto="' + risultati[i].IdTrasporto + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" data-numeroDDT_interno="' + risultati[i].numeroDDT_interno + '" data-dataDDT_interno="' + risultati[i].dataDDT_interno + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scaricaProdDaCamion">Scarica</a> </td>';
                     dettaglio = dettaglio + '</tr>';
 
                 }
@@ -217,14 +227,15 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                     //var dataDDT = $(this).closest('td').prev('td').prev('td')[0].children[0].value;
 
                     var numeroDDT = $(this).attr('data-numeroDDT');
-                    //var dataDDT = new Date(parseJsonDateToJsDate($(this).attr('data-dataDDT')));
+                    var numeroDDT_interno = $(this).attr('data-numeroDDT_interno');
                     var dataDDT = parseJsonDateToJsDate($(this).attr('data-dataDDT'));
+                    var dataDDT_interno = parseJsonDateToJsDate($(this).attr('data-dataDDT_interno'));
 
                     var quantitaRimasti = (quantitaAttuale - quantitaDaRimettereInMagazzino);
                     //var quantitaVenduti = (quantitaAttuale - quantitaRimasti);
                     var prezzoTotaleRimasti = (prezzo * quantitaRimasti);
                     var prezzoTotaleDaRimettereInMagazzino = (prezzo * quantitaDaRimettereInMagazzino);
-                    var idOperatore = $(this).attr('data-idOperatore');
+                    var idOperatore = localStorage.idOperatore;
                     //var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
                     var numeroLotto = parseJsonDateToJsDate($(this).attr('data-numeroLotto'));
                     //alert('quantitaAttuale=' + quantitaAttuale + ' quantitaDaRimettereInMagazzino=' + quantitaDaRimettereInMagazzino + ' isUint8(parseInt(quantitaDaRimettereInMagazzino))=' + isUint8(parseInt(quantitaDaRimettereInMagazzino)) + " numeroDDT=" + numeroDDT + " dataDDT=" + dataDDT);
@@ -246,7 +257,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                         $(this).prev().removeClass("evidenziaErrore");
                     }
 
-                    ScaricaProdottiDaCamion(IdTrasporto, idMezzo, idProdotto, quantitaDaRimettereInMagazzino, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleDaRimettereInMagazzino, idOperatore, numeroLotto, numeroDDT, dataDDT);
+                    ScaricaProdottiDaCamion(IdTrasporto, idMezzo, idProdotto, quantitaDaRimettereInMagazzino, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleDaRimettereInMagazzino, idOperatore, numeroLotto, numeroDDT, dataDDT, numeroDDT_interno, dataDDT_interno);
                     
                     var labelQuantita = $(this).closest('td').prev('td').prev('td');
                     //console.log(labelQuantita);
@@ -265,19 +276,19 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
 }
 
 
-function CaricaProdottisuCamion(IdMagazzino, idMezzo, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto, numeroDDT, dataDDT) {
-    console.log(" idProdotto=" + idProdotto + " quantitaCaricati=" + quantitaCaricati + " prezzoTotaleCaricati=" + prezzoTotaleCaricati + " idOperatore=" + idOperatore + " numeroLotto=" + numeroLotto + " idMezzo=" + idMezzo + " numeroDDT=" + numeroDDT + " dataDDT=" + dataDDT);
+function CaricaProdottisuCamion(IdMagazzino, idMezzo, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto, numeroDDT, dataDDT, numeroDDT_interno, dataDDT_interno, note) {
+    //console.log(" idProdotto=" + idProdotto + " quantitaCaricati=" + quantitaCaricati + " prezzoTotaleCaricati=" + prezzoTotaleCaricati + " idOperatore=" + idOperatore + " numeroLotto=" + numeroLotto + " idMezzo=" + idMezzo + " numeroDDT=" + numeroDDT + " dataDDT=" + dataDDT);
     //return;
     storicizzaProdottoInMagazzino(IdMagazzino, idOperatore);
 
-    AggiornaQuantitaProdottiInMagazzino(idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto);    
+    AggiornaQuantitaProdottiInMagazzino(idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT, note);    
 
-    InsertProdottiInCamion(idProdotto, quantitaCaricati, prezzoTotaleCaricati, idOperatore, numeroLotto, idMezzo, numeroDDT, dataDDT);
+    InsertProdottiInCamion(idProdotto, quantitaCaricati, prezzoTotaleCaricati, idOperatore, numeroLotto, idMezzo, numeroDDT, dataDDT, numeroDDT_interno, dataDDT_interno);
 }
 
-function ScaricaProdottiDaCamion(IdTrasporto, idMezzo, idProdotto, quantitaDaRimettereInMagazzino, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleDaRimettereInMagazzino, idOperatore, numeroLotto, numeroDDT, dataDDT) {
+function ScaricaProdottiDaCamion(IdTrasporto, idMezzo, idProdotto, quantitaDaRimettereInMagazzino, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleDaRimettereInMagazzino, idOperatore, numeroLotto, numeroDDT, dataDDT, numeroDDT_interno, dataDDT_interno) {
 
-    console.log(" IdTrasporto=" + IdTrasporto + " idMezzo=" + idMezzo + " idProdotto=" + idProdotto + " quantitaDaRimettereInMagazzino=" + quantitaDaRimettereInMagazzino + " quantitaRimasti=" + quantitaRimasti + " prezzoTotaleRimasti=" + prezzoTotaleRimasti + " prezzoTotaleDaRimettereInMagazzino=" + prezzoTotaleDaRimettereInMagazzino + " idOperatore=" + idOperatore + " numeroLotto=" + numeroLotto + " numeroDDT=" + numeroDDT + " dataDDT=" + dataDDT);
+    //console.log(" IdTrasporto=" + IdTrasporto + " idMezzo=" + idMezzo + " idProdotto=" + idProdotto + " quantitaDaRimettereInMagazzino=" + quantitaDaRimettereInMagazzino + " quantitaRimasti=" + quantitaRimasti + " prezzoTotaleRimasti=" + prezzoTotaleRimasti + " prezzoTotaleDaRimettereInMagazzino=" + prezzoTotaleDaRimettereInMagazzino + " idOperatore=" + idOperatore + " numeroLotto=" + numeroLotto + " numeroDDT=" + numeroDDT + " dataDDT=" + dataDDT);
     //return;
 
     // Storicizzo Prodotti su Camion ************************************************
@@ -308,7 +319,7 @@ function ScaricaProdottiDaCamion(IdTrasporto, idMezzo, idProdotto, quantitaDaRim
     });
     // *********************************************************************************
 
-    console.log(" idProdotto=" + idProdotto + " quantitaRimasti=" + quantitaRimasti + " prezzoTotaleRimasti=" + prezzoTotaleRimasti + " idOperatore=" + idOperatore + " numeroLotto=" + numeroLotto + " idMezzo=" + idMezzo + " numeroDDT=" + numeroDDT + " dataDDT=" + dataDDT);
+    //console.log(" idProdotto=" + idProdotto + " quantitaRimasti=" + quantitaRimasti + " prezzoTotaleRimasti=" + prezzoTotaleRimasti + " idOperatore=" + idOperatore + " numeroLotto=" + numeroLotto + " idMezzo=" + idMezzo + " numeroDDT=" + numeroDDT + " dataDDT=" + dataDDT);
     //return;
 
     // Aggiorno quantita Prodotti rimasti in Camion ************************************
@@ -320,7 +331,7 @@ function ScaricaProdottiDaCamion(IdTrasporto, idMezzo, idProdotto, quantitaDaRim
         url: urlAggiornaQuantInTrasporto,
         cache: false,
         async: true,
-        data: JSON.stringify({ idProdotto: idProdotto, quantita: quantitaRimasti, prezzoTotale: prezzoTotaleRimasti, idOperatore: idOperatore, numeroLotto: numeroLotto, IdMezzo: idMezzo, numeroDDT: numeroDDT, dataDDT:dataDDT }),
+        data: JSON.stringify({ idProdotto: idProdotto, quantita: quantitaRimasti, prezzoTotale: prezzoTotaleRimasti, idOperatore: idOperatore, numeroLotto: numeroLotto, IdMezzo: idMezzo, numeroDDT: numeroDDT, dataDDT: dataDDT, numeroDDT_interno: numeroDDT_interno, dataDDT_interno: dataDDT_interno }),
         error: function (data) {
             console.log(data.responseText)
         },
@@ -344,7 +355,7 @@ function ScaricaProdottiDaCamion(IdTrasporto, idMezzo, idProdotto, quantitaDaRim
 }
 
 //inserisco in un determinato Cliente una determinata quantita di Prodotto
-function InsertProdottiInCamion(idProdotto, quantita, prezzoTotale, idOperatore, numeroLotto, idMezzo, numeroDDT, dataDDT) {
+function InsertProdottiInCamion(idProdotto, quantita, prezzoTotale, idOperatore, numeroLotto, idMezzo, numeroDDT, dataDDT, numeroDDT_interno, dataDDT_interno) {
 
     $.ajax({
         type: "POST",
@@ -355,7 +366,7 @@ function InsertProdottiInCamion(idProdotto, quantita, prezzoTotale, idOperatore,
         cache: false,
         async: true,
         //            data: "idDisciplina=" + idDisciplina,
-        data: JSON.stringify({ idProdotto: idProdotto, quantita: quantita, prezzoTotale: prezzoTotale, idOperatore: idOperatore, numeroLotto: numeroLotto, IdMezzo: idMezzo, numeroDDT: numeroDDT, dataDDT: dataDDT }),
+        data: JSON.stringify({ idProdotto: idProdotto, quantita: quantita, prezzoTotale: prezzoTotale, idOperatore: idOperatore, numeroLotto: numeroLotto, IdMezzo: idMezzo, numeroDDT: numeroDDT, dataDDT: dataDDT, numeroDDT_interno: numeroDDT_interno, dataDDT_interno: dataDDT_interno }),
         error: function (data) {
             console.log(data.responseText)
         },

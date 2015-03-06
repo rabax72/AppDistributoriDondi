@@ -3,7 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<link rel="stylesheet" href="http://demos.jquerymobile.com/1.4.5/css/themes/default/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" href="http://demos.jquerymobile.com/1.4.5/css/themes/default/jquery.mobile-1.4.5.min.css">
 	<!--<link rel="stylesheet" href="http://demos.jquerymobile.com/1.4.5/_assets/css/jqm-demos.css">-->
     <link href="Scripts/Jquery/jqm-demos.css" rel="stylesheet" />
 	<script src="http://demos.jquerymobile.com/1.4.5/js/jquery.js"></script>
@@ -22,16 +22,16 @@
 
 <link href="Scripts/StyleSheet.css" rel="stylesheet" type="text/css" />
 
-<script src="Scripts/JSlogin.js"></script>
-<script src="Scripts/JSprodotti.js"></script>
-<script src="Scripts/JSdistributori.js"></script>
-<script src="Scripts/JSsituazionedistributori.js"></script>
-<script src="Scripts/JSprodottiinmagazzinopercamion.js"></script>
-<script src="Scripts/JSprodottisucamion.js"></script>
-<script src="Scripts/JSsituazioneclienti.js"></script>
-<script src="Scripts/JSgestionemagazzino.js"></script>
-<script src="Scripts/JSvenditadiretta.js"></script>
-<script src="Scripts/JSriepilogovenduto.js"></script>
+    <script src="Scripts/JSlogin.js"></script>
+    <script src="Scripts/JSprodotti.js"></script>
+    <script src="Scripts/JSdistributori.js"></script>
+    <script src="Scripts/JSsituazionedistributori.js"></script>
+    <script src="Scripts/JSprodottiinmagazzinopercamion.js"></script>
+    <script src="Scripts/JSprodottisucamion.js"></script>
+    <script src="Scripts/JSsituazioneclienti.js"></script>
+    <script src="Scripts/JSgestionemagazzino.js"></script>
+    <script src="Scripts/JSvenditadiretta.js"></script>
+    <script src="Scripts/JSriepilogovenduto.js"></script>
 
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script> 
 
@@ -356,13 +356,13 @@
     </div><!-- /page -->
 <!--************************************************************************************-->
 
-<!--**** Elenco Prodotti da Caricare in Magazzino ********************-->
+<!--**** Elenco Prodotti da Caricare in Magazzino **************************************-->
 <div data-role="page" id="gestioneMagazzino">
     <div data-role="panel" id="leftpanelGestioneMagazzino" class="leftPanel" data-position="left" data-display="push" data-theme="a">
        <!-- <h3>Left Panel: Push</h3>-->               
 	</div><!-- /leftpanel2 -->     
         <div data-role="header">
-            <h1>Elenco Prodotti presenti in Magazzino</h1>
+            <h1>Elenco Prodotti da Caricare o Scaricare in Magazzino</h1>
             
             <a href="#leftpanelGestioneMagazzino" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>                       
                         
@@ -378,9 +378,27 @@
             <div id="elencoGestioneMagazzino">Dist 1</div>
 
         </div><!-- /content -->   
-    </div><!-- /page -->
+    </div><!-- /page -->    
+<!--************************************************************************************-->
 
-    
+<!--**** Elenco Prodotti in Magazzino **************************************-->
+<div data-role="page" id="situazioneMagazzino">
+    <div data-role="panel" id="leftpanelsituazioneMagazzino" class="leftPanel" data-position="left" data-display="push" data-theme="a">
+       <!-- <h3>Left Panel: Push</h3>-->               
+	</div><!-- /leftpanel2 -->     
+        <div data-role="header">
+            <h1>Elenco Prodotti presenti in Magazzino</h1>
+            
+            <a href="#leftpanelsituazioneMagazzino" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>                       
+                        
+        </div><!-- /header -->
+                    
+        <div role="main" class="ui-content">  
+                       
+            <div id="elencoSituazioneMagazzino">Situazione Magazzino</div>
+
+        </div><!-- /content -->   
+    </div><!-- /page -->    
 <!--************************************************************************************-->
 
 <!--**** Form Vendita Diretta ************************-->

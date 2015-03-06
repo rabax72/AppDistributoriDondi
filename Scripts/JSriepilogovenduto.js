@@ -33,7 +33,6 @@ function RiepilogoVenduto() {
 }
 
 function VenditaDiretta(DataDa, DataA) {
-   // location.hash = "VenditaDiretta";
     
     $.ajax({
         type: "POST",
@@ -74,12 +73,12 @@ function VenditaDiretta(DataDa, DataA) {
 
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
+                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].prezzoTotale + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].numeroDDT + '</td>';
-                dettaglio = dettaglio + '<td>' + parseJsonDate(risultati[i].dataDDT) + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].prezzoTotale + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].numeroDDT + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
                 dettaglio = dettaglio + '</tr>';
                 prezzoTot = prezzoTot + risultati[i].prezzoTotale;
             }
@@ -171,9 +170,9 @@ function VendutoPerProdotto() {
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><a href="javascript:GetVendutoByIdProdotto(' + risultati[i].idProdotto + ', ' + desc + ', null, null);"><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></a></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].prezzo + ' €</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].aliquota + '</td>';                
-                dettaglio = dettaglio + '<td>' + parseJsonDate(risultati[i].dataScadenza) + '</td>';                
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].prezzo + ' €</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].aliquota + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].numeroLotto) + '</td>';
                 dettaglio = dettaglio + '</tr>';
 
             }
@@ -244,14 +243,14 @@ function GetVendutoByIdProdotto(idProdotto, descrizione, DataDa, DataA) {
 
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
+                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].prezzoTotale + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].numeroDDT + '</td>';
-                dettaglio = dettaglio + '<td>' + parseJsonDate(risultati[i].dataDDT) + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizioneDistributore + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizioneCliente + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].prezzoTotale + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].numeroDDT + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].descrizioneDistributore + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].descrizioneCliente + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
                 dettaglio = dettaglio + '</tr>';
                 prezzoTot = prezzoTot + risultati[i].prezzoTotale;
             }
@@ -339,8 +338,7 @@ function VendutoPerDistributore() {
 
 }
 
-function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) {
-    // location.hash = "VenditaDiretta";
+function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) {    
 
     $.ajax({
         type: "POST",
@@ -360,7 +358,7 @@ function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) 
 
             //console.log(risultati);
 
-            var dettaglio = '<h1>Filtro per Distributore: ' + descrizione + '</h1>' +
+            var dettaglio = '<h1>Riepilogo Venduto per Distributore: ' + descrizione + '</h1>' +
                             '<div>' +
                                 'Data Da <input type="text" id="VendutoDitributoreDataDa"  class="calendario" data-theme="a" /> Data A <input type="text" id="VendutoDitributoreDataA"  class="calendario" data-theme="a" /> <button id="filtraVendutoDitributore" value="Filtra" class="filtraVendutoDitributore">Filtra</button>' +
                             '</div><table id="tabellaVendutiByIdDistributore" class="display" cellspacing="0" width="100%">' +
@@ -370,6 +368,7 @@ function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) 
                                             '<th>Descrizione</th>' +
                                             '<th>Quantità</th>' +
                                             '<th>Prezzo Tot.</th>' +
+                                            '<th>Data Ril.</th>' +
                                             '<th>N° DDT</th>' +
                                             '<th>Data DDT</th>' +
                                             '<th>Distributore</th>' +                                            
@@ -382,13 +381,14 @@ function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) 
 
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
+                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].prezzoTotale + ' €</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].numeroDDT + '</td>';
-                dettaglio = dettaglio + '<td>' + parseJsonDate(risultati[i].dataDDT) + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizioneDistributore + '</td>';                
-                dettaglio = dettaglio + '<td>' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].prezzoTotale + ' €</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataUltimaModifica) + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].numeroDDT + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].descrizioneDistributore + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
                 dettaglio = dettaglio + '</tr>';
                 prezzoTot = prezzoTot + risultati[i].prezzoTotale;
 
@@ -445,8 +445,7 @@ function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) 
 
 }
 
-function VendutoPerCliente() {
-    // location.hash = "VenditaDiretta";
+function VendutoPerCliente() {    
 
     $.ajax({
         type: "POST",
@@ -488,8 +487,7 @@ function VendutoPerCliente() {
 
 }
 
-function GetVendutoByIdCliente(idCliente, descrizione, DataDa, DataA) {
-    // location.hash = "VenditaDiretta";
+function GetVendutoByIdCliente(idCliente, descrizione, DataDa, DataA) {    
 
     $.ajax({
         type: "POST",
@@ -520,6 +518,7 @@ function GetVendutoByIdCliente(idCliente, descrizione, DataDa, DataA) {
                                             '<th>Descrizione</th>' +
                                             '<th>Quantità</th>' +
                                             '<th>Prezzo Tot.</th>' +
+                                            '<th>Data Ril.</th>' +
                                             '<th>N° DDT</th>' +
                                             '<th>Data DDT</th>' +
                                             '<th>Cliente</th>' +
@@ -532,13 +531,14 @@ function GetVendutoByIdCliente(idCliente, descrizione, DataDa, DataA) {
 
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
+                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].prezzoTotale + ' €</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].numeroDDT + '</td>';
-                dettaglio = dettaglio + '<td>' + parseJsonDate(risultati[i].dataDDT) + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizioneCliente + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].prezzoTotale + ' €</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataUltimaModifica) + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].numeroDDT + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].descrizioneCliente + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
                 dettaglio = dettaglio + '</tr>';
                 prezzoTot = prezzoTot + risultati[i].prezzoTotale;
             }
@@ -636,13 +636,13 @@ function GetProdottiInMagazzinoResi() {
 
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
+                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].prezzoTotale + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizioneDistributore + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizioneCliente + '</td>';
-                dettaglio = dettaglio + '<td>' + parseJsonDate(risultati[i].dataInserimento) + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].prezzoTotale + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].descrizioneDistributore + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].descrizioneCliente + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataInserimento) + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
                 dettaglio = dettaglio + '</tr>';
 
             }
@@ -713,13 +713,13 @@ function GetProdottiInMagazzinoResiFiltrato(dataDa, dataA){
 
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDate(risultati[i].numeroLotto) + ')</td>';
+                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].prezzoTotale + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizioneDistributore + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizioneCliente + '</td>';
-                dettaglio = dettaglio + '<td>' + parseJsonDate(risultati[i].dataInserimento) + '</td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].prezzoTotale + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].descrizioneDistributore + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].descrizioneCliente + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataInserimento) + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
                 dettaglio = dettaglio + '</tr>';
 
             }
