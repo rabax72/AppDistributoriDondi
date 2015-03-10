@@ -495,10 +495,13 @@
 
           <label for="fAliquota">Aliquota:</label>
           <input type="number" name="fAliquota" id="fAliquota" data-clear-btn="true">
-          <form method="post" enctype="multipart/form-data" action="FileManager.ashx" class="dropzone">
-          </form>
+          <div id="myDropzone" class="dropzone" > 
+              <div class="fallback">
+                <input id="File1" name="file" type="file" runat="server"/>            
+            </div>     
+          </div>
 	      <!--<input type="button" id="cercaOrdinanze" value="Cerca">	 --> 
-          <a href="" id="inserisciProdotto" class="ui-btn ui-corner-all ui-shadow ui-btn-active">Inserisci</a>  
+          <a href="#" id="inserisciProdotto" class="ui-btn ui-corner-all ui-shadow ui-btn-active InserisciNuovoProdotto">Inserisci</a>  
         
 
        </div>
