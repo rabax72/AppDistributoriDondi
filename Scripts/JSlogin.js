@@ -10,6 +10,7 @@ if (tipoDiConn == "prod") {
     var urlGetElencoProdottiVenduti = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetElencoProdottiVenduti';
     var urlInsertProdotto = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/InsertProdotto';
     var urlGetProdottiDaGestireInMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiDaGestireInMagazzino';
+    var urlGetProdottiDaScaricareDaMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiDaScaricareDaMagazzino';
     var urlGetProdottiInMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiInMagazzino';
     var urlGetProdottiInMagazzinoResi = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiInMagazzinoResi';
     var urlGetProdottiInMagazzinoResiFiltrato = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiInMagazzinoResiFiltrato';
@@ -45,6 +46,7 @@ if (tipoDiConn == "prod") {
     var urlGetElencoProdottiVenduti = 'WebServiceAppDondi.asmx/GetElencoProdottiVenduti';
     var urlInsertProdotto = 'WebServiceAppDondi.asmx/InsertProdotto';
     var urlGetProdottiDaGestireInMagazzino = 'WebServiceAppDondi.asmx/GetProdottiDaGestireInMagazzino';
+    var urlGetProdottiDaScaricareDaMagazzino = 'WebServiceAppDondi.asmx/GetProdottiDaScaricareDaMagazzino';
     var urlGetProdottiInMagazzino = 'WebServiceAppDondi.asmx/GetProdottiInMagazzino';
     var urlGetProdottiInMagazzinoResi = 'WebServiceAppDondi.asmx/GetProdottiInMagazzinoResi';
     var urlGetProdottiInMagazzinoResiFiltrato = 'WebServiceAppDondi.asmx/GetProdottiInMagazzinoResiFiltrato';

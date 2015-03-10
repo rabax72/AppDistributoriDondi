@@ -20,9 +20,19 @@
 
     });
 
-    //$(".navBar").load("Controls/NavBar.htm");
+    Dropzone.options.myDropzone = {
+        // $("#myDropzone").dropzone({
+        autoProcessQueue: false,
+        maxFilesize: 1,
+        uploadMultiple: false
+
+    }
 });
 
+function GestioneProdotti() {
+    location.hash = "formInserimentoProdotto";
+
+}
     
 function insertProdotto(descrizione, prezzo, aliquota, dataProd, dataScad, dataInserimento, dataModifica) {
     //$("#footerRisultati").loader({ html: "<span class='ui-icon ui-icon-loading'><img src='jquery-logo.png' /><h2>is loading for you ...</h2></span>" });

@@ -24,11 +24,12 @@ function GestioneMagazzino() {
             //console.log(risultati);
             //$(".menuPrincipale").hide();
 
-            var dettaglio = '<table id="tabellaElencoProdotti" class="display" cellspacing="0" width="100%">' +
+            var dettaglio = '<table id="tabellaProdottiDaGestire" class="display" cellspacing="0" width="100%">' +
                                         '<thead>' +
                                             '<tr>' +
                                                 '<th>Foto</th>' +
                                                 '<th>Descrizione</th>' +
+                                                '<th>Prezzo</th>' +
                                                 '<th>Giacenza</th>' +
                                                 '<th>Carica</th>' +
                                                 '<th>Scarica</th>' +
@@ -38,6 +39,7 @@ function GestioneMagazzino() {
                                             '<tr>' +
                                                 '<th>Foto</th>' +
                                                 '<th>Descrizione</th>' +
+                                                '<th>Prezzo</th>' +
                                                 '<th>Giacenza</th>' +
                                                 '<th>Carica</th>' +
                                                 '<th>Scarica</th>' +
@@ -52,88 +54,98 @@ function GestioneMagazzino() {
             var quantita = 0;
             var quantitaOld = 0;
             var quantitaTot = 0;
-            var numeriLotti = '';
-            var quantitaGiacente = '';
-            var numeriDDT = '';
-            var dateDDT = '';
-            var noteDDT = '';
+            //var numeriLotti = '';
+            //var quantitaGiacente = '';
+            //var numeriDDT = '';
+            //var dateDDT = '';
+            //var noteDDT = '';
             var q = 0;
             for (var i = 0; i < risultati.length; i++) {
-
-                //dettaglio = dettaglio + '<tr>';
-                //dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                //dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '<br> Lotto: ' + parseJsonDate(risultati[i].numeroLotto) + '</td>';
-                //dettaglio = dettaglio + '<td>' + risultati[i].quantita + '</td>';                       
-                //dettaglio = dettaglio + '<td><a href="#popupCaricaMerceInMagazzino" data-rel="popup" data-position-to="window" data-idProdotto="' + risultati[i].idProdotto + '" data-foto="' + risultati[i].foto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" data-idOperatore="' + risultati[i].IdOperatore + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scegliProdDaCaricareInMagazzino">Carica</a></td>';
-                //dettaglio = dettaglio + '<td><a href="#"  data-idProdotto="' + risultati[i].idProdotto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" data-foto="' + risultati[i].foto + '" data-idOperatore="' + risultati[i].IdOperatore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scaricaProdInMagazzino">Scarica</a> </td>';
-                //dettaglio = dettaglio + '</tr>';
                 
-                idProd = risultati[i].idProdotto;
-                numLotto = risultati[i].numeroLotto;
-                quantita = risultati[i].quantita;
-                
-                if (idProd != idProdOld) {
-                    quantitaTot = quantita;
-                    if (quantita > 0) {                        
-                        numeriLotti = '<option>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</option>';
-                        quantitaGiacente = '<option>' + risultati[i].quantita + '</option>';
-                        numeriDDT = '<option>' + risultati[i].numeroDDT + '</option>';
-                        dateDDT = '<option>' + parseJsonDateLettura(risultati[i].dataDDT) + '</option>';
-                        noteDDT = '<option>' + risultati[i].Note + '</option>';
-                    }                    
-                    rigaDettaglio[i] = '<tr>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita" id="quantitaInMagazzino' + risultati[i].IdMagazzino + '">' + risultati[i].quantita + '</td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td><a href="#popupCaricaMerceInMagazzino" data-rel="popup" data-position-to="window" data-IdMagazzino="' + risultati[i].IdMagazzino + '" data-idProdotto="' + risultati[i].idProdotto + '" data-foto="' + risultati[i].foto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scegliProdDaCaricareInMagazzino">Carica</a></td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td><a href="#popupScaricaMerceDaMagazzino" data-rel="popup" data-position-to="window" data-IdMagazzino="' + risultati[i].IdMagazzino + '"  data-idProdotto="' + risultati[i].idProdotto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" data-foto="' + risultati[i].foto + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeriLotti="' + numeriLotti + '" data-quantitaGiacente="' + quantitaGiacente + '" data-numeriDDT="' + numeriDDT + '" data-dateDDT="' + dateDDT + '" data-noteDDT="' + noteDDT + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scegliProdDaScaricareDaMagazzino">Scarica</a> </td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
-                } else {
-                    rigaDettaglio[i - 1] = '';
-                    quantitaTot = (quantitaTot + quantita);
-                    if (quantita > 0) {                        
-                        numeriLotti = numeriLotti + '<option>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</option>';
-                        quantitaGiacente = quantitaGiacente + '<option>' + risultati[i].quantita + '</option>';
-                        numeriDDT = numeriDDT + '<option>' + risultati[i].numeroDDT + '</option>';
-                        dateDDT = dateDDT + '<option>' + parseJsonDateLettura(risultati[i].dataDDT) + '</option>';
-                        noteDDT = noteDDT + '<option>' + risultati[i].Note + '</option>';
-                    }                    
-                    rigaDettaglio[i] = '<tr>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita" id="quantitaInMagazzino' + risultati[i].IdMagazzino + '">' + quantitaTot + '</td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td><a href="#popupCaricaMerceInMagazzino" data-rel="popup" data-position-to="window" data-IdMagazzino="' + risultati[i].IdMagazzino + '" data-idProdotto="' + risultati[i].idProdotto + '" data-foto="' + risultati[i].foto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scegliProdDaCaricareInMagazzino">Carica</a></td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td><a href="#popupScaricaMerceDaMagazzino" data-rel="popup" data-position-to="window" data-IdMagazzino="' + risultati[i].IdMagazzino + '"  data-idProdotto="' + risultati[i].idProdotto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" data-foto="' + risultati[i].foto + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeriLotti="' + numeriLotti + '" data-quantitaGiacente="' + quantitaGiacente + '" data-numeriDDT="' + numeriDDT + '" data-dateDDT="' + dateDDT + '" data-noteDDT="' + noteDDT + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scegliProdDaScaricareDaMagazzino">Scarica</a> </td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';                   
+                dettaglio = dettaglio + '<tr>';
+                dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].prezzo + ' €</td>';
+                dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
+                dettaglio = dettaglio + '<td><a href="#popupCaricaMerceInMagazzino" data-rel="popup" data-position-to="window" data-idProdotto="' + risultati[i].idProdotto + '" data-foto="' + risultati[i].foto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scegliProdDaCaricareInMagazzino">Carica</a></td>';
+                if (parseInt(risultati[i].quantita) > 0) {
+                    dettaglio = dettaglio + '<td><a href="#popupScaricaMerceDaMagazzino" data-rel="popup" data-position-to="window" data-IdMagazzino="' + risultati[i].IdMagazzino + '"  data-idProdotto="' + risultati[i].idProdotto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" data-foto="' + risultati[i].foto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scegliProdDaScaricareDaMagazzino">Scarica</a> </td>';
                 }
+                else {
+                    dettaglio = dettaglio + '<td></td>';
+                }
+                
 
-                idProdOld = risultati[i].idProdotto;
-                numLottoOld = risultati[i].numeroLotto;
-                quantitaOld = risultati[i].quantita;
+                dettaglio = dettaglio + '</tr>';
+                
+                //idProd = risultati[i].idProdotto;
+                //numLotto = risultati[i].numeroLotto;
+                //quantita = risultati[i].quantita;
+                
+                //if (idProd != idProdOld) {
+                //    quantitaTot = quantita;
+                //    if (quantita > 0) {                        
+                //        numeriLotti = '<option>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</option>';
+                //        quantitaGiacente = '<option>' + risultati[i].quantita + '</option>';
+                //        numeriDDT = '<option>' + risultati[i].numeroDDT + '</option>';
+                //        dateDDT = '<option>' + parseJsonDateLettura(risultati[i].dataDDT) + '</option>';
+                //        noteDDT = '<option>' + risultati[i].Note + '</option>';
+                //    }                    
+                //    rigaDettaglio[i] = '<tr>';
+                //    rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                //    rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
+                //    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita" id="quantitaInMagazzino' + risultati[i].IdMagazzino + '">' + risultati[i].quantita + '</td>';
+                //    rigaDettaglio[i] = rigaDettaglio[i] + '<td><a href="#popupCaricaMerceInMagazzino" data-rel="popup" data-position-to="window" data-IdMagazzino="' + risultati[i].IdMagazzino + '" data-idProdotto="' + risultati[i].idProdotto + '" data-foto="' + risultati[i].foto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scegliProdDaCaricareInMagazzino">Carica</a></td>';
+                //    rigaDettaglio[i] = rigaDettaglio[i] + '<td><a href="#popupScaricaMerceDaMagazzino" data-rel="popup" data-position-to="window" data-IdMagazzino="' + risultati[i].IdMagazzino + '"  data-idProdotto="' + risultati[i].idProdotto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" data-foto="' + risultati[i].foto + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeriLotti="' + numeriLotti + '" data-quantitaGiacente="' + quantitaGiacente + '" data-numeriDDT="' + numeriDDT + '" data-dateDDT="' + dateDDT + '" data-noteDDT="' + noteDDT + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scegliProdDaScaricareDaMagazzino">Scarica</a> </td>';
+                //    rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
+                //} else {
+                //    rigaDettaglio[i - 1] = '';
+                //    quantitaTot = (quantitaTot + quantita);
+                //    if (quantita > 0) {                        
+                //        numeriLotti = numeriLotti + '<option>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</option>';
+                //        quantitaGiacente = quantitaGiacente + '<option>' + risultati[i].quantita + '</option>';
+                //        numeriDDT = numeriDDT + '<option>' + risultati[i].numeroDDT + '</option>';
+                //        dateDDT = dateDDT + '<option>' + parseJsonDateLettura(risultati[i].dataDDT) + '</option>';
+                //        noteDDT = noteDDT + '<option>' + risultati[i].Note + '</option>';
+                //    }                    
+                //    rigaDettaglio[i] = '<tr>';
+                //    rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                //    rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
+                //    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita" id="quantitaInMagazzino' + risultati[i].IdMagazzino + '">' + quantitaTot + '</td>';
+                //    rigaDettaglio[i] = rigaDettaglio[i] + '<td><a href="#popupCaricaMerceInMagazzino" data-rel="popup" data-position-to="window" data-IdMagazzino="' + risultati[i].IdMagazzino + '" data-idProdotto="' + risultati[i].idProdotto + '" data-foto="' + risultati[i].foto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scegliProdDaCaricareInMagazzino">Carica</a></td>';
+                //    rigaDettaglio[i] = rigaDettaglio[i] + '<td><a href="#popupScaricaMerceDaMagazzino" data-rel="popup" data-position-to="window" data-IdMagazzino="' + risultati[i].IdMagazzino + '"  data-idProdotto="' + risultati[i].idProdotto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" data-foto="' + risultati[i].foto + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeriLotti="' + numeriLotti + '" data-quantitaGiacente="' + quantitaGiacente + '" data-numeriDDT="' + numeriDDT + '" data-dateDDT="' + dateDDT + '" data-noteDDT="' + noteDDT + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scegliProdDaScaricareDaMagazzino">Scarica</a> </td>';
+                //    rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';                   
+                //}
+
+                //idProdOld = risultati[i].idProdotto;
+                //numLottoOld = risultati[i].numeroLotto;
+                //quantitaOld = risultati[i].quantita;
             }
             //dettaglio = dettaglio + '</tbody> </table>';
 
             //console.log(dettaglio);
-            var righe = '';
+            //var righe = '';
 
-            for (var i = 0; i < risultati.length; i++) {
-                righe = righe + rigaDettaglio[i];
-            }
+            //for (var i = 0; i < risultati.length; i++) {
+            //    righe = righe + rigaDettaglio[i];
+            //}
 
-            dettaglio = dettaglio + righe + '</tbody> </table>';
+            //dettaglio = dettaglio + righe + '</tbody> </table>';
 
             $('#elencoGestioneMagazzino').html(dettaglio);
 
-            var table = $('#tabellaElencoProdotti').DataTable(
+            var table = $('#tabellaProdottiDaGestire').DataTable(
                 { "paging": false }
             );
 
             $(".scegliProdDaCaricareInMagazzino").on('click', function () {
                 var idProdotto = $(this).attr('data-idProdotto');
-                var IdMagazzino = $(this).attr('data-IdMagazzino');
+                //var IdMagazzino = $(this).attr('data-IdMagazzino');
                 var prezzo = $(this).attr('data-prezzo');
-                var lblQ = '#quantitaInMagazzino' + IdMagazzino;
-                var quantitaAttuale = $(lblQ).text();
+                //var lblQ = '#quantitaInMagazzino' + IdMagazzino;
+                //var quantitaAttuale = $(lblQ).text();
+                var tdQuantita = $(this).closest('td').prev('td');
+                var quantitaAttuale = $(this).closest('td').prev('td').text();
                 var idOperatore = localStorage.idOperatore;
                 var foto = $(this).attr('data-foto');
 
@@ -203,14 +215,14 @@ function GestioneMagazzino() {
                     CaricaProdottoInMagazzino(idProdotto, quantitaCaricati, prezzoTotaleCaricati, idOperatore, numeroLotto, numeroDDT, dataDDT, note);
 
                     //var labelQuantita = $(this).closest('td').prev('td').prev('td').prev('td').prev('td');
-
-                    var labelQuantita = $(lblQ);
+                    
+                    //var labelQuantita = $(lblQ);
                     //console.log(labelQuantita);                   
-                    labelQuantita.animate({
+                    tdQuantita.animate({
                         backgroundColor: "green",
                         color: "#000"
                     }, 1000);
-                    labelQuantita.html(quantitaTotale);
+                    tdQuantita.html(quantitaTotale);
 
                 });
 
@@ -225,98 +237,24 @@ function GestioneMagazzino() {
 
             $(".scegliProdDaScaricareDaMagazzino").on('click', function () {
                 var idProdotto = $(this).attr('data-idProdotto');
-                var IdMagazzino = $(this).attr('data-IdMagazzino');
-                var prezzo = $(this).attr('data-prezzo');
-                var lblQ = '#quantitaInMagazzino' + IdMagazzino;
-                var quantitaAttuale = $(lblQ).text();
-                var idOperatore = localStorage.idOperatore;
-                var foto2 = $(this).attr('data-foto');
-                var numeroLotto = $(this).attr('data-numeroLotto');
-                var numLotti = $(this).attr('data-numeriLotti');
-                var quantitaGiacente = $(this).attr('data-quantitaGiacente');
-                var numsDDT = $(this).attr('data-numeriDDT');
-                var datesDDT = $(this).attr('data-dateDDT');
-                var notesDDT = $(this).attr('data-noteDDT');
-                //console.log('idProdotto=' + idProdotto + ' IdMagazzino=' + IdMagazzino + ' prezzo=' + prezzo + ' quantitaAttuale=' + quantitaAttuale + ' idOperatore=' + idOperatore + ' foto2=' + foto2 + ' numeroLotto=' + numeroLotto);
+                var quantitaAttuale = $(this).closest('td').prev('td').prev('td');
 
-                var finestraDati = '<div style="padding:10px 20px;">';
-                finestraDati = finestraDati + '<h3>Scarica da Magazzino</h3>';
-                finestraDati = finestraDati + '<img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + foto2 + '">';
-                finestraDati = finestraDati + '<br><br>Scegli il Lotto da scaricare: <select onchange="cambiaQuantitaGiacente(this)" class="lottoSpecifico">' + numLotti + '</select>';
-                finestraDati = finestraDati + '<label for="quantitaProdDaScaricareDaMagazzino">Quantita da scaricare:</label>';
-                finestraDati = finestraDati + '<input type="number" id="quantitaProdDaScaricareDaMagazzino" data-theme="a">';
-                finestraDati = finestraDati + '<br><br>Giacenza: <select disabled class="quantitaGiacenteInMagazzino">' + quantitaGiacente + '</select><br><br>';                                                
-                finestraDati = finestraDati + '<label for="numeroDDTCaricareinMagazzino">Numero DDT</label>';
-                finestraDati = finestraDati + '<select disabled id="numeroDDTCaricareinMagazzino">' + numsDDT + '</select>';
-                finestraDati = finestraDati + '<label for="dataDDTCaricareinMagazzino">Data DDT:</label>';
-                finestraDati = finestraDati + '<select disabled id="dataDDTCaricareinMagazzino">' + datesDDT + '</select>';
-                finestraDati = finestraDati + '<label for="noteCaricareinMagazzino">Note:</label>';
-                finestraDati = finestraDati + '<select disabled id="noteCaricareinMagazzino">' + notesDDT + '</select>';
-                finestraDati = finestraDati + '<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-active scaricaProdottoDaMagazzino">Scarica</a>';
-                finestraDati = finestraDati + '</div>';
+                //var IdMagazzino = $(this).attr('data-IdMagazzino');
+                //var prezzo = $(this).attr('data-prezzo');
+                //var lblQ = '#quantitaInMagazzino' + IdMagazzino;
+                //var quantitaAttuale = $(lblQ).text();
+                //var idOperatore = localStorage.idOperatore;
+                //var foto2 = $(this).attr('data-foto');
+                //var numeroLotto = $(this).attr('data-numeroLotto');
+                //var numLotti = $(this).attr('data-numeriLotti');
+                //var quantitaGiacente = $(this).attr('data-quantitaGiacente');
+                //var numsDDT = $(this).attr('data-numeriDDT');
+                //var datesDDT = $(this).attr('data-dateDDT');
+                //var notesDDT = $(this).attr('data-noteDDT');
+                ////console.log('idProdotto=' + idProdotto + ' IdMagazzino=' + IdMagazzino + ' prezzo=' + prezzo + ' quantitaAttuale=' + quantitaAttuale + ' idOperatore=' + idOperatore + ' foto2=' + foto2 + ' numeroLotto=' + numeroLotto);
 
-                $("#popupScaricaMerceDaMagazzino").html(finestraDati);
-
-                //$("#numeroLotttoCaricareinMagazzino").datepicker({
-                //    dateFormat: "dd-mm-yy"
-                //});
-                $("#dataDDTCaricareinMagazzino").datepicker({
-                    dateFormat: "dd-mm-yy"
-                });                
-
-                $(".scaricaProdottoDaMagazzino").on('click', function () {
-                    //var numeroLotto = $("#numeroLotttoCaricareinMagazzino").val();
-                    var quantitaDaScaricare = $("#quantitaProdDaScaricareDaMagazzino").val();
-                    var numeroDDT = $("#numeroDDTCaricareinMagazzino").val();
-                    var dataDDT = $("#dataDDTCaricareinMagazzino").val();
-                    var giacenzaPerLotto = $(".quantitaGiacenteInMagazzino").val();                                        
-
-                    dataDDT = stringToDate(dataDDT, "dd/MM/yyyy", "/");
-                    var note = $("#noteCaricareinMagazzino").val();
-                    var quantitaTotale = (parseInt(giacenzaPerLotto) - parseInt(quantitaDaScaricare));
-                    var totaleAggiornato = (parseInt(quantitaAttuale) - parseInt(quantitaDaScaricare));
-                    //var prezzoTotaleRimasti = (prezzo * quantitaRimasti);
-                    var prezzoTotale = (prezzo * quantitaTotale);
-
-                    var lottoSpecifico = $('.lottoSpecifico').val();
-                    //console.log(quantitaDaScaricare);
-
-                    if (quantitaDaScaricare == "" || isUint8(parseInt(quantitaDaScaricare)) == false) {
-                        alert("Scegli un valore Numerico prima di scaricare");
-                        //$(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
-                        return;                        
-                    }
-                    
-                    if (parseInt(quantitaDaScaricare) > parseInt(giacenzaPerLotto)) {
-                        alert("Non puoi scaricare più di quanto presente in magazzino!");                        
-                        return;
-                    }
-
-                    //alert('idProdotto=' + idProdotto + ' quantitaCaricati=' + quantitaCaricati + ' prezzoTotaleCaricati=' + prezzoTotaleCaricati + ' numeroLotto=' + numeroLotto + ' dataDDT=' + dataDDT + ' numeroDDT=' + numeroDDT + ' idOperatore=' + idOperatore);
-                    //return;
-
-                    //numeroLotto = parseJsonDateToJsDate(numeroLotto);
-                    numeroLotto = stringToDate(lottoSpecifico, 'dd/MM/yyyy', '/');                   
-
-                    SmaltiscoProdottiDaMagazzino(idProdotto, quantitaTotale, prezzoTotale, numeroLotto, idOperatore, numeroDDT, dataDDT, note, true);
-
-                    //dataDDT = null;
-                    //console.log(' idProdotto=' + idProdotto + ' quantitaDaScaricare=' + quantitaDaScaricare + ' prezzoTotale=' + prezzoTotale + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto + ' numeroDDT=' + numeroDDT + ' dataDDT=' + dataDDT + ' note=' + note);
-
-
-                    //var labelQuantita = $(this).closest('td').prev('td').prev('td').prev('td').prev('td');
-
-                    var labelQuantita = $(lblQ);
-                    //console.log(labelQuantita);                   
-                    labelQuantita.animate({
-                        backgroundColor: "green",
-                        color: "#000"
-                    }, 1000);
-                    labelQuantita.html(totaleAggiornato);
-                   
-                });
-
-
+                GetProdottiDaScaricareDaMagazzino(idProdotto, quantitaAttuale);
+               
             });
         }
 
@@ -328,11 +266,143 @@ function cambiaQuantitaGiacente(obj) {
     var lotto = obj.selectedIndex;
     //console.log(lotto);
     $('.quantitaGiacenteInMagazzino').prop("selectedIndex", lotto);
-    $('#numeroDDTCaricareinMagazzino').prop("selectedIndex", lotto);
-    $('#dataDDTCaricareinMagazzino').prop("selectedIndex", lotto);
-    $('#noteCaricareinMagazzino').prop("selectedIndex", lotto);    
+    $('#numeroDDTScaricareinMagazzino').prop("selectedIndex", lotto);
+    $('#dataDDTScaricareinMagazzino').prop("selectedIndex", lotto);
+    $('#noteScaricareinMagazzino').prop("selectedIndex", lotto);    
 }
 
+function GetProdottiDaScaricareDaMagazzino(idProdotto, quantitaAttuale) {
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiDaScaricareDaMagazzino",        
+        url: urlGetProdottiDaScaricareDaMagazzino,
+        cache: false,                   
+        async: true,        
+        data: JSON.stringify({ idProdotto: idProdotto }),
+        error: function (data) {
+            console.log(data.responseText)
+        },
+        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+        success: function (response) {
+            risultati = response.d;
+
+            //console.log(risultati);
+
+            var numeriLotti = '';
+            var quantitaGiacente = '';
+            var numeriDDT = '';
+            var dateDDT = '';
+            var noteDDT = '';
+            var foto2 = '';
+            for (var i = 0; i < risultati.length; i++) {
+                if (risultati[i].quantita > 0) {
+                    numeriLotti = numeriLotti + '<option>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</option>';
+                    quantitaGiacente = quantitaGiacente + '<option>' + risultati[i].quantita + '</option>';
+                    numeriDDT = numeriDDT + '<option>' + risultati[i].numeroDDT + '</option>';
+                    dateDDT += '<option>' + parseJsonDateLettura(risultati[i].dataDDT) + '</option>';
+                    noteDDT = noteDDT + '<option>' + risultati[i].Note + '</option>';
+                    foto2 = risultati[i].foto;
+                    var prezzo = risultati[i].prezzo;
+                }
+                //else {
+                //    var finestraDati = '<div style="padding:10px 20px;">';
+                //    finestraDati = finestraDati + '<h3>Non è possibile scaricare un prodotto che risulta a 0 nel magazzino!</h3>';
+                //    finestraDati = finestraDati + '</div>';
+
+                //    $("#popupScaricaMerceDaMagazzino").html(finestraDati);
+                //    return;
+                //}
+            }
+
+            var finestraDati = '<div style="padding:10px 20px;">';
+            finestraDati = finestraDati + '<h3>Scarica da Magazzino</h3>';
+            finestraDati = finestraDati + '<img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + foto2 + '">';
+            finestraDati = finestraDati + '<br><br>Scegli il Lotto da scaricare: <select onchange="cambiaQuantitaGiacente(this)" class="lottoSpecifico">' + numeriLotti + '</select>';
+            finestraDati = finestraDati + '<label for="quantitaProdDaScaricareDaMagazzino">Quantita da scaricare:</label>';
+            finestraDati = finestraDati + '<input type="number" id="quantitaProdDaScaricareDaMagazzino" data-theme="a">';
+            finestraDati = finestraDati + '<br><br>Giacenza: <select disabled class="quantitaGiacenteInMagazzino">' + quantitaGiacente + '</select><br><br>';
+            finestraDati = finestraDati + '<label for="numeroDDTScaricareinMagazzino">Numero DDT</label>';
+            finestraDati = finestraDati + '<select disabled id="numeroDDTScaricareinMagazzino">' + numeriDDT + '</select>';
+            finestraDati = finestraDati + '<label for="dataDDTScaricareinMagazzino">Data DDT:</label>';
+            finestraDati = finestraDati + '<select disabled id="dataDDTScaricareinMagazzino">' + dateDDT + '</select>';
+            finestraDati = finestraDati + '<label for="noteScaricareinMagazzino">Note:</label>';
+            finestraDati = finestraDati + '<select disabled id="noteScaricareinMagazzino">' + noteDDT + '</select>';
+            finestraDati = finestraDati + '<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-active scaricaProdottoDaMagazzino">Scarica</a>';
+            finestraDati = finestraDati + '</div>';
+
+            //console.log(finestraDati);
+
+            $("#popupScaricaMerceDaMagazzino").html(finestraDati);
+
+            //$("#numeroLotttoCaricareinMagazzino").datepicker({
+            //    dateFormat: "dd-mm-yy"
+            //});
+            $("#dataDDTCaricareinMagazzino").datepicker({
+                dateFormat: "dd-mm-yy"
+            });
+
+            $(".scaricaProdottoDaMagazzino").on('click', function () {
+                //var numeroLotto = $("#numeroLotttoCaricareinMagazzino").val();
+                var quantitaDaScaricare = $("#quantitaProdDaScaricareDaMagazzino").val();
+                if (quantitaDaScaricare == "" || isUint8(parseInt(quantitaDaScaricare)) == false) {
+                    alert("Scegli un valore Numerico prima di scaricare");
+                    //$(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
+                    return;
+                }
+                var giacenzaPerLotto = $(".quantitaGiacenteInMagazzino").val();
+                if (parseInt(quantitaDaScaricare) > parseInt(giacenzaPerLotto)) {
+                    alert("Non puoi scaricare più di quanto presente in magazzino!");
+                    return;
+                }
+                var numeroDDT = $("#numeroDDTCaricareinMagazzino").val();
+                var dataDDT = $("#dataDDTCaricareinMagazzino").val();
+                
+
+                dataDDT = stringToDate(dataDDT, "dd/MM/yyyy", "/");
+                var note = $("#noteCaricareinMagazzino").val();
+                var quantitaTotale = (parseInt(giacenzaPerLotto) - parseInt(quantitaDaScaricare));
+                var totaleAggiornato = (parseInt(quantitaAttuale.text()) - parseInt(quantitaDaScaricare));
+                //var prezzoTotaleRimasti = (prezzo * quantitaRimasti);
+                var prezzoTotale = (prezzo * quantitaTotale);
+
+                var lottoSpecifico = $('.lottoSpecifico').val();
+                //console.log(quantitaDaScaricare);
+
+                
+
+                
+
+                //alert('idProdotto=' + idProdotto + ' quantitaCaricati=' + quantitaCaricati + ' prezzoTotaleCaricati=' + prezzoTotaleCaricati + ' numeroLotto=' + numeroLotto + ' dataDDT=' + dataDDT + ' numeroDDT=' + numeroDDT + ' idOperatore=' + idOperatore);
+                //return;
+
+                //numeroLotto = parseJsonDateToJsDate(numeroLotto);
+                numeroLotto = stringToDate(lottoSpecifico, 'dd/MM/yyyy', '/');
+                var idOperatore = localStorage.idOperatore;
+
+                SmaltiscoProdottiDaMagazzino(idProdotto, quantitaTotale, prezzoTotale, numeroLotto, idOperatore, numeroDDT, dataDDT, note, true);
+
+                //dataDDT = null;
+                //console.log(' idProdotto=' + idProdotto + ' quantitaDaScaricare=' + quantitaDaScaricare + ' prezzoTotale=' + prezzoTotale + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto + ' numeroDDT=' + numeroDDT + ' dataDDT=' + dataDDT + ' note=' + note);
+
+
+                //var labelQuantita = $(this).closest('td').prev('td').prev('td').prev('td').prev('td');
+
+                //var labelQuantita = $(lblQ);
+                //console.log(labelQuantita);                   
+                quantitaAttuale.animate({
+                    backgroundColor: "green",
+                    color: "#000"
+                }, 1000);
+                quantitaAttuale.html(totaleAggiornato);
+
+            });
+
+            }
+        });
+}
 
 function SituazioneMagazzino() {
     location.hash = "situazioneMagazzino";
@@ -366,6 +436,7 @@ function SituazioneMagazzino() {
                                                 '<th>Numero DDT</th>' +
                                                 '<th>Data DDT</th>' +                                                
                                                 '<th>Note</th>' +
+                                                //'<th>Scarica</th>' +
                                             '</tr>' +
                                         '</thead>' +
                                         '<tfoot>' +
@@ -377,6 +448,7 @@ function SituazioneMagazzino() {
                                                 '<th>Numero DDT</th>' +
                                                 '<th>Data DDT</th>' +
                                                 '<th>Note</th>' +
+                                                //'<th>Scarica</th>' +
                                             '</tr>' +
                                         '</tfoot>' +
                                         '<tbody>';
@@ -412,6 +484,7 @@ function SituazioneMagazzino() {
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + risultati[i].numeroDDT + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + risultati[i].Note + '</td>';
+                    //rigaDettaglio[i] = rigaDettaglio[i] + '<td><a href="#popupScaricaMerceDaMagazzino" data-rel="popup" data-position-to="window" data-IdMagazzino="' + risultati[i].IdMagazzino + '"  data-idProdotto="' + risultati[i].idProdotto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" data-foto="' + risultati[i].foto + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + parseJsonDateLettura(risultati[i].dataDDT) + '" data-note="' + risultati[i].Note + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scegliProdDaScaricareDaMagazzino">Scarica</a> </td>';
 
                     rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
                 } else {
@@ -425,6 +498,7 @@ function SituazioneMagazzino() {
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + risultati[i].numeroDDT + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + risultati[i].Note + '</td>';
+                       // rigaDettaglio[i] = rigaDettaglio[i] + '<td><a href="#popupScaricaMerceDaMagazzino" data-rel="popup" data-position-to="window" data-IdMagazzino="' + risultati[i].IdMagazzino + '"  data-idProdotto="' + risultati[i].idProdotto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" data-foto="' + risultati[i].foto + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + parseJsonDateLettura(risultati[i].dataDDT) + '" data-note="' + risultati[i].Note + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scegliProdDaScaricareDaMagazzino">Scarica</a> </td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
                     } else {
                         rigaDettaglio[i - 1] = '';
@@ -437,6 +511,7 @@ function SituazioneMagazzino() {
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + risultati[i].numeroDDT + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + risultati[i].Note + '</td>';
+                        //rigaDettaglio[i] = rigaDettaglio[i] + '<td><a href="#popupScaricaMerceDaMagazzino" data-rel="popup" data-position-to="window" data-IdMagazzino="' + risultati[i].IdMagazzino + '"  data-idProdotto="' + risultati[i].idProdotto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" data-foto="' + risultati[i].foto + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + parseJsonDateLettura(risultati[i].dataDDT) + '" data-note="' + risultati[i].Note + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scegliProdDaScaricareDaMagazzino">Scarica</a> </td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
                     }
                 }

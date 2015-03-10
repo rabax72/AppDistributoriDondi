@@ -32,6 +32,8 @@
     <script src="Scripts/JSgestionemagazzino.js"></script>
     <script src="Scripts/JSvenditadiretta.js"></script>
     <script src="Scripts/JSriepilogovenduto.js"></script>
+    <script src="Scripts/dropzone.js"></script>
+    <link href="Scripts/dropzone.css" rel="stylesheet" />
 
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script> 
 
@@ -474,48 +476,39 @@
 
 <!--**** Form Inserimento Prodotti *****************************************************-->
     <div data-role="page" id="formInserimentoProdotto">
-  <div data-role="header">
-    <div class="navBar"></div>
-    <h1 id="headerInserimentoProdotto">Inserimento Prodotto</h1>    
-  </div>
+        <div data-role="panel" id="leftPanelformInserimentoProdotto" class="leftPanel" data-position="left" data-display="push" data-theme="a">
+        </div><!-- /leftpanel2 -->
+      <div data-role="header">
+        <h1 class="h1RiepilogoResi">Inseimento Prodotti</h1>           
+                <a href="#leftPanelformInserimentoProdotto" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left">MENU</a>  
+      </div>
 
-  <div data-role="collapsible" data-theme="c" data-content-theme="d" data-collapsed="false" class="formInserimentoProdotto">
-   <h3>Form Inserimento</h3>
-   <div data-role="main" class="ui-content">
-    <form method="post" action="">
-      <label for="fDescrizione">Descrizione:</label>
-      <input type="text" name="fDescrizione" id="fDescrizione" data-clear-btn="true">
+      <div data-role="collapsible" data-theme="c" data-content-theme="d" data-collapsed="false" class="formInserimentoProdotto">
+       <h3>Form Inserimento</h3>
+       <div data-role="main" class="ui-content">
+        
+          <label for="fDescrizione">Descrizione:</label>
+          <input type="text" name="fDescrizione" id="fDescrizione" data-clear-btn="true">
 
-      <label for="fPrezzo">Prezzo:</label>
-      <input type="number" name="fPrezzo" id="fPrezzo" data-clear-btn="true">
+          <label for="fPrezzo">Prezzo:</label>
+          <input type="number" name="fPrezzo" id="fPrezzo" data-clear-btn="true">
 
-      <label for="fAliquota">Aliquota:</label>
-      <input type="number" name="fAliquota" id="fAliquota" data-clear-btn="true">
+          <label for="fAliquota">Aliquota:</label>
+          <input type="number" name="fAliquota" id="fAliquota" data-clear-btn="true">
+          <form method="post" enctype="multipart/form-data" action="FileManager.ashx" class="dropzone">
+          </form>
+	      <!--<input type="button" id="cercaOrdinanze" value="Cerca">	 --> 
+          <a href="" id="inserisciProdotto" class="ui-btn ui-corner-all ui-shadow ui-btn-active">Inserisci</a>  
+        
 
-      <label for="dataProd">Data produzione:</label>
-      <input type="date" name="dataProd" id="dataProd">
-
-      <label for="dataScad">Data scadenza:</label>
-      <input type="date" name="dataScad" id="dataScad">
-
-      <label for="dataInserimento">Data inserimento:</label>
-      <input type="date" name="dataInserimento" id="dataInserimento">
-
-      <label for="dataModifica">Data ultima modifica:</label>
-      <input type="date" name="dataModifica" id="dataModifica">
-
-	  <!--<input type="button" id="cercaOrdinanze" value="Cerca">	 --> 
-      <a href="" id="inserisciProdotto" class="ui-btn ui-corner-all ui-shadow ui-btn-active">Inserisci</a>  
-    </form>
-
-   </div>
-  </div>
+       </div>
+      </div>
   
-  <div data-role="header">
-    <h1 id="totRisultatiProdotti"></h1>
-  </div>
+      <div data-role="header">
+        <h1 id="totRisultatiProdotti"></h1>
+      </div>
 
-  <div class="risultatiProdotti"></div>
+      <div class="risultatiProdotti"></div>
 
   <!--<div data-role="header">
     <h1 id="footerRisultatiOrdinanze"></h1>
