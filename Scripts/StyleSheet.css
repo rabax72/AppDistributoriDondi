@@ -109,10 +109,15 @@ min-width:400px;
 }
 
 .quantita {
-    font-size: 30px !important;
+    font-size: 32px !important;
     text-align:center;
     border-left:1px solid #ddd;
     border-right:1px solid #ddd;
+}
+
+.medioGrande {
+    text-align: center;
+    font-size: 24px !important;
 }
 
 .storicoVenduto {

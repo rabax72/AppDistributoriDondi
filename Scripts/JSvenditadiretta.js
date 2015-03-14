@@ -56,8 +56,8 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
-                dettaglio = dettaglio + '<td class="storicoVenduto">N° DDT<input type="number" data-clear-btn="true" class="miniInput accentraInput" readonly="true" value="' + risultati[i].numeroDDT + '"></td>';
-                dettaglio = dettaglio + '<td class="storicoVenduto">Data DDT<input type="text" class="dataDDT accentraInput" readonly="true" value="' + parseJsonDateLettura(risultati[i].dataDDT) + '"></td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">N° DDT<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">Data DDT<input type="text" class="dataDDT accentraInput"></td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">Quantità<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
                 dettaglio = dettaglio + '<td><a href="#" data-IdMagazzino="' + risultati[i].IdMagazzino + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-note="' + risultati[i].note + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active venditaDiretta">Vendi</a> </td>';
                 dettaglio = dettaglio + '</tr>';
@@ -93,7 +93,7 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                 if (dataDDT != '') {
                     dataDDT = stringToDate(dataDDT, "dd/MM/yyyy", "/");
                 } else {
-                    dataDDT = new Date();
+                    dataDDT = null;
                 }
 
                 var quantitaRimasti = (quantitaAttuale - quantitaVenduti);

@@ -69,15 +69,21 @@ function VenditaDiretta(DataDa, DataA) {
                                     '</thead>' +                                    
                                     '<tbody>';
             var prezzoTot = 0;
+            var dataDdt = '';
             for (var i = 0; i < risultati.length; i++) {
-
+                if (risultati[i].dataDDT != '/Date(-62135596800000)/') {
+                    dataDdt = parseJsonDateLettura(risultati[i].dataDDT);
+                }
+                else {
+                    dataDdt = '';
+                }
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].prezzoTotale + '</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].numeroDDT + '</td>';
-                dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + dataDdt + '</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
                 dettaglio = dettaglio + '</tr>';
                 prezzoTot = prezzoTot + risultati[i].prezzoTotale;
