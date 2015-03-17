@@ -155,7 +155,7 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                     dataDDT = parseJsonDateToJsDate(dataDDT);
                 }
 
-                if (quantitaRimasti == "" || isUint8(parseInt(quantitaRimasti)) == false) {
+                if (quantitaRimasti == "" || isInteroPositivo(parseInt(quantitaRimasti)) == false) {
                     alert("Scegli un valore Numerico prima di caricare");
                     $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
                     return;
@@ -209,7 +209,7 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                     dataDDT = parseJsonDateToJsDate(dataDDT);
                 }
 
-                if (quantitaResi == "" || isUint8(parseInt(quantitaResi)) == false) {
+                if (quantitaResi == "" || isInteroPositivo(parseInt(quantitaResi)) == false) {
                     alert("Scegli un valore Numerico prima di caricare");
                     $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
                     return;

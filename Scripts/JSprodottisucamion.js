@@ -55,7 +55,7 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
                 
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
+                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' <div class="medioGrande">Lotto: ' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
                 //dettaglio = dettaglio + '<td>' + parseJsonDate(risultati[i].numeroLotto) + '</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';                
                 dettaglio = dettaglio + '<td><input id="quantitaDaCaricare' + risultati[i].IdTrasporto + '" type="number" data-clear-btn="true" class="miniInput accentraInput"> </td>';
@@ -126,11 +126,11 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
                 //alert('quantitaCaricati=' + quantitaCaricati + ' quantitaAttuale=' + quantitaAttuale + ' IdTrasporto=' + IdTrasporto);
                 //return;
 
-                //alert('quantitaCaricati=' + quantitaCaricati + ' isUint8(parseInt(quantitaCaricati))=' + isUint8(parseInt(quantitaCaricati)));
+                //alert('quantitaCaricati=' + quantitaCaricati + ' isInteroPositivo(parseInt(quantitaCaricati))=' + isInteroPositivo(parseInt(quantitaCaricati)));
                 var inputQuantitaCaricati = $(this).closest('td').prev('td')[0].children[0];
                 //console.log(inputQuantitaCaricati.id);
                 var quantic = '#' + inputQuantitaCaricati.id;
-                if (quantitaCaricati == "" || isUint8(parseInt(quantitaCaricati)) == false) {
+                if (quantitaCaricati == "" || isInteroPositivo(parseInt(quantitaCaricati)) == false) {
                     alert("Scegli un valore Numerico prima di caricare");                    
                     $(inputQuantitaCaricati.id).addClass("evidenziaErrore", 1000, "easeOutBounce");
                     return;
@@ -220,13 +220,13 @@ function ElencoProdottiSuCamionPerCliente(idMezzo, idCliente) {
 
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
+                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' <div class="medioGrande">Lotto: ' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
                 //dettaglio = dettaglio + '<td>' + parseJsonDate(risultati[i].numeroLotto) + '</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
                 dettaglio = dettaglio + '<td><input id="quantitaDaCaricare' + risultati[i].IdTrasporto + '" type="number" data-clear-btn="true" class="miniInput accentraInput"> </td>';
                 //dettaglio = dettaglio + '<td><input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
                 //dettaglio = dettaglio + '<td><input type="text" data-role="date" class="dataDDT accentraInput"></td>';
-                dettaglio = dettaglio + '<td><a href="#" data-IdTrasporto="' + risultati[i].IdTrasporto + '" data-IdCliente="' + idCliente + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" data-numeroDDT_interno="' + risultati[i].numeroDDT_interno + '" data-dataDDT_interno="' + risultati[i].dataDDT_interno + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdInCliente">Scarica</a></td>';
+                dettaglio = dettaglio + '<td><a href="#" data-IdTrasporto="' + risultati[i].IdTrasporto + '" data-IdCliente="' + idCliente + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" data-numeroDDT_interno="' + risultati[i].numeroDDT_interno + '" data-dataDDT_interno="' + risultati[i].dataDDT_interno + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdInCliente ui-btnScarica">Scarica</a></td>';
                 dettaglio = dettaglio + '</tr>';
 
             }
@@ -290,11 +290,11 @@ function ElencoProdottiSuCamionPerCliente(idMezzo, idCliente) {
                 //alert('quantitaCaricati=' + quantitaCaricati + ' quantitaAttuale=' + quantitaAttuale + ' IdTrasporto=' + IdTrasporto);
                 //return;
 
-                //alert('quantitaCaricati=' + quantitaCaricati + ' isUint8(parseInt(quantitaCaricati))=' + isUint8(parseInt(quantitaCaricati)));
+                //alert('quantitaCaricati=' + quantitaCaricati + ' isInteroPositivo(parseInt(quantitaCaricati))=' + isInteroPositivo(parseInt(quantitaCaricati)));
                 var inputQuantitaCaricati = $(this).closest('td').prev('td')[0].children[0];
                 //console.log(inputQuantitaCaricati.id);
                 var quantic = '#' + inputQuantitaCaricati.id;
-                if (quantitaCaricati == "" || isUint8(parseInt(quantitaCaricati)) == false) {
+                if (quantitaCaricati == "" || isInteroPositivo(parseInt(quantitaCaricati)) == false) {
                     alert("Scegli un valore Numerico prima di caricare");
                     $(inputQuantitaCaricati.id).addClass("evidenziaErrore", 1000, "easeOutBounce");
                     return;

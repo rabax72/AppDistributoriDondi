@@ -29,6 +29,7 @@ div.slider,  div.sliderResidenti{
  
 table.dataTable tbody td.no-padding {
     padding: 0;
+    border: 1px solid #ddd;
 }
 
 .ui-btn-up-b {
@@ -64,15 +65,19 @@ background-image: linear-gradient( #5f9cc5 /*{b-bup-background-start}*/, #396b9e
 }
 
 .resi, .rimasti, .caricaProdInDistributore {
-    width: 60px;
+    width: 140px;
 }
 
 .miniInput {
-    width: 60px;
+  width: 130px;
+  height: 60px;
+  font-size: 50px;
 }
 
 .dataDDT {
-    width: 100px;
+    width: 130px;
+    height:30px;
+    font-size:24px;
 }
 
 .evidenziaErrore {
@@ -109,7 +114,7 @@ min-width:400px;
 }
 
 .quantita {
-    font-size: 32px !important;
+    font-size: 50px !important;
     text-align:center;
     border-left:1px solid #ddd;
     border-right:1px solid #ddd;
@@ -117,6 +122,15 @@ min-width:400px;
 
 .medioGrande {
     text-align: center;
+    font-size: 32px !important;
+    
+}
+
+.nomeDistributore {
+    font-size: 32px !important;
+}
+
+.medioFont {
     font-size: 24px !important;
 }
 
@@ -125,7 +139,28 @@ min-width:400px;
 }
 
 .storicoVendite td {
-    border: 1px solid black;
+    
     border-collapse: collapse;
     padding: 5px;
+}
+
+.ui-btnCarica {
+font-size: 32px !important;
+}
+
+.ui-btnScarica {
+font-size: 32px !important;
+background-color:red !important;
+}
+
+th {
+    font-size: 32px !important;
+}
+
+.ui-btnMedio {
+font-size: 21px !important;
+}
+
+.Blu {
+background-color:#0094ff !important;
 }

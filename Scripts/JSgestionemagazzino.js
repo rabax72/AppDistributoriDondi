@@ -65,11 +65,11 @@ function GestioneMagazzino() {
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
-                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].prezzo + ' €</td>';
+                dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzo + ' €</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
-                dettaglio = dettaglio + '<td><a href="#popupCaricaMerceInMagazzino" data-rel="popup" data-position-to="window" data-idProdotto="' + risultati[i].idProdotto + '" data-foto="' + risultati[i].foto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scegliProdDaCaricareInMagazzino">Carica</a></td>';
+                dettaglio = dettaglio + '<td><a href="#popupCaricaMerceInMagazzino" data-rel="popup" data-position-to="window" data-idProdotto="' + risultati[i].idProdotto + '" data-foto="' + risultati[i].foto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scegliProdDaCaricareInMagazzino ui-btnCarica">Carica</a></td>';
                 if (parseInt(risultati[i].quantita) > 0) {
-                    dettaglio = dettaglio + '<td><a href="#popupScaricaMerceDaMagazzino" data-rel="popup" data-position-to="window" data-IdMagazzino="' + risultati[i].IdMagazzino + '"  data-idProdotto="' + risultati[i].idProdotto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" data-foto="' + risultati[i].foto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scegliProdDaScaricareDaMagazzino">Scarica</a> </td>';
+                    dettaglio = dettaglio + '<td><a href="#popupScaricaMerceDaMagazzino" data-rel="popup" data-position-to="window" data-IdMagazzino="' + risultati[i].IdMagazzino + '"  data-idProdotto="' + risultati[i].idProdotto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" data-foto="' + risultati[i].foto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scegliProdDaScaricareDaMagazzino ui-btnScarica">Scarica</a> </td>';
                 }
                 else {
                     dettaglio = dettaglio + '<td></td>';
@@ -187,7 +187,7 @@ function GestioneMagazzino() {
                     }
                     numeroLotto = stringToDate(numeroLotto, "dd-MM-yyyy", "-");
 
-                    if (quantitaCaricati == '' || isUint8(parseInt(quantitaCaricati)) == false) {
+                    if (quantitaCaricati == '' || isInteroPositivo(parseInt(quantitaCaricati)) == false) {
                         alert("Scegli un valore Numerico prima di caricare");
                         return;
                     }
@@ -347,7 +347,7 @@ function GetProdottiDaScaricareDaMagazzino(idProdotto, quantitaAttuale) {
             $(".scaricaProdottoDaMagazzino").on('click', function () {
                 //var numeroLotto = $("#numeroLotttoCaricareinMagazzino").val();
                 var quantitaDaScaricare = $("#quantitaProdDaScaricareDaMagazzino").val();
-                if (quantitaDaScaricare == "" || isUint8(parseInt(quantitaDaScaricare)) == false) {
+                if (quantitaDaScaricare == "" || isInteroPositivo(parseInt(quantitaDaScaricare)) == false) {
                     alert("Scegli un valore Numerico prima di scaricare");
                     //$(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
                     return;
@@ -481,8 +481,8 @@ function SituazioneMagazzino() {
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + parseJsonDateLettura(risultati[i].numeroLotto) + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita" id="quantitaInMagazzino' + risultati[i].IdMagazzino + '">' + risultati[i].quantita + '</td>';
 
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + risultati[i].numeroDDT + '</td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + risultati[i].numeroDDT + '</td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + risultati[i].Note + '</td>';
                     //rigaDettaglio[i] = rigaDettaglio[i] + '<td><a href="#popupScaricaMerceDaMagazzino" data-rel="popup" data-position-to="window" data-IdMagazzino="' + risultati[i].IdMagazzino + '"  data-idProdotto="' + risultati[i].idProdotto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" data-foto="' + risultati[i].foto + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + parseJsonDateLettura(risultati[i].dataDDT) + '" data-note="' + risultati[i].Note + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scegliProdDaScaricareDaMagazzino">Scarica</a> </td>';
 
@@ -495,8 +495,8 @@ function SituazioneMagazzino() {
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + parseJsonDateLettura(risultati[i].numeroLotto) + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita" id="quantitaInMagazzino' + risultati[i].IdMagazzino + '">' + risultati[i].quantita + '</td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + risultati[i].numeroDDT + '</td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + risultati[i].numeroDDT + '</td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + risultati[i].Note + '</td>';
                        // rigaDettaglio[i] = rigaDettaglio[i] + '<td><a href="#popupScaricaMerceDaMagazzino" data-rel="popup" data-position-to="window" data-IdMagazzino="' + risultati[i].IdMagazzino + '"  data-idProdotto="' + risultati[i].idProdotto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" data-foto="' + risultati[i].foto + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + parseJsonDateLettura(risultati[i].dataDDT) + '" data-note="' + risultati[i].Note + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scegliProdDaScaricareDaMagazzino">Scarica</a> </td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
@@ -508,8 +508,8 @@ function SituazioneMagazzino() {
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + parseJsonDateLettura(risultati[i].numeroLotto) + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita" id="quantitaInMagazzino' + risultati[i].IdMagazzino + '">' + quantitaTot + '</td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + risultati[i].numeroDDT + '</td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + risultati[i].numeroDDT + '</td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + risultati[i].Note + '</td>';
                         //rigaDettaglio[i] = rigaDettaglio[i] + '<td><a href="#popupScaricaMerceDaMagazzino" data-rel="popup" data-position-to="window" data-IdMagazzino="' + risultati[i].IdMagazzino + '"  data-idProdotto="' + risultati[i].idProdotto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" data-foto="' + risultati[i].foto + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + parseJsonDateLettura(risultati[i].dataDDT) + '" data-note="' + risultati[i].Note + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scegliProdDaScaricareDaMagazzino">Scarica</a> </td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
@@ -584,7 +584,7 @@ function SituazioneMagazzino() {
             //        }
             //        numeroLotto = stringToDate(numeroLotto, "dd-MM-yyyy", "-");
 
-            //        if (quantitaCaricati == '' || isUint8(parseInt(quantitaCaricati)) == false) {
+            //        if (quantitaCaricati == '' || isInteroPositivo(parseInt(quantitaCaricati)) == false) {
             //            alert("Scegli un valore Numerico prima di caricare");
             //            return;
             //        }
@@ -680,7 +680,7 @@ function SituazioneMagazzino() {
 
             //        //console.log(quantitaDaScaricare);
 
-            //        if (quantitaDaScaricare == "" || isUint8(parseInt(quantitaDaScaricare)) == false) {
+            //        if (quantitaDaScaricare == "" || isInteroPositivo(parseInt(quantitaDaScaricare)) == false) {
             //            alert("Scegli un valore Numerico prima di caricare");
             //            //$(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
             //            return;
@@ -691,7 +691,7 @@ function SituazioneMagazzino() {
             //        //alert('idProdotto=' + idProdotto + ' quantitaCaricati=' + quantitaCaricati + ' prezzoTotaleCaricati=' + prezzoTotaleCaricati + ' numeroLotto=' + numeroLotto + ' dataDDT=' + dataDDT + ' numeroDDT=' + numeroDDT + ' idOperatore=' + idOperatore);
             //        //return;
             //        numeroLotto = parseJsonDateToJsDate(numeroLotto);
-            //        if (numeroDDT == "" || isUint8(parseInt(numeroDDT)) == false) {
+            //        if (numeroDDT == "" || isInteroPositivo(parseInt(numeroDDT)) == false) {
             //            numeroDDT = 0;
             //        }
 
@@ -745,7 +745,7 @@ function CaricaProdottoInMagazzino(idProdotto, quantitaCaricati, prezzoTotaleCar
 
             //console.log(risultati);
             //Ricarico i valori
-            GestioneMagazzino();
+            //GestioneMagazzino();
         }
 
     });

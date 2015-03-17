@@ -137,6 +137,19 @@ function isUint8(n) {
     return +n === n && !(n % 1) && n < 0x100 && n >= 0;
 }
 
+function isInteroPositivo(n) {
+    return +n === n && !(n % 1) && n < 0x80000000 && n > 0;
+}
+
+function onlyNumbers(n) {
+    var x = n;
+    var regex = /^[a-zA-Z]+$/;
+    if (!x.match(regex)) {
+        //alert("Must input numbers");
+        return false;
+    }
+}
+
 function stringToDate(_date, _format, _delimiter) {
     var formatLowerCase = _format.toLowerCase();
     var formatItems = formatLowerCase.split(_delimiter);
@@ -317,9 +330,9 @@ function ElencoMezziPerCaricareMerce() {
             var righe = '';
             for (var i = 0; i < risultati.length; i++) {
                 righe = righe + '<tr>' +
-                    '<td>' + risultati[i].descrizione + '</td>' +
-                    '<td><a href="#formPerCaricareMerceSuCamion" data-idMezzo="' + risultati[i].idMezzo + '" data-descMezzo="' + risultati[i].descrizione + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaDaMagazzinoPerCamion">Carica</a></td>' +
-                    '<td><a href="#formPerScaricareMerceDaCamion" data-idMezzo="' + risultati[i].idMezzo + '" data-descMezzo="' + risultati[i].descrizione + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active ScaricaDaCamionInMagazzino">Scarica</a></td>' +
+                    '<td class="medioGrande">' + risultati[i].descrizione + '</td>' +
+                    '<td><a href="#formPerCaricareMerceSuCamion" data-idMezzo="' + risultati[i].idMezzo + '" data-descMezzo="' + risultati[i].descrizione + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaDaMagazzinoPerCamion ui-btnCarica">Carica</a></td>' +
+                    '<td><a href="#formPerScaricareMerceDaCamion" data-idMezzo="' + risultati[i].idMezzo + '" data-descMezzo="' + risultati[i].descrizione + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active ScaricaDaCamionInMagazzino ui-btnScarica">Scarica</a></td>' +
                     '</tr>';
             }
 

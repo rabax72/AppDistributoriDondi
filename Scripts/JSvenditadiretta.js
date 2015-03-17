@@ -103,10 +103,10 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                 var idOperatore = localStorage.idOperatore;
                 //var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
                 var numeroLotto = parseJsonDateToJsDate($(this).attr('data-numeroLotto'));
-                //alert('quantitaAttuale=' + quantitaAttuale + ' quantitaVenduti=' + quantitaVenduti + ' isUint8(parseInt(quantitaVenduti))=' + isUint8(parseInt(quantitaVenduti)) + ' numeroDDT=' + numeroDDT + ' dataDDT=' + dataDDT);
+                //alert('quantitaAttuale=' + quantitaAttuale + ' quantitaVenduti=' + quantitaVenduti + ' isInteroPositivo(parseInt(quantitaVenduti))=' + isInteroPositivo(parseInt(quantitaVenduti)) + ' numeroDDT=' + numeroDDT + ' dataDDT=' + dataDDT);
                 //return;
 
-                if (quantitaVenduti == "" || isUint8(parseInt(quantitaVenduti)) == false) {
+                if (quantitaVenduti == "" || isInteroPositivo(parseInt(quantitaVenduti)) == false) {
                     alert("Scegli un valore Numerico prima di caricare");
                     $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
                     return;
