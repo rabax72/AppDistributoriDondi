@@ -135,7 +135,7 @@ function GestioneMagazzino() {
             $('#elencoGestioneMagazzino').html(dettaglio);
 
             var table = $('#tabellaProdottiDaGestire').DataTable(
-                { "paging": false }
+                { "paging": false, responsive: true }
             );
 
             $(".scegliProdDaCaricareInMagazzino").on('click', function () {
@@ -534,7 +534,7 @@ function SituazioneMagazzino() {
             $('#elencoSituazioneMagazzino').html(dettaglio);
 
             var table = $('#tabellaProdottiInMagazzino').DataTable(
-                { "paging": false }
+                { "paging": false, responsive: true }
             );           
 
             //$(".scegliProdDaCaricareInMagazzino").on('click', function () {

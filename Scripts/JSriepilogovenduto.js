@@ -113,7 +113,7 @@ function VenditaDiretta(DataDa, DataA) {
             });
 
             var table = $('#tabellaProdottiVendutiDirettamente').DataTable(
-                { "paging": false }
+                { "paging": false, responsive: true }
             );
 
             $('.filtraProdottiVendutiDirettamente').click(function () {
@@ -193,7 +193,7 @@ function VendutoPerProdotto() {
             });
 
             var table = $('#tabellaElencoProdotti').DataTable(
-                { "paging": false }
+                { "paging": false, responsive: true }
             );
 
 
@@ -286,7 +286,7 @@ function GetVendutoByIdProdotto(idProdotto, descrizione, DataDa, DataA) {
             });
 
             var table = $('#tabellaVendutiByIdProdotto').DataTable(
-                { "paging": false }
+                { "paging": false, responsive: true }
             );
             
             $('.filtraVendutiByIdProdotto').click(function () {
@@ -436,7 +436,7 @@ function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) 
             });
 
             var table = $('#tabellaVendutiByIdDistributore').DataTable(
-                { "paging": false }
+                { "paging": false, responsive: true }
             );
 
             $('.filtraVendutoDitributore').click(function () {
@@ -574,7 +574,7 @@ function GetVendutoByIdCliente(idCliente, descrizione, DataDa, DataA) {
             });
 
             var table = $('#tabellaVendutiByIdCliente').DataTable(
-                { "paging": false }
+                { "paging": false, responsive: true }
             );
 
             $('.filtraVendutiByIdCliente').click(function () {
@@ -659,7 +659,7 @@ function GetProdottiInMagazzinoResi() {
             $('.DettRiepilogoResi').html(dettaglio);            
 
             var table = $('#tabellaProdottiMagazzinoResi').DataTable(
-                { "paging": false }
+                { "paging": false, responsive: true }
             );
 
 
@@ -736,7 +736,7 @@ function GetProdottiInMagazzinoResiFiltrato(dataDa, dataA){
             $('.DettRiepilogoResi').html(dettaglio);
 
             var table = $('#tabellaProdottiMagazzinoResi').DataTable(
-                { "paging": false }
+                { "paging": false, responsive: true }
             );
 
 

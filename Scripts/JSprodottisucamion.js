@@ -75,7 +75,7 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
 
 
             var table = $('#tabellaProdottiSuMezzo').DataTable(
-                { "paging": false }
+                { "paging": false, responsive: true }
             );
 
             $(".caricaProdInDistributore").on('click', function () {
@@ -240,7 +240,7 @@ function ElencoProdottiSuCamionPerCliente(idMezzo, idCliente) {
 
 
             var table = $('#tabellaProdottiSuMezzoPerCliente').DataTable(
-                { "paging": false }
+                { "paging": false, responsive: true }
             );
 
             $(".caricaProdInCliente").on('click', function () {

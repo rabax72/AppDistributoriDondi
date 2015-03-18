@@ -82,7 +82,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                 });
 
                 var table = $('#tabellaProdottiInMagazzinoPerCamion').DataTable(
-                    { "paging": false }
+                    { "paging": false, responsive: true }
                 );
 
                 $(".caricaProdInCamion").on('click', function () {
@@ -212,7 +212,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                 $('.MerceDaScaricareDaCamion').html(dettaglio);                
 
                 var table = $('#tabellaProdottiInMagazzinoPerCamionDaScaricare').DataTable(
-                    { "paging": false }
+                    { "paging": false, responsive: true }
                 );
 
                 $(".scaricaProdDaCamion").on('click', function () {

@@ -131,7 +131,7 @@ function GetSituazioneCliente(IdCliente, descCliente) {
             $('.DettaglioCliente').html(dettaglio);
             
             var table = $('#tabellaDettaglioCliente').DataTable(
-                { "paging": false }
+                { "paging": false, responsive: true }
             );
 
             $(".rimasti").on('click', function () {

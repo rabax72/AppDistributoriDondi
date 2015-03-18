@@ -74,7 +74,7 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
             //});
 
             var table = $('#tabellaProdottiInMagazzinoPerVenditaDiretta').DataTable(
-                { "paging": false }
+                { "paging": false, responsive: true }
             );
 
             $(".venditaDiretta").on('click', function () {

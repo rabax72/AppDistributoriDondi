@@ -342,7 +342,7 @@ function ElencoMezziPerCaricareMerce() {
             $("#tabellaMezziCaricoScarico").html(tabellaMezzi);
 
             var table = $('#tabellaMezzi').DataTable(
-               { "paging": false }
+               { "paging": false, responsive: true }
            );
 
 

@@ -306,7 +306,7 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
             //});
 
             var table = $('#tabellaDettaglioDistributore').DataTable(
-                { "paging": false }
+                { "paging": false, responsive: true }
             );
 
             $(".rimasti").on('click', function () {
