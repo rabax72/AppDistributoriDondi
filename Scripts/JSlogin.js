@@ -308,7 +308,7 @@ function ElencoMezziPerCaricareMerce() {
                 //mezzi = mezzi + '<li><a href="#formPerCaricareMerceSuCamion" class="caricaDaMagazzinoPerCamion" data-idMezzo="' + risultati[i].idMezzo + '" data-descMezzo="' + risultati[i].descrizione + '">' + risultati[i].descrizione + '</a></li>';
 
                 
-                mezzi = mezzi + '<li><a href="#CaricoScaricoMagazzino" data-idMezzo="' + risultati[i].idMezzo + '" data-descMezzo="' + risultati[i].descrizione + '">' + risultati[i].descrizione + '</a></li>';
+                mezzi = mezzi + '<li><a href="#CaricoScaricoMagazzino" data-idMezzo="' + risultati[i].idMezzo + '" data-descMezzo="' + risultati[i].descrizione + '"><b>' + risultati[i].descrizione + '</b></a></li>';
             }
 
             var tabellaMezzi = '<table id="tabellaMezzi" class="display" cellspacing="0" width="100%">' +
@@ -330,7 +330,7 @@ function ElencoMezziPerCaricareMerce() {
             var righe = '';
             for (var i = 0; i < risultati.length; i++) {
                 righe = righe + '<tr>' +
-                    '<td class="medioGrande">' + risultati[i].descrizione + '</td>' +
+                    '<td class="medioGrande"><b>' + risultati[i].descrizione + '</b></td>' +
                     '<td><a href="#formPerCaricareMerceSuCamion" data-idMezzo="' + risultati[i].idMezzo + '" data-descMezzo="' + risultati[i].descrizione + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaDaMagazzinoPerCamion ui-btnCarica">Carica</a></td>' +
                     '<td><a href="#formPerScaricareMerceDaCamion" data-idMezzo="' + risultati[i].idMezzo + '" data-descMezzo="' + risultati[i].descrizione + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active ScaricaDaCamionInMagazzino ui-btnScarica">Scarica</a></td>' +
                     '</tr>';

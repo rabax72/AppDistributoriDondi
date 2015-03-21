@@ -37,7 +37,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                                         '<thead>' +
                                             '<tr>' +
                                                 '<th>Foto</th>' +
-                                                '<th>Descrizione</th>' +
+                                                '<th>Desc.</th>' +
                                                 '<th>Giacenza</th>' +
                                                 '<th>N° DDT interno</th>' +
                                                 '<th>Data DDT interno</th>' +
@@ -48,7 +48,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                                         '<tfoot>' +
                                             '<tr>' +
                                                 '<th>Foto</th>' +
-                                                '<th>Descrizione</th>' +
+                                                '<th>Desc.</th>' +
                                                 '<th>Giacenza</th>' +
                                                 '<th>N° DDT interno</th>' +
                                                 '<th>Data DDT interno</th>' +
@@ -62,7 +62,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
 
                     dettaglio = dettaglio + '<tr>';
                     dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                    dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' <div class="medioGrande">Lotto:' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
+                    dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
                     dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
                     dettaglio = dettaglio + '<td class="storicoVenduto">N° DDT interno<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
                     dettaglio = dettaglio + '<td class="storicoVenduto">Data DDT interno<input type="text" data-role="date" class="dataDDT accentraInput"></td>';
@@ -177,7 +177,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                                         '<thead>' +
                                             '<tr>' +
                                                 '<th>Foto</th>' +
-                                                '<th>Descrizione</th>' +
+                                                '<th>Desc.</th>' +
                                                 '<th>Quantità su Camion</th>' +                                                
                                                 '<th>Quantità da scaricare</th>' +
                                                 '<th> </th>' +
@@ -186,7 +186,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                                         '<tfoot>' +
                                             '<tr>' +
                                                 '<th>Foto</th>' +
-                                                '<th>Descrizione</th>' +
+                                                '<th>Desc.</th>' +
                                                 '<th>Quantità su Camion</th>' +
                                                 '<th>Quantità da scaricare</th>' +
                                                 '<th> </th>' +
@@ -198,7 +198,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
 
                     dettaglio = dettaglio + '<tr>';
                     dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                    dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' <div class="medioGrande">Lotto:' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
+                    dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
                     dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
                     dettaglio = dettaglio + '<td><input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
                     dettaglio = dettaglio + '<td><a href="#" data-IdTrasporto="' + risultati[i].IdTrasporto + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" data-numeroDDT_interno="' + risultati[i].numeroDDT_interno + '" data-dataDDT_interno="' + risultati[i].dataDDT_interno + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scaricaProdDaCamion ui-btnScarica">Scarica</a> </td>';

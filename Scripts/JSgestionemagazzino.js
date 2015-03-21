@@ -28,7 +28,7 @@ function GestioneMagazzino() {
                                         '<thead>' +
                                             '<tr>' +
                                                 '<th>Foto</th>' +
-                                                '<th>Descrizione</th>' +
+                                                '<th>Desc.</th>' +
                                                 '<th>Prezzo</th>' +
                                                 '<th>Giacenza</th>' +
                                                 '<th>Carica</th>' +
@@ -38,7 +38,7 @@ function GestioneMagazzino() {
                                         '<tfoot>' +
                                             '<tr>' +
                                                 '<th>Foto</th>' +
-                                                '<th>Descrizione</th>' +
+                                                '<th>Desc.</th>' +
                                                 '<th>Prezzo</th>' +
                                                 '<th>Giacenza</th>' +
                                                 '<th>Carica</th>' +
@@ -430,7 +430,7 @@ function SituazioneMagazzino() {
                                         '<thead>' +
                                             '<tr>' +
                                                 '<th>Foto</th>' +
-                                                '<th>Descrizione</th>' +
+                                                '<th>Desc.</th>' +
                                                 '<th>N° Lotto</th>' +
                                                 '<th>Giacenza</th>' +
                                                 '<th>Numero DDT</th>' +
@@ -442,7 +442,7 @@ function SituazioneMagazzino() {
                                         '<tfoot>' +
                                             '<tr>' +
                                                 '<th>Foto</th>' +
-                                                '<th>Descrizione</th>' +
+                                                '<th>Desc.</th>' +
                                                 '<th>N° Lotto</th>' +
                                                 '<th>Giacenza</th>' +
                                                 '<th>Numero DDT</th>' +

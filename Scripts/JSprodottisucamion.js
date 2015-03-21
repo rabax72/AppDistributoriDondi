@@ -28,7 +28,7 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
                                         '<thead>' +
                                             '<tr>' +
                                                 '<th>Foto</th>' +
-                                                '<th>Descrizione</th>' +                                                
+                                                '<th>Desc.</th>' +                                                
                                                 '<th>Quant. su Camion</th>' +
                                                 '<th>Quant. da Caricare</th>' +
                                                 //'<th>N° DDT</th>' +
@@ -39,7 +39,7 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
                                         '<tfoot>' +
                                             '<tr>' +
                                                '<th>Foto</th>' +
-                                                '<th>Descrizione</th>' +
+                                                '<th>Desc.</th>' +
                                                 '<th>Quant. su Camion</th>' +
                                                 '<th>Quant. da Caricare</th>' +
                                                 //'<th>N° DDT</th>' +
@@ -55,13 +55,13 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
                 
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' <div class="medioGrande">Lotto: ' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
+                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
                 //dettaglio = dettaglio + '<td>' + parseJsonDate(risultati[i].numeroLotto) + '</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';                
                 dettaglio = dettaglio + '<td><input id="quantitaDaCaricare' + risultati[i].IdTrasporto + '" type="number" data-clear-btn="true" class="miniInput accentraInput"> </td>';
                 //dettaglio = dettaglio + '<td><input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
                 //dettaglio = dettaglio + '<td><input type="text" data-role="date" class="dataDDT accentraInput"></td>';
-                dettaglio = dettaglio + '<td><a href="#" data-IdTrasporto="' + risultati[i].IdTrasporto + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" data-numeroDDT_interno="' + risultati[i].numeroDDT_interno + '" data-dataDDT_interno="' + risultati[i].dataDDT_interno + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdInDistributore">Carica</a></td>';
+                dettaglio = dettaglio + '<td><a href="#" data-IdTrasporto="' + risultati[i].IdTrasporto + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" data-numeroDDT_interno="' + risultati[i].numeroDDT_interno + '" data-dataDDT_interno="' + risultati[i].dataDDT_interno + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdInDistributore ui-btnCarica">Carica</a></td>';
                 dettaglio = dettaglio + '</tr>';
 
             }
@@ -193,7 +193,7 @@ function ElencoProdottiSuCamionPerCliente(idMezzo, idCliente) {
                                         '<thead>' +
                                             '<tr>' +
                                                 '<th>Foto</th>' +
-                                                '<th>Descrizione</th>' +
+                                                '<th>Desc.</th>' +
                                                 '<th>Quant. su Camion</th>' +
                                                 '<th>Quant. da Caricare</th>' +
                                                 //'<th>N° numeroDDT</th>' +
@@ -204,7 +204,7 @@ function ElencoProdottiSuCamionPerCliente(idMezzo, idCliente) {
                                         '<tfoot>' +
                                             '<tr>' +
                                                '<th>Foto</th>' +
-                                                '<th>Descrizione</th>' +
+                                                '<th>Desc.</th>' +
                                                 '<th>Quant. su Camion</th>' +
                                                 '<th>Quant. da Caricare</th>' +
                                                 //'<th>N° DDT</th>' +
@@ -220,7 +220,7 @@ function ElencoProdottiSuCamionPerCliente(idMezzo, idCliente) {
 
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' <div class="medioGrande">Lotto: ' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
+                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
                 //dettaglio = dettaglio + '<td>' + parseJsonDate(risultati[i].numeroLotto) + '</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
                 dettaglio = dettaglio + '<td><input id="quantitaDaCaricare' + risultati[i].IdTrasporto + '" type="number" data-clear-btn="true" class="miniInput accentraInput"> </td>';

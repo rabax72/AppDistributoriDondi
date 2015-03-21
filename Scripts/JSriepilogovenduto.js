@@ -59,7 +59,7 @@ function VenditaDiretta(DataDa, DataA) {
                                     '<thead>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
-                                            '<th>Descrizione</th>' +
+                                            '<th>Desc.</th>' +
                                             '<th>Quantità</th>' +
                                             '<th>Prezzo Tot.</th>' +
                                             '<th>N° DDT</th>' +
@@ -91,7 +91,7 @@ function VenditaDiretta(DataDa, DataA) {
             dettaglio = dettaglio + '</tbody>' + '<tfoot>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
-                                            '<th>Descrizione</th>' +
+                                            '<th>Desc.</th>' +
                                             '<th>Quantità</th>' +
                                             '<th>Totale Venduto: ' + prezzoTot + '€</th>' +
                                             '<th>N° DDT</th>' +
@@ -154,7 +154,7 @@ function VendutoPerProdotto() {
                                     '<thead>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
-                                            '<th>Descrizione</th>' +                                            
+                                            '<th>Desc.</th>' +                                            
                                             '<th>Prezzo</th>' +
                                             '<th>Aliquota</th>' +
                                             '<th>Data Scadenza</th>' +                                            
@@ -163,7 +163,7 @@ function VendutoPerProdotto() {
                                     '<tfoot>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
-                                            '<th>Descrizione</th>' +
+                                            '<th>Desc.</th>' +
                                             '<th>Prezzo</th>' +
                                             '<th>Aliquota</th>' +
                                             '<th>Data Scadenza</th>' +
@@ -233,7 +233,7 @@ function GetVendutoByIdProdotto(idProdotto, descrizione, DataDa, DataA) {
                                     '<thead>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
-                                            '<th>Descrizione</th>' +
+                                            '<th>Desc.</th>' +
                                             '<th>Quantità</th>' +
                                             '<th>Prezzo Tot.</th>' +
                                             '<th>N° DDT</th>' +
@@ -263,7 +263,7 @@ function GetVendutoByIdProdotto(idProdotto, descrizione, DataDa, DataA) {
             dettaglio = dettaglio + '</tbody>' + '<tfoot>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
-                                            '<th>Descrizione</th>' +
+                                            '<th>Desc.</th>' +
                                             '<th>Quantità</th>' +
                                             '<th>Totale Venduto: ' + prezzoTot + '€</th>' +
                                             '<th>N° DDT</th>' +
@@ -371,7 +371,7 @@ function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) 
                                     '<thead>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
-                                            '<th>Descrizione</th>' +
+                                            '<th>Desc.</th>' +
                                             '<th>Quantità</th>' +
                                             '<th>Prezzo Tot.</th>' +
                                             '<th>Data Ril.</th>' +
@@ -413,7 +413,7 @@ function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) 
             dettaglio = dettaglio + '</tbody>' + '<tfoot>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
-                                            '<th>Descrizione</th>' +
+                                            '<th>Desc.</th>' +
                                             '<th>Quantità</th>' +
                                             '<th>Totale Venduto: ' + prezzoTot + '€</th>' +
                                             '<th>N° DDT</th>' +
@@ -521,7 +521,7 @@ function GetVendutoByIdCliente(idCliente, descrizione, DataDa, DataA) {
                                     '<thead>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
-                                            '<th>Descrizione</th>' +
+                                            '<th>Desc.</th>' +
                                             '<th>Quantità</th>' +
                                             '<th>Prezzo Tot.</th>' +
                                             '<th>Data Ril.</th>' +
@@ -551,7 +551,7 @@ function GetVendutoByIdCliente(idCliente, descrizione, DataDa, DataA) {
             dettaglio = dettaglio + '</tbody>' + '<tfoot>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
-                                            '<th>Descrizione</th>' +
+                                            '<th>Desc.</th>' +
                                             '<th>Quantità</th>' +
                                             '<th>Totale Venduto: ' + prezzoTot + '€</th>' +
                                             '<th>N° DDT</th>' +
@@ -615,7 +615,7 @@ function GetProdottiInMagazzinoResi() {
                                     '<thead>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
-                                            '<th>Descrizione</th>' +
+                                            '<th>Desc.</th>' +
                                             '<th>Quantità</th>' +
                                             '<th>Prezzo Tot.</th>' +
                                             '<th>Distributore</th>' +
@@ -627,7 +627,7 @@ function GetProdottiInMagazzinoResi() {
                                     '<tfoot>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
-                                            '<th>Descrizione</th>' +
+                                            '<th>Desc.</th>' +
                                             '<th>Quantità</th>' +
                                             '<th>Prezzo Tot.</th>' +
                                             '<th>Distributore</th>' +
@@ -692,7 +692,7 @@ function GetProdottiInMagazzinoResiFiltrato(dataDa, dataA){
                                     '<thead>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
-                                            '<th>Descrizione</th>' +
+                                            '<th>Desc.</th>' +
                                             '<th>Quantità</th>' +
                                             '<th>Prezzo Tot.</th>' +
                                             '<th>Distributore</th>' +
@@ -704,7 +704,7 @@ function GetProdottiInMagazzinoResiFiltrato(dataDa, dataA){
                                     '<tfoot>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
-                                            '<th>Descrizione</th>' +
+                                            '<th>Desc.</th>' +
                                             '<th>Quantità</th>' +
                                             '<th>Prezzo Tot.</th>' +
                                             '<th>Distributore</th>' +

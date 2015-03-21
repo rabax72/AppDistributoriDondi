@@ -29,7 +29,7 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                                     '<thead>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
-                                            '<th>Descrizione</th>' +
+                                            '<th>Desc.</th>' +
                                             '<th>Giacenza</th>' +
                                             '<th>N° DDT</th>' +
                                             '<th>Data DDT</th>' +
@@ -40,7 +40,7 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                                     '<tfoot>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
-                                            '<th>Descrizione</th>' +
+                                            '<th>Desc.</th>' +
                                             '<th>Giacenza</th>' +
                                             '<th>N° DDT</th>' +
                                             '<th>Data DDT</th>' +

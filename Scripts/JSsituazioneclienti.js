@@ -46,7 +46,7 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                                         '<thead>' +
                                             '<tr>' +                                                
                                                 '<th>Foto</th>' +
-                                                '<th>Descrizione</th>' +
+                                                '<th>Desc.</th>' +
                                                 '<th>Quantita</th>' +
                                                 '<th>Rimasti</th>' +
                                                 '<th>Resi</th>' +
@@ -55,7 +55,7 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                                         '<tfoot>' +
                                             '<tr>' +                                              
                                                 '<th>Foto</th>' +
-                                                '<th>Descrizione</th>' +
+                                                '<th>Desc.</th>' +
                                                 '<th>Quantita</th>' +
                                                '<th>Rimasti</th>' +
                                                 '<th>Resi</th>' +
