@@ -40,12 +40,19 @@ function ElencoDistributori() {
                 var indirizzo = risultati[i].indirizzo;
                 var desc = '\'' + risultati[i].descrizione + '\'';
                 if (i == 0) {
-                    distributori = distributori + '<li data-role="list-divider">Parma</li>';                    
+                    distributori = distributori + '<li data-role="list-divider">PARMA</li>';                    
                 }
                 if (i > 0 && colore == '0094ff' && colore != coloreOld) {
-                    distributori = distributori + '<li data-role="list-divider">Reggio Emilia</li>';
+                    distributori = distributori + '<li data-role="list-divider">REGGIO EMILIA</li>';
+                }
+                if (i > 0 && colore == '0c0c0c' && colore != coloreOld) {
+                    distributori = distributori + '<li data-role="list-divider">SANT\' ILARIO REGGIO EMILIA</li>';
+                }
+                if (i > 0 && colore == 'fff' && colore != coloreOld) {
+                    distributori = distributori + '<li data-role="list-divider">NOCETO</li>';
                 }
 
+                
                 distributori = distributori + '<li class="Blu"><a href="javascript:GetSituazioneDistributore(' + risultati[i].idDistributore + ', ' + desc + ');" class="ui-btn ui-btn-icon-right ui-icon-carat-r nomeDistributore" >' + risultati[i].descrizione + '<br><span class="miniText">' + indirizzo + '</span></a></li>';
                 
                 coloreOld = risultati[i].colore;
