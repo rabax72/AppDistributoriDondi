@@ -164,3 +164,28 @@ font-size: 21px !important;
 .Blu {
 background-color:#0094ff !important;
 }
+
+.menuAdmin div{
+    display:inline-block;
+    background-color:#0094ff;
+    padding: 5px;
+    color: white;
+}
+
+    .menuAdmin div a {
+        color: white;
+    }
+
+    .menuAdmin div a:hover {
+        color: black;
+    }
+
+form {
+    font-family: Arial;
+}
+
+.ui-li-divider {
+  font-size: 36px !important;
+  /* color: blue !important; */
+  background-color: rgb(76, 200, 76) !important;
+}

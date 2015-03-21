@@ -33,12 +33,22 @@ function ElencoDistributori() {
             
 
             var distributori = '<ul data-role="listview" data-filter="true" data-filter-placeholder="Cerca il distributore..." data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">';
-
+            var colore = '';
+            var coloreOld = '';
             for (var i = 0; i < risultati.length; i++) {
+                colore = risultati[i].colore;
                 var indirizzo = risultati[i].indirizzo;
                 var desc = '\'' + risultati[i].descrizione + '\'';
+                if (i == 0) {
+                    distributori = distributori + '<li data-role="list-divider">Parma</li>';                    
+                }
+                if (i > 0 && colore == '0094ff' && colore != coloreOld) {
+                    distributori = distributori + '<li data-role="list-divider">Reggio Emilia</li>';
+                }
+
                 distributori = distributori + '<li class="Blu"><a href="javascript:GetSituazioneDistributore(' + risultati[i].idDistributore + ', ' + desc + ');" class="ui-btn ui-btn-icon-right ui-icon-carat-r nomeDistributore" >' + risultati[i].descrizione + '<br><span class="miniText">' + indirizzo + '</span></a></li>';
-                //$("#" + risultati[i]).show();
+                
+                coloreOld = risultati[i].colore;
             }
             distributori = distributori + '</ul>';
 
