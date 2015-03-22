@@ -502,7 +502,7 @@ function ElencoClienti() {
             for (var i = 0; i < risultati.length; i++) {
 
                 var desc = '\'' + risultati[i].descrizione + '\'';
-                clienti = clienti + '<li><a href="javascript:GetSituazioneCliente(' + risultati[i].idCliente + ', ' + desc + ');" class="ui-btn ui-btn-icon-right ui-icon-carat-r" >' + risultati[i].descrizione + '</a></li>';
+                clienti = clienti + '<li><a href="javascript:GetSituazioneCliente(' + risultati[i].idCliente + ', ' + desc + ');" class="ui-btn ui-btn-icon-right ui-icon-carat-r nomeCliente" >' + risultati[i].descrizione + '</a></li>';
                 //$("#" + risultati[i]).show();
             }
             clienti = clienti + '</ul>';
