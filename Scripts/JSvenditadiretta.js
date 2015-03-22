@@ -69,9 +69,9 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
 
             $('.MercePerVenditaDiretta').html(dettaglio);
 
-            //$(".dataDDT").datepicker({
-            //    dateFormat: "dd-mm-yy"
-            //});
+            $(".dataDDT").datepicker({
+                dateFormat: "dd-mm-yy"
+            });
 
             var table = $('#tabellaProdottiInMagazzinoPerVenditaDiretta').DataTable(
                 { "paging": false, responsive: true }
