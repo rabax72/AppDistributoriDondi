@@ -173,7 +173,7 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                     $(this).prev().removeClass("evidenziaErrore");
                 }
 
-                //alert('IdSituazioneCliente=' + IdSituazioneCliente + ' IdCliente=' + IdCliente + ' idProdotto=' + idProdotto + ' quantitaVenduti=' + quantitaVenduti + ' quantitaRimasti=' + quantitaRimasti + 'prezzoTotaleRimasti=' + prezzoTotaleRimasti + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto);
+                alert('IdSituazioneCliente=' + IdSituazioneCliente + ' IdCliente=' + IdCliente + ' idProdotto=' + idProdotto + ' quantitaVenduti=' + quantitaVenduti + ' quantitaRimasti=' + quantitaRimasti + 'prezzoTotaleRimasti=' + prezzoTotaleRimasti + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto);
                 //return;
 
                 SalvaRimastiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaVenduti, quantitaRimasti, prezzoTotaleVenduti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT);
@@ -302,6 +302,8 @@ function SalvaRimastiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantit
     
     AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, IdCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, VenditaDiretta, numeroDDT, dataDDT, numeroLotto);
     //****************************************************************** 
+
+    GetSituazioneCliente(IdCliente, null);
 }
 
 function SalvaResiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaResi, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT) {    
@@ -342,6 +344,7 @@ function SalvaResiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaRe
 
     InsertProdottiInCliente(IdCliente, idProdotto, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT);
 
+    GetSituazioneCliente(IdCliente, null);
 }
 
 //Storicizzo la quantita di prodotto in possesso di un dato cliente

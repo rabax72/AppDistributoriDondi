@@ -21,7 +21,7 @@ function GetSituazioneVendutoInDistributore(IdDistributore, idProd, obj, numeroL
         error: function (data) {
             console.log(data.responseText);
             //$("#tuttiDistributori").html(data.responseText);
-            alert(data.responseText);
+            //alert(data.responseText);
         },
         beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
         complete: function () { $.mobile.loading('hide'); }, //Hide spinner
@@ -336,7 +336,7 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                     dataDDT = new Date();
                 }
 
-                if (quantitaRimasti == "" || isUint8(parseInt(quantitaRimasti)) == false) {
+                if (quantitaRimasti == "") {
                     alert("Scegli un valore Numerico prima di caricare");
                     $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
                     return;
@@ -530,6 +530,8 @@ function SalvaRimasti(IdSituazioneDistributore, idDistributore, idProdotto, quan
     var VenditaDiretta = false;
     
     AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, idCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, VenditaDiretta, numeroDDT, dataDDT, numeroLotto);
+
+    GetSituazioneDistributore(idDistributore);
 }
 
 function SalvaResi(idSituazioneDistributore, idDistributore, idProdotto, quantitaResi, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT) {    
@@ -562,7 +564,7 @@ function SalvaResi(idSituazioneDistributore, idDistributore, idProdotto, quantit
 
             //$('.DettaglioDistributore').html(dettaglio);
 
-            //GetSituazioneDistributore(idDistributore);
+            GetSituazioneDistributore(idDistributore);
         }
 
     });
