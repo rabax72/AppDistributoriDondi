@@ -521,22 +521,25 @@ function ConfermaResi(quantita) {
 
 function SalvaRimasti(IdSituazioneDistributore, idDistributore, idProdotto, quantitaVenduti, quantitaRimasti, prezzoTotaleVenduti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT) {
 
-    StoricizzoStatoProdottoInDistributore(IdSituazioneDistributore);
+    StoricizzoStatoProdottoInDistributore(idDistributore, idProdotto, numeroLotto);
 
     //Inserisco la quantita aggiornata di prodotto nel Distributore
     //console.log('idDistributore=' + idDistributore + ' idProdotto=' + idProdotto + ' quantita=' + quantita + ' prezzoTotale=' + prezzoTotale + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto);
-    InsertProdottiInDistributore(idDistributore, idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT);
+    if (parseInt(quantitaRimasti) > 0) {
+        InsertProdottiInDistributore(idDistributore, idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT);
+    }
+    
     var idCliente = 0;
     var VenditaDiretta = false;
     
     AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, idCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, VenditaDiretta, numeroDDT, dataDDT, numeroLotto);
 
-    GetSituazioneDistributore(idDistributore);
+    //GetSituazioneDistributore(idDistributore);
 }
 
 function SalvaResi(idSituazioneDistributore, idDistributore, idProdotto, quantitaResi, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT) {    
 
-    StoricizzoStatoProdottoInDistributore(idSituazioneDistributore);
+    StoricizzoStatoProdottoInDistributore(idDistributore, idProdotto, numeroLotto);
     
     //alert(' quantitaResi=' + quantitaResi + ' quantitaRimasta=' + quantitaRimasta);
     var idCliente = 0;
@@ -564,18 +567,21 @@ function SalvaResi(idSituazioneDistributore, idDistributore, idProdotto, quantit
 
             //$('.DettaglioDistributore').html(dettaglio);
 
-            GetSituazioneDistributore(idDistributore);
+           
         }
 
     });
     //******************************************************************   
     //console.log('quantitaRimasta=' + quantitaRimasta);
-    InsertProdottiInDistributore(idDistributore, idProdotto, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT);
+    if (parseInt(quantitaRimasta) > 0) {
+        InsertProdottiInDistributore(idDistributore, idProdotto, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT);
+    }
 
+    //GetSituazioneDistributore(idDistributore);
 }
 
 //Storicizzo la quantita di prodotto nel Distributore
-function StoricizzoStatoProdottoInDistributore(idSituazioneDistributore) {
+function StoricizzoStatoProdottoInDistributore(idDistributore, idProdotto, numeroLotto) {
     
     $.ajax({
         type: "POST",
@@ -586,7 +592,7 @@ function StoricizzoStatoProdottoInDistributore(idSituazioneDistributore) {
         cache: false,
         async: true,
         //            data: "idDisciplina=" + idDisciplina,
-        data: JSON.stringify({ idSituazioneDistributore: idSituazioneDistributore }),
+        data: JSON.stringify({ idDistributore: idDistributore, idProdotto: idProdotto, numeroLotto: numeroLotto }),
         error: function (data) {
             console.log(data.responseText)
         },
@@ -627,7 +633,7 @@ function InsertProdottiInDistributore(idDistributore, idProdotto, quantita, prez
         success: function (response) {
             risultati = response.d;
 
-            //console.log(risultati);
+            console.log(risultati);
             
         }
 

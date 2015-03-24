@@ -182,3 +182,7 @@ form {
 table.dataTable thead th, table.dataTable thead td {
 padding: 10px 0px !important;
 }
+
+table {
+    margin-bottom: 100px !important;
+}

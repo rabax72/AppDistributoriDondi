@@ -173,7 +173,7 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                     $(this).prev().removeClass("evidenziaErrore");
                 }
 
-                alert('IdSituazioneCliente=' + IdSituazioneCliente + ' IdCliente=' + IdCliente + ' idProdotto=' + idProdotto + ' quantitaVenduti=' + quantitaVenduti + ' quantitaRimasti=' + quantitaRimasti + 'prezzoTotaleRimasti=' + prezzoTotaleRimasti + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto);
+                //alert('IdSituazioneCliente=' + IdSituazioneCliente + ' IdCliente=' + IdCliente + ' idProdotto=' + idProdotto + ' quantitaVenduti=' + quantitaVenduti + ' quantitaRimasti=' + quantitaRimasti + 'prezzoTotaleRimasti=' + prezzoTotaleRimasti + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto);
                 //return;
 
                 SalvaRimastiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaVenduti, quantitaRimasti, prezzoTotaleVenduti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT);
@@ -290,11 +290,14 @@ function ConfermaResi(quantita) {
 
 function SalvaRimastiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaVenduti, quantitaRimasti, prezzoTotaleVenduti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT) {
 
-    StoricizzoStatoProdottoInCliente(IdSituazioneCliente);
+    StoricizzoStatoProdottoInCliente(IdCliente, idProdotto, numeroLotto);
 
     //Inserisco la quantita aggiornata di prodotto nel Distributore
     //console.log('IdCliente=' + IdCliente + ' idProdotto=' + idProdotto + ' quantita=' + quantita + ' prezzoTotale=' + prezzoTotale + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto);
-    InsertProdottiInCliente(IdCliente, idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT);
+    if (parseInt(quantitaRimasti) > 0) {
+        InsertProdottiInCliente(IdCliente, idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT);
+    }
+    
     var idDistributore = 0;
 
     //Inserisco la quantita di Prodotti Venduti
@@ -303,12 +306,12 @@ function SalvaRimastiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantit
     AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, IdCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, VenditaDiretta, numeroDDT, dataDDT, numeroLotto);
     //****************************************************************** 
 
-    GetSituazioneCliente(IdCliente, null);
+    //GetSituazioneCliente(IdCliente, null);
 }
 
 function SalvaResiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaResi, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT) {    
 
-    StoricizzoStatoProdottoInCliente(IdSituazioneCliente);
+    StoricizzoStatoProdottoInCliente(IdCliente, idProdotto, numeroLotto);
     
     //alert(' quantitaResi=' + quantitaResi + ' quantitaRimasta=' + quantitaRimasta);
     var idDistributore = 0;
@@ -341,14 +344,14 @@ function SalvaResiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaRe
 
     });
     //******************************************************************   
-
-    InsertProdottiInCliente(IdCliente, idProdotto, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT);
-
-    GetSituazioneCliente(IdCliente, null);
+    if (parseInt(quantitaRimasta) > 0) {
+        InsertProdottiInCliente(IdCliente, idProdotto, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT);
+    }
+    //GetSituazioneCliente(IdCliente, null);
 }
 
 //Storicizzo la quantita di prodotto in possesso di un dato cliente
-function StoricizzoStatoProdottoInCliente(IdSituazioneCliente) {
+function StoricizzoStatoProdottoInCliente(idCliente, idProdotto, numeroLotto) {
     
     $.ajax({
         type: "POST",
@@ -359,7 +362,7 @@ function StoricizzoStatoProdottoInCliente(IdSituazioneCliente) {
         cache: false,
         async: true,
         //            data: "idDisciplina=" + idDisciplina,
-        data: JSON.stringify({ IdSituazioneCliente: IdSituazioneCliente }),
+        data: JSON.stringify({ idCliente: idCliente, idProdotto: idProdotto, numeroLotto: numeroLotto }),
         error: function (data) {
             console.log(data.responseText)
         },
