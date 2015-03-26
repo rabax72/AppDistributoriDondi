@@ -122,7 +122,7 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                     $(this).prev().removeClass("evidenziaErrore");
                 }
 
-                storicizzaProdottoInMagazzino(IdMagazzino, idOperatore);
+                storicizzaProdottoInMagazzino(idProdotto, numeroLotto, idOperatore, note, false);
                 
                 AggiornaQuantitaProdottiInMagazzino(idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT, note);
 

@@ -30,7 +30,7 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
                                                 '<th>Foto</th>' +
                                                 '<th>Desc.</th>' +                                                
                                                 '<th>Quant. su Camion</th>' +
-                                                '<th>Quant. da Caricare</th>' +
+                                                '<th>Quant. da Scaricare</th>' +
                                                 //'<th>N° DDT</th>' +
                                                 //'<th>Data DDT</th>' +
                                                 '<th></th>' +
@@ -41,7 +41,7 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
                                                '<th>Foto</th>' +
                                                 '<th>Desc.</th>' +
                                                 '<th>Quant. su Camion</th>' +
-                                                '<th>Quant. da Caricare</th>' +
+                                                '<th>Quant. da Scaricare</th>' +
                                                 //'<th>N° DDT</th>' +
                                                 //'<th>Data DDT</th>' +
                                                 '<th></th>' +
@@ -61,7 +61,7 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
                 dettaglio = dettaglio + '<td><input id="quantitaDaCaricare' + risultati[i].IdTrasporto + '" type="number" data-clear-btn="true" class="miniInput accentraInput"> </td>';
                 //dettaglio = dettaglio + '<td><input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
                 //dettaglio = dettaglio + '<td><input type="text" data-role="date" class="dataDDT accentraInput"></td>';
-                dettaglio = dettaglio + '<td><a href="#" data-IdTrasporto="' + risultati[i].IdTrasporto + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" data-numeroDDT_interno="' + risultati[i].numeroDDT_interno + '" data-dataDDT_interno="' + risultati[i].dataDDT_interno + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdInDistributore ui-btnCarica">Carica</a></td>';
+                dettaglio = dettaglio + '<td><a href="#" data-IdTrasporto="' + risultati[i].IdTrasporto + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" data-numeroDDT_interno="' + risultati[i].numeroDDT_interno + '" data-dataDDT_interno="' + risultati[i].dataDDT_interno + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdInDistributore ui-btnScarica">Scarica</a></td>';
                 dettaglio = dettaglio + '</tr>';
 
             }
@@ -122,6 +122,7 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
                 //console.log(quantitaCaricati);
                 //alert('quantitaAttuale=' + quantitaAttuale + ' quantitaCaricati= ' + quantitaCaricati);
                 //return;
+                if (!confirm("Sicuro di voler Scaricare " + quantitaCaricati + " pezzi di questo prodotto?")) return;
 
                 //alert('quantitaCaricati=' + quantitaCaricati + ' quantitaAttuale=' + quantitaAttuale + ' IdTrasporto=' + IdTrasporto);
                 //return;
@@ -195,7 +196,7 @@ function ElencoProdottiSuCamionPerCliente(idMezzo, idCliente) {
                                                 '<th>Foto</th>' +
                                                 '<th>Desc.</th>' +
                                                 '<th>Quant. su Camion</th>' +
-                                                '<th>Quant. da Caricare</th>' +
+                                                '<th>Quant. da Scaricare</th>' +
                                                 //'<th>N° numeroDDT</th>' +
                                                 //'<th>Data DDT</th>' +
                                                 '<th></th>' +
@@ -206,7 +207,7 @@ function ElencoProdottiSuCamionPerCliente(idMezzo, idCliente) {
                                                '<th>Foto</th>' +
                                                 '<th>Desc.</th>' +
                                                 '<th>Quant. su Camion</th>' +
-                                                '<th>Quant. da Caricare</th>' +
+                                                '<th>Quant. da Scaricare</th>' +
                                                 //'<th>N° DDT</th>' +
                                                 //'<th>Data DDT</th>' +
                                                 '<th></th>' +
@@ -286,7 +287,7 @@ function ElencoProdottiSuCamionPerCliente(idMezzo, idCliente) {
                 //console.log(quantitaCaricati);
                 //alert('numeroDDT=' + numeroDDT + ' dataDDT= ' + dataDDT);
                 //return;
-
+                if (!confirm("Sicuro di voler Scaricare " + quantitaCaricati + " pezzi di questo prodotto?")) return;
                 //alert('quantitaCaricati=' + quantitaCaricati + ' quantitaAttuale=' + quantitaAttuale + ' IdTrasporto=' + IdTrasporto);
                 //return;
 
@@ -345,7 +346,7 @@ function CaricaProdottiInCliente(IdTrasporto, idCliente, idProdotto, quantitaCar
 
         async: true,
         //            data: "idDisciplina=" + idDisciplina,
-        data: JSON.stringify({ IdTrasporto: IdTrasporto, IdOperatore: idOperatore }),
+        data: JSON.stringify({ IdProdotto: idProdotto, numeroLotto: numeroLotto, IdOperatore: idOperatore }),
 
         error: function (data) {
             console.log(data.responseText)
@@ -405,7 +406,7 @@ function CaricaProdottiInDistributore(IdTrasporto, idDistributore, idProdotto, q
                    
         async: true,
         //            data: "idDisciplina=" + idDisciplina,
-        data: JSON.stringify({ IdTrasporto: IdTrasporto, IdOperatore: idOperatore }),
+        data: JSON.stringify({ IdProdotto: idProdotto, numeroLotto: numeroLotto, IdOperatore: idOperatore }),
        
         error: function (data) {
             console.log(data.responseText)

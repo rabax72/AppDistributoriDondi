@@ -177,17 +177,47 @@ function parseJsonDate(jsonDate) {
     return (date + "/" + mon + "/" + year);
 };
 
+function annoBisestile(anno) {
+    if ((anno % 4) == 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 function parseJsonDateLettura(jsonDate) {
     var offset = new Date().getTimezoneOffset() * 60000;
     var parts = /\/Date\((-?\d+)([+-]\d{2})?(\d{2})?.*/.exec(jsonDate);
     if (parts[2] == undefined) parts[2] = 0;
     if (parts[3] == undefined) parts[3] = 0;
     d = new Date(+parts[1] + offset + parts[2] * 3600000 + parts[3] * 60000);
-    date = d.getDate() + 1;
-    date = date < 10 ? "0" + date : date;
-    mon = d.getMonth() + 1;
-    mon = mon < 10 ? "0" + mon : mon;
+
     year = d.getFullYear();
+    var bisestile = annoBisestile(year);
+    mon = d.getMonth() + 1;    
+    date = d.getDate() + 1;
+    if ((mon == 4 || mon == 6 || mon == 9 || mon == 11) && date == 31) {
+        mon = mon + 1;
+        date = 1;
+    }
+
+    date = date < 10 ? "0" + date : date;
+    
+    if (date == "32" && mon < 12) {
+        mon = mon + 1;
+        date = "01";
+    }
+    if (date == "32" && mon == 12) {
+        mon = 1;
+        date = "01";
+        year = year + 1;
+    }
+    if (bisestile == false && mon == "02" && date == "29") {
+        date = "01";
+        mon = "3";
+    }
+    mon = mon < 10 ? "0" + mon : mon;
+   
     return (date + "/" + mon + "/" + year);
 };
 
@@ -466,7 +496,10 @@ function ElencoMezziPerDistributori() {
                 var descDistributore = $(this).attr('data-descDistributore');
                 $("#titoloProdottiInCamionPerDistributore").html('Elenco prodotti su:' + descMezzo);
                 $(".descDistributore").html('Carica per:' + descDistributore);
-                var desc = '\'' + descDistributore + '\'';
+                //var desc = '\'' + descDistributore + '\'';
+                var desc = descDistributore;
+                desc = desc.replace("'", "\\'");
+                desc = '\'' + desc + '\'';
                 var linkBack = 'javascript:GetSituazioneDistributore(' + idDistributore + ', ' + desc + ');'
                 $(".backDistributore").attr("href", linkBack);
 
@@ -500,8 +533,10 @@ function ElencoClienti() {
             var clienti = '<ul data-role="listview" data-filter="true" data-filter-placeholder="Cerca il Cliente..." data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">';
 
             for (var i = 0; i < risultati.length; i++) {
-
-                var desc = '\'' + risultati[i].descrizione + '\'';
+                var desc = risultati[i].descrizione;
+                desc = desc.replace("'", "\\'");
+                desc = '\'' + desc + '\'';
+                
                 clienti = clienti + '<li><a href="javascript:GetSituazioneCliente(' + risultati[i].idCliente + ', ' + desc + ');" class="ui-btn ui-btn-icon-right ui-icon-carat-r nomeCliente" >' + risultati[i].descrizione + '</a></li>';
                 //$("#" + risultati[i]).show();
             }
@@ -534,7 +569,7 @@ function ElencoClienti() {
 }
 
 // Storicizzo Prodotti in magazzino ************************************************
-function storicizzaProdottoInMagazzino(IdMagazzino, idOperatore) {
+function storicizzaProdottoInMagazzino(IdProdotto, numeroLotto, IdOperatore, note, smaltito) {
     
     $.ajax({
         type: "POST",
@@ -546,7 +581,7 @@ function storicizzaProdottoInMagazzino(IdMagazzino, idOperatore) {
 
         async: true,
         //            data: "idDisciplina=" + idDisciplina,
-        data: JSON.stringify({ IdMagazzino: IdMagazzino, IdOperatore: idOperatore }),
+        data: JSON.stringify({ IdProdotto: IdProdotto, numeroLotto: numeroLotto, IdOperatore: IdOperatore, note: note, smaltito: smaltito }),
 
         error: function (data) {
             console.log(data.responseText)

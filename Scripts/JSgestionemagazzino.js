@@ -296,16 +296,32 @@ function GetProdottiDaScaricareDaMagazzino(idProdotto, quantitaAttuale) {
             var numeriDDT = '';
             var dateDDT = '';
             var noteDDT = '';
-            var foto2 = '';
+            var foto2 = '';            
+            var numLotto = '';
+            var numLottoOld = '';
+            var quantitaTot = 0;            
             for (var i = 0; i < risultati.length; i++) {
                 if (risultati[i].quantita > 0) {
-                    numeriLotti = numeriLotti + '<option>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</option>';
-                    quantitaGiacente = quantitaGiacente + '<option>' + risultati[i].quantita + '</option>';
-                    numeriDDT = numeriDDT + '<option>' + risultati[i].numeroDDT + '</option>';
-                    dateDDT += '<option>' + parseJsonDateLettura(risultati[i].dataDDT) + '</option>';
-                    noteDDT = noteDDT + '<option>' + risultati[i].Note + '</option>';
+                    numLotto = risultati[i].numeroLotto;
+                    if (numLotto != numLottoOld) {
+                        quantitaTot = risultati[i].quantita;
+                        numeriLotti = numeriLotti + '<option>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</option>';
+                        quantitaGiacente = quantitaGiacente + '<option>' + quantitaTot + '</option>';
+                        numeriDDT = numeriDDT + '<option>' + risultati[i].numeroDDT + '</option>';
+                        dateDDT += '<option>' + parseJsonDateLettura(risultati[i].dataDDT) + '</option>';
+                        noteDDT = noteDDT + '<option>' + risultati[i].Note + '</option>';
+                    } else {
+                        quantitaTot = (quantitaTot + risultati[i].quantita);
+                        numeriLotti = '<option>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</option>';
+                        quantitaGiacente = '<option>' + quantitaTot + '</option>';
+                        numeriDDT = '<option>' + risultati[i].numeroDDT + '</option>';
+                        dateDDT = '<option>' + parseJsonDateLettura(risultati[i].dataDDT) + '</option>';
+                        noteDDT = '<option>' + risultati[i].Note + '</option>';
+                    }
+                    
                     foto2 = risultati[i].foto;
                     var prezzo = risultati[i].prezzo;
+                    numLottoOld = risultati[i].numeroLotto;
                 }
                 //else {
                 //    var finestraDati = '<div style="padding:10px 20px;">';
@@ -357,12 +373,13 @@ function GetProdottiDaScaricareDaMagazzino(idProdotto, quantitaAttuale) {
                     alert("Non puoi scaricare più di quanto presente in magazzino!");
                     return;
                 }
-                var numeroDDT = $("#numeroDDTCaricareinMagazzino").val();
-                var dataDDT = $("#dataDDTCaricareinMagazzino").val();
+                var numeroDDT = $("#numeroDDTScaricareinMagazzino").val();
+                var dataDDT = $("#dataDDTScaricareinMagazzino").val();
                 
 
                 dataDDT = stringToDate(dataDDT, "dd/MM/yyyy", "/");
-                var note = $("#noteCaricareinMagazzino").val();
+
+                var note = $("#noteScaricareinMagazzino").val();
                 var quantitaTotale = (parseInt(giacenzaPerLotto) - parseInt(quantitaDaScaricare));
                 var totaleAggiornato = (parseInt(quantitaAttuale.text()) - parseInt(quantitaDaScaricare));
                 //var prezzoTotaleRimasti = (prezzo * quantitaRimasti);
@@ -370,11 +387,7 @@ function GetProdottiDaScaricareDaMagazzino(idProdotto, quantitaAttuale) {
 
                 var lottoSpecifico = $('.lottoSpecifico').val();
                 //console.log(quantitaDaScaricare);
-
-                
-
-                
-
+                                
                 //alert('idProdotto=' + idProdotto + ' quantitaCaricati=' + quantitaCaricati + ' prezzoTotaleCaricati=' + prezzoTotaleCaricati + ' numeroLotto=' + numeroLotto + ' dataDDT=' + dataDDT + ' numeroDDT=' + numeroDDT + ' idOperatore=' + idOperatore);
                 //return;
 
@@ -386,7 +399,6 @@ function GetProdottiDaScaricareDaMagazzino(idProdotto, quantitaAttuale) {
 
                 //dataDDT = null;
                 //console.log(' idProdotto=' + idProdotto + ' quantitaDaScaricare=' + quantitaDaScaricare + ' prezzoTotale=' + prezzoTotale + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto + ' numeroDDT=' + numeroDDT + ' dataDDT=' + dataDDT + ' note=' + note);
-
 
                 //var labelQuantita = $(this).closest('td').prev('td').prev('td').prev('td').prev('td');
 
@@ -472,6 +484,7 @@ function SituazioneMagazzino() {
 
                 idProd = risultati[i].idProdotto;
                 numLotto = risultati[i].numeroLotto;
+                //console.log(numLotto);
                 quantita = risultati[i].quantita;
                 if (idProd != idProdOld) {
                     quantitaTot = quantita;
