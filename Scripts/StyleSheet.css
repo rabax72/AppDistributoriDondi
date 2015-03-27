@@ -147,6 +147,7 @@ th, .caricaDaCamionPerCliente, .caricaDaCamion, .nomeCliente, .ui-title, .nomeDi
 .ui-btnScarica {
 font-size: 32px !important;
 background-color:red !important;
+color:white !important;
 }
 
 .ui-btnMedio {

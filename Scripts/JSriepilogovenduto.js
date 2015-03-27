@@ -640,20 +640,7 @@ function GetProdottiInMagazzinoResi() {
                                             '<th>Data Reso</th>' +
                                             '<th>Operatore</th>' +
                                         '</tr>' +
-                                    '</thead>' +
-                                    '<tfoot>' +
-                                        '<tr>' +
-                                            '<th>Foto</th>' +
-                                            '<th>Desc.</th>' +
-                                            '<th>Quantità</th>' +
-                                            '<th>Prezzo Tot.</th>' +
-                                            '<th>Distributore</th>' +
-                                            '<th>Cliente</th>' +
-                                            '<th>Data Reso</th>' +
-                                            '<th>Operatore</th>' +
-                                        '</tr>' +
-                                    '</tfoot>' +
-                                    '<tbody>';
+                                    '</thead>';
             var idProd = '';
             var idProdOld = '';
             var numLotto = '';
@@ -662,6 +649,8 @@ function GetProdottiInMagazzinoResi() {
             var quantita = 0;
             var quantitaOld = 0;
             var quantitaTot = 0;
+            var prezzoTot = 0;
+            var totaleQuantita = 0;
             for (var i = 0; i < risultati.length; i++) {
 
                 //dettaglio = dettaglio + '<tr>';
@@ -723,9 +712,11 @@ function GetProdottiInMagazzinoResi() {
                 idProdOld = risultati[i].idProdotto;
                 numLottoOld = risultati[i].numeroLotto;
                 quantitaOld = risultati[i].quantita;
+                prezzoTot = prezzoTot + risultati[i].prezzoTotale;
+                totaleQuantita = totaleQuantita + risultati[i].quantita;
             }
             //dettaglio = dettaglio + '</tbody> </table>';
-
+            
             //console.log(dettaglio);
             var righe = '';
 
@@ -733,7 +724,19 @@ function GetProdottiInMagazzinoResi() {
                 righe = righe + rigaDettaglio[i];
             }
 
-            dettaglio = dettaglio + righe + '</tbody> </table>';
+            //dettaglio = dettaglio + righe + '</tbody> </table>';
+            dettaglio = dettaglio + righe + '</tbody>' + '<tfoot>' +
+                                        '<tr>' +
+                                            '<th>Foto</th>' +
+                                            '<th>Desc.</th>' +
+                                            '<th>Totale Quantità: ' + totaleQuantita + '</th>' +
+                                            '<th>Totale Venduto: ' + Number(prezzoTot).toFixed(2) + '€</th>' +
+                                            '<th>N° DDT</th>' +
+                                            '<th>Data DDT</th>' +
+                                            '<th>Distributore</th>' +
+                                            '<th>Operatore</th>' +
+                                        '</tr>' +
+                                    '</tfoot>' + ' </table>';
 
             $('.DettRiepilogoResi').html(dettaglio);            
 
@@ -779,20 +782,7 @@ function GetProdottiInMagazzinoResiFiltrato(dataDa, dataA){
                                             '<th>Data Reso</th>' +
                                             '<th>Operatore</th>' +
                                         '</tr>' +
-                                    '</thead>' +
-                                    '<tfoot>' +
-                                        '<tr>' +
-                                            '<th>Foto</th>' +
-                                            '<th>Desc.</th>' +
-                                            '<th>Quantità</th>' +
-                                            '<th>Prezzo Tot.</th>' +
-                                            '<th>Distributore</th>' +
-                                            '<th>Cliente</th>' +
-                                            '<th>Data Reso</th>' +
-                                            '<th>Operatore</th>' +
-                                        '</tr>' +
-                                    '</tfoot>' +
-                                    '<tbody>';
+                                    '</thead>';
 
             var idProd = '';
             var idProdOld = '';
@@ -802,6 +792,8 @@ function GetProdottiInMagazzinoResiFiltrato(dataDa, dataA){
             var quantita = 0;
             var quantitaOld = 0;
             var quantitaTot = 0;
+            var prezzoTot = 0;
+            var totaleQuantita = 0;
             for (var i = 0; i < risultati.length; i++) {
 
                 //dettaglio = dettaglio + '<tr>';
@@ -863,6 +855,8 @@ function GetProdottiInMagazzinoResiFiltrato(dataDa, dataA){
                 idProdOld = risultati[i].idProdotto;
                 numLottoOld = risultati[i].numeroLotto;
                 quantitaOld = risultati[i].quantita;
+                prezzoTot = prezzoTot + risultati[i].prezzoTotale;
+                totaleQuantita = totaleQuantita + risultati[i].quantita;
             }
             //dettaglio = dettaglio + '</tbody> </table>';
 
@@ -873,7 +867,19 @@ function GetProdottiInMagazzinoResiFiltrato(dataDa, dataA){
                 righe = righe + rigaDettaglio[i];
             }
 
-            dettaglio = dettaglio + righe + '</tbody> </table>';
+            //dettaglio = dettaglio + righe + '</tbody> </table>';
+            dettaglio = dettaglio + righe + '</tbody>' + '<tfoot>' +
+                                        '<tr>' +
+                                            '<th>Foto</th>' +
+                                            '<th>Desc.</th>' +
+                                            '<th>Totale Quantità: ' + totaleQuantita + '</th>' +
+                                            '<th>Totale Venduto: ' + Number(prezzoTot).toFixed(2) + '€</th>' +
+                                            '<th>N° DDT</th>' +
+                                            '<th>Data DDT</th>' +
+                                            '<th>Distributore</th>' +
+                                            '<th>Operatore</th>' +
+                                        '</tr>' +
+                                    '</tfoot>' + ' </table>';
 
             $('.DettRiepilogoResi').html(dettaglio);
 
