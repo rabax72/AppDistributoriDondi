@@ -256,54 +256,7 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                 numeroLotto = stringToDate(numeroLotto, 'dd/mm/yyyy', '/');
                 GetStoricoVendutoInDistributore(idDistributore, idProdotto, numeroLotto);
                                 
-            });
-
-
-            //$(".aggiornaVenduto").on('click', function () {
-            //    var idProdotto = $(this).attr('data-idProdotto');
-            //    var vend = $(this);
-            //    var numLotto = $(this).attr('data-numeroLotto');
-            //    //console.log('numLotto=' + numLotto);
-            //    //return;
-            //    GetSituazioneVendutoInDistributore(IdDistributore, idProdotto, vend, null);
-            //    //var v = $(this);
-            //    //var venduto = foo(IdDistributore, idProdotto).done(function (r) {
-            //    //    if (r) {
-            //    //        // Tell the user they're logged in
-            //    //        //console.log(r.responseText);
-            //    //        //$(".qVenduto").html(r.quantita);
-            //    //        //venduto = r;
-            //    //    } else {
-            //    //        // Tell the user their password was bad
-            //    //        console.log('Non ha finito');
-            //    //        alert('r=' + r);
-            //    //        v.next('div').html(r);
-            //    //    }
-
-            //    //})
-            //    //.fail(function (x) {
-            //    //    // Tell the user something bad happened
-            //    //    console.log(x);
-            //    //    alert('x=' + x.d);
-            //    //    v.next('div').html(x);
-            //    //});
-                
-            //    //foo(IdDistributore, idProdotto).success(function (data) {
-            //    //    //alert(data);
-            //    //    console.log(data.d.quantita);
-            //    //    //var zzz = venduto.responseText;
-            //    //    //console.log(zzz);
-            //    //    //$(".qVenduto").html(data.d.quantita);
-            //    //    //v.closest('td').html(data.d.quantita);
-            //    //    alert('q=' + data.d.quantita);
-            //    //    v.next('div').html(data.d.quantita);
-            //    //});
-
-            //});
-            
-            //$(".aggiornaVenduto").each(function () {
-            //    $(this).click();
-            //});
+            });          
 
             var table = $('#tabellaDettaglioDistributore').DataTable(
                 { "paging": false, responsive: true }

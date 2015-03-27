@@ -155,7 +155,7 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                     dataDDT = parseJsonDateToJsDate(dataDDT);
                 }
 
-                if (quantitaRimasti == "" || isInteroPositivo(parseInt(quantitaRimasti)) == false) {
+                if (quantitaRimasti == "") {
                     alert("Scegli un valore Numerico prima di caricare");
                     $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
                     return;
