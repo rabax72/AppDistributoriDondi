@@ -176,6 +176,8 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                 //alert('IdSituazioneCliente=' + IdSituazioneCliente + ' IdCliente=' + IdCliente + ' idProdotto=' + idProdotto + ' quantitaVenduti=' + quantitaVenduti + ' quantitaRimasti=' + quantitaRimasti + 'prezzoTotaleRimasti=' + prezzoTotaleRimasti + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto);
                 //return;
 
+                if (!confirm("Sicuro che al cliente sono rimasti " + quantitaRimasti + " pezzi di questo prodotto?")) return;
+
                 SalvaRimastiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaVenduti, quantitaRimasti, prezzoTotaleVenduti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT);
 
                 var labelQuantita = $(this).closest('td').prev('td');
@@ -231,6 +233,8 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                 if (confermaResi == 0) {
                     return;
                 } 
+
+                if (!confirm("Sicuro che il cliente ti ha reso " + quantitaResi + " pezzi di questo prodotto?")) return;
 
                 SalvaResiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaResi, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT);
 

@@ -181,6 +181,8 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                     $(this).prev().removeClass("evidenziaErrore");
                 }
 
+                if (!confirm("Sicuro di voler vendere " + quantitaVenduti + " pezzi di questo prodotto?")) return;
+
                 storicizzaProdottoInMagazzino(idProdotto, numeroLotto, idOperatore, note, false);
 
                 if (parseInt(quantitaRimasti) > 0) {

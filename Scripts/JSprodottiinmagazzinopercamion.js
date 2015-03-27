@@ -196,6 +196,8 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                         $(this).prev().removeClass("evidenziaErrore");
                     }
 
+                    if (!confirm("Sicuro di voler Caricare sul camion " + quantitaCaricati + " pezzi di questo prodotto?")) return;
+
                     CaricaProdottisuCamion(IdMagazzino, idMezzo, idProdotto, quantitaCaricati, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleCaricati, idOperatore, numeroLotto, numeroDDT, dataDDT, numeroDDT_interno, dataDDT_interno, note);
 
                     var labelQuantita = $(this).closest('td').prev('td').prev('td').prev('td').prev('td');
@@ -352,7 +354,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                     //return;
 
                     if (quantitaDaRimettereInMagazzino == "" || isInteroPositivo(parseInt(quantitaDaRimettereInMagazzino)) == false) {
-                        alert("Scegli un valore Numerico prima di caricare");
+                        alert("Scegli un valore Numerico prima di scaricare");
                         $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
                         return;
                     } else {
@@ -360,12 +362,14 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                     }
 
                     if (parseInt(quantitaDaRimettereInMagazzino) > parseInt(quantitaAttuale)) {
-                        alert("E' impossibile che ci siano da caricare più prodotti di quelli presenti!");
+                        alert("E' impossibile che ci siano da scaricare più prodotti di quelli presenti!");
                         $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
                         return;
                     } else {
                         $(this).prev().removeClass("evidenziaErrore");
                     }
+
+                    if (!confirm("Sicuro di voler Scaricare dal camion " + quantitaDaRimettereInMagazzino + " pezzi di questo prodotto?")) return;
 
                     ScaricaProdottiDaCamion(IdTrasporto, idMezzo, idProdotto, quantitaDaRimettereInMagazzino, quantitaRimasti, prezzoTotaleRimasti, prezzoTotaleDaRimettereInMagazzino, idOperatore, numeroLotto, numeroDDT, dataDDT, numeroDDT_interno, dataDDT_interno);
                     
@@ -391,7 +395,10 @@ function CaricaProdottisuCamion(IdMagazzino, idMezzo, idProdotto, quantitaCarica
     //return;
     storicizzaProdottoInMagazzino(idProdotto, numeroLotto, idOperatore, note, false);
 
-    AggiornaQuantitaProdottiInMagazzino(idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT, note);    
+    if (parseInt(quantitaRimasti) > 0) {
+        AggiornaQuantitaProdottiInMagazzino(idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT, note);
+    }
+    
 
     InsertProdottiInCamion(idProdotto, quantitaCaricati, prezzoTotaleCaricati, idOperatore, numeroLotto, idMezzo, numeroDDT, dataDDT, numeroDDT_interno, dataDDT_interno);
 }

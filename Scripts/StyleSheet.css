@@ -139,6 +139,9 @@ th, .caricaDaCamionPerCliente, .caricaDaCamion, .nomeCliente, .ui-title, .nomeDi
     
     border-collapse: collapse;
     padding: 5px;
+    border: 1px solid;
+    text-align: center;
+    font-size:24px;
 }
 
 .ui-btnScarica {
@@ -248,7 +251,7 @@ box-shadow: -5px 0px 5px rgba(0,0,0,.15);
 .ui-page-theme-a,
 .ui-panel-wrapper {
 background-color: #fff;
-background-image: url("../_assets/img/bg-pattern.png");
+/*background-image: url("../_assets/img/bg-pattern.png");*/
 background-repeat: repeat-x;
 background-position: left bottom;
 }
@@ -295,4 +298,8 @@ margin-right: 2em;
 
 .ui-panel-animate.ui-panel-page-content-position-left {
     left: 205px !important;
+}
+
+.cellaPopupStorico {
+    border: 1px solid black;
 }
