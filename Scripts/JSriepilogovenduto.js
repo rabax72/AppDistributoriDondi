@@ -150,7 +150,7 @@ function VendutoPerProdotto() {
         success: function (response) {
             risultati = response.d;
 
-            //console.log(risultati);
+            console.log(risultati);
 
             var dettaglio = '<h1>Filtra per prodotto</h1><table id="tabellaElencoProdotti" class="display" cellspacing="0" width="100%">' +
                                     '<thead>' +
@@ -159,7 +159,81 @@ function VendutoPerProdotto() {
                                             '<th>Desc.</th>' +                                            
                                             '<th>Prezzo</th>' +
                                             '<th>Aliquota</th>' +
-                                            '<th>Data Scadenza</th>' +                                            
+                                            '<th>Dettaglio</th>' +                                            
+                                        '</tr>' +
+                                    '</thead>' +
+                                    '<tfoot>' +
+                                        '<tr>' +
+                                            '<th>Foto</th>' +
+                                            '<th>Desc.</th>' +
+                                            '<th>Prezzo</th>' +
+                                            '<th>Aliquota</th>' +
+                                            '<th>Dettaglio</th>' +
+                                        '</tr>' +
+                                    '</tfoot>' +
+                                    '<tbody>';
+
+            for (var i = 0; i < risultati.length; i++) {
+                var desc = '\'' + risultati[i].descrizione + '\'';
+                //var numLotto = parseJsonDateLettura(risultati[i].numeroLotto);
+                //numLotto = '\'' + numLotto + '\'';
+                dettaglio = dettaglio + '<tr>';
+                dettaglio = dettaglio + '<td><a href="javascript:GetVendutoByIdProdotto(' + risultati[i].idProdotto + ', null, ' + desc + ', null, null);"><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></a></td>';
+                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
+                dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzo + ' €</td>';
+                dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].aliquota + '</td>';
+                dettaglio = dettaglio + '<td class="medioGrande"><a href="javascript:GetVendutoByIdProdotto(' + risultati[i].idProdotto + ', null, ' + desc + ', null, null);">Dettaglio</a></td>';
+                dettaglio = dettaglio + '</tr>';
+
+            }
+            dettaglio = dettaglio + '</tbody> </table>';
+
+            //console.log(dettaglio);
+
+            $('.DettRiepilogoVenduto').html(dettaglio);
+
+            $(".dataDDT").datepicker({
+                dateFormat: "dd-mm-yy"
+            });
+
+            var table = $('#tabellaElencoProdotti').DataTable(
+                { "paging": false, responsive: true }
+            );
+
+        }
+    });
+
+}
+
+function VendutoPerProdottoLotto() {
+    // location.hash = "VenditaDiretta";
+
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        url: urlGetElencoProdottiVendutiPerLotto,
+        cache: false,
+        async: true,
+        data: JSON.stringify({}),
+        error: function (data) {
+            console.log(data.responseText)
+        },
+        beforeSend: function () { $('.DettRiepilogoVenduto').html(''); $.mobile.loading('show'); }, //Show spinner
+        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+        success: function (response) {
+            risultati = response.d;
+
+            //console.log(risultati);
+
+            var dettaglio = '<h1>Filtra per prodotto</h1><table id="tabellaElencoProdottiPerLotto" class="display" cellspacing="0" width="100%">' +
+                                    '<thead>' +
+                                        '<tr>' +
+                                            '<th>Foto</th>' +
+                                            '<th>Desc.</th>' +
+                                            '<th>Prezzo</th>' +
+                                            '<th>Aliquota</th>' +
+                                            '<th>Data Scadenza</th>' +
                                         '</tr>' +
                                     '</thead>' +
                                     '<tfoot>' +
@@ -196,22 +270,22 @@ function VendutoPerProdotto() {
                 dateFormat: "dd-mm-yy"
             });
 
-            var table = $('#tabellaElencoProdotti').DataTable(
+            var table = $('#tabellaElencoProdottiPerLotto').DataTable(
                 { "paging": false, responsive: true }
             );
 
-
         }
     });
-
 
 }
 
 function GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, DataA) {
     // location.hash = "VenditaDiretta";
-    //DataDa = stringToDate(DataDa, "dd-MM-yyyy", "-");
-    //DataA = stringToDate(DataA, "dd-MM-yyyy", "-");
-    numeroLotto = stringToDate(numeroLotto,"dd/MM/yyyy", "/");
+    
+    if (numeroLotto != null) {
+        numeroLotto = stringToDate(numeroLotto, "dd/MM/yyyy", "/");
+    }
+    
     $.ajax({
         type: "POST",
         crossDomain: true,
