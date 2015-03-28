@@ -298,7 +298,7 @@ function SalvaRimastiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantit
 
     //Inserisco la quantita aggiornata di prodotto nel Distributore
     //console.log('IdCliente=' + IdCliente + ' idProdotto=' + idProdotto + ' quantita=' + quantita + ' prezzoTotale=' + prezzoTotale + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto);
-    if (parseInt(quantitaRimasti) > 0) {
+    if (quantitaRimasti > 0) {
         InsertProdottiInCliente(IdCliente, idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT);
     }
     
@@ -348,7 +348,7 @@ function SalvaResiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaRe
 
     });
     //******************************************************************   
-    if (parseInt(quantitaRimasta) > 0) {
+    if (quantitaRimasta > 0) {
         InsertProdottiInCliente(IdCliente, idProdotto, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT);
     }
     //GetSituazioneCliente(IdCliente, null);

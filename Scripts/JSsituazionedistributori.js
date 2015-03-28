@@ -483,7 +483,7 @@ function SalvaRimasti(IdSituazioneDistributore, idDistributore, idProdotto, quan
 
     //Inserisco la quantita aggiornata di prodotto nel Distributore
     //console.log('idDistributore=' + idDistributore + ' idProdotto=' + idProdotto + ' quantita=' + quantita + ' prezzoTotale=' + prezzoTotale + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto);
-    if (parseInt(quantitaRimasti) > 0) {
+    if (quantitaRimasti > 0) {
         InsertProdottiInDistributore(idDistributore, idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT);
     }
     
@@ -531,7 +531,7 @@ function SalvaResi(idSituazioneDistributore, idDistributore, idProdotto, quantit
     });
     //******************************************************************   
     //console.log('quantitaRimasta=' + quantitaRimasta);
-    if (parseInt(quantitaRimasta) > 0) {
+    if (quantitaRimasta > 0) {
         InsertProdottiInDistributore(idDistributore, idProdotto, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT);
     }
 

@@ -477,7 +477,7 @@ function CaricaProdottiInCliente(IdTrasporto, idCliente, idProdotto, quantitaCar
     // *********************************************************************************
 
     // Aggiorno quantita Prodotti rimasti in Camion ************************************
-    if (parseInt(quantitaRimasti) > 0) {
+    if (quantitaRimasti > 0) {
         $.ajax({
             type: "POST",
             crossDomain: true,
@@ -538,7 +538,7 @@ function CaricaProdottiInDistributore(IdTrasporto, idDistributore, idProdotto, q
         
     // Aggiorno quantita Prodotti rimasti in Camion ************************************
     
-    if (parseInt(quantitaRimasti) > 0) {
+    if (quantitaRimasti > 0) {
         $.ajax({
             type: "POST",
             crossDomain: true,

@@ -75,7 +75,6 @@ function GestioneMagazzino() {
                     dettaglio = dettaglio + '<td></td>';
                 }
                 
-
                 dettaglio = dettaglio + '</tr>';
                 
                 //idProd = risultati[i].idProdotto;
