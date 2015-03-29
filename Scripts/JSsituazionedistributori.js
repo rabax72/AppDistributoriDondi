@@ -490,8 +490,10 @@ function SalvaRimasti(IdSituazioneDistributore, idDistributore, idProdotto, quan
     var idCliente = 0;
     var VenditaDiretta = false;
     
-    AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, idCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, VenditaDiretta, numeroDDT, dataDDT, numeroLotto);
-
+    if (parseInt(quantitaVenduti) > 0) {
+        AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, idCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, VenditaDiretta, numeroDDT, dataDDT, numeroLotto);
+    }
+    
     //GetSituazioneDistributore(idDistributore);
 }
 

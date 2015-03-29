@@ -194,8 +194,10 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                 
                 //console.log(idProdotto + ', '+idProdotto + ', '+idDistributore + ', '+idCliente + ', '+quantitaVenduti + ', '+prezzoTotaleVenduti + ', '+idOperatore + ', '+numeroDDT + ', '+dataDDT );
                 //return;
-                AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, idCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, true, numeroDDT, dataDDT, numeroLotto);
-
+                if (parseInt(quantitaVenduti) > 0) {
+                    AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, idCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, true, numeroDDT, dataDDT, numeroLotto);
+                }
+                
                 var labelQuantita = $(this).closest('td').prev('td').prev('td').prev('td').prev('td');
                 //console.log(labelQuantita);
                 //labelQuantita.switchClass("oldVal", "valoreCambiato", 1000);

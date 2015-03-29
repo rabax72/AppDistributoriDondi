@@ -307,7 +307,11 @@ function SalvaRimastiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantit
     //Inserisco la quantita di Prodotti Venduti
     var VenditaDiretta = false;
     
-    AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, IdCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, VenditaDiretta, numeroDDT, dataDDT, numeroLotto);
+    if (parseInt(quantitaVenduti) > 0) {
+        AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, IdCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, VenditaDiretta, numeroDDT, dataDDT, numeroLotto);
+    }
+    
+
     //****************************************************************** 
 
     //GetSituazioneCliente(IdCliente, null);
