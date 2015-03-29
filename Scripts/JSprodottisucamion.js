@@ -384,7 +384,6 @@ function ElencoProdottiSuCamionPerCliente(idMezzo, idCliente) {
                     dataDDT_interno = new Date();
                 }
                 
-
                 var quantitaAttuale = $(this).closest('td').prev('td').prev('td').text();
                 var quantitaCaricati = $(this).closest('td').prev('td')[0].children[0].value;
                 //var quantiC = quantitaCaricati[0].children[0].value;
@@ -470,39 +469,37 @@ function CaricaProdottiInCliente(IdTrasporto, idCliente, idProdotto, quantitaCar
             risultati = response.d;
 
             //console.log(risultati);
+            // Aggiorno quantita Prodotti rimasti in Camion ************************************
+            if (parseInt(quantitaRimasti) > 0) {
+                $.ajax({
+                    type: "POST",
+                    crossDomain: true,
+                    contentType: "application/json; charset=utf-8",
+                    //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInTrasporto",
+                    url: urlAggiornaQuantInTrasporto,
+                    cache: false,
+                    async: true,
+                    data: JSON.stringify({ idProdotto: idProdotto, quantita: quantitaRimasti, prezzoTotale: prezzoTotaleRimasti, idOperatore: idOperatore, numeroLotto: numeroLotto, IdMezzo: IdMezzo, numeroDDT: numeroDDT, dataDDT: dataDDT, numeroDDT_interno: numeroDDT_interno, dataDDT_interno: dataDDT_interno }),
+                    error: function (data) {
+                        console.log(data.responseText)
+                    },
+                    beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+                    complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+                    success: function (response) {
+                        risultati = response.d;
 
+                        //console.log(risultati);
+
+                    }
+
+                });
+            }
+            // *********************************************************************************
         }
 
     });
     // *********************************************************************************
-
-    // Aggiorno quantita Prodotti rimasti in Camion ************************************
-    if (quantitaRimasti > 0) {
-        $.ajax({
-            type: "POST",
-            crossDomain: true,
-            contentType: "application/json; charset=utf-8",
-            //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInTrasporto",
-            url: urlAggiornaQuantInTrasporto,
-            cache: false,
-            async: true,
-            data: JSON.stringify({ idProdotto: idProdotto, quantita: quantitaRimasti, prezzoTotale: prezzoTotaleRimasti, idOperatore: idOperatore, numeroLotto: numeroLotto, IdMezzo: IdMezzo, numeroDDT: numeroDDT, dataDDT: dataDDT, numeroDDT_interno: numeroDDT_interno, dataDDT_interno: dataDDT_interno }),
-            error: function (data) {
-                console.log(data.responseText)
-            },
-            beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
-            complete: function () { $.mobile.loading('hide'); }, //Hide spinner
-            success: function (response) {
-                risultati = response.d;
-
-                //console.log(risultati);
-
-            }
-
-        });
-    }
-    // *********************************************************************************
-    
+        
     InsertProdottiInCliente(idCliente, idProdotto, quantitaCaricati, prezzoTotaleCaricati, idOperatore, numeroLotto, numeroDDT, dataDDT);
 }
 
@@ -530,40 +527,37 @@ function CaricaProdottiInDistributore(IdTrasporto, idDistributore, idProdotto, q
             risultati = response.d;
             
             //console.log(risultati);
-                    
+            // Aggiorno quantita Prodotti rimasti in Camion ************************************    
+            if (parseInt(quantitaRimasti) > 0) {
+                $.ajax({
+                    type: "POST",
+                    crossDomain: true,
+                    contentType: "application/json; charset=utf-8",
+                    //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInTrasporto",
+                    url: urlAggiornaQuantInTrasporto,
+                    cache: false,
+                    async: true,
+                    data: JSON.stringify({ idProdotto: idProdotto, quantita: quantitaRimasti, prezzoTotale: prezzoTotaleRimasti, idOperatore: idOperatore, numeroLotto: numeroLotto, IdMezzo: IdMezzo, numeroDDT: numeroDDT, dataDDT: dataDDT, numeroDDT_interno: numeroDDT_interno, dataDDT_interno: dataDDT_interno }),
+                    error: function (data) {
+                        console.log(data.responseText)
+                    },
+                    beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+                    complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+                    success: function (response) {
+                        risultati = response.d;
+
+                        //console.log(risultati);
+
+                    }
+
+                });
+            }
+            // *********************************************************************************        
         }
 
     });
     // *********************************************************************************
-        
-    // Aggiorno quantita Prodotti rimasti in Camion ************************************
-    
-    if (quantitaRimasti > 0) {
-        $.ajax({
-            type: "POST",
-            crossDomain: true,
-            contentType: "application/json; charset=utf-8",
-            //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInTrasporto",
-            url: urlAggiornaQuantInTrasporto,
-            cache: false,
-            async: true,        
-            data: JSON.stringify({ idProdotto: idProdotto, quantita: quantitaRimasti, prezzoTotale: prezzoTotaleRimasti, idOperatore: idOperatore, numeroLotto: numeroLotto, IdMezzo: IdMezzo, numeroDDT: numeroDDT, dataDDT: dataDDT, numeroDDT_interno:numeroDDT_interno, dataDDT_interno:dataDDT_interno }),
-            error: function (data) {
-                console.log(data.responseText)
-            },
-            beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
-            complete: function () { $.mobile.loading('hide'); }, //Hide spinner
-            success: function (response) {
-                risultati = response.d;
-
-                //console.log(risultati);
-
-            }
-
-        });
-    }
-    // *********************************************************************************
-
+            
     InsertProdottiInDistributore(idDistributore, idProdotto, quantitaCaricati, prezzoTotaleCaricati, idOperatore, numeroLotto, numeroDDT, dataDDT);
 }
 

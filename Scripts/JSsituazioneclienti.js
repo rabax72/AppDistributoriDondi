@@ -294,13 +294,13 @@ function ConfermaResi(quantita) {
 
 function SalvaRimastiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaVenduti, quantitaRimasti, prezzoTotaleVenduti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT) {
 
-    StoricizzoStatoProdottoInCliente(IdCliente, idProdotto, numeroLotto);
-
+    StoricizzoStatoProdottoInCliente(IdCliente, idProdotto, numeroLotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroDDT, dataDDT);
+    
     //Inserisco la quantita aggiornata di prodotto nel Distributore
     //console.log('IdCliente=' + IdCliente + ' idProdotto=' + idProdotto + ' quantita=' + quantita + ' prezzoTotale=' + prezzoTotale + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto);
-    if (quantitaRimasti > 0) {
-        InsertProdottiInCliente(IdCliente, idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT);
-    }
+    //if (quantitaRimasti > 0) {
+    //    InsertProdottiInCliente(IdCliente, idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT);
+    //}
     
     var idDistributore = 0;
 
@@ -314,10 +314,14 @@ function SalvaRimastiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantit
 }
 
 function SalvaResiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaResi, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT) {    
-
-    StoricizzoStatoProdottoInCliente(IdCliente, idProdotto, numeroLotto);
     
+    StoricizzoStatoProdottoInCliente(IdCliente, idProdotto, numeroLotto, quantitaRimasta, prezzoTotale, idOperatore, numeroDDT, dataDDT);
     //alert(' quantitaResi=' + quantitaResi + ' quantitaRimasta=' + quantitaRimasta);
+
+    //if (quantitaRimasta > 0) {
+    //    InsertProdottiInCliente(IdCliente, idProdotto, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT);
+    //}
+
     var idDistributore = 0;
     //Inserisco la quantita di Resi nel Magazzino Resi
     $.ajax({
@@ -348,15 +352,12 @@ function SalvaResiCliente(IdSituazioneCliente, IdCliente, idProdotto, quantitaRe
 
     });
     //******************************************************************   
-    if (quantitaRimasta > 0) {
-        InsertProdottiInCliente(IdCliente, idProdotto, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT);
-    }
+    
     //GetSituazioneCliente(IdCliente, null);
 }
 
 //Storicizzo la quantita di prodotto in possesso di un dato cliente
-function StoricizzoStatoProdottoInCliente(idCliente, idProdotto, numeroLotto) {
-    
+function StoricizzoStatoProdottoInCliente(idCliente, idProdotto, numeroLotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroDDT, dataDDT) {
     $.ajax({
         type: "POST",
         crossDomain: true,
@@ -374,12 +375,10 @@ function StoricizzoStatoProdottoInCliente(idCliente, idProdotto, numeroLotto) {
         complete: function () { $.mobile.loading('hide'); }, //Hide spinner
         success: function (response) {
             risultati = response.d;
-
             //console.log(risultati);
-            //$(".menuPrincipale").hide();
-
-            //$('.DettaglioDistributore').html(dettaglio);
-
+            if (parseInt(quantitaRimasti) > 0) {
+                InsertProdottiInCliente(idCliente, idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT);
+            }
         }
 
     });

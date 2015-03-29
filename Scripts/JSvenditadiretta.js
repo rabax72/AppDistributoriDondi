@@ -182,12 +182,12 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                 }
 
                 if (!confirm("Sicuro di voler vendere " + quantitaVenduti + " pezzi di questo prodotto?")) return;
+                
+                storicizzaProdottoInMagazzino(idProdotto, numeroLotto, idOperatore, note, false, quantitaRimasti, prezzoTotaleRimasti, numeroDDT, dataDDT);
 
-                storicizzaProdottoInMagazzino(idProdotto, numeroLotto, idOperatore, note, false);
-
-                if (parseInt(quantitaRimasti) > 0) {
-                    AggiornaQuantitaProdottiInMagazzino(idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT, note);
-                }
+                //if (parseInt(quantitaRimasti) > 0) {
+                //    AggiornaQuantitaProdottiInMagazzino(idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT, note);
+                //}
                 
                 var idDistributore = 0;
                 var idCliente = 0;

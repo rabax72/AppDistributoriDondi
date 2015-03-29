@@ -571,7 +571,7 @@ function ElencoClienti() {
 }
 
 // Storicizzo Prodotti in magazzino ************************************************
-function storicizzaProdottoInMagazzino(IdProdotto, numeroLotto, IdOperatore, note, smaltito) {
+function storicizzaProdottoInMagazzino(IdProdotto, numeroLotto, IdOperatore, note, smaltito, quantitaRimasti, prezzoTotaleRimasti, numeroDDT, dataDDT) {
     
     $.ajax({
         type: "POST",
@@ -594,7 +594,9 @@ function storicizzaProdottoInMagazzino(IdProdotto, numeroLotto, IdOperatore, not
             risultati = response.d;
 
             //console.log(risultati);
-
+            if (parseInt(quantitaRimasti) > 0) {
+                AggiornaQuantitaProdottiInMagazzino(IdProdotto, quantitaRimasti, prezzoTotaleRimasti, IdOperatore, numeroLotto, numeroDDT, dataDDT, note);
+            }
         }
 
     });
