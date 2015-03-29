@@ -38,7 +38,9 @@ function ElencoDistributori() {
             for (var i = 0; i < risultati.length; i++) {
                 Citta = risultati[i].Citta;
                 var indirizzo = risultati[i].indirizzo;
-                var desc = '\'' + risultati[i].descrizione + '\'';
+                var desc = risultati[i].descrizione ;
+                desc = desc.replace("'", "\\'");
+                desc = '\'' + desc + '\'';
                 
                 if (Citta != CittaOld) {
                     distributori = distributori + '<li data-role="list-divider">' + Citta + '</li>';
