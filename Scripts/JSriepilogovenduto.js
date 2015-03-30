@@ -381,6 +381,108 @@ function GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, Da
 
 }
 
+function VendutoPerTuttiDistributori(DataDa, DataA) {
+    // location.hash = "VenditaDiretta";
+
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        url: urlGetVendutoPerTuttiDistributori,
+        cache: false,
+        async: true,
+        data: JSON.stringify({ DataDa: DataDa, DataA: DataA }),
+        error: function (data) {
+            console.log(data.responseText)
+        },
+        beforeSend: function () { $('.DettRiepilogoVenduto').html(''); $.mobile.loading('show'); }, //Show spinner
+        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+        success: function (response) {
+            risultati = response.d;
+
+            var dettaglio = '<h1>Riepilogo Venduto per Tutti i Distributori</h1>' +
+                            '<div>' +
+                                'Data Da <input type="text" id="VendutoPerTuttiDitributoriDataDa"  class="calendario" data-theme="a" /> Data A <input type="text" id="VendutoPerTuttiDitributoriDataA"  class="calendario" data-theme="a" /> <button id="filtraVendutoDitributore" value="Filtra" class="filtraVendutoPerTuttiDitributori">Filtra</button>' +
+                            '</div><table id="tabellaVendutoPerTuttiDitributori" class="display" cellspacing="0" width="100%">' +
+                                    '<thead>' +
+                                        '<tr>' +
+                                            '<th>Foto</th>' +
+                                            '<th>Desc.</th>' +
+                                            '<th>Quantità</th>' +
+                                            '<th>Prezzo Tot.</th>' +
+                                            '<th>Data Ril.</th>' +
+                                            '<th>N° DDT</th>' +
+                                            '<th>Data DDT</th>' +
+                                            '<th>Distributore</th>' +
+                                            '<th>Operatore</th>' +
+                                        '</tr>' +
+                                    '</thead>' +
+                                    '<tbody>';
+            var prezzoTot = 0;
+            var totaleQuantita = 0;
+            for (var i = 0; i < risultati.length; i++) {
+
+                dettaglio = dettaglio + '<tr>';
+                dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
+                dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
+                dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzoTotale + ' €</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataUltimaModifica) + '</td>';
+                dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].numeroDDT + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].descrizioneDistributore + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
+                dettaglio = dettaglio + '</tr>';
+                prezzoTot = prezzoTot + risultati[i].prezzoTotale;
+                totaleQuantita = totaleQuantita + risultati[i].quantita;
+            }
+
+           
+            dettaglio = dettaglio + '</tbody>' + '<tfoot>' +
+                                        '<tr>' +
+                                            '<th>Foto</th>' +
+                                            '<th>Desc.</th>' +
+                                            '<th>Totale Quantità: ' + totaleQuantita + '</th>' +
+                                            '<th>Totale Venduto: ' + Number(prezzoTot).toFixed(2) + '€</th>' +
+                                            '<th>N° DDT</th>' +
+                                            '<th>Data DDT</th>' +
+                                            '<th>Distributore</th>' +
+                                            '<th>Operatore</th>' +
+                                        '</tr>' +
+                                    '</tfoot>' + ' </table>';
+
+            //console.log(dettaglio);
+
+            $('.DettRiepilogoVenduto').html(dettaglio);
+
+            $(".dataDDT").datepicker({
+                dateFormat: "dd-mm-yy"
+            });
+
+            $(".calendario").datepicker({
+                dateFormat: "dd-mm-yy"
+            });
+
+            var table = $('#tabellaVendutoPerTuttiDitributori').DataTable(
+                {
+                    "paging": false, responsive: true, dom: 'T<"clear">lfrtip', tableTools: {
+                        "sSwfPath": "Scripts/jquery/swf/ZeroClipboard.swf"
+                    }
+                }
+            );
+
+            $('.filtraVendutoPerTuttiDitributori').click(function () {
+                var DataDa = stringToDate($('#VendutoPerTuttiDitributoriDataDa').val(), "dd-MM-yyyy", "-");
+                var DataA = stringToDate($('#VendutoPerTuttiDitributoriDataDa').val(), "dd-MM-yyyy", "-");
+                //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
+                VendutoPerTuttiDistributori(DataDa, DataA);
+            });
+
+        }
+    });
+
+}
+
 function VendutoPerDistributore() {
     // location.hash = "VenditaDiretta";
 

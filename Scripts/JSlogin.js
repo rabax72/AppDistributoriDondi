@@ -36,6 +36,7 @@ if (tipoDiConn == "prod") {
     var urlGetVendutoDistributori = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetVendutoDistributori';
     var urlGetVendutoByIdProdotto = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetVendutoByIdProdotto';
     var urlGetVendutoByIdDistributore = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetVendutoByIdDistributore';
+    var urlGetVendutoPerTuttiDistributori = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetVendutoPerTuttiDistributori';
     var urlGetVendutoByIdCliente = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetVendutoByIdCliente';
 } else {
     var urlGetAuthentication = 'WebServiceAppDondi.asmx/GetAuthentication';
@@ -73,6 +74,7 @@ if (tipoDiConn == "prod") {
     var urlGetVendutoDistributori = 'WebServiceAppDondi.asmx/GetVendutoDistributori';
     var urlGetVendutoByIdProdotto = 'WebServiceAppDondi.asmx/GetVendutoByIdProdotto';
     var urlGetVendutoByIdDistributore = 'WebServiceAppDondi.asmx/GetVendutoByIdDistributore';
+    var urlGetVendutoPerTuttiDistributori = 'WebServiceAppDondi.asmx/GetVendutoPerTuttiDistributori';
     var urlGetVendutoByIdCliente = 'WebServiceAppDondi.asmx/GetVendutoByIdCliente';
 }
 

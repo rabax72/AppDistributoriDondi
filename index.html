@@ -15,6 +15,9 @@
 <link rel="stylesheet" href="http://cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css">
 <script src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
 
+    <link href="Scripts/Jquery/tableTools.css" rel="stylesheet" />
+    <script src="Scripts/Jquery/tableTools.js"></script>
+
     <link href="Scripts/DatePicker/jquery.mobile.datepicker.css" rel="stylesheet" />
     <link href="Scripts/DatePicker/jquery.mobile.datepicker.theme.css" rel="stylesheet" />
     <script src="Scripts/DatePicker/jquery.mobile.datepicker.js"></script>
@@ -438,6 +441,7 @@
         <div role="main" class="ui-content jqm-content">                
                                    
             <ul data-role="listview" data-filter="true" data-filter-placeholder="Cerca il Cliente..." data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+                <li><a href="javascript:VendutoPerTuttiDistributori(null, null);" class="ui-btn ui-btn-icon-right ui-icon-carat-r vociVenduto" >Venduto di tutti i Distributori</a></li>
                 <li><a href="javascript:VendutoPerDistributore();" class="ui-btn ui-btn-icon-right ui-icon-carat-r vociVenduto" >Venduto Per Distributore</a></li>
                 <li><a href="javascript:VendutoPerCliente();" class="ui-btn ui-btn-icon-right ui-icon-carat-r vociVenduto" >Venduto Per Cliente</a></li>
                 <li><a href="javascript:VendutoPerProdotto();" class="ui-btn ui-btn-icon-right ui-icon-carat-r vociVenduto" >Venduto Per Prodotto</a></li>
