@@ -465,9 +465,7 @@ function VendutoPerTuttiDistributori(DataDa, DataA) {
 
             var table = $('#tabellaVendutoPerTuttiDitributori').DataTable(
                 {
-                    "paging": false, responsive: true, dom: 'T<"clear">lfrtip', tableTools: {
-                        "sSwfPath": "Scripts/jquery/swf/ZeroClipboard.swf"
-                    }
+                    "paging": false, responsive: true
                 }
             );
 
