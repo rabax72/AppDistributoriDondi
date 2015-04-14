@@ -35,7 +35,7 @@ function GetSituazioneVendutoInDistributore(IdDistributore, idProd, obj, numeroL
             //venduto = response.d;
            // alert(risultati);
             //obj.next('div').html(risultati.quantita);
-            obj.closest('td').html(risultati.quantita);
+            obj.closest('td').html(risultati.quantitaVenduto);
 
             //return risultati;
 
@@ -69,23 +69,14 @@ function GetStoricoVendutoInDistributore(IdDistributore, idProd, numeroLotto, nu
         complete: function () { $.mobile.loading('hide'); }, //Hide spinner
         success: function (response) {
             risultati = response.d;
-            //corsiGlobal = response.d;
-            //console.log('Caricati!');
-            //console.log(Ordinanze);
-            //console.log(risultati);
-            //$(".menuPrincipale").hide();
-            //venduto = response.d;
-            // alert(risultati);
-            //obj.next('div').html(risultati.quantita);
-
-            //obj.closest('td').html(risultati.quantita);
+            
             var storicoQuantitaVendute = '<table class="storicoVendite"><tr><td><b>Data Vendita</b></td><td><b>Quantità Venduta</b></td></tr>';
             
             var righe = '';
             for (var i = 0; i < risultati.length; i++) {
                 righe = righe + '<tr>';
                 righe = righe + '<td>' + parseJsonDateLettura(risultati[i].dataInserimento) + '</td>';
-                righe = righe + '<td>' + risultati[i].quantita + '</td>';
+                righe = righe + '<td>' + risultati[i].quantitaVenduto + '</td>';
                 righe = righe + '</tr>';
             }
                         
@@ -114,8 +105,8 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
         type: "POST",
         crossDomain: true,
         contentType: "application/json; charset=utf-8",
-        //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetSituazioneDistributore",        
-        url: urlGetSituazioneDistributore,
+        //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetSituazioneDistributoreV2",        
+        url: urlGetSituazioneDistributoreV2,
         cache: false,
         //jsonpCallback: 'risposta',
         // jsonp: 'callback',
@@ -140,23 +131,24 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
             var dettaglio = '<table id="tabellaDettaglioDistributore" class="display" cellspacing="0" width="100%">' +
                                         '<thead>' +
                                             '<tr>' +                                                
-                                                '<th>Foto</th>' +
-                                                '<th>Desc.</th>' +
-                                                '<th>Quantita Precedente</th>' +
-                                                '<th>Rimasti</th>' +
-                                                '<th>Resi</th>' +
-                                                //'<th>Venduti</th>' +
-                                                '<th>Storico Venduto</th>' +
+                                                '<th width="10%">Foto</th>' +
+                                                '<th width="15%">Desc.</th>' +
+                                                '<th width="15%">Quantita Dist.</th>' +
+                                                '<th width="15%">Rimasti</th>' +
+                                                '<th width="15%">Resi</th>' +
+                                                '<th width="15%">Carica</th>' +
+                                                '<th width="15%">Sposta</th>' +
                                             '</tr>' +
                                         '</thead>' +
                                         '<tfoot>' +
                                             '<tr>' +                                              
                                                 '<th>Foto</th>' +
                                                 '<th>Desc.</th>' +
-                                                '<th>Quantita Precedente</th>' +
+                                                '<th>Quantita Dist.</th>' +
                                                 '<th>Rimasti</th>' +
-                                                //'<th>Venduti</th>' +
-                                                '<th>Storico Venduto</th>' +
+                                                '<th>Resi</th>' +
+                                                '<th>Carica</th>' +
+                                                '<th>Sposta</th>' +
                                             '</tr>' +
                                         '</tfoot>' +
                                         '<tbody>';
@@ -168,88 +160,46 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
             var quantita = 0;
             var quantitaOld = 0;
             var quantitaTot = 0;
+            var coloreEvidenziato = '';
+            var prodotti = new Array();
             for (var i = 0; i < risultati.length; i++) {
                 //var quantitaRimasta = $("#rimastoLotto" + risultati[i].IdSituazioneDistributore).val();
                 //var prezzoTotale = (quantitaRimasta * risultati[i].prezzo);
 
                 idProd = risultati[i].idProdotto;
                 numLotto = risultati[i].numeroLotto;
-                quantita = risultati[i].quantita;
-                //var oggi = stringToDate('15-02-2015','dd-MM-yyyy','-');
-                                        
-                //function displayData(x) {
-                //    x.success(function (realData) {
-                //        //$('#test').text(realData).css({color: 'green'});
-                //        $(".qVenduto").html(realData);
-                //    });
-                //}
-
-                //var promise = foo(IdDistributore, idProd);
-                //displayData(promise);
-
-                //var venduto = foo(IdDistributore, idProd, oggi);
-                
-
-                //console.log(venduto);
-                //var h = venduto;
-                //console.log(h.d);
-
-                if (idProd != idProdOld) {
-                    
-                    quantitaTot = quantita;
-                    rigaDettaglio[i] = '<tr>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantita + '</td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td><div class="nomeDistributore">Rimasti</div> <input type="number" id="rimastoLotto' + risultati[i].IdSituazioneDistributore + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneDistributore="' + risultati[i].IdSituazioneDistributore + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdDistributore="' + risultati[i].IdDistributore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti ui-btnCarica">Salva</a> </td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td><div class="medioFont">Resi</div> <input type="number" id="resoLotto' + risultati[i].IdSituazioneDistributore + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneDistributore="' + risultati[i].IdSituazioneDistributore + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdDistributore="' + risultati[i].IdDistributore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active resi ui-btnScarica">Salva</a> </td>';
-                    //rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita"><input type="button" text="Aggiorna" value="Aggiorna" class="aggiornaVenduto" data-idProdotto="' + idProd + '" data-numeroLotto="' + stringToDate(parseJsonDateLettura(risultati[i].numeroLotto), "dd/MM/yyyy", "/") + '"><div>a</div></td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td align="center"><a href="#popUpStoricoVendutoDaDist" data-rel="popup" data-position-to="window" class="storicoVendutoDaDistributore" data-idProdotto="' + risultati[i].idProdotto + '" data-IdDistributore="' + risultati[i].IdDistributore + '" data-numeroLotto="' + parseJsonDateLettura(risultati[i].numeroLotto) + '"><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/info_40x40.png" border="0" alt="Storico Vendite" title="Storico Vendite"></a> </td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
-                } else {
-                    if (numLotto != numLottoOld) {
-                        quantitaTot = quantita;
-                        rigaDettaglio[i] = '<tr>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantita + '</td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><div class="nomeDistributore">Rimasti</div> <input type="number" id="rimastoLotto' + risultati[i].IdSituazioneDistributore + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneDistributore="' + risultati[i].IdSituazioneDistributore + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdDistributore="' + risultati[i].IdDistributore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti ui-btnCarica">Salva</a> </td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><div class="medioFont">Resi</div> <input type="number" id="resoLotto' + risultati[i].IdSituazioneDistributore + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneDistributore="' + risultati[i].IdSituazioneDistributore + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdDistributore="' + risultati[i].IdDistributore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active resi ui-btnScarica">Salva</a> </td>';
-                        //rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita"><input type="button" text="Aggiorna" value="Aggiorna" class="aggiornaVenduto" data-idProdotto="' + idProd + '" data-numeroLotto="' + stringToDate(parseJsonDateLettura(risultati[i].numeroLotto), "dd/MM/yyyy", "/") + '"><div>a</div></td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td align="center"><a href="#popUpStoricoVendutoDaDist" data-rel="popup" data-position-to="window" class="storicoVendutoDaDistributore" data-idProdotto="' + risultati[i].idProdotto + '" data-IdDistributore="' + risultati[i].IdDistributore + '" data-numeroLotto="' + parseJsonDateLettura(risultati[i].numeroLotto, "dd/MM/yyyy", "/") + '"><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/info_40x40.png" border="0" alt="Storico Vendite" title="Storico Vendite"></a> </td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
-                    } else {
-                        rigaDettaglio[i - 1] = '';
-                        quantitaTot = (quantitaTot + quantita);
-                        rigaDettaglio[i] = '<tr>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + quantitaTot + '</td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><div class="nomeDistributore">Rimasti</div> <input type="number" id="rimastoLotto' + risultati[i].IdSituazioneDistributore + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneDistributore="' + risultati[i].IdSituazioneDistributore + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdDistributore="' + risultati[i].IdDistributore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti ui-btnCarica">Salva</a> </td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><div class="medioFont">Resi</div> <input type="number" id="resoLotto' + risultati[i].IdSituazioneDistributore + '" data-clear-btn="true" class="miniInput" min="0" max="3"> <a href="#" data-IdSituazioneDistributore="' + risultati[i].IdSituazioneDistributore + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-IdDistributore="' + risultati[i].IdDistributore + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-numeroDDT="' + risultati[i].numeroDDT + '" data-dataDDT="' + risultati[i].dataDDT + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active resi ui-btnScarica">Salva</a> </td>';
-                        //rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita"><input type="button" text="Aggiorna" value="Aggiorna" class="aggiornaVenduto" data-idProdotto="' + idProd + '" data-numeroLotto="' + stringToDate(parseJsonDateLettura(risultati[i].numeroLotto), "dd/MM/yyyy", "/") + '"><div>a</div></td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td align="center"><a href="#popUpStoricoVendutoDaDist" data-rel="popup" data-position-to="window" class="storicoVendutoDaDistributore" data-idProdotto="' + risultati[i].idProdotto + '" data-IdDistributore="' + risultati[i].IdDistributore + '" data-numeroLotto="' + parseJsonDateLettura(risultati[i].numeroLotto, "dd/MM/yyyy", "/") + '"><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/info_40x40.png" border="0" alt="Storico Vendite" title="Storico Vendite"></a> </td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
-                    }
+                quantita = risultati[i].quantitaDistributore;                
+                coloreEvidenziato = risultati[i].colore;
+                 
+                var evidenziato = "";
+                if (risultati[i].caricato) {
+                    evidenziato = "verde";
                 }
 
-                idProdOld = risultati[i].idProdotto;
-                numLottoOld = risultati[i].numeroLotto;
-                quantitaOld = risultati[i].quantita;
-            }
-            var righe = '';
+                prodotti[i] = idProd;
+                dettaglio = dettaglio + '<tr>';
+                dettaglio = dettaglio + '<td align="center"><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"><a href="#popUpStoricoVendutoDaDist" data-rel="popup" data-position-to="window" class="storicoVendutoDaDistributore" data-idProdotto="' + risultati[i].idProdotto + '" data-IdDistributore="' + risultati[i].IdDistributore + '" data-numeroLotto="' + parseJsonDateLettura(risultati[i].numeroLotto) + '"><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/info_40x40.png" border="0" alt="Storico Vendite" title="Storico Vendite"></a></td>';
+                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '<br><br><div id="quantMagazzino' + risultati[i].idProdotto + '" class="quantitaMag">' + risultati[i].quantitaMagazzino + '</div></td>';
+                dettaglio = dettaglio + '<td class="quantita ' + coloreEvidenziato + '">' + risultati[i].quantitaDistributore + '</td>';
+                dettaglio = dettaglio + '<td><div class="nomeDistributore">Rimasti</div> <input type="number" id="rimastoDist' + risultati[i].idProdotto + '" data-clear-btn="true" class="miniInput" min="0"> <a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti ui-btnCarica">Salva</a> </td>';
+                dettaglio = dettaglio + '<td><div class="medioFont" style="margin-bottom:9px;">Resi</div> <input type="number" id="resoDist' + risultati[i].idProdotto + '" data-clear-btn="true" class="miniInput" min="0"> <a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active resi ui-btnScarica">Salva</a> </td>';
+                dettaglio = dettaglio + '<td><div class="medioFont" style="margin-bottom:9px;">Carica</div> <input type="number" id="caricaDist' + risultati[i].idProdotto + '" data-clear-btn="true" class="miniInput" min="0"> <a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-quantMagazzino="' + risultati[i].quantitaMagazzino + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaDist ui-btnCaricaDaMagazzino">Salva</a></td>';
+                dettaglio = dettaglio + '<td><input type="checkbox" data-role="flipswitch" name="flip-checkbox-' + risultati[i].idProdotto + '" id="flip-checkbox-' + risultati[i].idProdotto + '" data-on-text="Camion" data-off-text="Distributore" data-wrapper-class="custom-size-flipswitch" checked=""><span id="quantInCamion-' + risultati[i].idProdotto + '" class="quantSuCamion"></span> <input type="number" id="spostaDist' + risultati[i].idProdotto + '" data-clear-btn="true" class="miniInput" min="0"> <a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active spostaDist ui-btnSposta">Salva</a></td>';
+                dettaglio = dettaglio + '</tr>';
 
-            for (var i = 0; i < risultati.length; i++) {
-                righe = righe + rigaDettaglio[i];                
-            }
+            }           
 
-            dettaglio = dettaglio + righe + '</tbody> </table>';
+            dettaglio = dettaglio + '</tbody> </table>';
+            var desc = descDistributore;
+            desc = desc.replace("'", "\\'");
+            desc = '\'' + desc + '\'';
+            dettaglio = dettaglio + '<br><p align="center"><input type="button" value="FINE CARICO" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti ui-btnCarica fineCarico" onclick="togliEvidenziatoDistributore(' + IdDistributore + ', ' + desc + ')" /></p>';
 
             $('.DettaglioDistributore').html(dettaglio);
 
             $(".storicoVendutoDaDistributore").on('click', function () {
                 var idProdotto = $(this).attr('data-idProdotto');
-                var idDistributore = $(this).attr('data-IdDistributore');
+                var idDistributore = IdDistributore;
                 var numeroLotto = $(this).attr('data-numeroLotto');
                 //console.log("numeroLotto=" + numeroLotto + "---");
                 numeroLotto = stringToDate(numeroLotto, 'dd/mm/yyyy', '/');
@@ -259,38 +209,32 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
             });          
 
             var table = $('#tabellaDettaglioDistributore').DataTable(
-                { "paging": false, responsive: true }
+                {
+                    "paging": false, responsive: true, "fnDrawCallback": function () {
+                        $(this).trigger('create');                       
+                    }
+                }
             );
 
-            $(".rimasti").on('click', function () {
+            for (var i = 0; i < prodotti.length; i++) {
+                GetProdottiInCamionByIdProdotto(1, prodotti[i]);
+            }
 
-                var IdSituazioneDistributore = $(this).attr('data-IdSituazioneDistributore');
-                var idDistributore = $(this).attr('data-IdDistributore');
+            $(".rimasti").on('click', function () {
+                
+                var idDistributore = IdDistributore;
                 var idProdotto = $(this).attr('data-idProdotto');
                 var prezzo = $(this).attr('data-prezzo');
                 var quantitaAttuale = $(this).closest('td').prev('td').text();
-                var quantitaRimasti = $(this).prev().val();
+                var quantitaRimasti = $('#rimastoDist' + idProdotto).val();
                 var quantitaVenduti = (quantitaAttuale - quantitaRimasti);
                 var prezzoTotaleRimasti = (prezzo * quantitaRimasti);
                 var prezzoTotaleVenduti = (prezzo * quantitaVenduti);
                 var idOperatore = localStorage.idOperatore;
-                //var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
-                var numeroLotto = parseJsonDateToJsDate($(this).attr('data-numeroLotto'));
-
-                var numeroDDT = $(this).attr('data-numeroDDT');
-                if (numeroDDT == 'undefined') {
-                    numeroDDT = 0;
-                }
-                var dataDDT = $(this).attr('data-dataDDT');
-                if (dataDDT != 'undefined') {
-                    //dataDDT = new Date(parseJsonDateToJsDate(dataDDT));
-                    dataDDT = parseJsonDateToJsDate(dataDDT);
-                } else {
-                    dataDDT = new Date();
-                }
+               
 
                 if (quantitaRimasti == "") {
-                    alert("Scegli un valore Numerico prima di caricare");
+                    alert("Scegli un valore Numerico per indicare i Rimasti!");
                     $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
                     return;
                 } else {
@@ -307,19 +251,19 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                     $(this).prev().removeClass("evidenziaErrore");
                 }
 
-                //alert('IdSituazioneDistributore=' + IdSituazioneDistributore + ' idDistributore=' + idDistributore + ' idProdotto=' + idProdotto + ' quantitaVenduti=' + quantitaVenduti + ' quantitaRimasti=' + quantitaRimasti + 'prezzoTotaleVenduti=' + prezzoTotaleVenduti + ' prezzoTotaleRimasti=' + prezzoTotaleRimasti + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto);
+                //alert('idDistributore=' + idDistributore + ' idProdotto=' + idProdotto + ' quantitaVenduti=' + quantitaVenduti + ' quantitaRimasti=' + quantitaRimasti + 'prezzoTotaleVenduti=' + prezzoTotaleVenduti + ' prezzoTotaleRimasti=' + prezzoTotaleRimasti + ' idOperatore=' + idOperatore);
                 //return;
 
-                if (!confirm("Sicuro che sul distributore sono rimasti " + quantitaRimasti + " pezzi di questo prodotto?")) return;
+                //if (!confirm("Sicuro che sul distributore sono rimasti " + quantitaRimasti + " pezzi di questo prodotto?")) return;
 
-                SalvaRimasti(IdSituazioneDistributore, idDistributore, idProdotto, quantitaVenduti, quantitaRimasti, prezzoTotaleVenduti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT);
+                SalvaRimasti(idDistributore, idProdotto, quantitaVenduti, quantitaRimasti, prezzoTotaleVenduti, prezzoTotaleRimasti, idOperatore);
 
                 var labelQuantita = $(this).closest('td').prev('td');
                 //console.log(labelQuantita);
                 //labelQuantita.switchClass("oldVal", "valoreCambiato", 1000);
                 //labelQuantita.css("background-color", "green");
                 labelQuantita.animate({
-                    backgroundColor: "green",
+                    backgroundColor: "#38c",
                     color: "#000"
                 }, 1000);
                 labelQuantita.html(quantitaRimasti);
@@ -333,33 +277,18 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
             });
 
             $(".resi").on('click', function () {
-
-                var IdSituazioneDistributore = $(this).attr('data-IdSituazioneDistributore');
-                var idDistributore = $(this).attr('data-IdDistributore');
+                
+                var idDistributore = IdDistributore;
                 var idProdotto = $(this).attr('data-idProdotto');
                 var prezzo = $(this).attr('data-prezzo');
-                var quantitaResi = $(this).prev().val();
+                var quantitaResi = $('#resoDist' + idProdotto).val();
                 var quantitaDist = $(this).closest('td').prev('td').prev('td').text();
                 var prezzoTotale = (prezzo * quantitaResi);
                 var idOperatore = localStorage.idOperatore;
-                //var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
-                var numeroLotto = parseJsonDateToJsDate($(this).attr('data-numeroLotto'));
                 var quantitaRimasta = (quantitaDist - quantitaResi);
 
-                var numeroDDT = $(this).attr('data-numeroDDT');
-                if (numeroDDT == 'undefined') {
-                    numeroDDT = 0;
-                }
-                var dataDDT = $(this).attr('data-dataDDT');
-                if (dataDDT != 'undefined') {
-                    //dataDDT = new Date(parseJsonDateToJsDate(dataDDT));
-                    dataDDT = parseJsonDateToJsDate(dataDDT);
-                } else {
-                    dataDDT = new Date();
-                }
-
                 if (quantitaResi == "" || isInteroPositivo(parseInt(quantitaResi)) == false) {
-                    alert("Scegli un valore Numerico prima di caricare");
+                    alert("Scegli un valore Numerico per indicare i Resi!");
                     $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
                     return;
                 } else {
@@ -383,22 +312,113 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                 //alert('IdSituazioneDistributore=' + IdSituazioneDistributore + ' idDistributore=' + idDistributore + ' idProdotto=' + idProdotto + ' quantitaResi=' + quantitaResi + ' quantitaRimasta=' + quantitaRimasta + 'prezzoTotale=' + prezzoTotale + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto);
                 //return;
 
-                if (!confirm("Sicuro che sono da rendere " + quantitaResi + " pezzi di questo prodotto?")) return;
+                //if (!confirm("Sicuro che sono da rendere " + quantitaResi + " pezzi di questo prodotto?")) return;
 
-                SalvaResi(IdSituazioneDistributore, idDistributore, idProdotto, quantitaResi, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT);
+                SalvaResi(idDistributore, idProdotto, quantitaResi, quantitaRimasta, prezzoTotale, idOperatore);
 
                 var labelQuantita = $(this).closest('td').prev('td').prev('td');
                 //console.log(labelQuantita);
                 //labelQuantita.switchClass("oldVal", "valoreCambiato", 1000);
                 //labelQuantita.css("background-color", "green");
+                
                 labelQuantita.animate({
-                    backgroundColor: "green",
+                    backgroundColor: "red",
                     color: "#000"
                 }, 1000);
                 
                 labelQuantita.html(quantitaRimasta);
             });
+
+            $('.caricaDist').on('click', function () {
+                var idProdotto = $(this).attr('data-idProdotto');
+                var quantitaDaCaricare = $('#caricaDist' + idProdotto).val();
+                var quantMagazzino = $(this).attr('data-quantMagazzino');
+                var quantRestante = (quantMagazzino - quantitaDaCaricare);
+                var labelQuantita = $(this).closest('td').prev('td').prev('td').prev('td');
+                var quantitaAggiornata = (parseInt(quantitaDaCaricare) + parseInt(labelQuantita.text()));
+                var prezzo = $(this).attr('data-prezzo');
+                var prezzoTotale = (prezzo * quantRestante);
+                var idOperatore = localStorage.idOperatore;
+                var giacenza = $('#quantMagazzino' + idProdotto);
+
+                if (quantitaDaCaricare == "" || isInteroPositivo(parseInt(quantitaDaCaricare)) == false) {
+                    alert("Scegli un valore Numerico per indicare quanto caricare!");
+                    $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
+                    return;
+                } else {
+                    $(this).prev().removeClass("evidenziaErrore");
+                }
+
+                SmaltiscoProdottiDaMagazzinoV2(idProdotto, quantRestante, prezzoTotale, idOperatore, false, 'verde');
+
+                InsertProdottiInDistributore(IdDistributore, idProdotto, quantitaDaCaricare, prezzoTotale, idOperatore, 'verde');
+
+                labelQuantita.html(quantitaAggiornata);
+                giacenza.html(quantRestante);
+
+                labelQuantita.animate({
+                    backgroundColor: "green",
+                    color: "#000"
+                }, 1000);
+
+                giacenza.animate({
+                    backgroundColor: "green",
+                    color: "#000"
+                }, 1000);
+
+            });
             
+            $('.spostaDist').on('click', function () {
+                var idProdotto = $(this).attr('data-idProdotto');
+                var quantitaDaSpostare = $('#spostaDist' + idProdotto).val();
+                var quantCamion = $('#quantInCamion-' + idProdotto);
+                
+                var labelQuantita = $(this).closest('td').prev('td').prev('td').prev('td').prev('td');
+                
+                var prezzo = $(this).attr('data-prezzo');
+                
+                var idOperatore = localStorage.idOperatore;
+                
+                var direzione = $('#flip-checkbox-' + idProdotto).is(':checked');
+
+                if (quantitaDaSpostare == "" || isInteroPositivo(parseInt(quantitaDaSpostare)) == false) {
+                    alert("Scegli un valore Numerico per indicare quanto spostare!");
+                    $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
+                    return;
+                } else {
+                    $(this).prev().removeClass("evidenziaErrore");
+                }
+
+                if (direzione) {
+                    var quantRestanteDistributore = (parseInt(labelQuantita.text()) - parseInt(quantitaDaSpostare));
+                    var quantRestanteCamion = (parseInt(quantCamion.text()) + parseInt(quantitaDaSpostare));
+                    
+                } else {
+                    var quantRestanteDistributore = (parseInt(labelQuantita.text()) + parseInt(quantitaDaSpostare));
+                    var quantRestanteCamion = (parseInt(quantCamion.text()) - parseInt(quantitaDaSpostare));
+                    //InsertProdottiInCamionV2(idProdotto, quantitaDaSpostare, prezzoTotaleRimastiCamion, idOperatore, 1);
+                }
+                var prezzoTotaleRimastiDistributore = (prezzo * quantRestanteDistributore);
+                var prezzoTotaleRimastiCamion = (prezzo * quantRestanteCamion);
+
+                StoricizzoStatoProdottoInDistributore(IdDistributore, idProdotto, quantRestanteDistributore, prezzoTotaleRimastiDistributore, idOperatore);
+
+                StoricizzoProdInTrasportoV2(idProdotto, idOperatore, quantRestanteCamion, prezzoTotaleRimastiCamion, IdDistributore);
+                                
+                labelQuantita.html(quantRestanteDistributore);
+                quantCamion.html(quantRestanteCamion);               
+
+                labelQuantita.animate({
+                    backgroundColor: "#FFA500",
+                    color: "#000"
+                }, 1000);
+
+                quantCamion.animate({
+                    backgroundColor: "#FFA500",
+                    color: "#000"
+                }, 1000);
+
+            });
 
         }
 
@@ -406,41 +426,65 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
 
 }
 
-//function GetSituazioneVendutoInDistributore(idDistributore, idProdotto, DataA) {
-//    $.ajax({
-//        type: "POST",
-//        crossDomain: true,
-//        contentType: "application/json; charset=utf-8",               
-//        url: urlGetSituazioneVendutoInDistributore,
-//        cache: false,
-//        //jsonpCallback: 'risposta',
-//        // jsonp: 'callback',
-//        // dataType: "jsonp",            
-//        async: false,
-//        //            data: "idDisciplina=" + idDisciplina,
-//        data: JSON.stringify({ idDistributore: idDistributore, idProdotto: idProdotto, DataA: DataA }),
-//        //data: { NomeOrdinanza: NomeOrdinanza, DataPubbDa: DataPubbDa, DataPubbA: DataPubbA, DataScadDa: DataScadDa, DataScadA: DataScadA },
-//        error: function (data) {
-//            console.log(data.responseText);
-//            //$("#tuttiDistributori").html(data.responseText);
-//        },
-//        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
-//        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
-//        success: function (response) {
-//            //risultati = response.d;
-//            //corsiGlobal = response.d;
-//            //console.log('Caricati!');
-//            // console.log(Ordinanze);
-//            //console.log(risultati);
-//            //$(".menuPrincipale").hide();
-//            return response.d;
+function StoricizzoProdInTrasportoV2(IdProdotto, IdOperatore, quantitaDaSpostare, prezzoTotaleRimasti, idDidtributore) {
+    $.ajax({
+                    type: "POST",
+                    crossDomain: true,
+                    contentType: "application/json; charset=utf-8",                    
+                    url: urlStoricizzoProdTrasportoV2,
+                    cache: false,
+                    async: true,
+                    data: JSON.stringify({ IdProdotto: IdProdotto, IdOperatore: IdOperatore }),
+                    error: function (data) {
+                        console.log(data.responseText)
+                    },
+                    beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+                    complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+                    success: function (response) {
+                        risultati = response.d;
 
-//            //$("#tuttiDistributori").html(distributori);
+                        //console.log(risultati);
+                        InsertProdottiInCamionV2(IdProdotto, quantitaDaSpostare, prezzoTotaleRimasti, IdOperatore, 1, idDidtributore);
+                    }
 
-//        }
+                });
+}
 
-//    });
-//}
+function GetProdottiInCamionByIdProdotto(idMezzo, idProdotto) {
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiSuCamionByIdProdotto",        
+        url: urlGetProdottiSuCamionByIdProdotto,
+        cache: false,
+        async: true,
+        //            data: "idDisciplina=" + idDisciplina,
+        data: JSON.stringify({ idMezzo: idMezzo, idProdotto: idProdotto }),
+        error: function (data) {
+            console.log(data.responseText)
+        },
+        //beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+        //complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+        success: function (response) {
+            risultati = response.d;
+
+            //console.log(risultati);
+            //$(".menuPrincipale").hide();
+            var quantita = 0;
+            for (var i = 0; i < risultati.length; i++) {
+                quantita = (quantita + parseInt(risultati[i].quantitaTrasporto));
+            }
+
+            $('#quantInCamion-' + idProdotto).html(quantita);
+            //$('.DettaglioDistributore').html(dettaglio);
+            //AggiornaColoreProdottoInDistributore(idDistributore, idProdotto, 'rosso');
+
+        }
+
+    });
+}
+
 
 function ConfermaResi(quantita) {
     var answer = confirm('Confermi che per questo articolo ci sono '+quantita + ' Resi?')
@@ -477,9 +521,9 @@ function ConfermaResi(quantita) {
     //});
 }
 
-function SalvaRimasti(IdSituazioneDistributore, idDistributore, idProdotto, quantitaVenduti, quantitaRimasti, prezzoTotaleVenduti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT) {
+function SalvaRimasti(idDistributore, idProdotto, quantitaVenduti, quantitaRimasti, prezzoTotaleVenduti, prezzoTotaleRimasti, idOperatore) {
 
-    StoricizzoStatoProdottoInDistributore(idDistributore, idProdotto, numeroLotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroDDT, dataDDT);
+    StoricizzoStatoProdottoInDistributore(idDistributore, idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore);
     
     //Inserisco la quantita aggiornata di prodotto nel Distributore
     //console.log('idDistributore=' + idDistributore + ' idProdotto=' + idProdotto + ' quantita=' + quantita + ' prezzoTotale=' + prezzoTotale + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto);
@@ -491,15 +535,15 @@ function SalvaRimasti(IdSituazioneDistributore, idDistributore, idProdotto, quan
     var VenditaDiretta = false;
     
     if (parseInt(quantitaVenduti) > 0) {
-        AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, idCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, VenditaDiretta, numeroDDT, dataDDT, numeroLotto);
+        AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, idCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, VenditaDiretta);
     }
     
     //GetSituazioneDistributore(idDistributore);
 }
 
-function SalvaResi(idSituazioneDistributore, idDistributore, idProdotto, quantitaResi, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT) {    
+function SalvaResi(idDistributore, idProdotto, quantitaResi, quantitaRimasta, prezzoTotale, idOperatore) {    
     
-    StoricizzoStatoProdottoInDistributore(idDistributore, idProdotto, numeroLotto, quantitaRimasta, prezzoTotale, idOperatore, numeroDDT, dataDDT);
+    StoricizzoStatoProdottoInDistributore(idDistributore, idProdotto, quantitaRimasta, prezzoTotale, idOperatore);
 
     //if (quantitaRimasta > 0) {
     //    InsertProdottiInDistributore(idDistributore, idProdotto, quantitaRimasta, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT);
@@ -512,12 +556,12 @@ function SalvaResi(idSituazioneDistributore, idDistributore, idProdotto, quantit
         type: "POST",
         crossDomain: true,
         contentType: "application/json; charset=utf-8",
-        //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzinoResi",        
-        url: urlAggiornaQuantitaProdottiInMagazzinoResi,
+        //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzinoResiV2",        
+        url: urlAggiornaQuantitaProdottiInMagazzinoResiV2,
         cache: false,
         async: true,
         //            data: "idDisciplina=" + idDisciplina,
-        data: JSON.stringify({ idProdotto: idProdotto, idDistributore: idDistributore, IdCliente: idCliente, quantita: quantitaResi, prezzoTotale: prezzoTotale, idOperatore: idOperatore, numeroLotto: numeroLotto }),
+        data: JSON.stringify({ idProdotto: idProdotto, idDistributore: idDistributore, IdCliente: idCliente, quantita: quantitaResi, prezzoTotale: prezzoTotale, idOperatore: idOperatore}),
         error: function (data) {
             console.log(data.responseText)
         },
@@ -530,7 +574,7 @@ function SalvaResi(idSituazioneDistributore, idDistributore, idProdotto, quantit
             //$(".menuPrincipale").hide();
 
             //$('.DettaglioDistributore').html(dettaglio);
-
+            AggiornaColoreProdottoInDistributore(idDistributore, idProdotto, 'rosso');
            
         }
 
@@ -539,10 +583,11 @@ function SalvaResi(idSituazioneDistributore, idDistributore, idProdotto, quantit
     //console.log('quantitaRimasta=' + quantitaRimasta);    
 
     //GetSituazioneDistributore(idDistributore);
+    
 }
 
 //Storicizzo la quantita di prodotto nel Distributore
-function StoricizzoStatoProdottoInDistributore(idDistributore, idProdotto, numeroLotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroDDT, dataDDT) {
+function StoricizzoStatoProdottoInDistributore(idDistributore, idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore) {
     
     $.ajax({
         type: "POST",
@@ -553,7 +598,7 @@ function StoricizzoStatoProdottoInDistributore(idDistributore, idProdotto, numer
         cache: false,
         async: true,
         //            data: "idDisciplina=" + idDisciplina,
-        data: JSON.stringify({ idDistributore: idDistributore, idProdotto: idProdotto, numeroLotto: numeroLotto }),
+        data: JSON.stringify({ idDistributore: idDistributore, idProdotto: idProdotto}),
         error: function (data) {
             console.log(data.responseText)
         },
@@ -564,7 +609,7 @@ function StoricizzoStatoProdottoInDistributore(idDistributore, idProdotto, numer
 
             //console.log(risultati);
             if (parseInt(quantitaRimasti) > 0) {
-                InsertProdottiInDistributore(idDistributore, idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT);
+                InsertProdottiInDistributore(idDistributore, idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, 'azzurro');
             }
 
         }
@@ -574,18 +619,18 @@ function StoricizzoStatoProdottoInDistributore(idDistributore, idProdotto, numer
 }
 
 //inserisco in un determinato Distributore una determinata quantita di Prodotto
-function InsertProdottiInDistributore(idDistributore, idProdotto, quantita, prezzoTotale, idOperatore, numeroLotto, numeroDDT, dataDDT) {
+function InsertProdottiInDistributore(idDistributore, idProdotto, quantita, prezzoTotale, idOperatore, colore) {
 
     $.ajax({
         type: "POST",
         crossDomain: true,
         contentType: "application/json; charset=utf-8",
-        //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottoInDistributore",        
-        url: urlAggiornoQuantitaProdottiInDistributore,
+        //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottoInDistributoreV2",        
+        url: urlAggiornoQuantitaProdottiInDistributoreV2,
         cache: false,
         async: true,
         //            data: "idDisciplina=" + idDisciplina,
-        data: JSON.stringify({ idDistributore: idDistributore, idProdotto: idProdotto, quantita: quantita, prezzoTotale: prezzoTotale, idOperatore: idOperatore, numeroLotto: numeroLotto, numeroDDT: numeroDDT, dataDDT: dataDDT }),
+        data: JSON.stringify({ idDistributore: idDistributore, idProdotto: idProdotto, quantita: quantita, prezzoTotale: prezzoTotale, idOperatore: idOperatore, colore:colore }),
         error: function (data) {
             console.log(data.responseText)
         },
@@ -594,7 +639,7 @@ function InsertProdottiInDistributore(idDistributore, idProdotto, quantita, prez
         success: function (response) {
             risultati = response.d;
 
-            console.log(risultati);
+            //console.log(risultati);
             
         }
 

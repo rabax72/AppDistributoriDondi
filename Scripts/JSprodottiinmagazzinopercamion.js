@@ -70,7 +70,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                     idProd = risultati[i].idProdotto;
                     numLotto = risultati[i].numeroLotto;
                     //console.log(numLotto);
-                    quantita = risultati[i].quantita;
+                    quantita = risultati[i].quantitaMagazzino;
                     if (idProd != idProdOld) {
                         quantitaTot = quantita;
                         //dettaglio = dettaglio + '<tr>';
@@ -86,7 +86,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                         rigaDettaglio[i] = '<tr>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantita + '</td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantitaMagazzino + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">N° DDT interno<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">Data DDT interno<input type="text" data-role="date" class="dataDDT accentraInput"></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">Quantità da caricare<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
@@ -98,7 +98,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                             rigaDettaglio[i] = '<tr>';
                             rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                             rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
-                            rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantita + '</td>';
+                            rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantitaMagazzino + '</td>';
                             rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">N° DDT interno<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
                             rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">Data DDT interno<input type="text" data-role="date" class="dataDDT accentraInput"></td>';
                             rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">Quantità da caricare<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
@@ -120,7 +120,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                     }
                     idProdOld = risultati[i].idProdotto;
                     numLottoOld = risultati[i].numeroLotto;
-                    quantitaOld = risultati[i].quantita;
+                    quantitaOld = risultati[i].quantitaMagazzino;
                 }
                 //dettaglio = dettaglio + '</tbody> </table>';
 
@@ -266,7 +266,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                     idProd = risultati[i].idProdotto;
                     numLotto = risultati[i].numeroLotto;
                     //console.log(numLotto);
-                    quantita = risultati[i].quantita;
+                    quantita = risultati[i].quantitaTrasporto;
                     if (idProd != idProdOld) {
                         quantitaTot = quantita;
                         //dettaglio = dettaglio + '<tr>';
@@ -310,7 +310,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                     }
                     idProdOld = risultati[i].idProdotto;
                     numLottoOld = risultati[i].numeroLotto;
-                    quantitaOld = risultati[i].quantita;
+                    quantitaOld = risultati[i].quantitaTrasporto;
                 }
                 //dettaglio = dettaglio + '</tbody> </table>';
 
@@ -494,6 +494,33 @@ function InsertProdottiInCamion(idProdotto, quantita, prezzoTotale, idOperatore,
 
             //console.log(risultati);
 
+        }
+
+    });
+}
+
+function InsertProdottiInCamionV2(idProdotto, quantita, prezzoTotale, idOperatore, idMezzo, idDistributore) {
+
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInTrasportoV2",        
+        url: urlAggiornaQuantInTrasportoV2,
+        cache: false,
+        async: true,
+        //            data: "idDisciplina=" + idDisciplina,
+        data: JSON.stringify({ idProdotto: idProdotto, quantita: quantita, prezzoTotale: prezzoTotale, idOperatore: idOperatore, IdMezzo: idMezzo }),
+        error: function (data) {
+            console.log(data.responseText)
+        },
+        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+        success: function (response) {
+            risultati = response.d;
+
+            //console.log(risultati);
+            AggiornaColoreProdottoInDistributore(idDistributore, idProdotto, 'arancio');
         }
 
     });

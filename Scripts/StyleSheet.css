@@ -110,7 +110,11 @@ min-width:400px;
 }
 
 th, .caricaDaCamionPerCliente, .caricaDaCamion, .nomeCliente, .ui-title, .nomeDistributore, .ui-btnCarica, .vociVenduto, .voceMenuScomparsa {
-    font-size: 32px !important;
+    font-size: 32px !important;      
+}
+
+.ui-btnCarica {
+    padding:0 !important;
 }
 
 .quantita {
@@ -118,6 +122,12 @@ th, .caricaDaCamionPerCliente, .caricaDaCamion, .nomeCliente, .ui-title, .nomeDi
     text-align:center;
     border-left:1px solid #ddd;
     border-right:1px solid #ddd;
+}
+
+.quantitaMag {
+    text-align:center;
+    font-weight:bold;
+    font-size:32px;
 }
 
 .medioGrande {
@@ -145,17 +155,34 @@ th, .caricaDaCamionPerCliente, .caricaDaCamion, .nomeCliente, .ui-title, .nomeDi
 }
 
 .ui-btnScarica {
-font-size: 32px !important;
-background-color:red !important;
-color:white !important;
+    font-size: 32px !important;
+    background-color:red !important;
+    color:white !important;
+    padding:0 !important;
 }
 
+.ui-btnCaricaDaMagazzino{
+    font-size: 32px !important;
+    background-color:green !important;
+    color:white !important;
+    padding:0 !important;
+}
+
+.ui-btnSposta{
+    font-size: 32px !important;
+    background-color:orange !important;
+    color:white !important;
+    padding:0 !important;
+}
+
+
+
 .ui-btnMedio {
-font-size: 21px !important;
+    font-size: 21px !important;
 }
 
 .Blu {
-background-color:#0094ff !important;
+    background-color:#0094ff !important;
 }
 
 .menuAdmin div{
@@ -303,4 +330,57 @@ margin-right: 2em;
 
 .cellaPopupStorico {
     border: 1px solid black;
+}
+
+.arancio {
+    background-color: orange;
+}
+
+.azzurro {
+    background-color: #38c;
+}
+
+.rosso {
+    background-color: red;
+}
+
+.verde {
+    background-color: green;
+}
+
+.fineCarico {
+    width: 280px !important;
+}
+
+/* Custom indentations are needed because the length of custom labels differs from
+   the length of the standard labels */
+.custom-size-flipswitch.ui-flipswitch .ui-btn.ui-flipswitch-on {
+text-indent: -5.9em;
+}
+.custom-size-flipswitch.ui-flipswitch .ui-flipswitch-off {
+text-indent: 0.5em;
+margin:0;
+}
+/* Custom widths are needed because the length of custom labels differs from
+   the length of the standard labels */
+.custom-size-flipswitch.ui-flipswitch {
+width: 8.875em;
+}
+.custom-size-flipswitch.ui-flipswitch.ui-flipswitch-active {
+padding-left: 7em;
+width: 1.875em;
+}
+@media (min-width: 28em) {
+    /*Repeated from rule .ui-flipswitch above*/
+    .ui-field-contain > label + .custom-size-flipswitch.ui-flipswitch {
+        width: 1.875em;
+    }
+}
+
+.ui-flipswitch {
+    margin:0;
+}
+
+.quantSuCamion {
+margin-left:5px;
 }

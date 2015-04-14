@@ -71,14 +71,14 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
 
                 idProd = risultati[i].idProdotto;
                 numLotto = risultati[i].numeroLotto;                
-                quantita = risultati[i].quantita;
+                quantita = risultati[i].quantitaVenduto;
 
                 if (idProd != idProdOld) {
                     quantitaTot = quantita;
                     rigaDettaglio[i] = '<tr>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantita + '</td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantitaVenduto + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">N° DDT<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">Data DDT<input type="text" class="dataDDT accentraInput"></td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">Quantità<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
@@ -90,7 +90,7 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                         rigaDettaglio[i] = '<tr>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantita + '</td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantitaVenduto + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">N° DDT<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">Data DDT<input type="text" class="dataDDT accentraInput"></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">Quantità<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
@@ -114,7 +114,7 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                 }
                 idProdOld = risultati[i].idProdotto;
                 numLottoOld = risultati[i].numeroLotto;
-                quantitaOld = risultati[i].quantita;
+                quantitaOld = risultati[i].quantitaVenduto;
             }
             //dettaglio = dettaglio + '</tbody> </table>';
 
