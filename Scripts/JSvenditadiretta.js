@@ -22,7 +22,7 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
         success: function (response) {
             risultati = response.d;
 
-            //console.log(risultati);
+            console.log(risultati);
 
 
             var dettaglio = '<table id="tabellaProdottiInMagazzinoPerVenditaDiretta" class="display" cellspacing="0" width="100%">' +
@@ -31,8 +31,8 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                                             '<th>Foto</th>' +
                                             '<th>Desc.</th>' +
                                             '<th>Giacenza</th>' +
-                                            '<th>N° DDT</th>' +
-                                            '<th>Data DDT</th>' +
+                                            //'<th>N° DDT</th>' +
+                                            //'<th>Data DDT</th>' +
                                             '<th>Quantità</th>' +
                                             '<th> </th>' +
                                         '</tr>' +
@@ -42,8 +42,8 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                                             '<th>Foto</th>' +
                                             '<th>Desc.</th>' +
                                             '<th>Giacenza</th>' +
-                                            '<th>N° DDT</th>' +
-                                            '<th>Data DDT</th>' +
+                                            //'<th>N° DDT</th>' +
+                                            //'<th>Data DDT</th>' +
                                             '<th>Quantità</th>' +
                                             '<th> </th>' +
                                         '</tr>' +
@@ -70,18 +70,18 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                 //dettaglio = dettaglio + '</tr>';
 
                 idProd = risultati[i].idProdotto;
-                numLotto = risultati[i].numeroLotto;                
-                quantita = risultati[i].quantitaVenduto;
+                //numLotto = risultati[i].numeroLotto;                
+                quantita = risultati[i].quantitaMagazzino;
 
                 if (idProd != idProdOld) {
                     quantitaTot = quantita;
                     rigaDettaglio[i] = '<tr>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantitaVenduto + '</td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">N° DDT<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">Data DDT<input type="text" class="dataDDT accentraInput"></td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">Quantità<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantitaMagazzino + '</td>';
+                    //rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">N° DDT<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
+                    //rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">Data DDT<input type="text" class="dataDDT accentraInput"></td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">Quantità<input type="number" data-clear-btn="true" class="miniInput accentraInput" min="0"></td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td><a href="#" data-IdMagazzino="' + risultati[i].IdMagazzino + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-note="' + risultati[i].note + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active venditaDiretta ui-btnCarica">Vendi</a> </td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
                 } else {
@@ -89,11 +89,11 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                         quantitaTot = quantita;
                         rigaDettaglio[i] = '<tr>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantitaVenduto + '</td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">N° DDT<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">Data DDT<input type="text" class="dataDDT accentraInput"></td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">Quantità<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantitaMagazzino + '</td>';
+                        //rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">N° DDT<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
+                        //rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">Data DDT<input type="text" class="dataDDT accentraInput"></td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">Quantità<input type="number" data-clear-btn="true" class="miniInput accentraInput" min="0"></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td><a href="#" data-IdMagazzino="' + risultati[i].IdMagazzino + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-note="' + risultati[i].note + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active venditaDiretta ui-btnCarica">Vendi</a> </td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
                     } else {
@@ -102,11 +102,11 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
 
                         rigaDettaglio[i] = '<tr>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + quantitaTot + '</td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">N° DDT<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">Data DDT<input type="text" class="dataDDT accentraInput"></td>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">Quantità<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
+                        //rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">N° DDT<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
+                        //rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">Data DDT<input type="text" class="dataDDT accentraInput"></td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">Quantità<input type="number" data-clear-btn="true" class="miniInput accentraInput" min="0"></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td><a href="#" data-IdMagazzino="' + risultati[i].IdMagazzino + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-numeroLotto="' + risultati[i].numeroLotto + '" data-note="' + risultati[i].note + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active venditaDiretta ui-btnCarica">Vendi</a> </td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
                     }
@@ -114,7 +114,7 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                 }
                 idProdOld = risultati[i].idProdotto;
                 numLottoOld = risultati[i].numeroLotto;
-                quantitaOld = risultati[i].quantitaVenduto;
+                quantitaOld = risultati[i].quantitaMagazzino;
             }
             //dettaglio = dettaglio + '</tbody> </table>';
 
@@ -142,18 +142,18 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                 var idProdotto = $(this).attr('data-idProdotto');
                 var prezzo = $(this).attr('data-prezzo');
                 var note = $(this).attr('data-note');
-                var quantitaAttuale = $(this).closest('td').prev('td').prev('td').prev('td').prev('td').text();
+                var quantitaAttuale = $(this).closest('td').prev('td').prev('td').text();
                 var quantitaVenduti = $(this).closest('td').prev('td')[0].children[0].value;
-                var numeroDDT = $(this).closest('td').prev('td').prev('td').prev('td')[0].children[0].value;
-                if (numeroDDT == '') {
-                    numeroDDT = 0;
-                }
-                var dataDDT = $(this).closest('td').prev('td').prev('td')[0].children[0].value;
-                if (dataDDT != '') {
-                    dataDDT = stringToDate(dataDDT, "dd/MM/yyyy", "/");
-                } else {
-                    dataDDT = null;
-                }
+                //var numeroDDT = $(this).closest('td').prev('td').prev('td').prev('td')[0].children[0].value;
+                //if (numeroDDT == '') {
+                //    numeroDDT = 0;
+                //}
+                //var dataDDT = $(this).closest('td').prev('td').prev('td')[0].children[0].value;
+                //if (dataDDT != '') {
+                //    dataDDT = stringToDate(dataDDT, "dd/MM/yyyy", "/");
+                //} else {
+                //    dataDDT = null;
+                //}
 
                 var quantitaRimasti = (quantitaAttuale - quantitaVenduti);
                 //var quantitaVenduti = (quantitaAttuale - quantitaRimasti);
@@ -161,8 +161,8 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                 var prezzoTotaleVenduti = (prezzo * quantitaVenduti);
                 var idOperatore = localStorage.idOperatore;
                 //var numeroLotto = new Date(parseJsonDateToJsDate($(this).attr('data-numeroLotto')));
-                var numeroLotto = parseJsonDateToJsDate($(this).attr('data-numeroLotto'));
-                //alert('quantitaAttuale=' + quantitaAttuale + ' quantitaVenduti=' + quantitaVenduti + ' isInteroPositivo(parseInt(quantitaVenduti))=' + isInteroPositivo(parseInt(quantitaVenduti)) + ' numeroDDT=' + numeroDDT + ' dataDDT=' + dataDDT);
+                //var numeroLotto = parseJsonDateToJsDate($(this).attr('data-numeroLotto'));
+                //alert('quantitaAttuale=' + quantitaAttuale + ' quantitaVenduti=' + quantitaVenduti + ' isInteroPositivo(parseInt(quantitaVenduti))=' + isInteroPositivo(parseInt(quantitaVenduti)) );
                 //return;
 
                 if (quantitaVenduti == "" || isInteroPositivo(parseInt(quantitaVenduti)) == false) {
@@ -183,7 +183,7 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
 
                 if (!confirm("Sicuro di voler vendere " + quantitaVenduti + " pezzi di questo prodotto?")) return;
                 
-                storicizzaProdottoInMagazzino(idProdotto, numeroLotto, idOperatore, note, false, quantitaRimasti, prezzoTotaleRimasti, numeroDDT, dataDDT);
+                storicizzaProdottoInMagazzino(idProdotto, idOperatore, note, false, quantitaRimasti, prezzoTotaleRimasti);
 
                 //if (parseInt(quantitaRimasti) > 0) {
                 //    AggiornaQuantitaProdottiInMagazzino(idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, numeroLotto, numeroDDT, dataDDT, note);
@@ -194,11 +194,14 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                 
                 //console.log(idProdotto + ', '+idProdotto + ', '+idDistributore + ', '+idCliente + ', '+quantitaVenduti + ', '+prezzoTotaleVenduti + ', '+idOperatore + ', '+numeroDDT + ', '+dataDDT );
                 //return;
+                //if (parseInt(quantitaVenduti) > 0) {
+                //    AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, idCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, true, numeroDDT, dataDDT, numeroLotto);
+                //}
                 if (parseInt(quantitaVenduti) > 0) {
-                    AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, idCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, true, numeroDDT, dataDDT, numeroLotto);
+                    AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, idCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, true);
                 }
                 
-                var labelQuantita = $(this).closest('td').prev('td').prev('td').prev('td').prev('td');
+                var labelQuantita = $(this).closest('td').prev('td').prev('td');
                 //console.log(labelQuantita);
                 //labelQuantita.switchClass("oldVal", "valoreCambiato", 1000);
                 //labelQuantita.css("background-color", "green");

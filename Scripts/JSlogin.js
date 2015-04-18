@@ -1,104 +1,61 @@
 ﻿//Connessioni ai WebServices
-var tipoDiConn = "test";
-if (tipoDiConn == "prod") {
-    var urlGetAuthentication = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetAuthentication';
-    var urlGetClienteById = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetClienteById';
-    var urlGetElencoMezzi = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetElencoMezzi';
-    var urlGetElencoClienti = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetElencoClienti';
-    var urlGetElencoDistributori = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetElencoDistributori';
-    var urlGetElencoProdotti = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetElencoProdotti';
-    var urlGetElencoProdottiVenduti = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetElencoProdottiVenduti';
-    var urlGetElencoProdottiVendutiPerLotto = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetElencoProdottiVendutiPerLotto';
-    var urlInsertProdotto = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/InsertProdotto';
-    var urlGetProdottiDaGestireInMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiDaGestireInMagazzino';
-    var urlGetProdottiDaScaricareDaMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiDaScaricareDaMagazzino';
-    var urlGetProdottiInMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiInMagazzino';
-    var urlGetProdottiInMagazzinoResi = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiInMagazzinoResi';
-    var urlGetProdottiInMagazzinoResiFiltrato = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiInMagazzinoResiFiltrato';
-    var urlStoricizzoProdottiInMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/StoricizzoProdottoInMagazzino';
-    var urlSmaltiscoProdottoInMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/SmaltiscoProdottoInMagazzino';
-    var urlSmaltiscoProdottoInMagazzinoV2 = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/SmaltiscoProdottoInMagazzinoV2';
-    var urlQuantitaProdottiInMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzino';
-    var urlGetProdottiSuCamion = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiInCamion';
-    var urlGetProdottiSuCamionByIdProdotto = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetProdottiInCamionByIdProdotto';
-    var urlStoricizzoProdTrasporto = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/StoricizzoProdottoInTrasporto';
-    var urlStoricizzoProdTrasportoV2 = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/StoricizzoProdottoInTrasportoV2';
-    var urlAggiornaQuantInTrasporto = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInTrasporto';
-    var urlAggiornaQuantInTrasportoV2 = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInTrasportoV2';
-    var urlGetSituazioneClienti = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetSituazioneCliente';
-    var urlAggiornaQuantitaProdottiVenduti = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottiVenduti';
-    var urlAggiornaQuantitaProdottiInMagazzinoResi = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzinoResi';
-    var urlAggiornaQuantitaProdottiInMagazzinoResiV2 = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzinoResiV2';
-    var urlStoricizzoStatoProdottiInDistributore = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/StoricizzoStatoProdottoInDistributore';
-    var urlAggiornaQuantitaProdottoInCliente = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottoInCliente';
-    var urlGetSituazioneDistributore = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetSituazioneDistributore';
-    var urlGetSituazioneDistributoreV2 = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetSituazioneDistributoreV2';
-    var urlAggiornoQuantitaProdottiInDistributore = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottoInDistributore';
-    var urlAggiornoQuantitaProdottiInDistributoreV2 = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottoInDistributoreV2';
-    var urlStoricizzaStatoProdottoInCliente = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/StoricizzoStatoProdottoInCliente';
-    var urlCaricaProdottiInMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/CaricaProdottiInMagazzino';
-    var urlCaricaProdottiInMagazzinoV2 = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/CaricaProdottiInMagazzinoV2';
-    var urlAggiornaColoreProdottoInDistributore = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaColoreProdottoInDistributore';
-    var urlGetSituazioneVendutoInDistributore = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetSituazioneVendutoInDistributore';
-    var urlGetVendutoCliente = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetVendutoCliente';
-    var urlGetVendutoDirettamente = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetVendutoDirettamente';
-    var urlGetVendutoDistributori = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetVendutoDistributori';
-    var urlGetVendutoByIdProdotto = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetVendutoByIdProdotto';
-    var urlGetVendutoByIdDistributore = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetVendutoByIdDistributore';
-    var urlGetVendutoPerTuttiDistributori = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetVendutoPerTuttiDistributori';
-    var urlGetVendutoByIdCliente = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/GetVendutoByIdCliente';
-    var urlResetEvidenzaByDistributore = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/ResetEvidenzaByDistributore';
-    var urlResetEvidenzaMagazzino = 'http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/ResetEvidenzaMagazzino';
-} else {
-    var urlGetAuthentication = 'WebServiceAppDondi.asmx/GetAuthentication';
-    var urlGetClienteById = 'WebServiceAppDondi.asmx/GetClienteById';
-    var urlGetElencoMezzi = 'WebServiceAppDondi.asmx/GetElencoMezzi';
-    var urlGetElencoClienti = 'WebServiceAppDondi.asmx/GetElencoClienti';
-    var urlGetElencoDistributori = 'WebServiceAppDondi.asmx/GetElencoDistributori';
-    var urlGetElencoProdotti = 'WebServiceAppDondi.asmx/GetElencoProdotti';
-    var urlGetElencoProdottiVenduti = 'WebServiceAppDondi.asmx/GetElencoProdottiVenduti';
-    var urlGetElencoProdottiVendutiPerLotto = 'WebServiceAppDondi.asmx/GetElencoProdottiVendutiPerLotto';
-    var urlInsertProdotto = 'WebServiceAppDondi.asmx/InsertProdotto';
-    var urlGetProdottiDaGestireInMagazzino = 'WebServiceAppDondi.asmx/GetProdottiDaGestireInMagazzino';
-    var urlGetProdottiDaScaricareDaMagazzino = 'WebServiceAppDondi.asmx/GetProdottiDaScaricareDaMagazzino';
-    var urlGetProdottiInMagazzino = 'WebServiceAppDondi.asmx/GetProdottiInMagazzino';
-    var urlGetProdottiInMagazzinoResi = 'WebServiceAppDondi.asmx/GetProdottiInMagazzinoResi';
-    var urlGetProdottiInMagazzinoResiFiltrato = 'WebServiceAppDondi.asmx/GetProdottiInMagazzinoResiFiltrato';
-    var urlStoricizzoProdottiInMagazzino = 'WebServiceAppDondi.asmx/StoricizzoProdottoInMagazzino';
-    var urlSmaltiscoProdottoInMagazzino = 'WebServiceAppDondi.asmx/SmaltiscoProdottoInMagazzino';
-    var urlSmaltiscoProdottoInMagazzinoV2 = 'WebServiceAppDondi.asmx/SmaltiscoProdottoInMagazzinoV2';
-    var urlQuantitaProdottiInMagazzino = 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzino';
-    var urlGetProdottiSuCamion = 'WebServiceAppDondi.asmx/GetProdottiInCamion';
-    var urlGetProdottiSuCamionByIdProdotto = 'WebServiceAppDondi.asmx/GetProdottiInCamionByIdProdotto';
-    var urlStoricizzoProdTrasporto = 'WebServiceAppDondi.asmx/StoricizzoProdottoInTrasporto';
-    var urlStoricizzoProdTrasportoV2 = 'WebServiceAppDondi.asmx/StoricizzoProdottoInTrasportoV2';
-    var urlAggiornaQuantInTrasporto = 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInTrasporto';
-    var urlAggiornaQuantInTrasportoV2 = 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInTrasportoV2';
-    var urlGetSituazioneClienti = 'WebServiceAppDondi.asmx/GetSituazioneCliente';
-    var urlAggiornaQuantitaProdottiVenduti = 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiVenduti';
-    var urlAggiornaQuantitaProdottiInMagazzinoResi = 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzinoResi';
-    var urlAggiornaQuantitaProdottiInMagazzinoResiV2 = 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzinoResiV2';
-    var urlStoricizzoStatoProdottiInDistributore = 'WebServiceAppDondi.asmx/StoricizzoStatoProdottoInDistributore';
-    var urlAggiornaQuantitaProdottoInCliente = 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottoInCliente';
-    var urlGetSituazioneDistributore = 'WebServiceAppDondi.asmx/GetSituazioneDistributore';
-    var urlGetSituazioneDistributoreV2 = 'WebServiceAppDondi.asmx/GetSituazioneDistributoreV2';
-    var urlAggiornoQuantitaProdottiInDistributore = 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottoInDistributore';
-    var urlAggiornoQuantitaProdottiInDistributoreV2 = 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottoInDistributoreV2';
-    var urlAggiornaColoreProdottoInDistributore = 'WebServiceAppDondi.asmx/AggiornaColoreProdottoInDistributore';
-    var urlStoricizzaStatoProdottoInCliente = 'WebServiceAppDondi.asmx/StoricizzoStatoProdottoInCliente';
-    var urlCaricaProdottiInMagazzino = 'WebServiceAppDondi.asmx/CaricaProdottiInMagazzino';
-    var urlCaricaProdottiInMagazzinoV2 = 'WebServiceAppDondi.asmx/CaricaProdottiInMagazzinoV2';
-    var urlGetSituazioneVendutoInDistributore = 'WebServiceAppDondi.asmx/GetSituazioneVendutoInDistributore';
-    var urlGetVendutoCliente = 'WebServiceAppDondi.asmx/GetVendutoCliente';
-    var urlGetVendutoDirettamente = 'WebServiceAppDondi.asmx/GetVendutoDirettamente';
-    var urlGetVendutoDistributori = 'WebServiceAppDondi.asmx/GetVendutoDistributori';
-    var urlGetVendutoByIdProdotto = 'WebServiceAppDondi.asmx/GetVendutoByIdProdotto';
-    var urlGetVendutoByIdDistributore = 'WebServiceAppDondi.asmx/GetVendutoByIdDistributore';
-    var urlGetVendutoPerTuttiDistributori = 'WebServiceAppDondi.asmx/GetVendutoPerTuttiDistributori';
-    var urlGetVendutoByIdCliente = 'WebServiceAppDondi.asmx/GetVendutoByIdCliente';
-    var urlResetEvidenzaByDistributore = 'WebServiceAppDondi.asmx/ResetEvidenzaByDistributore';
-    var urlResetEvidenzaMagazzino = 'WebServiceAppDondi.asmx/ResetEvidenzaMagazzino';
+var tipoDiConn = "prod";
+var urlProd = 'http://www.giacomorabaglia.com/appdistributoridondi/';
+
+if (tipoDiConn != "prod") {
+    urlProd = '';
 }
+
+var urlGetAuthentication = urlProd + 'WebServiceAppDondi.asmx/GetAuthentication';
+var urlGetClienteById = urlProd + 'WebServiceAppDondi.asmx/GetClienteById';
+var urlGetElencoMezzi = urlProd + 'WebServiceAppDondi.asmx/GetElencoMezzi';
+var urlGetElencoClienti = urlProd + 'WebServiceAppDondi.asmx/GetElencoClienti';
+var urlGetElencoDistributori = urlProd + 'WebServiceAppDondi.asmx/GetElencoDistributori';
+var urlGetElencoProdotti = urlProd + 'WebServiceAppDondi.asmx/GetElencoProdotti';
+var urlGetElencoProdottiVenduti = urlProd + 'WebServiceAppDondi.asmx/GetElencoProdottiVenduti';
+var urlGetElencoProdottiVendutiPerLotto = urlProd + 'WebServiceAppDondi.asmx/GetElencoProdottiVendutiPerLotto';
+var urlInsertProdotto = urlProd + 'WebServiceAppDondi.asmx/InsertProdotto';
+var urlGetProdottiDaGestireInMagazzino = urlProd + 'WebServiceAppDondi.asmx/GetProdottiDaGestireInMagazzino';
+var urlGetProdottiDaScaricareDaMagazzino = urlProd + 'WebServiceAppDondi.asmx/GetProdottiDaScaricareDaMagazzino';
+var urlGetProdottiInMagazzino = urlProd + 'WebServiceAppDondi.asmx/GetProdottiInMagazzino';
+var urlGetProdottiInMagazzinoResi = urlProd + 'WebServiceAppDondi.asmx/GetProdottiInMagazzinoResi';
+var urlGetProdottiInMagazzinoResiFiltrato = urlProd + 'WebServiceAppDondi.asmx/GetProdottiInMagazzinoResiFiltrato';
+var urlStoricizzoProdottiInMagazzino = urlProd + 'WebServiceAppDondi.asmx/StoricizzoProdottoInMagazzino';
+var urlSmaltiscoProdottoInMagazzino = urlProd + 'WebServiceAppDondi.asmx/SmaltiscoProdottoInMagazzino';
+var urlSmaltiscoProdottoInMagazzinoV2 = urlProd + 'WebServiceAppDondi.asmx/SmaltiscoProdottoInMagazzinoV2';
+var urlQuantitaProdottiInMagazzino = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzino';
+var urlQuantitaProdottiInMagazzinoV2 = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzinoV2';
+var urlGetProdottiSuCamion = urlProd + 'WebServiceAppDondi.asmx/GetProdottiInCamion';
+var urlGetProdottiSuCamionByIdProdotto = urlProd + 'WebServiceAppDondi.asmx/GetProdottiInCamionByIdProdotto';
+var urlStoricizzoProdTrasporto = urlProd + 'WebServiceAppDondi.asmx/StoricizzoProdottoInTrasporto';
+var urlStoricizzoProdTrasportoV2 = urlProd + 'WebServiceAppDondi.asmx/StoricizzoProdottoInTrasportoV2';
+var urlAggiornaQuantInTrasporto = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInTrasporto';
+var urlAggiornaQuantInTrasportoV2 = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInTrasportoV2';
+var urlGetSituazioneClienti = urlProd + 'WebServiceAppDondi.asmx/GetSituazioneCliente';
+var urlAggiornaQuantitaProdottiVenduti = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiVenduti';
+var urlAggiornaQuantitaProdottiInMagazzinoResi = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzinoResi';
+var urlAggiornaQuantitaProdottiInMagazzinoResiV2 = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzinoResiV2';
+var urlStoricizzoStatoProdottiInDistributore = urlProd + 'WebServiceAppDondi.asmx/StoricizzoStatoProdottoInDistributore';
+var urlAggiornaQuantitaProdottoInCliente = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottoInCliente';
+var urlGetSituazioneDistributore = urlProd + 'WebServiceAppDondi.asmx/GetSituazioneDistributore';
+var urlGetSituazioneDistributoreV2 = urlProd + 'WebServiceAppDondi.asmx/GetSituazioneDistributoreV2';
+var urlAggiornoQuantitaProdottiInDistributore = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottoInDistributore';
+var urlAggiornoQuantitaProdottiInDistributoreV2 = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottoInDistributoreV2';
+var urlAggiornaColoreProdottoInDistributore = urlProd + 'WebServiceAppDondi.asmx/AggiornaColoreProdottoInDistributore';
+var urlStoricizzaStatoProdottoInCliente = urlProd + 'WebServiceAppDondi.asmx/StoricizzoStatoProdottoInCliente';
+var urlCaricaProdottiInMagazzino = urlProd + 'WebServiceAppDondi.asmx/CaricaProdottiInMagazzino';
+var urlCaricaProdottiInMagazzinoV2 = urlProd + 'WebServiceAppDondi.asmx/CaricaProdottiInMagazzinoV2';
+var urlGetSituazioneVendutoInDistributore = urlProd + 'WebServiceAppDondi.asmx/GetSituazioneVendutoInDistributore';
+var urlGetVendutoCliente = urlProd + 'WebServiceAppDondi.asmx/GetVendutoCliente';
+var urlGetVendutoDirettamente = urlProd + 'WebServiceAppDondi.asmx/GetVendutoDirettamente';
+var urlGetVendutoDistributori = urlProd + 'WebServiceAppDondi.asmx/GetVendutoDistributori';
+var urlGetVendutoByIdProdotto = urlProd + 'WebServiceAppDondi.asmx/GetVendutoByIdProdotto';
+var urlGetVendutoByIdDistributore = urlProd + 'WebServiceAppDondi.asmx/GetVendutoByIdDistributore';
+var urlGetVendutoPerTuttiDistributori = urlProd + 'WebServiceAppDondi.asmx/GetVendutoPerTuttiDistributori';
+var urlGetVendutoByIdCliente = urlProd + 'WebServiceAppDondi.asmx/GetVendutoByIdCliente';
+var urlResetEvidenzaByDistributore = urlProd + 'WebServiceAppDondi.asmx/ResetEvidenzaByDistributore';
+var urlResetEvidenzaMagazzino = urlProd + 'WebServiceAppDondi.asmx/ResetEvidenzaMagazzino';
+
 
 $(function () {    
 
@@ -595,7 +552,7 @@ function ElencoClienti() {
 }
 
 // Storicizzo Prodotti in magazzino ************************************************
-function storicizzaProdottoInMagazzino(IdProdotto, numeroLotto, IdOperatore, note, smaltito, quantitaRimasti, prezzoTotaleRimasti, numeroDDT, dataDDT) {
+function storicizzaProdottoInMagazzino(IdProdotto, IdOperatore, note, smaltito, quantitaRimasti, prezzoTotaleRimasti) {
     
     $.ajax({
         type: "POST",
@@ -607,7 +564,7 @@ function storicizzaProdottoInMagazzino(IdProdotto, numeroLotto, IdOperatore, not
 
         async: true,
         //            data: "idDisciplina=" + idDisciplina,
-        data: JSON.stringify({ IdProdotto: IdProdotto, numeroLotto: numeroLotto, IdOperatore: IdOperatore, note: note, smaltito: smaltito }),
+        data: JSON.stringify({ IdProdotto: IdProdotto, IdOperatore: IdOperatore, note: note, smaltito: smaltito }),
 
         error: function (data) {
             console.log(data.responseText)
@@ -619,7 +576,7 @@ function storicizzaProdottoInMagazzino(IdProdotto, numeroLotto, IdOperatore, not
 
             //console.log(risultati);
             if (parseInt(quantitaRimasti) > 0) {
-                AggiornaQuantitaProdottiInMagazzino(IdProdotto, quantitaRimasti, prezzoTotaleRimasti, IdOperatore, numeroLotto, numeroDDT, dataDDT, note);
+                AggiornaQuantitaProdottiInMagazzinoV2(IdProdotto, quantitaRimasti, prezzoTotaleRimasti, IdOperatore, note);
             }
         }
 
@@ -639,6 +596,32 @@ function AggiornaQuantitaProdottiInMagazzino(idProdotto, quantitaRimasti, prezzo
         cache: false,
         async: true,
         data: JSON.stringify({ idProdotto: idProdotto, quantita: quantitaRimasti, prezzoTotale: prezzoTotaleRimasti, idOperatore: idOperatore, numeroLotto: numeroLotto, numeroDDT: numeroDDT, dataDDT: dataDDT, note: note }),
+        error: function (data) {
+            console.log(data.responseText)
+        },
+        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+        success: function (response) {
+            risultati = response.d;
+
+            //console.log(risultati);
+
+        }
+
+    });
+}
+// *********************************************************************************
+// Aggiorno quantita Prodotti rimasti in magazzino V2*********************************
+function AggiornaQuantitaProdottiInMagazzinoV2(idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, note) {
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzinoV2",
+        url: urlQuantitaProdottiInMagazzinoV2,
+        cache: false,
+        async: true,
+        data: JSON.stringify({ idProdotto: idProdotto, quantita: quantitaRimasti, prezzoTotale: prezzoTotaleRimasti, idOperatore: idOperatore, note: note }),
         error: function (data) {
             console.log(data.responseText)
         },

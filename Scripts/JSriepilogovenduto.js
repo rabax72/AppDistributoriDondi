@@ -62,8 +62,8 @@ function VenditaDiretta(DataDa, DataA) {
                                             '<th>Desc.</th>' +
                                             '<th>Quantità</th>' +
                                             '<th>Prezzo Tot.</th>' +
-                                            '<th>N° DDT</th>' +
-                                            '<th>Data DDT</th>' +
+                                            //'<th>N° DDT</th>' +
+                                            //'<th>Data DDT</th>' +
                                             '<th>Operatore</th>' +                                            
                                         '</tr>' +
                                     '</thead>' +                                    
@@ -80,11 +80,11 @@ function VenditaDiretta(DataDa, DataA) {
                 }
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
+                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantitaVenduto + '</td>';
                 dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzoTotale + ' €</td>';
-                dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].numeroDDT + '</td>';
-                dettaglio = dettaglio + '<td class="medioGrande">' + dataDdt + '</td>';
+                //dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].numeroDDT + '</td>';
+                //dettaglio = dettaglio + '<td class="medioGrande">' + dataDdt + '</td>';
                 dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
                 dettaglio = dettaglio + '</tr>';
                 prezzoTot = prezzoTot + risultati[i].prezzoTotale;
@@ -96,8 +96,8 @@ function VenditaDiretta(DataDa, DataA) {
                                             '<th>Desc.</th>' +
                                             '<th>Totale Quantità: ' + totaleQuantita + '</th>' +
                                             '<th>Totale Venduto: ' + Number(prezzoTot).toFixed(2) + ' €</th>' +
-                                            '<th>N° DDT</th>' +
-                                            '<th>Data DDT</th>' +                                            
+                                            //'<th>N° DDT</th>' +
+                                            //'<th>Data DDT</th>' +                                            
                                             '<th>Operatore</th>' +
                                         '</tr>' +
                                     '</tfoot>' + ' </table>';
@@ -314,8 +314,8 @@ function GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, Da
                                             '<th>Desc.</th>' +
                                             '<th>Quantità</th>' +
                                             '<th>Prezzo Tot.</th>' +
-                                            '<th>N° DDT</th>' +
-                                            '<th>Data DDT</th>' +
+                                            //'<th>N° DDT</th>' +
+                                            //'<th>Data DDT</th>' +
                                             '<th>Distributore</th>' +
                                             '<th>Cliente</th>' +
                                             '<th>Operatore</th>' +
@@ -328,11 +328,11 @@ function GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, Da
 
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
+                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantitaVenduto + '</td>';
                 dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzoTotale + ' €</td>';
-                dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].numeroDDT + '</td>';
-                dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
+                //dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].numeroDDT + '</td>';
+                //dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].descrizioneDistributore + '</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].descrizioneCliente + '</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
@@ -346,8 +346,8 @@ function GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, Da
                                             '<th>Desc.</th>' +
                                             '<th>Totale Quantità: ' + totaleQuantita + '</th>' +
                                             '<th>Totale Venduto: ' + Number(prezzoTot).toFixed(2) + '€</th>' +
-                                            '<th>N° DDT</th>' +
-                                            '<th>Data DDT</th>' +
+                                            //'<th>N° DDT</th>' +
+                                            //'<th>Data DDT</th>' +
                                             '<th>Distributore</th>' +
                                             '<th>Operatore</th>' +
                                         '</tr>' +
@@ -411,8 +411,8 @@ function VendutoPerTuttiDistributori(DataDa, DataA) {
                                             '<th>Quantità</th>' +
                                             '<th>Prezzo Tot.</th>' +
                                             '<th>Data Ril.</th>' +
-                                            '<th>N° DDT</th>' +
-                                            '<th>Data DDT</th>' +
+                                            //'<th>N° DDT</th>' +
+                                            //'<th>Data DDT</th>' +
                                             '<th>Distributore</th>' +
                                             '<th>Operatore</th>' +
                                         '</tr>' +
@@ -424,12 +424,12 @@ function VendutoPerTuttiDistributori(DataDa, DataA) {
 
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
+                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantitaVenduto + '</td>';
                 dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzoTotale + ' €</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataUltimaModifica) + '</td>';
-                dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].numeroDDT + '</td>';
-                dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
+                //dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].numeroDDT + '</td>';
+                //dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].descrizioneDistributore + '</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
                 dettaglio = dettaglio + '</tr>';
@@ -444,8 +444,8 @@ function VendutoPerTuttiDistributori(DataDa, DataA) {
                                             '<th>Desc.</th>' +
                                             '<th>Totale Quantità: ' + totaleQuantita + '</th>' +
                                             '<th>Totale Venduto: ' + Number(prezzoTot).toFixed(2) + '€</th>' +
-                                            '<th>N° DDT</th>' +
-                                            '<th>Data DDT</th>' +
+                                            //'<th>N° DDT</th>' +
+                                            //'<th>Data DDT</th>' +
                                             '<th>Distributore</th>' +
                                             '<th>Operatore</th>' +
                                         '</tr>' +
@@ -563,8 +563,8 @@ function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) 
                                             '<th>Quantità</th>' +
                                             '<th>Prezzo Tot.</th>' +
                                             '<th>Data Ril.</th>' +
-                                            '<th>N° DDT</th>' +
-                                            '<th>Data DDT</th>' +
+                                            //'<th>N° DDT</th>' +
+                                            //'<th>Data DDT</th>' +
                                             '<th>Distributore</th>' +                                            
                                             '<th>Operatore</th>' +
                                         '</tr>' +
@@ -576,12 +576,12 @@ function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) 
 
                 dettaglio = dettaglio + '<tr>';
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
+                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantitaVenduto + '</td>';
                 dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzoTotale + ' €</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataUltimaModifica) + '</td>';
-                dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].numeroDDT + '</td>';
-                dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
+                //dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].numeroDDT + '</td>';
+                //dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].descrizioneDistributore + '</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
                 dettaglio = dettaglio + '</tr>';
@@ -605,8 +605,8 @@ function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) 
                                             '<th>Desc.</th>' +
                                             '<th>Totale Quantità: ' + totaleQuantita + '</th>' +
                                             '<th>Totale Venduto: ' + Number(prezzoTot).toFixed(2) + '€</th>' +
-                                            '<th>N° DDT</th>' +
-                                            '<th>Data DDT</th>' +
+                                            //'<th>N° DDT</th>' +
+                                            //'<th>Data DDT</th>' +
                                             '<th>Distributore</th>' +
                                             '<th>Operatore</th>' +
                                         '</tr>' +
@@ -714,8 +714,8 @@ function GetVendutoByIdCliente(idCliente, descrizione, DataDa, DataA) {
                                             '<th>Quantità</th>' +
                                             '<th>Prezzo Tot.</th>' +
                                             '<th>Data Ril.</th>' +
-                                            '<th>N° DDT</th>' +
-                                            '<th>Data DDT</th>' +
+                                            //'<th>N° DDT</th>' +
+                                            //'<th>Data DDT</th>' +
                                             '<th>Cliente</th>' +
                                             '<th>Operatore</th>' +
                                         '</tr>' +
@@ -731,8 +731,8 @@ function GetVendutoByIdCliente(idCliente, descrizione, DataDa, DataA) {
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantitaVenduto + '</td>';
                 dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzoTotale + ' €</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataUltimaModifica) + '</td>';
-                dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].numeroDDT + '</td>';
-                dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
+                //dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].numeroDDT + '</td>';
+                //dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].descrizioneCliente + '</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
                 dettaglio = dettaglio + '</tr>';
@@ -745,8 +745,8 @@ function GetVendutoByIdCliente(idCliente, descrizione, DataDa, DataA) {
                                             '<th>Desc.</th>' +
                                             '<th>Totale Quantità: ' + totaleQuantita + '</th>' +
                                             '<th>Totale Venduto: ' + Number(prezzoTot).toFixed(2) + '€</th>' +
-                                            '<th>N° DDT</th>' +
-                                            '<th>Data DDT</th>' +
+                                            //'<th>N° DDT</th>' +
+                                            //'<th>Data DDT</th>' +
                                             '<th>Distributore</th>' +
                                             '<th>Operatore</th>' +
                                         '</tr>' +

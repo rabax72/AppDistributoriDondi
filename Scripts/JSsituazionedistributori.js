@@ -193,7 +193,7 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
             var desc = descDistributore;
             desc = desc.replace("'", "\\'");
             desc = '\'' + desc + '\'';
-            dettaglio = dettaglio + '<br><p align="center"><input type="button" value="FINE CARICO" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti ui-btnCarica fineCarico" onclick="togliEvidenziatoDistributore(' + IdDistributore + ', ' + desc + ')" /></p>';
+            dettaglio = dettaglio + '<br><p align="center"><input type="button" value="FINE" class="ui-btn ui-corner-all ui-shadow ui-btn-active ui-btnCarica fineCarico" onclick="togliEvidenziatoDistributore(' + IdDistributore + ', ' + desc + ')" /></p>';
 
             $('.DettaglioDistributore').html(dettaglio);
 
@@ -204,7 +204,8 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                 //console.log("numeroLotto=" + numeroLotto + "---");
                 numeroLotto = stringToDate(numeroLotto, 'dd/mm/yyyy', '/');
                 //console.log("idDistributore=" + idDistributore + ", idProdotto=" + idProdotto + ", numeroLotto=" + numeroLotto);
-                GetStoricoVendutoInDistributore(idDistributore, idProdotto, numeroLotto, 10);
+                //GetStoricoVendutoInDistributore(idDistributore, idProdotto, numeroLotto, 10);
+                GetStoricoVendutoInDistributore(idDistributore, idProdotto, '', 10);
                                 
             });          
 
@@ -254,7 +255,7 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                 //alert('idDistributore=' + idDistributore + ' idProdotto=' + idProdotto + ' quantitaVenduti=' + quantitaVenduti + ' quantitaRimasti=' + quantitaRimasti + 'prezzoTotaleVenduti=' + prezzoTotaleVenduti + ' prezzoTotaleRimasti=' + prezzoTotaleRimasti + ' idOperatore=' + idOperatore);
                 //return;
 
-                //if (!confirm("Sicuro che sul distributore sono rimasti " + quantitaRimasti + " pezzi di questo prodotto?")) return;
+                if (!confirm("Sicuro che sul distributore sono rimasti " + quantitaRimasti + " pezzi di questo prodotto?")) return;
 
                 SalvaRimasti(idDistributore, idProdotto, quantitaVenduti, quantitaRimasti, prezzoTotaleVenduti, prezzoTotaleRimasti, idOperatore);
 
@@ -349,6 +350,8 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                     $(this).prev().removeClass("evidenziaErrore");
                 }
 
+                if (!confirm("Sicuro che vuoi caricare " + quantitaDaCaricare + " pezzi di questo prodotto?")) return;
+
                 SmaltiscoProdottiDaMagazzinoV2(idProdotto, quantRestante, prezzoTotale, idOperatore, false, 'verde');
 
                 InsertProdottiInDistributore(IdDistributore, idProdotto, quantitaDaCaricare, prezzoTotale, idOperatore, 'verde');
@@ -388,6 +391,8 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                 } else {
                     $(this).prev().removeClass("evidenziaErrore");
                 }
+
+                if (!confirm("Sicuro che vuoi spostare " + quantitaDaSpostare + " pezzi di questo prodotto?")) return;
 
                 if (direzione) {
                     var quantRestanteDistributore = (parseInt(labelQuantita.text()) - parseInt(quantitaDaSpostare));
