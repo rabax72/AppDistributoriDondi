@@ -117,6 +117,10 @@ th, .caricaDaCamionPerCliente, .caricaDaCamion, .nomeCliente, .ui-title, .nomeDi
     padding:0 !important;
 }
 
+.ui-btnCancella {
+    padding:5px;
+}
+
 .quantita {
     font-size: 50px !important;
     text-align:center;
@@ -159,6 +163,11 @@ th, .caricaDaCamionPerCliente, .caricaDaCamion, .nomeCliente, .ui-title, .nomeDi
     background-color:red !important;
     color:white !important;
     padding:0 !important;
+}
+
+.ui-btnClose {    
+    background-color:red !important;
+    color:white !important;   
 }
 
 .ui-btnCaricaDaMagazzino{

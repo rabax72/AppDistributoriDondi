@@ -499,7 +499,7 @@ function InsertProdottiInCamion(idProdotto, quantita, prezzoTotale, idOperatore,
     });
 }
 
-function InsertProdottiInCamionV2(idProdotto, quantita, prezzoTotale, idOperatore, idMezzo, idDistributore) {
+function InsertProdottiInCamionV2(idProdotto, quantita, prezzoTotale, idOperatore, idMezzo, idDistributore, idCliente) {
 
     $.ajax({
         type: "POST",
@@ -520,7 +520,13 @@ function InsertProdottiInCamionV2(idProdotto, quantita, prezzoTotale, idOperator
             risultati = response.d;
 
             //console.log(risultati);
-            AggiornaColoreProdottoInDistributore(idDistributore, idProdotto, 'arancio');
+            if (idCliente == 0) {
+                AggiornaColoreProdottoInDistributore(idDistributore, idProdotto, 'arancio');
+            }
+            if (idDistributore == 0) {
+                AggiornaColoreProdottoInCliente(idCliente, idProdotto, 'arancio');
+            }
+            
         }
 
     });

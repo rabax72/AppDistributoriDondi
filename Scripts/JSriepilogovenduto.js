@@ -471,7 +471,7 @@ function VendutoPerTuttiDistributori(DataDa, DataA) {
 
             $('.filtraVendutoPerTuttiDitributori').click(function () {
                 var DataDa = stringToDate($('#VendutoPerTuttiDitributoriDataDa').val(), "dd-MM-yyyy", "-");
-                var DataA = stringToDate($('#VendutoPerTuttiDitributoriDataDa').val(), "dd-MM-yyyy", "-");
+                var DataA = stringToDate($('#VendutoPerTuttiDitributoriDataA').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 VendutoPerTuttiDistributori(DataDa, DataA);
             });

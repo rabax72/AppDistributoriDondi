@@ -32,19 +32,24 @@ var urlStoricizzoProdTrasportoV2 = urlProd + 'WebServiceAppDondi.asmx/Storicizzo
 var urlAggiornaQuantInTrasporto = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInTrasporto';
 var urlAggiornaQuantInTrasportoV2 = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInTrasportoV2';
 var urlGetSituazioneClienti = urlProd + 'WebServiceAppDondi.asmx/GetSituazioneCliente';
+var urlGetSituazioneClientiV2 = urlProd + 'WebServiceAppDondi.asmx/GetSituazioneClienteV2';
 var urlAggiornaQuantitaProdottiVenduti = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiVenduti';
 var urlAggiornaQuantitaProdottiInMagazzinoResi = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzinoResi';
 var urlAggiornaQuantitaProdottiInMagazzinoResiV2 = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzinoResiV2';
 var urlStoricizzoStatoProdottiInDistributore = urlProd + 'WebServiceAppDondi.asmx/StoricizzoStatoProdottoInDistributore';
 var urlAggiornaQuantitaProdottoInCliente = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottoInCliente';
+var urlAggiornaQuantitaProdottoInClienteV2 = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottoInClienteV2';
 var urlGetSituazioneDistributore = urlProd + 'WebServiceAppDondi.asmx/GetSituazioneDistributore';
 var urlGetSituazioneDistributoreV2 = urlProd + 'WebServiceAppDondi.asmx/GetSituazioneDistributoreV2';
 var urlAggiornoQuantitaProdottiInDistributore = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottoInDistributore';
 var urlAggiornoQuantitaProdottiInDistributoreV2 = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottoInDistributoreV2';
+var urlAggiornaColoreProdottoInCliente = urlProd + 'WebServiceAppDondi.asmx/AggiornaColoreProdottoInCliente';
 var urlAggiornaColoreProdottoInDistributore = urlProd + 'WebServiceAppDondi.asmx/AggiornaColoreProdottoInDistributore';
 var urlStoricizzaStatoProdottoInCliente = urlProd + 'WebServiceAppDondi.asmx/StoricizzoStatoProdottoInCliente';
+var urlStoricizzaStatoProdottoInClienteV2 = urlProd + 'WebServiceAppDondi.asmx/StoricizzoStatoProdottoInClienteV2';
 var urlCaricaProdottiInMagazzino = urlProd + 'WebServiceAppDondi.asmx/CaricaProdottiInMagazzino';
 var urlCaricaProdottiInMagazzinoV2 = urlProd + 'WebServiceAppDondi.asmx/CaricaProdottiInMagazzinoV2';
+var urlGetSituazioneVendutoInCliente = urlProd + 'WebServiceAppDondi.asmx/GetSituazioneVendutoInCliente';
 var urlGetSituazioneVendutoInDistributore = urlProd + 'WebServiceAppDondi.asmx/GetSituazioneVendutoInDistributore';
 var urlGetVendutoCliente = urlProd + 'WebServiceAppDondi.asmx/GetVendutoCliente';
 var urlGetVendutoDirettamente = urlProd + 'WebServiceAppDondi.asmx/GetVendutoDirettamente';
@@ -55,6 +60,7 @@ var urlGetVendutoPerTuttiDistributori = urlProd + 'WebServiceAppDondi.asmx/GetVe
 var urlGetVendutoByIdCliente = urlProd + 'WebServiceAppDondi.asmx/GetVendutoByIdCliente';
 var urlResetEvidenzaByDistributore = urlProd + 'WebServiceAppDondi.asmx/ResetEvidenzaByDistributore';
 var urlResetEvidenzaMagazzino = urlProd + 'WebServiceAppDondi.asmx/ResetEvidenzaMagazzino';
+var urlCorrezioneVendita = urlProd + 'WebServiceAppDondi.asmx/CorrezioneVendita';
 
 
 $(function () {    
@@ -716,6 +722,30 @@ function togliEvidenziatoMagazzino() {
     });
 }
 
+function AggiornaColoreProdottoInCliente(idCliente, idProdotto, colore) {
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        url: urlAggiornaColoreProdottoInCliente,
+        cache: false,
+        async: true,
+        //            data: "idDisciplina=" + idDisciplina,
+        data: JSON.stringify({ idCliente: idCliente, idProdotto: idProdotto, colore: colore }),
+        error: function (data) {
+            console.log(data.responseText)
+        },
+        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+        success: function (response) {
+            risultati = response.d;
+
+            //console.log(risultati);            
+        }
+
+    });
+}
+
 function AggiornaColoreProdottoInDistributore(idDistributore, idProdotto, colore) {
     $.ajax({
         type: "POST",
@@ -735,6 +765,31 @@ function AggiornaColoreProdottoInDistributore(idDistributore, idProdotto, colore
             risultati = response.d;
 
             //console.log(risultati);            
+        }
+
+    });
+}
+
+function CorrezioneVendita(idVendita) {
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        url: urlCorrezioneVendita,
+        cache: false,
+        async: true,
+        //            data: "idDisciplina=" + idDisciplina,
+        data: JSON.stringify({ idVendita: idVendita}),
+        error: function (data) {
+            console.log(data.responseText)
+        },
+        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+        success: function (response) {
+            risultati = response.d;
+
+            //console.log(risultati);     
+
         }
 
     });
