@@ -51,7 +51,7 @@ function GetStoricoVendutoInDistributore(IdDistributore, idProd, numeroLotto, nu
         type: "POST",
         crossDomain: true,
         contentType: "application/json; charset=utf-8",
-        url: urlGetSituazioneVendutoInDistributore,
+        url: urlGetSituazioneVendutoInDistributore2,
         cache: false,
         //jsonpCallback: 'risposta',
         // jsonp: 'callback',

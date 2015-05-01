@@ -51,6 +51,7 @@ var urlCaricaProdottiInMagazzino = urlProd + 'WebServiceAppDondi.asmx/CaricaProd
 var urlCaricaProdottiInMagazzinoV2 = urlProd + 'WebServiceAppDondi.asmx/CaricaProdottiInMagazzinoV2';
 var urlGetSituazioneVendutoInCliente = urlProd + 'WebServiceAppDondi.asmx/GetSituazioneVendutoInCliente';
 var urlGetSituazioneVendutoInDistributore = urlProd + 'WebServiceAppDondi.asmx/GetSituazioneVendutoInDistributore';
+var urlGetSituazioneVendutoInDistributore2 = urlProd + 'WebServiceAppDondi.asmx/GetSituazioneVendutoInDistributore2';
 var urlGetVendutoCliente = urlProd + 'WebServiceAppDondi.asmx/GetVendutoCliente';
 var urlGetVendutoDirettamente = urlProd + 'WebServiceAppDondi.asmx/GetVendutoDirettamente';
 var urlGetVendutoDistributori = urlProd + 'WebServiceAppDondi.asmx/GetVendutoDistributori';
