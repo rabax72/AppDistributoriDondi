@@ -37,6 +37,7 @@ var urlAggiornaQuantitaProdottiVenduti = urlProd + 'WebServiceAppDondi.asmx/Aggi
 var urlAggiornaQuantitaProdottiInMagazzinoResi = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzinoResi';
 var urlAggiornaQuantitaProdottiInMagazzinoResiV2 = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzinoResiV2';
 var urlStoricizzoStatoProdottiInDistributore = urlProd + 'WebServiceAppDondi.asmx/StoricizzoStatoProdottoInDistributore';
+var urlStoricizzoStatoProdottiInDistributore2 = urlProd + 'WebServiceAppDondi.asmx/StoricizzoStatoProdottoInDistributore2';
 var urlAggiornaQuantitaProdottoInCliente = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottoInCliente';
 var urlAggiornaQuantitaProdottoInClienteV2 = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottoInClienteV2';
 var urlGetSituazioneDistributore = urlProd + 'WebServiceAppDondi.asmx/GetSituazioneDistributore';
