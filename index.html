@@ -2,7 +2,6 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-
     <link rel="stylesheet" href="http://demos.jquerymobile.com/1.4.5/css/themes/default/jquery.mobile-1.4.5.min.css">
 	<!--<link rel="stylesheet" href="http://demos.jquerymobile.com/1.4.5/_assets/css/jqm-demos.css">-->
     <link href="Scripts/Jquery/jqm-demos.css" rel="stylesheet" />
@@ -14,6 +13,8 @@
 
 <link rel="stylesheet" href="http://cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css">
 <script src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript"  src="http://datatables.net/release-datatables/extensions/TableTools/js/dataTables.tableTools.js"></script>
 
     <link href="Scripts/Jquery/tableTools.css" rel="stylesheet" />
     <script src="Scripts/Jquery/tableTools.js"></script>
@@ -36,6 +37,7 @@
     <script src="Scripts/JSvenditadiretta.js"></script>
     <script src="Scripts/JSriepilogovenduto.js"></script>
     <script src="Scripts/dropzone.js"></script>
+    <script src="Scripts/JSmarkreport.js"></script>
     <link href="Scripts/dropzone.css" rel="stylesheet" />
 
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script> 
@@ -482,7 +484,26 @@
     
     </div><!-- /page -->
 <!--************************************************************************************-->
+<!--**** Mark Report ************************-->
+<div data-role="page" id="MarkReport">
+    <div data-role="panel" id="leftpanelMarkReport" class="leftPanel" data-position="left" data-display="push" data-theme="a">
+       <!-- <h3>Left Panel: Push</h3>-->       
+        
+	</div><!-- /leftpanel2 -->     
+    <div data-role="header">
+            <h1 class="h1MarkReport">Mark Report</h1>           
+            <a href="#leftpanelMarkReport" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left ui-btnMedio">MENU</a>
+            <!--<a href="#" data-rel="back" data-icon="arrow-l" class="ui-corner-all ui-shadow ui-btn-active ui-btn-right ui-btnMedio">Back</a>-->
+        </div><!-- /header -->                
 
+        <div role="main" class="ui-content jqm-content">                                                               
+           
+            <div class="DettMarkReport"></div>
+
+        </div><!-- /content -->        
+    
+    </div><!-- /page -->
+<!--************************************************************************************-->
 <!--**** Form Inserimento Prodotti *****************************************************-->
     <div data-role="page" id="formInserimentoProdotto">
         <div data-role="panel" id="leftPanelformInserimentoProdotto" class="leftPanel" data-position="left" data-display="push" data-theme="a">

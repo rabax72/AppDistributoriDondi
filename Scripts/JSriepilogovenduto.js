@@ -444,7 +444,7 @@ function VendutoPerTuttiDistributori(DataDa, DataA) {
                                             '<th>Desc.</th>' +
                                             '<th>Totale Quantità: ' + totaleQuantita + '</th>' +
                                             '<th>Totale Venduto: ' + Number(prezzoTot).toFixed(2) + '€</th>' +
-                                            //'<th>N° DDT</th>' +
+                                            '<th>Venduto Mark: </th>' +
                                             //'<th>Data DDT</th>' +
                                             '<th>Distributore</th>' +
                                             '<th>Operatore</th>' +

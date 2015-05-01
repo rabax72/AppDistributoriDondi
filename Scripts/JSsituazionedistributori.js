@@ -162,8 +162,8 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                                         '<thead>' +
                                             '<tr>' +                                                
                                                 '<th width="10%">Foto</th>' +
-                                                '<th width="15%">Magaz.</th>' +
-                                                '<th width="15%">Quantita Dist.</th>' +
+                                                '<th width="15%">Mag.</th>' +
+                                                '<th width="15%">Quant. Dist.</th>' +
                                                 '<th width="15%">Rimasti</th>' +
                                                 '<th width="15%">Resi</th>' +
                                                 '<th width="15%">Carica</th>' +
@@ -173,8 +173,8 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                                         '<tfoot>' +
                                             '<tr>' +                                              
                                                 '<th>Foto</th>' +
-                                                '<th>Magaz.</th>' +
-                                                '<th>Quantita Dist.</th>' +
+                                                '<th>Mag.</th>' +
+                                                '<th>Quant. Dist.</th>' +
                                                 '<th>Rimasti</th>' +
                                                 '<th>Resi</th>' +
                                                 '<th>Carica</th>' +

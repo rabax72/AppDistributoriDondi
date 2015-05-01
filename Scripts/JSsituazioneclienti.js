@@ -123,8 +123,8 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                                         '<thead>' +
                                             '<tr>' +                                                
                                                '<th width="10%">Foto</th>' +
-                                                '<th width="15%">Magaz.</th>' +
-                                                '<th width="15%">Quantita Cliente</th>' +
+                                                '<th width="15%">Mag.</th>' +
+                                                '<th width="15%">Quant. Cli.</th>' +
                                                 '<th width="15%">Vendita</th>' +
                                                 '<th width="15%">Rimasti</th>' +
                                                 '<th width="15%">Resi</th>' +                                                
@@ -134,8 +134,8 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                                         '<tfoot>' +
                                             '<tr>' +                                              
                                                 '<th>Foto</th>' +
-                                                '<th>Magaz.</th>' +
-                                                '<th>Quantita Cliente</th>' +
+                                                '<th>Mag.</th>' +
+                                                '<th>Quant. Cli.</th>' +
                                                 '<th>Vendita</th>' +
                                                 '<th>Rimasti</th>' +
                                                 '<th>Resi</th>' +

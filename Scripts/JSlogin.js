@@ -58,10 +58,12 @@ var urlGetVendutoByIdProdotto = urlProd + 'WebServiceAppDondi.asmx/GetVendutoByI
 var urlGetVendutoByIdDistributore = urlProd + 'WebServiceAppDondi.asmx/GetVendutoByIdDistributore';
 var urlGetVendutoPerTuttiDistributori = urlProd + 'WebServiceAppDondi.asmx/GetVendutoPerTuttiDistributori';
 var urlGetVendutoByIdCliente = urlProd + 'WebServiceAppDondi.asmx/GetVendutoByIdCliente';
+var urlResetEvidenzaByCliente = urlProd + 'WebServiceAppDondi.asmx/ResetEvidenzaByCliente';
 var urlResetEvidenzaByDistributore = urlProd + 'WebServiceAppDondi.asmx/ResetEvidenzaByDistributore';
 var urlResetEvidenzaMagazzino = urlProd + 'WebServiceAppDondi.asmx/ResetEvidenzaMagazzino';
 var urlCorrezioneVendita = urlProd + 'WebServiceAppDondi.asmx/CorrezioneVendita';
-
+var urlGetMarkReport = urlProd + 'WebServiceAppDondi.asmx/GetMarkReport';
+var urlFilterMarkReport = urlProd + 'WebServiceAppDondi.asmx/FilterMarkReport';
 
 $(function () {    
 
@@ -671,6 +673,30 @@ function AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, idCliente, 
     });
 }
 //****************************************************************** 
+function togliEvidenziatoCliente(idCliente, descCliente) {
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        url: urlResetEvidenzaByCliente,
+        cache: false,
+        async: true,
+        //            data: "idDisciplina=" + idDisciplina,
+        data: JSON.stringify({ idCliente: idCliente }),
+        error: function (data) {
+            console.log(data.responseText)
+        },
+        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+        success: function (response) {
+            risultati = response.d;
+
+            //console.log(risultati);
+            GetSituazioneCliente(idCliente, descCliente);
+        }
+
+    });
+}
 
 function togliEvidenziatoDistributore(idDistributore, descDistributore) {
     $.ajax({
