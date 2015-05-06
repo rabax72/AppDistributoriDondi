@@ -124,11 +124,11 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                                             '<tr>' +                                                
                                                '<th width="10%">Foto</th>' +
                                                 '<th width="15%">Mag.</th>' +
-                                                '<th width="15%">Quant. Cli.</th>' +
-                                                '<th width="15%">Vendita</th>' +
+                                                '<th width="20%">Quant. Cli.</th>' +
+                                                '<th width="20%">Vendita</th>' +
                                                 '<th width="15%">Rimasti</th>' +
-                                                '<th width="15%">Resi</th>' +                                                
-                                                '<th width="15%">Sposta</th>' +
+                                                '<th width="10%">Resi</th>' +                                                
+                                                '<th width="10%">Sposta</th>' +
                                             '</tr>' +
                                         '</thead>' +
                                         '<tfoot>' +
@@ -392,10 +392,28 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                 if (!confirm("Sicuro che vuoi spostare " + quantitaDaSpostare + " pezzi di questo prodotto?")) return;
 
                 if (direzione) {
+                    if (parseInt(quantitaDaSpostare) > parseInt(labelQuantita.text())) {
+                        alert("E' impossibile spostare più prodotti di quelli presenti dal Cliente!");
+                        //$(this).prev().animate({ backgroundcolor: "red" }, 1000);
+                        $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
+
+                        return;
+                    } else {
+                        $(this).prev().removeClass("evidenziaErrore");
+                    }
                     var quantRestanteDistributore = (parseInt(labelQuantita.text()) - parseInt(quantitaDaSpostare));
                     var quantRestanteCamion = (parseInt(quantCamion.text()) + parseInt(quantitaDaSpostare));
 
                 } else {
+                    if (parseInt(quantitaDaSpostare) > parseInt(quantCamion.text())) {
+                        alert("E' impossibile spostare più prodotti di quelli presenti sul camion!");
+                        //$(this).prev().animate({ backgroundcolor: "red" }, 1000);
+                        $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
+
+                        return;
+                    } else {
+                        $(this).prev().removeClass("evidenziaErrore");
+                    }
                     var quantRestanteDistributore = (parseInt(labelQuantita.text()) + parseInt(quantitaDaSpostare));
                     var quantRestanteCamion = (parseInt(quantCamion.text()) - parseInt(quantitaDaSpostare));
                     //InsertProdottiInCamionV2(idProdotto, quantitaDaSpostare, prezzoTotaleRimastiCamion, idOperatore, 1);
