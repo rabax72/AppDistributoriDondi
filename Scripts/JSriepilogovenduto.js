@@ -502,76 +502,80 @@ function VendutoPerTuttiDistributoriStampa(DataDa, DataA) {
 
             var dettaglio = '<h1>Riepilogo Venduto per Tutti i Distributori</h1>' +
                             '<div>' +
-                                'Data Da <input type="text" id="VendutoPerTuttiDitributoriDataDa"  class="calendario" data-theme="a" /> Data A <input type="text" id="VendutoPerTuttiDitributoriDataA"  class="calendario" data-theme="a" /> <button id="filtraVendutoDitributore" value="Filtra" class="filtraVendutoPerTuttiDitributori">Filtra</button>' +
-                            '</div><table id="tabellaVendutoPerTuttiDitributori" class="display" cellspacing="0" width="100%">' +
+                                'Data Da <input type="text" id="VendutoPerTuttiDitributoriStampaDataDa"  class="calendario" data-theme="a" /> Data A <input type="text" id="VendutoPerTuttiDitributoriStampaDataA"  class="calendario" data-theme="a" /> <button id="filtraVendutoDitributoreStampa" value="Filtra" class="filtraVendutoPerTuttiDitributoriStampa">Filtra</button>' +
+                            '</div><table id="tabellaVendutoPerTuttiDitributoriStampa" class="display" cellspacing="0" width="100%">' +
                                     '<thead>' +
                                         '<tr>' +
-                                            '<th>Foto</th>' +
-                                            '<th>Desc.</th>' +
-                                            '<th>Quantità</th>' +
-                                            '<th>Prezzo Tot.</th>' +
-                                            '<th>Data Ril.</th>' +
-                                            //'<th>N° DDT</th>' +
-                                            //'<th>Data DDT</th>' +
-                                            '<th>Distributore</th>' +
-                                            '<th>Operatore</th>' +
+                                            '<th width ="40%">Distributore</th>' +                                            
+                                            '<th width ="40%">Venduto Tot.</th>' +
+                                            '<th width ="20%">Data Ril.</th>' +                                           
                                         '</tr>' +
                                     '</thead>' +
                                     '<tbody>';
             var prezzoTot = 0;
-            var totaleQuantita = 0;
+            var totalePerDist= 0;
+            var descrizioneOld = "";
+            var k = 0;
+            var rigaDettaglio = new Array();
+            var sommaTotali = 0;
             for (var i = 0; i < risultati.length; i++) {
-
-                dettaglio = dettaglio + '<tr>';
-                dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
-                dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantitaVenduto + '</td>';
-                dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzoTotale + ' €</td>';
-                dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataUltimaModifica) + '</td>';
-                //dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].numeroDDT + '</td>';
-                //dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
-                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].descrizioneDistributore + '</td>';
-                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
-                dettaglio = dettaglio + '</tr>';
-                prezzoTot = prezzoTot + risultati[i].prezzoTotale;
-                totaleQuantita = totaleQuantita + risultati[i].quantitaVenduto;
+                totalePerDist = risultati[i].prezzoTotale;
+                sommaTotali = sommaTotali + risultati[i].prezzoTotale;
+                if (descrizioneOld != risultati[i].descrizione) {
+                    prezzoTot = risultati[i].prezzoTotale;
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<tr>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + prezzoTot + ' €</td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataUltimaModifica) + '</td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
+                   
+                } else {
+                    rigaDettaglio[i - 1] = '';
+                    prezzoTot = (parseInt(prezzoTot) + parseInt(totalePerDist));
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<tr>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + prezzoTot + ' €</td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataUltimaModifica) + '</td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
+                    //totalePerDist = totalePerDist + risultati[i].prezzoTotale;
+                }
+                
+                descrizioneOld = risultati[i].descrizione;
+                           
             }
-
-
-            dettaglio = dettaglio + '</tbody>' + '<tfoot>' +
-                                        '<tr>' +
-                                            '<th>Foto</th>' +
-                                            '<th>Desc.</th>' +
-                                            '<th>Totale Quantità: ' + totaleQuantita + '</th>' +
-                                            '<th>Totale Venduto: ' + Number(prezzoTot).toFixed(2) + '€</th>' +
-                                            '<th>Venduto Mark: </th>' +
-                                            //'<th>Data DDT</th>' +
-                                            '<th>Distributore</th>' +
-                                            '<th>Operatore</th>' +
-                                        '</tr>' +
-                                    '</tfoot>' + ' </table>';
 
             //console.log(dettaglio);
 
-            $('.DettRiepilogoVenduto').html(dettaglio);
+            var righe = '';
 
-            $(".dataDDT").datepicker({
-                dateFormat: "dd-mm-yy"
-            });
+            for (var i = 0; i < risultati.length; i++) {
+                righe = righe + rigaDettaglio[i];
+            }
+
+            dettaglio = dettaglio + righe + '</tbody>' + '<tfoot>' +
+                                         '<tr>' +
+                                             '<th>Distributore</th>' +
+                                             '<th>Totale Venduto: ' + Number(sommaTotali).toFixed(2) + '€</th>' +
+                                             //'<th>Venduto Mark: </th>' +                                            
+                                             '<th>Data Ril.</th>' +
+                                         '</tr>' +
+                                     '</tfoot>' + ' </table>';
+
+            $('.DettRiepilogoVenduto').html(dettaglio);            
 
             $(".calendario").datepicker({
                 dateFormat: "dd-mm-yy"
             });
 
-            var table = $('#tabellaVendutoPerTuttiDitributori').DataTable(
+            var table = $('#tabellaVendutoPerTuttiDitributoriStampa').DataTable(
                 {
-                    "paging": false, responsive: true
+                    "paging": false, responsive: true, dom: 'T<"clear">lfrtip'
                 }
             );
 
-            $('.filtraVendutoPerTuttiDitributori').click(function () {
-                var DataDa = stringToDate($('#VendutoPerTuttiDitributoriDataDa').val(), "dd-MM-yyyy", "-");
-                var DataA = stringToDate($('#VendutoPerTuttiDitributoriDataA').val(), "dd-MM-yyyy", "-");
+            $('.filtraVendutoPerTuttiDitributoriStampa').click(function () {
+                var DataDa = stringToDate($('#VendutoPerTuttiDitributoriStampaDataDa').val(), "dd-MM-yyyy", "-");
+                var DataA = stringToDate($('#VendutoPerTuttiDitributoriStampaDataA').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 VendutoPerTuttiDistributori(DataDa, DataA);
             });

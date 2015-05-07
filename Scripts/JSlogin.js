@@ -59,6 +59,7 @@ var urlGetVendutoDistributori = urlProd + 'WebServiceAppDondi.asmx/GetVendutoDis
 var urlGetVendutoByIdProdotto = urlProd + 'WebServiceAppDondi.asmx/GetVendutoByIdProdotto';
 var urlGetVendutoByIdDistributore = urlProd + 'WebServiceAppDondi.asmx/GetVendutoByIdDistributore';
 var urlGetVendutoPerTuttiDistributori = urlProd + 'WebServiceAppDondi.asmx/GetVendutoPerTuttiDistributori';
+var urlGetVendutoPerTuttiDistributoriStampa = urlProd + 'WebServiceAppDondi.asmx/GetVendutoPerTuttiDistributoriStampa';
 var urlGetVendutoByIdCliente = urlProd + 'WebServiceAppDondi.asmx/GetVendutoByIdCliente';
 var urlResetEvidenzaByCliente = urlProd + 'WebServiceAppDondi.asmx/ResetEvidenzaByCliente';
 var urlResetEvidenzaByDistributore = urlProd + 'WebServiceAppDondi.asmx/ResetEvidenzaByDistributore';
