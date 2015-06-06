@@ -521,17 +521,18 @@ function VendutoPerTuttiDistributoriStampa(DataDa, DataA) {
             for (var i = 0; i < risultati.length; i++) {
                 totalePerDist = risultati[i].prezzoTotale;
                 sommaTotali = sommaTotali + risultati[i].prezzoTotale;
+                //console.log(risultati[i]);
                 if (descrizioneOld != risultati[i].descrizione) {
-                    prezzoTot = risultati[i].prezzoTotale;
+                    
                     rigaDettaglio[i] = rigaDettaglio[i] + '<tr>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + prezzoTot + ' €</td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + risultati[i].prezzoTotale + ' €</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataUltimaModifica) + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
-                   
+                    prezzoTot = risultati[i].prezzoTotale;
                 } else {
                     rigaDettaglio[i - 1] = '';
-                    prezzoTot = (parseInt(prezzoTot) + parseInt(totalePerDist));
+                    prezzoTot = (parseFloat(prezzoTot) + parseFloat(totalePerDist));
                     rigaDettaglio[i] = rigaDettaglio[i] + '<tr>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + prezzoTot + ' €</td>';
@@ -548,8 +549,8 @@ function VendutoPerTuttiDistributoriStampa(DataDa, DataA) {
 
             var righe = '';
 
-            for (var i = 0; i < risultati.length; i++) {
-                righe = righe + rigaDettaglio[i];
+            for (var z = 0; z < risultati.length; z++) {
+                righe = righe + rigaDettaglio[z];
             }
 
             dettaglio = dettaglio + righe + '</tbody>' + '<tfoot>' +
@@ -577,7 +578,7 @@ function VendutoPerTuttiDistributoriStampa(DataDa, DataA) {
                 var DataDa = stringToDate($('#VendutoPerTuttiDitributoriStampaDataDa').val(), "dd-MM-yyyy", "-");
                 var DataA = stringToDate($('#VendutoPerTuttiDitributoriStampaDataA').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
-                VendutoPerTuttiDistributori(DataDa, DataA);
+                VendutoPerTuttiDistributoriStampa(DataDa, DataA);
             });
 
         }

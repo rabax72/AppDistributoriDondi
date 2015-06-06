@@ -167,7 +167,7 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                                                 '<th width="15%">Rimasti</th>' +
                                                 '<th width="10%">Resi</th>' +
                                                 '<th width="20%">Carica</th>' +
-                                                '<th width="10%">Sposta</th>' +
+                                                '<th width="10%">Scarica</th>' +
                                             '</tr>' +
                                         '</thead>' +
                                         '<tfoot>' +
@@ -178,7 +178,7 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                                                 '<th>Rimasti</th>' +
                                                 '<th>Resi</th>' +
                                                 '<th>Carica</th>' +
-                                                '<th>Sposta</th>' +
+                                                '<th>Scarica</th>' +
                                             '</tr>' +
                                         '</tfoot>' +
                                         '<tbody>';
@@ -214,7 +214,8 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                 dettaglio = dettaglio + '<td><div class="nomeDistributore">Rimasti</div> <input type="number" id="rimastoDist' + risultati[i].idProdotto + '" data-clear-btn="true" class="miniInput" min="0"> <a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti ui-btnCarica">Salva</a> </td>';
                 dettaglio = dettaglio + '<td><div class="medioFont" style="margin-bottom:9px;">Resi</div> <input type="number" id="resoDist' + risultati[i].idProdotto + '" data-clear-btn="true" class="miniInput" min="0"> <a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active resi ui-btnScarica">Salva</a> </td>';
                 dettaglio = dettaglio + '<td><div class="medioFont" style="margin-bottom:9px;">Carica</div> <input type="number" id="caricaDist' + risultati[i].idProdotto + '" data-clear-btn="true" class="miniInput" min="0"> <a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-quantMagazzino="' + risultati[i].quantitaMagazzino + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaDist ui-btnCaricaDaMagazzino">Salva</a></td>';
-                dettaglio = dettaglio + '<td><input type="checkbox" data-role="flipswitch" name="flip-checkbox-' + risultati[i].idProdotto + '" id="flip-checkbox-' + risultati[i].idProdotto + '" data-on-text="Camion" data-off-text="Distributore" data-wrapper-class="custom-size-flipswitch" checked=""><span id="quantInCamion-' + risultati[i].idProdotto + '" class="quantSuCamion">0</span> <input type="number" id="spostaDist' + risultati[i].idProdotto + '" data-clear-btn="true" class="miniInput" min="0"> <a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active spostaDist ui-btnSposta">Salva</a></td>';
+                dettaglio = dettaglio + '<td><div class="medioFont" style="margin-bottom:9px;">Scarica</div> <input type="number" id="spostaDist' + risultati[i].idProdotto + '" data-clear-btn="true" class="miniInput" min="0"> <a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-quantMagazzino="' + risultati[i].quantitaMagazzino + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active spostaDist ui-btnSposta">Salva</a></td>';
+                //dettaglio = dettaglio + '<td><input type="checkbox" data-role="flipswitch" name="flip-checkbox-' + risultati[i].idProdotto + '" id="flip-checkbox-' + risultati[i].idProdotto + '" data-on-text="Camion" data-off-text="Distributore" data-wrapper-class="custom-size-flipswitch" checked=""><span id="quantInCamion-' + risultati[i].idProdotto + '" class="quantSuCamion">0</span> <input type="number" id="spostaDist' + risultati[i].idProdotto + '" data-clear-btn="true" class="miniInput" min="0"> <a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active spostaDist ui-btnSposta">Salva</a></td>';
                 dettaglio = dettaglio + '</tr>';
 
             }           
@@ -238,9 +239,7 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                 GetStoricoVendutoInDistributore(idDistributore, idProdotto, '', 10, desc);
                                                
             });
-
-            
-                  
+                              
             var table = $('#tabellaDettaglioDistributore').DataTable(
                 {
                     "paging": false, responsive: true, "fnDrawCallback": function () {
@@ -283,11 +282,8 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                 } else {
                     $(this).prev().removeClass("evidenziaErrore");
                 }
-
-                //alert('idDistributore=' + idDistributore + ' idProdotto=' + idProdotto + ' quantitaVenduti=' + quantitaVenduti + ' quantitaRimasti=' + quantitaRimasti + 'prezzoTotaleVenduti=' + prezzoTotaleVenduti + ' prezzoTotaleRimasti=' + prezzoTotaleRimasti + ' idOperatore=' + idOperatore);
-                //return;
-
-                if (!confirm("Sicuro che sul distributore sono rimasti " + quantitaRimasti + " pezzi di questo prodotto?")) return;
+                
+                //if (!confirm("Sicuro che sul distributore sono rimasti " + quantitaRimasti + " pezzi di questo prodotto?")) return;
 
                 SalvaRimasti(idDistributore, idProdotto, quantitaVenduti, quantitaRimasti, prezzoTotaleVenduti, prezzoTotaleRimasti, idOperatore);
 
@@ -300,6 +296,9 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                     color: "#000"
                 }, 1000);
                 labelQuantita.html(quantitaRimasti);
+
+                //azzero il campo
+                $('#rimastoDist' + idProdotto).val('');
 
                 //var labelVenduto = $(this).closest('td').next('td').next('td');
                 //labelVenduto.animate({
@@ -392,7 +391,7 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                     $(this).prev().removeClass("evidenziaErrore");
                 }
 
-                if (!confirm("Sicuro che vuoi caricare " + quantitaDaCaricare + " pezzi di questo prodotto?")) return;
+                //if (!confirm("Sicuro che vuoi caricare " + quantitaDaCaricare + " pezzi di questo prodotto?")) return;
 
                 SmaltiscoProdottiDaMagazzinoV2(idProdotto, quantRestante, prezzoTotale, idOperatore, false, 'verde');
 
@@ -400,6 +399,8 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
 
                 labelQuantita.html(quantitaAggiornata);
                 giacenza.html(quantRestante);
+
+                $('#caricaDist' + idProdotto).val('');
 
                 labelQuantita.animate({
                     backgroundColor: "green",
@@ -416,72 +417,109 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
             $('.spostaDist').on('click', function () {
                 var idProdotto = $(this).attr('data-idProdotto');
                 var quantitaDaSpostare = $('#spostaDist' + idProdotto).val();
-                var quantCamion = $('#quantInCamion-' + idProdotto);
-                
-                var labelQuantita = $(this).closest('td').prev('td').prev('td').prev('td').prev('td');
-                
+                //var quantCamion = $('#quantInCamion-' + idProdotto);                
+                var labelQuantita = $(this).closest('td').prev('td').prev('td').prev('td').prev('td');                
                 var prezzo = $(this).attr('data-prezzo');
+                //var quantMagazzino = $(this).attr('data-quantMagazzino');
+                var quantMagazzino = $('#quantMagazzino' + idProdotto).text();
                 
+                var giacenza = $('#quantMagazzino' + idProdotto);
+                var quantRestanteDistributore = (parseInt(labelQuantita.text()) - parseInt(quantitaDaSpostare));
+                var quantRestante = (parseInt(quantMagazzino) + parseInt(quantitaDaSpostare));
+                var prezzoTotaleRimasti = (prezzo * quantRestante);
+                var prezzoTotaleRimastiDistributore = (prezzo * (parseInt(labelQuantita.text()) - parseInt(quantitaDaSpostare)));
+
                 var idOperatore = localStorage.idOperatore;
                 
-                var direzione = $('#flip-checkbox-' + idProdotto).is(':checked');
+                //var direzione = $('#flip-checkbox-' + idProdotto).is(':checked');
 
                 if (quantitaDaSpostare == "" || isInteroPositivo(parseInt(quantitaDaSpostare)) == false) {
-                    alert("Scegli un valore Numerico per indicare quanto spostare!");
+                    alert("Scegli un valore Numerico per indicare quanto scaricare!");
                     $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
                     return;
                 } else {
                     $(this).prev().removeClass("evidenziaErrore");
                 }
                 
-                if (!confirm("Sicuro che vuoi spostare " + quantitaDaSpostare + " pezzi di questo prodotto?")) return;
+                //if (!confirm("Sicuro che vuoi spostare " + quantitaDaSpostare + " pezzi di questo prodotto?")) return;
 
-                if (direzione) {
-                    if (parseInt(quantitaDaSpostare) > parseInt(labelQuantita.text())) {
-                        alert("E' impossibile spostare più prodotti di quelli presenti nel distributore!");
-                        //$(this).prev().animate({ backgroundcolor: "red" }, 1000);
-                        $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
-
-                        return;
-                    } else {
-                        $(this).prev().removeClass("evidenziaErrore");
-                    }
-                    var quantRestanteDistributore = (parseInt(labelQuantita.text()) - parseInt(quantitaDaSpostare));
-                    var quantRestanteCamion = (parseInt(quantCamion.text()) + parseInt(quantitaDaSpostare));
+                if (parseInt(quantitaDaSpostare) > parseInt(labelQuantita.text())) {
+                    alert("E' impossibile scaricare più prodotti di quelli presenti nel distributore!");
+                    //$(this).prev().animate({ backgroundcolor: "red" }, 1000);
+                    $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
                     
+                    return;
                 } else {
-                    if (parseInt(quantitaDaSpostare) > parseInt(quantCamion.text())) {
-                        alert("E' impossibile spostare più prodotti di quelli presenti sul camion!");
-                        //$(this).prev().animate({ backgroundcolor: "red" }, 1000);
-                        $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
-
-                        return;
-                    } else {
-                        $(this).prev().removeClass("evidenziaErrore");
-                    }
-                    var quantRestanteDistributore = (parseInt(labelQuantita.text()) + parseInt(quantitaDaSpostare));
-                    var quantRestanteCamion = (parseInt(quantCamion.text()) - parseInt(quantitaDaSpostare));
-                    //InsertProdottiInCamionV2(idProdotto, quantitaDaSpostare, prezzoTotaleRimastiCamion, idOperatore, 1);
+                    $(this).prev().removeClass("evidenziaErrore");
                 }
-                var prezzoTotaleRimastiDistributore = (prezzo * quantRestanteDistributore);
-                var prezzoTotaleRimastiCamion = (prezzo * quantRestanteCamion);
-
+                                
                 StoricizzoStatoProdottoInDistributore(IdDistributore, idProdotto, quantRestanteDistributore, prezzoTotaleRimastiDistributore, idOperatore);
 
-                StoricizzoProdInTrasportoV2(idProdotto, idOperatore, quantRestanteCamion, prezzoTotaleRimastiCamion, IdDistributore, 0);
-                                
-                labelQuantita.html(quantRestanteDistributore);
-                quantCamion.html(quantRestanteCamion);               
+                storicizzaProdottoInMagazzino(idProdotto, idOperatore, '', true, quantRestante, prezzoTotaleRimasti);
+
+                $('#spostaDist' + idProdotto).val('');
+
+                labelQuantita.html(quantRestanteDistributore);                             
 
                 labelQuantita.animate({
                     backgroundColor: "#FFA500",
                     color: "#000"
                 }, 1000);
 
-                quantCamion.animate({
+                giacenza.html(quantRestante);
+                giacenza.animate({
                     backgroundColor: "#FFA500",
                     color: "#000"
                 }, 1000);
+
+                //*********************************
+
+                //if (direzione) {
+                //    if (parseInt(quantitaDaSpostare) > parseInt(labelQuantita.text())) {
+                //        alert("E' impossibile spostare più prodotti di quelli presenti nel distributore!");
+                //        //$(this).prev().animate({ backgroundcolor: "red" }, 1000);
+                //        $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
+
+                //        return;
+                //    } else {
+                //        $(this).prev().removeClass("evidenziaErrore");
+                //    }
+                //    var quantRestanteDistributore = (parseInt(labelQuantita.text()) - parseInt(quantitaDaSpostare));
+                //    var quantRestanteCamion = (parseInt(quantCamion.text()) + parseInt(quantitaDaSpostare));
+                    
+                //} else {
+                //    if (parseInt(quantitaDaSpostare) > parseInt(quantCamion.text())) {
+                //        alert("E' impossibile spostare più prodotti di quelli presenti sul camion!");
+                //        //$(this).prev().animate({ backgroundcolor: "red" }, 1000);
+                //        $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
+
+                //        return;
+                //    } else {
+                //        $(this).prev().removeClass("evidenziaErrore");
+                //    }
+                //    var quantRestanteDistributore = (parseInt(labelQuantita.text()) + parseInt(quantitaDaSpostare));
+                //    var quantRestanteCamion = (parseInt(quantCamion.text()) - parseInt(quantitaDaSpostare));
+                //    //InsertProdottiInCamionV2(idProdotto, quantitaDaSpostare, prezzoTotaleRimastiCamion, idOperatore, 1);
+                //}
+                //var prezzoTotaleRimastiDistributore = (prezzo * quantRestanteDistributore);
+                //var prezzoTotaleRimastiCamion = (prezzo * quantRestanteCamion);
+
+                //StoricizzoStatoProdottoInDistributore(IdDistributore, idProdotto, quantRestanteDistributore, prezzoTotaleRimastiDistributore, idOperatore);
+
+                //StoricizzoProdInTrasportoV2(idProdotto, idOperatore, quantRestanteCamion, prezzoTotaleRimastiCamion, IdDistributore, 0);
+                                
+                //labelQuantita.html(quantRestanteDistributore);
+                //quantCamion.html(quantRestanteCamion);               
+
+                //labelQuantita.animate({
+                //    backgroundColor: "#FFA500",
+                //    color: "#000"
+                //}, 1000);
+
+                //quantCamion.animate({
+                //    backgroundColor: "#FFA500",
+                //    color: "#000"
+                //}, 1000);
 
             });
 
