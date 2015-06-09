@@ -74,7 +74,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                     if (idProd != idProdOld) {
                         quantitaTot = quantita;
                         //dettaglio = dettaglio + '<tr>';
-                        //dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                        //dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                         //dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
                         //dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
                         //dettaglio = dettaglio + '<td class="storicoVenduto">N° DDT interno<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
@@ -84,7 +84,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                         //dettaglio = dettaglio + '</tr>';
 
                         rigaDettaglio[i] = '<tr>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantitaMagazzino + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">N° DDT interno<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
@@ -96,7 +96,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                         if (numLotto != numLottoOld) {
                             quantitaTot = quantita;
                             rigaDettaglio[i] = '<tr>';
-                            rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                            rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                             rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
                             rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantitaMagazzino + '</td>';
                             rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">N° DDT interno<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
@@ -108,7 +108,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                             rigaDettaglio[i - 1] = '';
                             quantitaTot = (quantitaTot + quantita);
                             rigaDettaglio[i] = '<tr>';
-                            rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                            rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                             rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
                             rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + quantitaTot + '</td>';
                             rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">N° DDT interno<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
@@ -270,7 +270,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                     if (idProd != idProdOld) {
                         quantitaTot = quantita;
                         //dettaglio = dettaglio + '<tr>';
-                        //dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                        //dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                         //dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
                         //dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
                         //dettaglio = dettaglio + '<td><input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
@@ -278,7 +278,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                         //dettaglio = dettaglio + '</tr>';
 
                         rigaDettaglio[i] = '<tr>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + quantitaTot + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td><input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
@@ -288,7 +288,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                         if (numLotto != numLottoOld) {
                             quantitaTot = quantita;
                             rigaDettaglio[i] = '<tr>';
-                            rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                            rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                             rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
                             rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + quantitaTot + '</td>';
                             rigaDettaglio[i] = rigaDettaglio[i] + '<td><input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
@@ -299,7 +299,7 @@ function ElencoProdottiInMagazzinoPerMezzo(idMezzo, azione) {
                             quantitaTot = (quantitaTot + quantita);
 
                             rigaDettaglio[i] = '<tr>';
-                            rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                            rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                             rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
                             rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + quantitaTot + '</td>';
                             rigaDettaglio[i] = rigaDettaglio[i] + '<td><input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';

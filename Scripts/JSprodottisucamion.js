@@ -68,7 +68,7 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
                 if (idProd != idProdOld) {
                     quantitaTot = quantita;
                     //dettaglio = dettaglio + '<tr>';
-                    //dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                    //dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                     //dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
                     ////dettaglio = dettaglio + '<td>' + parseJsonDate(risultati[i].numeroLotto) + '</td>';
                     //dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
@@ -79,7 +79,7 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
                     //dettaglio = dettaglio + '</tr>';
 
                     rigaDettaglio[i] = '<tr>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';                   
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantitaTrasporto + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td><input id="quantitaDaCaricare' + risultati[i].IdTrasporto + '" type="number" data-clear-btn="true" class="miniInput accentraInput"> </td>';                    
@@ -90,7 +90,7 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
                     if (numLotto != numLottoOld) {
                         quantitaTot = quantita;
                         rigaDettaglio[i] = '<tr>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantitaTrasporto + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td><input id="quantitaDaCaricare' + risultati[i].IdTrasporto + '" type="number" data-clear-btn="true" class="miniInput accentraInput"> </td>';
@@ -100,7 +100,7 @@ function ElencoProdottiSuCamionPerDistributore(idMezzo, idDistributore) {
                         rigaDettaglio[i - 1] = '';
                         quantitaTot = (quantitaTot + quantita);
                         rigaDettaglio[i] = '<tr>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + quantitaTot + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td><input id="quantitaDaCaricare' + risultati[i].IdTrasporto + '" type="number" data-clear-btn="true" class="miniInput accentraInput"> </td>';
@@ -293,7 +293,7 @@ function ElencoProdottiSuCamionPerCliente(idMezzo, idCliente) {
                     quantitaTot = quantita;
 
                     //dettaglio = dettaglio + '<tr>';
-                    //dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                    //dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                     //dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';                    
                     //dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
                     //dettaglio = dettaglio + '<td><input id="quantitaDaCaricare' + risultati[i].IdTrasporto + '" type="number" data-clear-btn="true" class="miniInput accentraInput"> </td>';
@@ -301,7 +301,7 @@ function ElencoProdottiSuCamionPerCliente(idMezzo, idCliente) {
                     //dettaglio = dettaglio + '</tr>';
 
                     rigaDettaglio[i] = '<tr>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantitaTrasporto + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td><input id="quantitaDaCaricare' + risultati[i].IdTrasporto + '" type="number" data-clear-btn="true" class="miniInput accentraInput"> </td>';
@@ -311,7 +311,7 @@ function ElencoProdottiSuCamionPerCliente(idMezzo, idCliente) {
                     if (numLotto != numLottoOld) {
                         quantitaTot = quantita;
                         rigaDettaglio[i] = '<tr>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantitaTrasporto + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td><input id="quantitaDaCaricare' + risultati[i].IdTrasporto + '" type="number" data-clear-btn="true" class="miniInput accentraInput"> </td>';
@@ -321,7 +321,7 @@ function ElencoProdottiSuCamionPerCliente(idMezzo, idCliente) {
                         rigaDettaglio[i - 1] = '';
                         quantitaTot = (quantitaTot + quantita);
                         rigaDettaglio[i] = '<tr>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '<br><div class="medioGrande">Lotto:<br>' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + quantitaTot + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td><input id="quantitaDaCaricare' + risultati[i].IdTrasporto + '" type="number" data-clear-btn="true" class="miniInput accentraInput"> </td>';

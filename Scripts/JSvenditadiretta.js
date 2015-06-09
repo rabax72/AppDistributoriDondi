@@ -60,7 +60,7 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
             for (var i = 0; i < risultati.length; i++) {
 
                 //dettaglio = dettaglio + '<tr>';
-                //dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                //dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                 //dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
                 //dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantita + '</td>';
                 //dettaglio = dettaglio + '<td class="storicoVenduto">N° DDT<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
@@ -76,7 +76,7 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                 if (idProd != idProdOld) {
                     quantitaTot = quantita;
                     rigaDettaglio[i] = '<tr>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantitaMagazzino + '</td>';
                     //rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">N° DDT<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
@@ -88,7 +88,7 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                     if (numLotto != numLottoOld) {
                         quantitaTot = quantita;
                         rigaDettaglio[i] = '<tr>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantitaMagazzino + '</td>';
                         //rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">N° DDT<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';
@@ -101,7 +101,7 @@ function ElencoProdottiInMagazzinoPerVenditaDiretta() {
                         quantitaTot = (quantitaTot + quantita);
 
                         rigaDettaglio[i] = '<tr>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + quantitaTot + '</td>';
                         //rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">N° DDT<input type="number" data-clear-btn="true" class="miniInput accentraInput"></td>';

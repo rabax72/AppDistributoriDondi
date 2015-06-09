@@ -60,7 +60,7 @@ function GestioneMagazzino() {
             for (var i = 0; i < risultati.length; i++) {
                 colore = risultati[i].colore;
                 dettaglio = dettaglio + '<tr>';
-                dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
                 dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzo + ' €</td>';
                 dettaglio = dettaglio + '<td class="quantita ' + colore + '">' + risultati[i].quantitaMagazzino + '</td>';
@@ -222,7 +222,7 @@ function GetProdottiDaScaricareDaMagazzino(idProdotto, quantitaAttuale) {
 
             var finestraDati = '<div style="padding:10px 20px;">';
             finestraDati = finestraDati + '<h3>Scarica da Magazzino</h3>';
-            finestraDati = finestraDati + '<img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + foto2 + '">';
+            finestraDati = finestraDati + '<img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + foto2 + '">';
             finestraDati = finestraDati + '<br><br>Scegli il Lotto da scaricare: <select onchange="cambiaQuantitaGiacente(this)" class="lottoSpecifico">' + numeriLotti + '</select>';
             finestraDati = finestraDati + '<label for="quantitaProdDaScaricareDaMagazzino">Quantita da scaricare:</label>';
             finestraDati = finestraDati + '<input type="number" id="quantitaProdDaScaricareDaMagazzino" data-theme="a">';
@@ -367,7 +367,7 @@ function SituazioneMagazzino() {
             for (var i = 0; i < risultati.length; i++) {
                 
                 //dettaglio = dettaglio + '<tr>';
-                //dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                //dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                 //dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '<br> Lotto: ' + parseJsonDate(risultati[i].numeroLotto) + '</td>';
                 //dettaglio = dettaglio + '<td>' + risultati[i].quantita + '</td>';                       
                 //dettaglio = dettaglio + '<td><a href="#popupCaricaMerceInMagazzino" data-rel="popup" data-position-to="window" data-idProdotto="' + risultati[i].idProdotto + '" data-foto="' + risultati[i].foto + '" data-quantita="' + risultati[i].quantita + '" data-prezzo="' + risultati[i].prezzo + '" data-idOperatore="' + risultati[i].IdOperatore + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scegliProdDaCaricareInMagazzino">Carica</a></td>';
@@ -381,7 +381,7 @@ function SituazioneMagazzino() {
                 if (idProd != idProdOld) {
                     quantitaTot = quantita;
                     rigaDettaglio[i] = '<tr>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + parseJsonDateLettura(risultati[i].numeroLotto) + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita" id="quantitaInMagazzino' + risultati[i].IdMagazzino + '">' + risultati[i].quantitaMagazzino + '</td>';
@@ -396,7 +396,7 @@ function SituazioneMagazzino() {
                     if (numLotto != numLottoOld) {
                         quantitaTot = quantita;
                         rigaDettaglio[i] = '<tr>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + parseJsonDateLettura(risultati[i].numeroLotto) + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita" id="quantitaInMagazzino' + risultati[i].IdMagazzino + '">' + risultati[i].quantitaMagazzino + '</td>';
@@ -409,7 +409,7 @@ function SituazioneMagazzino() {
                         rigaDettaglio[i - 1] = '';
                         quantitaTot = (quantitaTot + quantita);
                         rigaDettaglio[i] = '<tr>';
-                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + risultati[i].foto + '"></td>';
+                        rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + parseJsonDateLettura(risultati[i].numeroLotto) + '</td>';
                         rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita" id="quantitaInMagazzino' + risultati[i].IdMagazzino + '">' + quantitaTot + '</td>';
@@ -453,7 +453,7 @@ function SituazioneMagazzino() {
 
             //    var finestraDati = '<div style="padding:10px 20px;">';
             //    finestraDati = finestraDati + '<h3>Carica in Magazzino</h3>';
-            //    finestraDati = finestraDati + '<img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + foto + '">';
+            //    finestraDati = finestraDati + '<img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + foto + '">';
             //    finestraDati = finestraDati + '<label for="quantitaProdDaCaricareInMagazzino">Quantita:</label>';
             //    finestraDati = finestraDati + '<input type="number" id="quantitaProdDaCaricareInMagazzino" data-theme="a">';
             //    finestraDati = finestraDati + '<label for="numeroLotttoCaricareinMagazzino">Numero Lotto</label>';
@@ -544,7 +544,7 @@ function SituazioneMagazzino() {
 
             //    var finestraDati = '<div style="padding:10px 20px;">';
             //    finestraDati = finestraDati + '<h3>Scarica da Magazzino</h3>';
-            //    finestraDati = finestraDati + '<img src="http://www.giacomorabaglia.com/AppDistributoriDondi/Immagini/' + foto2 + '">';
+            //    finestraDati = finestraDati + '<img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + foto2 + '">';
             //    finestraDati = finestraDati + '<label for="quantitaProdDaScaricareDaMagazzino">Quantita:</label>';
             //    finestraDati = finestraDati + '<input type="number" id="quantitaProdDaScaricareDaMagazzino" data-theme="a">';
             //    //finestraDati = finestraDati + '<label for="numeroLotttoCaricareinMagazzino">Numero Lotto</label>';
