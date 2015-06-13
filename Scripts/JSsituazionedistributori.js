@@ -101,6 +101,9 @@ function GetStoricoVendutoInDistributore(IdDistributore, idProd, numeroLotto, nu
                 var prezzoTotaleRimasti = (quantitaRimasti * prezzoProdotto);
                 //console.log("idDistributore=" + idDistributore + ", idProdotto=" + idProdotto + ", numeroLotto=" + numeroLotto);
                 //GetStoricoVendutoInDistributore(idDistributore, idProdotto, numeroLotto, 10);
+
+                if (!confirm("Sicuro che vuoi cancellare " + quantExVenduto + " pezzi di questo prodotto?")) return;
+
                 CorrezioneVendita(idVendita);
 
                 StoricizzoStatoProdottoInDistributore(IdDistributore, idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore);
@@ -347,6 +350,8 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                 //if (!confirm("Sicuro che sono da rendere " + quantitaResi + " pezzi di questo prodotto?")) return;
 
                 SalvaResi(idDistributore, idProdotto, quantitaResi, quantitaRimasta, prezzoTotale, idOperatore);
+
+                $('#resoDist' + idProdotto).val('');
 
                 var labelQuantita = $(this).closest('td').prev('td').prev('td');
                 //console.log(labelQuantita);

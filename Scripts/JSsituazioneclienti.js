@@ -57,6 +57,9 @@ function GetStoricoVendutoInCliente(IdCliente, idProd, numeroLotto, numeroRecord
                 var prezzoTotaleRimasti = (quantitaRimasti * prezzoProdotto);
                 //console.log("idDistributore=" + idDistributore + ", idProdotto=" + idProdotto + ", numeroLotto=" + numeroLotto);
                 //GetStoricoVendutoInDistributore(idDistributore, idProdotto, numeroLotto, 10);
+
+                if (!confirm("Sicuro che vuoi cancellare " + quantExVenduto + " pezzi di questo prodotto?")) return;
+
                 CorrezioneVendita(idVendita);
 
                 StoricizzoStatoProdottoInCliente(IdCliente, idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore, 'azzurro');
@@ -174,7 +177,7 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                 dettaglio = dettaglio + '<td class="quantita ' + coloreEvidenziato + ' quantProdInCli-' + risultati[i].idProdotto + '">' + risultati[i].quantitaCliente + '</td>';
                 dettaglio = dettaglio + '<td><div class="medioFont" style="margin-bottom:9px;">Vendita</div> <input type="number" id="caricaCliente' + risultati[i].idProdotto + '" data-clear-btn="true" class="miniInput" min="0"> <a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-quantMagazzino="' + risultati[i].quantitaMagazzino + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaCliente ui-btnCaricaDaMagazzino">Salva</a></td>';
                 dettaglio = dettaglio + '<td><div class="medioFont">Rimasti</div> <input type="number" id="rimastoCliente' + risultati[i].idProdotto + '" data-clear-btn="true" class="miniInput" min="0"> <a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimastiCliente ui-btnCarica">Salva</a> </td>';
-                dettaglio = dettaglio + '<td><div class="medioFont" style="margin-bottom:9px;">Resi</div> <input type="number" id="resoCliente' + risultati[i].idProdotto + '" data-clear-btn="true" class="miniInput" min="0"> <a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active resi ui-btnScarica">Salva</a> </td>';                
+                dettaglio = dettaglio + '<td><div class="medioFont" style="margin-bottom:9px;">Resi</div> <input type="number" id="resoCliente' + risultati[i].idProdotto + '" data-clear-btn="true" class="miniInput"> <a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active resi ui-btnScarica">Salva</a> </td>';                
                 //dettaglio = dettaglio + '<td><input type="checkbox" data-role="flipswitch" name="flip-checkbox-' + risultati[i].idProdotto + '" id="flip-checkbox-' + risultati[i].idProdotto + '" data-on-text="Camion" data-off-text="Cliente" data-wrapper-class="custom-size-flipswitch" checked=""><span id="quantInCamionCliente-' + risultati[i].idProdotto + '" class="quantSuCamion"></span> <input type="number" id="spostaCliente' + risultati[i].idProdotto + '" data-clear-btn="true" class="miniInput" min="0"> <a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active spostaCliente ui-btnSposta">Salva</a></td>';
                 dettaglio = dettaglio + '<td><div class="medioFont" style="margin-bottom:9px;">Scarica</div> <input type="number" id="spostaCliente' + risultati[i].idProdotto + '" data-clear-btn="true" class="miniInput" min="0"> <a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-quantMagazzino="' + risultati[i].quantitaMagazzino + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active spostaCliente ui-btnSposta">Salva</a></td>';
                 dettaglio = dettaglio + '</tr>';
@@ -329,13 +332,13 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                 //var numeroLotto = parseJsonDateToJsDate($(this).attr('data-numeroLotto'));
                 var quantitaRimasta = (quantitaDist - quantitaResi);
                 
-                if (quantitaResi == "" || isInteroPositivo(parseInt(quantitaResi)) == false) {
-                    alert("Scegli un valore Numerico prima di caricare");
-                    $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
-                    return;
-                } else {
-                    $(this).prev().removeClass("evidenziaErrore");
-                }
+                //if (quantitaResi == "" || isInteroPositivo(parseInt(quantitaResi)) == false) {
+                //    alert("Scegli un valore Numerico prima di caricare");
+                //    $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
+                //    return;
+                //} else {
+                //    $(this).prev().removeClass("evidenziaErrore");
+                //}
 
                 if (parseInt(quantitaResi) > parseInt(quantitaDist)) {
                     alert("E' impossibile che siano più prodotti Resi di quelli presenti!");
@@ -355,6 +358,8 @@ function GetSituazioneCliente(IdCliente, descCliente) {
                 //if (!confirm("Sicuro che il cliente ti ha reso " + quantitaResi + " pezzi di questo prodotto?")) return;
 
                 SalvaResiCliente(IdCliente, idProdotto, quantitaResi, quantitaRimasta, prezzoTotale, idOperatore);
+
+                $('#resoCliente' + idProdotto).val('');
 
                 var labelQuantita = $(this).closest('td').prev('td').prev('td').prev('td');
                 //console.log(labelQuantita);
