@@ -212,7 +212,7 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '<br><br><div id="quantMagazzino' + risultati[i].idProdotto + '" class="quantitaMag">' + risultati[i].quantitaMagazzino + '</div></td>';
                 dettaglio = dettaglio + '<td class="quantita ' + coloreEvidenziato + ' quantProdInDist-' + risultati[i].idProdotto + '">' + risultati[i].quantitaDistributore + '</td>';
                 dettaglio = dettaglio + '<td><div class="nomeDistributore">Rimasti</div> <input type="number" id="rimastoDist' + risultati[i].idProdotto + '" data-clear-btn="true" class="miniInput" min="0"> <a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti ui-btnCarica">Salva</a> </td>';
-                dettaglio = dettaglio + '<td><div class="medioFont" style="margin-bottom:9px;">Resi</div> <input type="number" id="resoDist' + risultati[i].idProdotto + '" data-clear-btn="true" class="miniInput" min="0"> <a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active resi ui-btnScarica">Salva</a> </td>';
+                dettaglio = dettaglio + '<td><div class="medioFont" style="margin-bottom:9px;">Resi</div> <input type="number" id="resoDist' + risultati[i].idProdotto + '" data-clear-btn="true" class="miniInput"> <a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active resi ui-btnScarica">Salva</a> </td>';
                 dettaglio = dettaglio + '<td><div class="medioFont" style="margin-bottom:9px;">Carica</div> <input type="number" id="caricaDist' + risultati[i].idProdotto + '" data-clear-btn="true" class="miniInput" min="0"> <a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-quantMagazzino="' + risultati[i].quantitaMagazzino + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaDist ui-btnCaricaDaMagazzino">Salva</a></td>';
                 dettaglio = dettaglio + '<td><div class="medioFont" style="margin-bottom:9px;">Scarica</div> <input type="number" id="spostaDist' + risultati[i].idProdotto + '" data-clear-btn="true" class="miniInput" min="0"> <a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" data-quantMagazzino="' + risultati[i].quantitaMagazzino + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active spostaDist ui-btnSposta">Salva</a></td>';
                 //dettaglio = dettaglio + '<td><input type="checkbox" data-role="flipswitch" name="flip-checkbox-' + risultati[i].idProdotto + '" id="flip-checkbox-' + risultati[i].idProdotto + '" data-on-text="Camion" data-off-text="Distributore" data-wrapper-class="custom-size-flipswitch" checked=""><span id="quantInCamion-' + risultati[i].idProdotto + '" class="quantSuCamion">0</span> <input type="number" id="spostaDist' + risultati[i].idProdotto + '" data-clear-btn="true" class="miniInput" min="0"> <a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active spostaDist ui-btnSposta">Salva</a></td>';
@@ -319,13 +319,13 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                 var idOperatore = localStorage.idOperatore;
                 var quantitaRimasta = (quantitaDist - quantitaResi);
 
-                if (quantitaResi == "" || isInteroPositivo(parseInt(quantitaResi)) == false) {
-                    alert("Scegli un valore Numerico per indicare i Resi!");
-                    $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
-                    return;
-                } else {
-                    $(this).prev().removeClass("evidenziaErrore");
-                }
+                //if (quantitaResi == "" || isInteroPositivo(parseInt(quantitaResi)) == false) {
+                //    alert("Scegli un valore Numerico per indicare i Resi!");
+                //    $(this).prev().addClass("evidenziaErrore", 1000, "easeOutBounce");
+                //    return;
+                //} else {
+                //    $(this).prev().removeClass("evidenziaErrore");
+                //}
 
                 if (parseInt(quantitaResi) > parseInt(quantitaDist)) {
                     alert("E' impossibile che siano più prodotti Resi di quelli presenti!");
