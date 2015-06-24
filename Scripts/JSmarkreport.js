@@ -27,6 +27,7 @@
                                             '<th>Cod. Gett.</th>' +
                                             '<th>Venduto</th>' +
                                             '<th>Inviato in cassa </th>' +
+                                            '<th>Banconote </th>' +
                                             '<th>Data Ril.</th>' +
                                             '<th>Data Ril. prec.</th>' +
                                         '</tr>' +
@@ -35,6 +36,7 @@
             var prezzoTot = 0;
             var totaleVenduto = 0;
             var totaleInviatoCassa = 0;
+            var totaleBanconote = 0;
             for (var i = 0; i < risultati.length; i++) {
 
                 dettaglio = dettaglio + '<tr>';
@@ -42,13 +44,16 @@
                 dettaglio = dettaglio + '<td>' + risultati[i].codiceGettoniera + '</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].venduto2 + ' </td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].inviatoInCassa2 + ' </td>';
+                dettaglio = dettaglio + '<td class="quantita">' + risultati[i].banconote + ' </td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataRilevazione2) + '</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataRilevazionePrecedente2) + '</td>';
                 dettaglio = dettaglio + '</tr>';
                 var totInv = risultati[i].inviatoInCassa;
+                var totBanc = risultati[i].banconote;
                 //totInv = totInv.replace("$ ", "");
                 //totInv = totInv.replace(".", ",");
                 totaleInviatoCassa = (totaleInviatoCassa + parseFloat(totInv / 100));
+                totaleBanconote = (totaleBanconote + parseFloat(totBanc / 100));
                 totaleVenduto = (totaleVenduto + parseFloat((risultati[i].venduto)/100));
                 //console.log(totaleInviatoCassa)
             }
@@ -59,6 +64,7 @@
                                             '<th>Cod. Gett.</th>' +                                            
                                             '<th>Totale Venduto: ' + totaleVenduto.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' }) + '</th>' +
                                             '<th>Totale Inviato in cassa: ' + totaleInviatoCassa.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' }) + '</th>' +
+                                            '<th>Totale Banconote: ' + totaleBanconote.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' }) + '</th>' +
                                             '<th>Data Ril.</th>' +
                                             '<th>Data Ril. prec.</th>' +
                                         '</tr>' +
