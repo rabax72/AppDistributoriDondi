@@ -216,7 +216,7 @@ function GetSituazioneCliente(IdCliente, descCliente) {
             $('.caricaCliente').on('click', function () {
                 var idProdotto = $(this).attr('data-idProdotto');
                 var quantitaDaCaricare = $('#caricaCliente' + idProdotto).val();
-                var quantMagazzino = $(this).attr('data-quantMagazzino');
+                var quantMagazzino = $('#quantMagazzino' + idProdotto).text();
                 var quantRestante = (quantMagazzino - quantitaDaCaricare);
                 var labelQuantita = $(this).closest('td').prev('td');
                 var quantitaAggiornata = (parseInt(quantitaDaCaricare) + parseInt(labelQuantita.text()));

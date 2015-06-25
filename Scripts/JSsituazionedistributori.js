@@ -369,7 +369,7 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
             $('.caricaDist').on('click', function () {
                 var idProdotto = $(this).attr('data-idProdotto');
                 var quantitaDaCaricare = $('#caricaDist' + idProdotto).val();
-                var quantMagazzino = $(this).attr('data-quantMagazzino');
+                var quantMagazzino = $('#quantMagazzino' + idProdotto).text();                
                 var quantRestante = (quantMagazzino - quantitaDaCaricare);
                 var labelQuantita = $(this).closest('td').prev('td').prev('td').prev('td');
                 var quantitaAggiornata = (parseInt(quantitaDaCaricare) + parseInt(labelQuantita.text()));
