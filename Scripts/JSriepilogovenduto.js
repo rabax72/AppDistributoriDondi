@@ -303,7 +303,7 @@ function GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, Da
         success: function (response) {
             risultati = response.d;
 
-            //console.log(risultati);
+            console.log(risultati);
 
             var dettaglio = '<h1>Filtro per: ' + descrizione + '</h1>' + '<div>' +
                                 'Data Da <input type="text" id="VendutiByIdProdottoDataDa"  class="calendario" data-theme="a" /> Data A <input type="text" id="VendutiByIdProdottoDataA"  class="calendario" data-theme="a" /> <button id="filtraVendutiByIdProdotto" value="Filtra" class="filtraVendutiByIdProdotto">Filtra</button>' +
@@ -318,7 +318,7 @@ function GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, Da
                                             //'<th>Data DDT</th>' +
                                             '<th>Distributore</th>' +
                                             '<th>Cliente</th>' +
-                                            '<th>Operatore</th>' +
+                                            '<th>Data Ril.</th>' +
                                         '</tr>' +
                                     '</thead>' +                                    
                                     '<tbody>';
@@ -335,7 +335,8 @@ function GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, Da
                 //dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].descrizioneDistributore + '</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].descrizioneCliente + '</td>';
-                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
+                //dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
+                dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataUltimaModifica) + '</td>';
                 dettaglio = dettaglio + '</tr>';
                 prezzoTot = prezzoTot + risultati[i].prezzoTotale;
                 totaleQuantita = totaleQuantita + risultati[i].quantitaVenduto;
@@ -349,7 +350,7 @@ function GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, Da
                                             //'<th>N° DDT</th>' +
                                             //'<th>Data DDT</th>' +
                                             '<th>Distributore</th>' +
-                                            '<th>Operatore</th>' +
+                                            '<th>Data Ril.</th>' +
                                         '</tr>' +
                                     '</tfoot>' + ' </table>';
 
