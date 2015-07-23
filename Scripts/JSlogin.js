@@ -66,7 +66,7 @@ var urlResetEvidenzaByDistributore = urlProd + 'WebServiceAppDondi.asmx/ResetEvi
 var urlResetEvidenzaMagazzino = urlProd + 'WebServiceAppDondi.asmx/ResetEvidenzaMagazzino';
 var urlCorrezioneVendita = urlProd + 'WebServiceAppDondi.asmx/CorrezioneVendita';
 var urlGetMarkReport = urlProd + 'WebServiceAppDondi.asmx/GetMarkReport';
-var urlFilterMarkReport = urlProd + 'WebServiceAppDondi.asmx/FilterMarkReport';
+var urlFilterMarkReport = urlProd + 'WebServiceAppDondi.asmx/FiltraMarkReport';
 
 $(function () {    
 
