@@ -330,7 +330,7 @@ function GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, Da
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantitaVenduto + '</td>';
-                dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzoTotale + ' €</td>';
+                dettaglio = dettaglio + '<td class="quantita">' + risultati[i].prezzoTotale + ' €</td>';
                 //dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].numeroDDT + '</td>';
                 //dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].descrizioneDistributore + '</td>';
@@ -345,8 +345,8 @@ function GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, Da
                                         '<tr>' +
                                             '<th>Foto</th>' +
                                             '<th>Desc.</th>' +
-                                            '<th>Totale Quantità: ' + totaleQuantita + '</th>' +
-                                            '<th>Totale Venduto: ' + Number(prezzoTot).toFixed(2) + '€</th>' +
+                                            '<th>Totale:<br>' + totaleQuantita + '</th>' +
+                                            '<th>Totale:<br>' + Number(prezzoTot).toFixed(2) + '€</th>' +
                                             //'<th>N° DDT</th>' +
                                             //'<th>Data DDT</th>' +
                                             '<th>Distributore</th>' +
