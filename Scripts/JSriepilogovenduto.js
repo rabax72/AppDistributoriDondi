@@ -500,7 +500,7 @@ function VendutoPerTuttiDistributoriStampa(DataDa, DataA) {
         complete: function () { $.mobile.loading('hide'); }, //Hide spinner
         success: function (response) {
             risultati = response.d;
-
+            //console.log(risultati);
             var dettaglio = '<h1>Riepilogo Venduto per Tutti i Distributori</h1>' +
                             '<div>' +
                                 'Data Da <input type="text" id="VendutoPerTuttiDitributoriStampaDataDa"  class="calendario" data-theme="a" /> Data A <input type="text" id="VendutoPerTuttiDitributoriStampaDataA"  class="calendario" data-theme="a" /> <button id="filtraVendutoDitributoreStampa" value="Filtra" class="filtraVendutoPerTuttiDitributoriStampa">Filtra</button>' +
@@ -520,28 +520,28 @@ function VendutoPerTuttiDistributoriStampa(DataDa, DataA) {
             var rigaDettaglio = new Array();
             var sommaTotali = 0;
             for (var i = 0; i < risultati.length; i++) {
-                totalePerDist = risultati[i].prezzoTotale;
+                //totalePerDist = risultati[i].prezzoTotale;
                 sommaTotali = sommaTotali + risultati[i].prezzoTotale;
                 //console.log(risultati[i]);
                 if (descrizioneOld != risultati[i].descrizione) {
-                    
+                    rigaDettaglio[i] = '';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<tr>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + risultati[i].prezzoTotale + ' €</td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + Number(risultati[i].prezzoTotale).toFixed(2) + ' €</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataUltimaModifica) + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
                     prezzoTot = risultati[i].prezzoTotale;
                 } else {
                     rigaDettaglio[i - 1] = '';
-                    prezzoTot = (parseFloat(prezzoTot) + parseFloat(totalePerDist));
+                    prezzoTot = (parseFloat(prezzoTot) + parseFloat(risultati[i].prezzoTotale));
+                    rigaDettaglio[i] = '';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<tr>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + prezzoTot + ' €</td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + Number(prezzoTot).toFixed(2) + ' €</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataUltimaModifica) + '</td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';
-                    //totalePerDist = totalePerDist + risultati[i].prezzoTotale;
+                    rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';                    
                 }
-                
+                var riga = rigaDettaglio[i];
                 descrizioneOld = risultati[i].descrizione;
                            
             }
@@ -550,14 +550,14 @@ function VendutoPerTuttiDistributoriStampa(DataDa, DataA) {
 
             var righe = '';
 
-            for (var z = 0; z < risultati.length; z++) {
-                righe = righe + rigaDettaglio[z];
+            for (var i = 0; i < risultati.length; i++) {
+                righe = righe + rigaDettaglio[i];
             }
 
             dettaglio = dettaglio + righe + '</tbody>' + '<tfoot>' +
                                          '<tr>' +
                                              '<th>Distributore</th>' +
-                                             '<th>Totale Venduto: ' + Number(sommaTotali).toFixed(2) + '€</th>' +
+                                             '<th>Totale Venduto:<br>' + Number(sommaTotali).toFixed(2) + '€</th>' +
                                              //'<th>Venduto Mark: </th>' +                                            
                                              '<th>Data Ril.</th>' +
                                          '</tr>' +
