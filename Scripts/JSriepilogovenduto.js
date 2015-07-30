@@ -317,7 +317,7 @@ function GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, Da
                                             //'<th>N° DDT</th>' +
                                             //'<th>Data DDT</th>' +
                                             '<th>Distributore</th>' +
-                                            '<th>Cliente</th>' +
+                                            //'<th>Cliente</th>' +
                                             '<th>Data Ril.</th>' +
                                         '</tr>' +
                                     '</thead>' +                                    
@@ -334,7 +334,7 @@ function GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, Da
                 //dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].numeroDDT + '</td>';
                 //dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].descrizioneDistributore + '</td>';
-                dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].descrizioneCliente + '</td>';
+                //dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].descrizioneCliente + '</td>';
                 //dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataUltimaModifica) + '</td>';
                 dettaglio = dettaglio + '</tr>';
@@ -541,7 +541,7 @@ function VendutoPerTuttiDistributoriStampa(DataDa, DataA) {
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataUltimaModifica) + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '</tr>';                    
                 }
-                var riga = rigaDettaglio[i];
+                //var riga = rigaDettaglio[i];
                 descrizioneOld = risultati[i].descrizione;
                            
             }
