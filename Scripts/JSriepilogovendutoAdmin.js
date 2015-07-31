@@ -1,28 +1,6 @@
 ﻿$(function () {
     
-    //$("#ResiDataDa").datepicker({
-    //    dateFormat: "dd-mm-yy"
-    //});
-    //$("#ResiDataA").datepicker({
-    //    dateFormat: "dd-mm-yy"
-    //});
-
-    //$(".filtraResi").on('click', function () {
-    //    var dataDa = $("#ResiDataDa").val();
-    //    if (dataDa != '') {
-    //        dataDa = stringToDate(dataDa, "dd-MM-yyyy", "-");
-    //    } else {
-    //        dataDa = stringToDate("01-01-2000", "dd-MM-yyyy", "-");
-    //    }
-
-    //    var dataA = $("#ResiDataA").val();
-    //    if (dataA != '') {
-    //        dataA = stringToDate(dataA, "dd-MM-yyyy", "-");
-    //    } else {
-    //        dataA = stringToDate("01-01-2100", "dd-MM-yyyy", "-");
-    //    }
-    //    GetProdottiInMagazzinoResiFiltrato(dataDa, dataA);
-    //});
+    
 
 });
 
@@ -52,10 +30,9 @@ function VenditaDirettaAdmin(DataDa, DataA) {
 
             //console.log(risultati);
 
-
             var dettaglio = '<div>' +
-                                'Data Da <input type="text" id="ProdottiVendutiDirettamenteDataDa" class="calendario" data-theme="a" /> Data A <input type="text" id="ProdottiVendutiDirettamenteDataA" class="calendario" data-theme="a" /> <button id="filtraProdottiVendutiDirettamente" value="Filtra" class="filtraProdottiVendutiDirettamente">Filtra</button>' +
-                            '</div><table id="tabellaProdottiVendutiDirettamente" class="display" cellspacing="0" width="100%">' +
+                                'Data Da <input type="text" id="ProdottiVendutiDirettamenteDataDaAdmin" class="calendario" data-theme="a" /> Data A <input type="text" id="ProdottiVendutiDirettamenteDataAAdmin" class="calendario" data-theme="a" /> <button id="filtraProdottiVendutiDirettamenteAdmin" value="Filtra" class="filtraProdottiVendutiDirettamenteAdmin">Filtra</button>' +
+                            '</div><table id="tabellaProdottiVendutiDirettamenteAdmin" class="display" cellspacing="0" width="100%">' +
                                     '<thead>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
@@ -117,13 +94,13 @@ function VenditaDirettaAdmin(DataDa, DataA) {
                 dateFormat: "dd-mm-yy"
             });
 
-            var table = $('#tabellaProdottiVendutiDirettamente').DataTable(
+            var table = $('#tabellaProdottiVendutiDirettamenteAdmin').DataTable(
                 { "paging": false, responsive: true, dom: 'T<"clear">lfrtip' }
             );
 
-            $('.filtraProdottiVendutiDirettamente').click(function () {
-                var DataDa = stringToDate($('#ProdottiVendutiDirettamenteDataDa').val(), "dd-MM-yyyy", "-");
-                var DataA = stringToDate($('#ProdottiVendutiDirettamenteDataA').val(), "dd-MM-yyyy", "-");
+            $('.filtraProdottiVendutiDirettamenteAdmin').click(function () {
+                var DataDa = stringToDate($('#ProdottiVendutiDirettamenteDataDaAdmin').val(), "dd-MM-yyyy", "-");
+                var DataA = stringToDate($('#ProdottiVendutiDirettamenteDataAAdmin').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 VenditaDirettaAdmin(DataDa, DataA);
             });
@@ -155,7 +132,7 @@ function VendutoPerProdottoAdmin() {
 
             console.log(risultati);
 
-            var dettaglio = '<h1>Filtra per prodotto</h1><table id="tabellaElencoProdotti" class="display" cellspacing="0" width="100%">' +
+            var dettaglio = '<h1>Filtra per prodotto</h1><table id="tabellaElencoProdottiAdmin" class="display" cellspacing="0" width="100%">' +
                                     '<thead>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
@@ -201,7 +178,7 @@ function VendutoPerProdottoAdmin() {
                 dateFormat: "dd-mm-yy"
             });
 
-            var table = $('#tabellaElencoProdotti').DataTable(
+            var table = $('#tabellaElencoProdottiAdmin').DataTable(
                 { "paging": false, responsive: true, dom: 'T<"clear">lfrtip' }
             );
 
@@ -210,7 +187,7 @@ function VendutoPerProdottoAdmin() {
 
 }
 
-function VendutoPerProdottoLotto() {
+function VendutoPerProdottoLottoAdmin() {
     // location.hash = "VenditaDirettaAdmin";
 
     $.ajax({
@@ -231,7 +208,7 @@ function VendutoPerProdottoLotto() {
 
             //console.log(risultati);
 
-            var dettaglio = '<h1>Filtra per prodotto</h1><table id="tabellaElencoProdottiPerLotto" class="display" cellspacing="0" width="100%">' +
+            var dettaglio = '<h1>Filtra per prodotto</h1><table id="tabellaElencoProdottiPerLottoAdmin" class="display" cellspacing="0" width="100%">' +
                                     '<thead>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
@@ -277,7 +254,7 @@ function VendutoPerProdottoLotto() {
                 dateFormat: "dd-mm-yy"
             });
 
-            var table = $('#tabellaElencoProdottiPerLotto').DataTable(
+            var table = $('#tabellaElencoProdottiPerLottoAdmin').DataTable(
                 { "paging": false, responsive: true, dom: 'T<"clear">lfrtip' }
             );
 
@@ -313,8 +290,8 @@ function GetVendutoByIdProdottoAdmin(idProdotto, numeroLotto, descrizione, DataD
             console.log(risultati);
 
             var dettaglio = '<h1>Filtro per: ' + descrizione + '</h1>' + '<div>' +
-                                'Data Da <input type="text" id="VendutiByIdProdottoDataDa"  class="calendario" data-theme="a" /> Data A <input type="text" id="VendutiByIdProdottoDataA"  class="calendario" data-theme="a" /> <button id="filtraVendutiByIdProdotto" value="Filtra" class="filtraVendutiByIdProdotto">Filtra</button>' +
-                            '</div><table id="tabellaVendutiByIdProdotto" class="display" cellspacing="0" width="100%">' +
+                                'Data Da <input type="text" id="VendutiByIdProdottoDataDaAdmin"  class="calendario" data-theme="a" /> Data A <input type="text" id="VendutiByIdProdottoDataAAdmin"  class="calendario" data-theme="a" /> <button id="filtraVendutiByIdProdottoAdmin" value="Filtra" class="filtraVendutiByIdProdottoAdmin">Filtra</button>' +
+                            '</div><table id="tabellaVendutiByIdProdottoAdmin" class="display" cellspacing="0" width="100%">' +
                                     '<thead>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
@@ -373,13 +350,13 @@ function GetVendutoByIdProdottoAdmin(idProdotto, numeroLotto, descrizione, DataD
                 dateFormat: "dd-mm-yy"
             });
 
-            var table = $('#tabellaVendutiByIdProdotto').DataTable(
+            var table = $('#tabellaVendutiByIdProdottoAdmin').DataTable(
                 { "paging": false, responsive: true, dom: 'T<"clear">lfrtip' }
             );
             
-            $('.filtraVendutiByIdProdotto').click(function () {
-                var DataDa = stringToDate($('#VendutiByIdProdottoDataDa').val(), "dd-MM-yyyy", "-");
-                var DataA = stringToDate($('#VendutiByIdProdottoDataA').val(), "dd-MM-yyyy", "-");
+            $('.filtraVendutiByIdProdottoAdmin').click(function () {
+                var DataDa = stringToDate($('#VendutiByIdProdottoDataDaAdmin').val(), "dd-MM-yyyy", "-");
+                var DataA = stringToDate($('#VendutiByIdProdottoDataAAdmin').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 GetVendutoByIdProdottoAdmin(idProdotto, numeroLotto, descrizione, DataDa, DataA);
             });
@@ -410,8 +387,8 @@ function VendutoPerTuttiDistributoriAdmin(DataDa, DataA) {
 
             var dettaglio = '<h1>Riepilogo Venduto per Tutti i Distributori</h1>' +
                             '<div>' +
-                                'Data Da <input type="text" id="VendutoPerTuttiDitributoriDataDa"  class="calendario" data-theme="a" /> Data A <input type="text" id="VendutoPerTuttiDitributoriDataA"  class="calendario" data-theme="a" /> <button id="filtraVendutoDitributore" value="Filtra" class="filtraVendutoPerTuttiDitributori">Filtra</button>' +
-                            '</div><table id="tabellaVendutoPerTuttiDitributori" class="display" cellspacing="0" width="100%">' +
+                                'Data Da <input type="text" id="VendutoPerTuttiDitributoriDataDaAdmin"  class="calendario" data-theme="a" /> Data A <input type="text" id="VendutoPerTuttiDitributoriDataAAdmin"  class="calendario" data-theme="a" /> <button id="filtraVendutoDitributoreAdmin" value="Filtra" class="filtraVendutoPerTuttiDitributoriAdmin">Filtra</button>' +
+                            '</div><table id="tabellaVendutoPerTuttiDitributoriAdmin" class="display" cellspacing="0" width="100%">' +
                                     '<thead>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
@@ -471,15 +448,15 @@ function VendutoPerTuttiDistributoriAdmin(DataDa, DataA) {
                 dateFormat: "dd-mm-yy"
             });
 
-            var table = $('#tabellaVendutoPerTuttiDitributori').DataTable(
+            var table = $('#tabellaVendutoPerTuttiDitributoriAdmin').DataTable(
                 {
                     "paging": false, responsive: true, dom: 'T<"clear">lfrtip'
                 }
             );
 
-            $('.filtraVendutoPerTuttiDitributori').click(function () {
-                var DataDa = stringToDate($('#VendutoPerTuttiDitributoriDataDa').val(), "dd-MM-yyyy", "-");
-                var DataA = stringToDate($('#VendutoPerTuttiDitributoriDataA').val(), "dd-MM-yyyy", "-");
+            $('.filtraVendutoPerTuttiDitributoriAdmin').click(function () {
+                var DataDa = stringToDate($('#VendutoPerTuttiDitributoriDataDaAdmin').val(), "dd-MM-yyyy", "-");
+                var DataA = stringToDate($('#VendutoPerTuttiDitributoriDataAAdmin').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 VendutoPerTuttiDistributoriAdmin(DataDa, DataA);
             });
@@ -510,8 +487,8 @@ function VendutoPerTuttiDistributoriStampaAdmin(DataDa, DataA) {
             //console.log(risultati);
             var dettaglio = '<h1>Riepilogo Venduto per Tutti i Distributori</h1>' +
                             '<div>' +
-                                'Data Da <input type="text" id="VendutoPerTuttiDitributoriStampaDataDa"  class="calendario" data-theme="a" /> Data A <input type="text" id="VendutoPerTuttiDitributoriStampaDataA"  class="calendario" data-theme="a" /> <button id="filtraVendutoDitributoreStampa" value="Filtra" class="filtraVendutoPerTuttiDitributoriStampa">Filtra</button>' +
-                            '</div><table id="tabellaVendutoPerTuttiDitributoriStampa" class="display" cellspacing="0" width="100%">' +
+                                'Data Da <input type="text" id="VendutoPerTuttiDitributoriStampaDataDaAdmin"  class="calendario" data-theme="a" /> Data A <input type="text" id="VendutoPerTuttiDitributoriStampaDataAAdmin"  class="calendario" data-theme="a" /> <button id="filtraVendutoDitributoreStampa" value="Filtra" class="filtraVendutoPerTuttiDitributoriStampaAdmin">Filtra</button>' +
+                            '</div><table id="tabellaVendutoPerTuttiDitributoriStampaAdmin" class="display" cellspacing="0" width="100%">' +
                                     '<thead>' +
                                         '<tr>' +
                                             '<th width ="40%">Distributore</th>' +                                            
@@ -576,15 +553,15 @@ function VendutoPerTuttiDistributoriStampaAdmin(DataDa, DataA) {
                 dateFormat: "dd-mm-yy"
             });
 
-            var table = $('#tabellaVendutoPerTuttiDitributoriStampa').DataTable(
+            var table = $('#tabellaVendutoPerTuttiDitributoriStampaAdmin').DataTable(
                 {
                     "paging": false, responsive: true, dom: 'T<"clear">lfrtip'
                 }
             );
 
-            $('.filtraVendutoPerTuttiDitributoriStampa').click(function () {
-                var DataDa = stringToDate($('#VendutoPerTuttiDitributoriStampaDataDa').val(), "dd-MM-yyyy", "-");
-                var DataA = stringToDate($('#VendutoPerTuttiDitributoriStampaDataA').val(), "dd-MM-yyyy", "-");
+            $('.filtraVendutoPerTuttiDitributoriStampaAdmin').click(function () {
+                var DataDa = stringToDate($('#VendutoPerTuttiDitributoriStampaDataDaAdmin').val(), "dd-MM-yyyy", "-");
+                var DataA = stringToDate($('#VendutoPerTuttiDitributoriStampaDataAAdmin').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 VendutoPerTuttiDistributoriStampaAdmin(DataDa, DataA);
             });
@@ -669,8 +646,8 @@ function GetVendutoByIdDistributoreAdmin(idDistributore, descrizione, DataDa, Da
 
             var dettaglio = '<h1>Riepilogo Venduto per Distributore: ' + descrizione + '</h1>' +
                             '<div>' +
-                                'Data Da <input type="text" id="VendutoDitributoreDataDa"  class="calendario" data-theme="a" /> Data A <input type="text" id="VendutoDitributoreDataA"  class="calendario" data-theme="a" /> <button id="filtraVendutoDitributore" value="Filtra" class="filtraVendutoDitributore">Filtra</button>' +
-                            '</div><table id="tabellaVendutiByIdDistributore" class="display" cellspacing="0" width="100%">' +
+                                'Data Da <input type="text" id="VendutoDitributoreDataDaAdmin"  class="calendario" data-theme="a" /> Data A <input type="text" id="VendutoDitributoreDataAAdmin"  class="calendario" data-theme="a" /> <button id="filtraVendutoDitributoreAdmin" value="Filtra" class="filtraVendutoDitributoreAdmin">Filtra</button>' +
+                            '</div><table id="tabellaVendutiByIdDistributoreAdmin" class="display" cellspacing="0" width="100%">' +
                                     '<thead>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
@@ -739,13 +716,13 @@ function GetVendutoByIdDistributoreAdmin(idDistributore, descrizione, DataDa, Da
                 dateFormat: "dd-mm-yy"
             });
 
-            var table = $('#tabellaVendutiByIdDistributore').DataTable(
+            var table = $('#tabellaVendutiByIdDistributoreAdmin').DataTable(
                 { "paging": false, responsive: true, dom: 'T<"clear">lfrtip' }
             );
 
-            $('.filtraVendutoDitributore').click(function () {
-                var DataDa = stringToDate($('#VendutoDitributoreDataDa').val(), "dd-MM-yyyy", "-");
-                var DataA = stringToDate($('#VendutoDitributoreDataA').val(), "dd-MM-yyyy", "-");
+            $('.filtraVendutoDitributoreAdmin').click(function () {
+                var DataDa = stringToDate($('#VendutoDitributoreDataDaAdmin').val(), "dd-MM-yyyy", "-");
+                var DataA = stringToDate($('#VendutoDitributoreDataAAdmin').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 GetVendutoByIdDistributoreAdmin(idDistributore, descrizione, DataDa, DataA);
             });
@@ -823,7 +800,7 @@ function GetVendutoByIdClienteAdmin(idCliente, descrizione, DataDa, DataA) {
             var dettaglio = '<h1>Filtro per Cliente: ' + descrizione + '</h1>' +
                             '<div>' +
                                 'Data Da <input type="text" id="VendutiByIdClienteDataDaAdmin" class="calendario" data-theme="a" /> Data A <input type="text" id="VendutiByIdClienteDataAAdmin"  class="calendario" data-theme="a" /> <button id="filtraVendutiByIdClienteAdmin" value="Filtra" class="filtraVendutiByIdClienteAdmin">Filtra</button>' +
-                            '</div><table id="tabellaVendutiByIdCliente" class="display" cellspacing="0" width="100%">' +
+                            '</div><table id="tabellaVendutiByIdClienteAdmin" class="display" cellspacing="0" width="100%">' +
                                     '<thead>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
@@ -882,7 +859,7 @@ function GetVendutoByIdClienteAdmin(idCliente, descrizione, DataDa, DataA) {
                 dateFormat: "dd-mm-yy"
             });
 
-            var table = $('#tabellaVendutiByIdCliente').DataTable(
+            var table = $('#tabellaVendutiByIdClienteAdmin').DataTable(
                 { "paging": false, responsive: true, dom: 'T<"clear">lfrtip' }
             );
 
