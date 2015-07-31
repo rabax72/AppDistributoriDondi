@@ -26,13 +26,13 @@
 
 });
 
-function RiepilogoVenduto() {
+function RiepilogoVendutoAdmin() {
 
-    $('.DettRiepilogoVenduto').html('');
-    location.hash = "RiepilogoVenduto";
+    $('.DettRiepilogoVendutoAdmin').html('');
+    location.hash = "RiepilogoVendutoAdmin";
 }
 
-function VenditaDiretta(DataDa, DataA) {
+function VenditaDirettaAdmin(DataDa, DataA) {
     
     $.ajax({
         type: "POST",
@@ -61,10 +61,10 @@ function VenditaDiretta(DataDa, DataA) {
                                             '<th>Foto</th>' +
                                             '<th>Desc.</th>' +
                                             '<th>Quantità</th>' +
-                                            //'<th>Prezzo Tot.</th>' +
+                                            '<th>Prezzo Tot.</th>' +
                                             //'<th>N° DDT</th>' +
                                             //'<th>Data DDT</th>' +
-                                            '<th>Data Ril.</th>' + 
+                                            '<th>Data Ril.</th>' +
                                             '<th>Operatore</th>' +                                            
                                         '</tr>' +
                                     '</thead>' +                                    
@@ -83,7 +83,7 @@ function VenditaDiretta(DataDa, DataA) {
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantitaVenduto + '</td>';
-                //dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzoTotale + ' €</td>';
+                dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzoTotale + ' €</td>';
                 //dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].numeroDDT + '</td>';
                 //dettaglio = dettaglio + '<td class="medioGrande">' + dataDdt + '</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataUltimaModifica) + '</td>';
@@ -97,9 +97,9 @@ function VenditaDiretta(DataDa, DataA) {
                                             '<th>Foto</th>' +
                                             '<th>Desc.</th>' +
                                             '<th>Totale Quantità: ' + totaleQuantita + '</th>' +
-                                            //'<th>Totale Venduto: ' + Number(prezzoTot).toFixed(2) + ' €</th>' +
+                                            '<th>Totale Venduto: ' + Number(prezzoTot).toFixed(2) + ' €</th>' +
                                             //'<th>N° DDT</th>' +
-                                            //'<th>Data DDT</th>' + 
+                                            //'<th>Data DDT</th>' +     
                                             '<th>Data Ril.</th>' +
                                             '<th>Operatore</th>' +
                                         '</tr>' +
@@ -107,7 +107,7 @@ function VenditaDiretta(DataDa, DataA) {
 
             //console.log(dettaglio);
 
-            $('.DettRiepilogoVenduto').html(dettaglio);
+            $('.DettRiepilogoVendutoAdmin').html(dettaglio);
 
             $(".dataDDT").datepicker({
                 dateFormat: "dd-mm-yy"
@@ -125,7 +125,7 @@ function VenditaDiretta(DataDa, DataA) {
                 var DataDa = stringToDate($('#ProdottiVendutiDirettamenteDataDa').val(), "dd-MM-yyyy", "-");
                 var DataA = stringToDate($('#ProdottiVendutiDirettamenteDataA').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
-                VenditaDiretta(DataDa, DataA);
+                VenditaDirettaAdmin(DataDa, DataA);
             });
             
             
@@ -134,8 +134,8 @@ function VenditaDiretta(DataDa, DataA) {
     
 }
 
-function VendutoPerProdotto() {
-    // location.hash = "VenditaDiretta";
+function VendutoPerProdottoAdmin() {
+    // location.hash = "VenditaDirettaAdmin";
 
     $.ajax({
         type: "POST",
@@ -148,7 +148,7 @@ function VendutoPerProdotto() {
         error: function (data) {
             console.log(data.responseText)
         },
-        beforeSend: function () { $('.DettRiepilogoVenduto').html(''); $.mobile.loading('show'); }, //Show spinner
+        beforeSend: function () { $('.DettRiepilogoVendutoAdmin').html(''); $.mobile.loading('show'); }, //Show spinner
         complete: function () { $.mobile.loading('hide'); }, //Hide spinner
         success: function (response) {
             risultati = response.d;
@@ -183,11 +183,11 @@ function VendutoPerProdotto() {
                 //var numLotto = parseJsonDateLettura(risultati[i].numeroLotto);
                 //numLotto = '\'' + numLotto + '\'';
                 dettaglio = dettaglio + '<tr>';
-                dettaglio = dettaglio + '<td><a href="javascript:GetVendutoByIdProdotto(' + risultati[i].idProdotto + ', null, ' + desc + ', null, null);"><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></a></td>';
+                dettaglio = dettaglio + '<td><a href="javascript:GetVendutoByIdProdottoAdmin(' + risultati[i].idProdotto + ', null, ' + desc + ', null, null);"><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></a></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
                 dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzo + ' €</td>';
                 dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].aliquota + '</td>';
-                dettaglio = dettaglio + '<td class="medioGrande"><a href="javascript:GetVendutoByIdProdotto(' + risultati[i].idProdotto + ', null, ' + desc + ', null, null);">Dettaglio</a></td>';
+                dettaglio = dettaglio + '<td class="medioGrande"><a href="javascript:GetVendutoByIdProdottoAdmin(' + risultati[i].idProdotto + ', null, ' + desc + ', null, null);">Dettaglio</a></td>';
                 dettaglio = dettaglio + '</tr>';
 
             }
@@ -195,7 +195,7 @@ function VendutoPerProdotto() {
 
             //console.log(dettaglio);
 
-            $('.DettRiepilogoVenduto').html(dettaglio);
+            $('.DettRiepilogoVendutoAdmin').html(dettaglio);
 
             $(".dataDDT").datepicker({
                 dateFormat: "dd-mm-yy"
@@ -211,7 +211,7 @@ function VendutoPerProdotto() {
 }
 
 function VendutoPerProdottoLotto() {
-    // location.hash = "VenditaDiretta";
+    // location.hash = "VenditaDirettaAdmin";
 
     $.ajax({
         type: "POST",
@@ -224,7 +224,7 @@ function VendutoPerProdottoLotto() {
         error: function (data) {
             console.log(data.responseText)
         },
-        beforeSend: function () { $('.DettRiepilogoVenduto').html(''); $.mobile.loading('show'); }, //Show spinner
+        beforeSend: function () { $('.DettRiepilogoVendutoAdmin').html(''); $.mobile.loading('show'); }, //Show spinner
         complete: function () { $.mobile.loading('hide'); }, //Hide spinner
         success: function (response) {
             risultati = response.d;
@@ -259,7 +259,7 @@ function VendutoPerProdottoLotto() {
                 var numLotto = parseJsonDateLettura(risultati[i].numeroLotto);
                 numLotto = '\'' + numLotto + '\'';
                 dettaglio = dettaglio + '<tr>';
-                dettaglio = dettaglio + '<td><a href="javascript:GetVendutoByIdProdotto(' + risultati[i].idProdotto + ', ' + numLotto + ', ' + desc + ', null, null);"><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></a></td>';
+                dettaglio = dettaglio + '<td><a href="javascript:GetVendutoByIdProdottoAdmin(' + risultati[i].idProdotto + ', ' + numLotto + ', ' + desc + ', null, null);"><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></a></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
                 dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzo + ' €</td>';
                 dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].aliquota + '</td>';
@@ -271,7 +271,7 @@ function VendutoPerProdottoLotto() {
 
             //console.log(dettaglio);
 
-            $('.DettRiepilogoVenduto').html(dettaglio);
+            $('.DettRiepilogoVendutoAdmin').html(dettaglio);
 
             $(".dataDDT").datepicker({
                 dateFormat: "dd-mm-yy"
@@ -286,8 +286,8 @@ function VendutoPerProdottoLotto() {
 
 }
 
-function GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, DataA) {
-    // location.hash = "VenditaDiretta";
+function GetVendutoByIdProdottoAdmin(idProdotto, numeroLotto, descrizione, DataDa, DataA) {
+    // location.hash = "VenditaDirettaAdmin";
     
     if (numeroLotto != null) {
         numeroLotto = stringToDate(numeroLotto, "dd/MM/yyyy", "/");
@@ -303,7 +303,7 @@ function GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, Da
         data: JSON.stringify({ idProdotto: idProdotto, numeroLotto:numeroLotto, DataDa: DataDa, DataA: DataA }),
         error: function (data) {
             console.log(data.responseText);
-            $('.DettRiepilogoVenduto').html(data.responseText);
+            $('.DettRiepilogoVendutoAdmin').html(data.responseText);
         },
         beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
         complete: function () { $.mobile.loading('hide'); }, //Hide spinner
@@ -320,7 +320,7 @@ function GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, Da
                                             '<th>Foto</th>' +
                                             '<th>Desc.</th>' +
                                             '<th>Quantità</th>' +
-                                            //'<th>Prezzo Tot.</th>' +
+                                            '<th>Prezzo Tot.</th>' +
                                             //'<th>N° DDT</th>' +
                                             //'<th>Data DDT</th>' +
                                             '<th>Distributore</th>' +
@@ -337,7 +337,7 @@ function GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, Da
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantitaVenduto + '</td>';
-                //dettaglio = dettaglio + '<td class="quantita">' + risultati[i].prezzoTotale + ' €</td>';
+                dettaglio = dettaglio + '<td class="quantita">' + risultati[i].prezzoTotale + ' €</td>';
                 //dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].numeroDDT + '</td>';
                 //dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + risultati[i].descrizioneDistributore + '</td>';
@@ -353,7 +353,7 @@ function GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, Da
                                             '<th>Foto</th>' +
                                             '<th>Desc.</th>' +
                                             '<th>Totale:<br>' + totaleQuantita + '</th>' +
-                                            //'<th>Totale:<br>' + Number(prezzoTot).toFixed(2) + '€</th>' +
+                                            '<th>Totale:<br>' + Number(prezzoTot).toFixed(2) + '€</th>' +
                                             //'<th>N° DDT</th>' +
                                             //'<th>Data DDT</th>' +
                                             '<th>Distributore</th>' +
@@ -363,7 +363,7 @@ function GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, Da
 
             //console.log(dettaglio);
 
-            $('.DettRiepilogoVenduto').html(dettaglio);
+            $('.DettRiepilogoVendutoAdmin').html(dettaglio);
 
             $(".dataDDT").datepicker({
                 dateFormat: "dd-mm-yy"
@@ -381,7 +381,7 @@ function GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, Da
                 var DataDa = stringToDate($('#VendutiByIdProdottoDataDa').val(), "dd-MM-yyyy", "-");
                 var DataA = stringToDate($('#VendutiByIdProdottoDataA').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
-                GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, DataA);
+                GetVendutoByIdProdottoAdmin(idProdotto, numeroLotto, descrizione, DataDa, DataA);
             });
 
         }
@@ -389,8 +389,8 @@ function GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, Da
 
 }
 
-function VendutoPerTuttiDistributori(DataDa, DataA) {
-    // location.hash = "VenditaDiretta";
+function VendutoPerTuttiDistributoriAdmin(DataDa, DataA) {
+    // location.hash = "VenditaDirettaAdmin";
 
     $.ajax({
         type: "POST",
@@ -403,7 +403,7 @@ function VendutoPerTuttiDistributori(DataDa, DataA) {
         error: function (data) {
             console.log(data.responseText)
         },
-        beforeSend: function () { $('.DettRiepilogoVenduto').html(''); $.mobile.loading('show'); }, //Show spinner
+        beforeSend: function () { $('.DettRiepilogoVendutoAdmin').html(''); $.mobile.loading('show'); }, //Show spinner
         complete: function () { $.mobile.loading('hide'); }, //Hide spinner
         success: function (response) {
             risultati = response.d;
@@ -417,7 +417,7 @@ function VendutoPerTuttiDistributori(DataDa, DataA) {
                                             '<th>Foto</th>' +
                                             '<th>Desc.</th>' +
                                             '<th>Quantità</th>' +
-                                            //'<th>Prezzo Tot.</th>' +
+                                            '<th>Prezzo Tot.</th>' +
                                             '<th>Data Ril.</th>' +
                                             //'<th>N° DDT</th>' +
                                             //'<th>Data DDT</th>' +
@@ -434,7 +434,7 @@ function VendutoPerTuttiDistributori(DataDa, DataA) {
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantitaVenduto + '</td>';
-                //dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzoTotale + ' €</td>';
+                dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzoTotale + ' €</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataUltimaModifica) + '</td>';
                 //dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].numeroDDT + '</td>';
                 //dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
@@ -451,7 +451,7 @@ function VendutoPerTuttiDistributori(DataDa, DataA) {
                                             '<th>Foto</th>' +
                                             '<th>Desc.</th>' +
                                             '<th>Totale Quantità: ' + totaleQuantita + '</th>' +
-                                            //'<th>Totale Venduto: ' + Number(prezzoTot).toFixed(2) + '€</th>' +
+                                            '<th>Totale Venduto: ' + Number(prezzoTot).toFixed(2) + '€</th>' +
                                             '<th>Venduto Mark: </th>' +
                                             //'<th>Data DDT</th>' +
                                             '<th>Distributore</th>' +
@@ -461,7 +461,7 @@ function VendutoPerTuttiDistributori(DataDa, DataA) {
 
             //console.log(dettaglio);
 
-            $('.DettRiepilogoVenduto').html(dettaglio);
+            $('.DettRiepilogoVendutoAdmin').html(dettaglio);
 
             $(".dataDDT").datepicker({
                 dateFormat: "dd-mm-yy"
@@ -481,7 +481,7 @@ function VendutoPerTuttiDistributori(DataDa, DataA) {
                 var DataDa = stringToDate($('#VendutoPerTuttiDitributoriDataDa').val(), "dd-MM-yyyy", "-");
                 var DataA = stringToDate($('#VendutoPerTuttiDitributoriDataA').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
-                VendutoPerTuttiDistributori(DataDa, DataA);
+                VendutoPerTuttiDistributoriAdmin(DataDa, DataA);
             });
 
         }
@@ -489,8 +489,8 @@ function VendutoPerTuttiDistributori(DataDa, DataA) {
 
 }
 
-function VendutoPerTuttiDistributoriStampa(DataDa, DataA) {
-    // location.hash = "VenditaDiretta";
+function VendutoPerTuttiDistributoriStampaAdmin(DataDa, DataA) {
+    // location.hash = "VenditaDirettaAdmin";
 
     $.ajax({
         type: "POST",
@@ -503,7 +503,7 @@ function VendutoPerTuttiDistributoriStampa(DataDa, DataA) {
         error: function (data) {
             console.log(data.responseText)
         },
-        beforeSend: function () { $('.DettRiepilogoVenduto').html(''); $.mobile.loading('show'); }, //Show spinner
+        beforeSend: function () { $('.DettRiepilogoVendutoAdmin').html(''); $.mobile.loading('show'); }, //Show spinner
         complete: function () { $.mobile.loading('hide'); }, //Hide spinner
         success: function (response) {
             risultati = response.d;
@@ -570,7 +570,7 @@ function VendutoPerTuttiDistributoriStampa(DataDa, DataA) {
                                          '</tr>' +
                                      '</tfoot>' + ' </table>';
 
-            $('.DettRiepilogoVenduto').html(dettaglio);            
+            $('.DettRiepilogoVendutoAdmin').html(dettaglio);            
 
             $(".calendario").datepicker({
                 dateFormat: "dd-mm-yy"
@@ -586,7 +586,7 @@ function VendutoPerTuttiDistributoriStampa(DataDa, DataA) {
                 var DataDa = stringToDate($('#VendutoPerTuttiDitributoriStampaDataDa').val(), "dd-MM-yyyy", "-");
                 var DataA = stringToDate($('#VendutoPerTuttiDitributoriStampaDataA').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
-                VendutoPerTuttiDistributoriStampa(DataDa, DataA);
+                VendutoPerTuttiDistributoriStampaAdmin(DataDa, DataA);
             });
 
         }
@@ -594,8 +594,8 @@ function VendutoPerTuttiDistributoriStampa(DataDa, DataA) {
 
 }
 
-function VendutoPerDistributore() {
-    // location.hash = "VenditaDiretta";
+function VendutoPerDistributoreAdmin() {
+    // location.hash = "VenditaDirettaAdmin";
 
     $.ajax({
         type: "POST",
@@ -608,7 +608,7 @@ function VendutoPerDistributore() {
         error: function (data) {
             console.log(data.responseText)
         },
-        beforeSend: function () { $('.DettRiepilogoVenduto').html(''); $.mobile.loading('show'); }, //Show spinner
+        beforeSend: function () { $('.DettRiepilogoVendutoAdmin').html(''); $.mobile.loading('show'); }, //Show spinner
         complete: function () { $.mobile.loading('hide'); }, //Hide spinner
         success: function (response) {
             risultati = response.d;
@@ -629,14 +629,14 @@ function VendutoPerDistributore() {
                     dettaglio = dettaglio + '<li data-role="list-divider" class="ui-li-divider">' + Citta + '</li>';
                 }
 
-                dettaglio = dettaglio + '<li><a href="javascript:GetVendutoByIdDistributore(' + risultati[i].idDistributore + ', ' + desc + ', null, null);" class="ui-btn ui-btn-icon-right ui-icon-carat-r vociVenduto" >' + risultati[i].descrizione + '<br><span class="miniText">' + indirizzo + '</span></a></li>';
+                dettaglio = dettaglio + '<li><a href="javascript:GetVendutoByIdDistributoreAdmin(' + risultati[i].idDistributore + ', ' + desc + ', null, null);" class="ui-btn ui-btn-icon-right ui-icon-carat-r vociVenduto" >' + risultati[i].descrizione + '<br><span class="miniText">' + indirizzo + '</span></a></li>';
                 CittaOld = risultati[i].Citta;
             }
             dettaglio = dettaglio + '</ul>';
 
             //console.log(dettaglio);
 
-            $('.DettRiepilogoVenduto').html(dettaglio);
+            $('.DettRiepilogoVendutoAdmin').html(dettaglio);
 
             $(".dataDDT").datepicker({
                 dateFormat: "dd-mm-yy"
@@ -647,7 +647,7 @@ function VendutoPerDistributore() {
 
 }
 
-function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) {    
+function GetVendutoByIdDistributoreAdmin(idDistributore, descrizione, DataDa, DataA) {    
 
     $.ajax({
         type: "POST",
@@ -676,7 +676,7 @@ function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) 
                                             '<th>Foto</th>' +
                                             '<th>Desc.</th>' +
                                             '<th>Quantità</th>' +
-                                            //'<th>Prezzo Tot.</th>' +
+                                            '<th>Prezzo Tot.</th>' +
                                             '<th>Data Ril.</th>' +
                                             //'<th>N° DDT</th>' +
                                             //'<th>Data DDT</th>' +
@@ -693,7 +693,7 @@ function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) 
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantitaVenduto + '</td>';
-                //dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzoTotale + ' €</td>';
+                dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzoTotale + ' €</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataUltimaModifica) + '</td>';
                 //dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].numeroDDT + '</td>';
                 //dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
@@ -719,7 +719,7 @@ function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) 
                                             '<th>Foto</th>' +
                                             '<th>Desc.</th>' +
                                             '<th>Totale Quantità: ' + totaleQuantita + '</th>' +
-                                            //'<th>Totale Venduto: ' + Number(prezzoTot).toFixed(2) + '€</th>' +
+                                            '<th>Totale Venduto: ' + Number(prezzoTot).toFixed(2) + '€</th>' +
                                             //'<th>N° DDT</th>' +
                                             //'<th>Data DDT</th>' +
                                             '<th>Distributore</th>' +
@@ -729,7 +729,7 @@ function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) 
 
             //console.log(dettaglio);
 
-            $('.DettRiepilogoVenduto').html(dettaglio);
+            $('.DettRiepilogoVendutoAdmin').html(dettaglio);
 
             $(".dataDDT").datepicker({
                 dateFormat: "dd-mm-yy"
@@ -747,7 +747,7 @@ function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) 
                 var DataDa = stringToDate($('#VendutoDitributoreDataDa').val(), "dd-MM-yyyy", "-");
                 var DataA = stringToDate($('#VendutoDitributoreDataA').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
-                GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA);
+                GetVendutoByIdDistributoreAdmin(idDistributore, descrizione, DataDa, DataA);
             });
 
         }
@@ -755,7 +755,7 @@ function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) 
 
 }
 
-function VendutoPerCliente() {    
+function VendutoPerClienteAdmin() {    
 
     $.ajax({
         type: "POST",
@@ -782,13 +782,13 @@ function VendutoPerCliente() {
                 var desc = risultati[i].descrizione;
                 desc = desc.replace("'", "\\'");
                 desc = '\'' + desc + '\'';
-                dettaglio = dettaglio + '<li><a href="javascript:GetVendutoByIdCliente(' + risultati[i].idCliente + ', ' + desc + ', null, null);" class="ui-btn ui-btn-icon-right ui-icon-carat-r vociVenduto" >' + risultati[i].descrizione + '<br><span class="miniText">' + indirizzo + '</span></a></li>';
+                dettaglio = dettaglio + '<li><a href="javascript:GetVendutoByIdClienteAdmin(' + risultati[i].idCliente + ', ' + desc + ', null, null);" class="ui-btn ui-btn-icon-right ui-icon-carat-r vociVenduto" >' + risultati[i].descrizione + '<br><span class="miniText">' + indirizzo + '</span></a></li>';
             }
             dettaglio = dettaglio + '</ul>';
 
             //console.log(dettaglio);
 
-            $('.DettRiepilogoVenduto').html(dettaglio);
+            $('.DettRiepilogoVendutoAdmin').html(dettaglio);
 
             $(".dataDDT").datepicker({
                 dateFormat: "dd-mm-yy"
@@ -799,7 +799,7 @@ function VendutoPerCliente() {
 
 }
 
-function GetVendutoByIdCliente(idCliente, descrizione, DataDa, DataA) {    
+function GetVendutoByIdClienteAdmin(idCliente, descrizione, DataDa, DataA) {    
 
     $.ajax({
         type: "POST",
@@ -822,14 +822,14 @@ function GetVendutoByIdCliente(idCliente, descrizione, DataDa, DataA) {
 
             var dettaglio = '<h1>Filtro per Cliente: ' + descrizione + '</h1>' +
                             '<div>' +
-                                'Data Da <input type="text" id="VendutiByIdClienteDataDa" class="calendario" data-theme="a" /> Data A <input type="text" id="VendutiByIdClienteDataA"  class="calendario" data-theme="a" /> <button id="filtraVendutiByIdCliente" value="Filtra" class="filtraVendutiByIdCliente">Filtra</button>' +
+                                'Data Da <input type="text" id="VendutiByIdClienteDataDaAdmin" class="calendario" data-theme="a" /> Data A <input type="text" id="VendutiByIdClienteDataAAdmin"  class="calendario" data-theme="a" /> <button id="filtraVendutiByIdClienteAdmin" value="Filtra" class="filtraVendutiByIdClienteAdmin">Filtra</button>' +
                             '</div><table id="tabellaVendutiByIdCliente" class="display" cellspacing="0" width="100%">' +
                                     '<thead>' +
                                         '<tr>' +
                                             '<th>Foto</th>' +
                                             '<th>Desc.</th>' +
                                             '<th>Quantità</th>' +
-                                            //'<th>Prezzo Tot.</th>' +
+                                            '<th>Prezzo Tot.</th>' +
                                             '<th>Data Ril.</th>' +
                                             //'<th>N° DDT</th>' +
                                             //'<th>Data DDT</th>' +
@@ -846,7 +846,7 @@ function GetVendutoByIdCliente(idCliente, descrizione, DataDa, DataA) {
                 dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
                 dettaglio = dettaglio + '<td class="quantita">' + risultati[i].quantitaVenduto + '</td>';
-                //dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzoTotale + ' €</td>';
+                dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzoTotale + ' €</td>';
                 dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataUltimaModifica) + '</td>';
                 //dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].numeroDDT + '</td>';
                 //dettaglio = dettaglio + '<td class="storicoVenduto">' + parseJsonDateLettura(risultati[i].dataDDT) + '</td>';
@@ -861,7 +861,7 @@ function GetVendutoByIdCliente(idCliente, descrizione, DataDa, DataA) {
                                             '<th>Foto</th>' +
                                             '<th>Desc.</th>' +
                                             '<th>Totale Quantità: ' + totaleQuantita + '</th>' +
-                                            //'<th>Totale Venduto: ' + Number(prezzoTot).toFixed(2) + '€</th>' +
+                                            '<th>Totale Venduto: ' + Number(prezzoTot).toFixed(2) + '€</th>' +
                                             '<th>Data Ril.</th>' +
                                             //'<th>N° DDT</th>' +
                                             //'<th>Data DDT</th>' +
@@ -872,7 +872,7 @@ function GetVendutoByIdCliente(idCliente, descrizione, DataDa, DataA) {
 
             //console.log(dettaglio);
 
-            $('.DettRiepilogoVenduto').html(dettaglio);
+            $('.DettRiepilogoVendutoAdmin').html(dettaglio);
 
             $(".dataDDT").datepicker({
                 dateFormat: "dd-mm-yy"
@@ -886,14 +886,14 @@ function GetVendutoByIdCliente(idCliente, descrizione, DataDa, DataA) {
                 { "paging": false, responsive: true, dom: 'T<"clear">lfrtip' }
             );
 
-            $('.filtraVendutiByIdCliente').click(function () {
-                var DataDa = stringToDate($('#VendutiByIdClienteDataDa').val(), "dd-MM-yyyy", "-");
-                var DataA = stringToDate($('#VendutiByIdClienteDataA').val(), "dd-MM-yyyy", "-");
+            $('.filtraVendutiByIdClienteAdmin').click(function () {
+                var DataDa = stringToDate($('#VendutiByIdClienteDataDaAdmin').val(), "dd-MM-yyyy", "-");
+                var DataA = stringToDate($('#VendutiByIdClienteDataAAdmin').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 var desc = descrizione;
                 //desc = desc.replace("'", "\\'");
                 //desc = '\'' + desc + '\'';
-                GetVendutoByIdCliente(idCliente, desc, DataDa, DataA);
+                GetVendutoByIdClienteAdmin(idCliente, desc, DataDa, DataA);
             });
 
         }

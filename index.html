@@ -36,6 +36,7 @@
     <script src="Scripts/JSgestionemagazzino.js"></script>
     <script src="Scripts/JSvenditadiretta.js"></script>
     <script src="Scripts/JSriepilogovenduto.js"></script>
+    <script src="Scripts/JSriepilogovendutoAdmin.js"></script>
     <script src="Scripts/dropzone.js"></script>
     <script src="Scripts/JSmarkreport.js"></script>
     <link href="Scripts/dropzone.css" rel="stylesheet" />
@@ -447,7 +448,7 @@
         <div role="main" class="ui-content jqm-content">                
                                    
             <ul data-role="listview" data-filter="true" data-filter-placeholder="Cerca il Cliente..." data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
-                <li><a href="javascript:VendutoPerTuttiDistributoriStampa(null, null);" class="ui-btn ui-btn-icon-right ui-icon-carat-r vociVenduto" >Venduto di tutti i Distributori - Solo totali</a></li>
+                
                 <li><a href="javascript:VendutoPerTuttiDistributori(null, null);" class="ui-btn ui-btn-icon-right ui-icon-carat-r vociVenduto" >Venduto di tutti i Distributori con dett. prod.</a></li>
                 <li><a href="javascript:VendutoPerDistributore();" class="ui-btn ui-btn-icon-right ui-icon-carat-r vociVenduto" >Venduto Per Distributore</a></li>
                 <li><a href="javascript:VendutoPerCliente();" class="ui-btn ui-btn-icon-right ui-icon-carat-r vociVenduto" >Venduto Per Cliente</a></li>
@@ -457,6 +458,36 @@
             </ul>
             
             <div class="DettRiepilogoVenduto"></div>
+
+        </div><!-- /content -->        
+    
+    </div><!-- /page -->
+<!--************************************************************************************-->
+
+<!--**** Riepilogo Venduto Admin************************-->
+<div data-role="page" id="RiepilogoVendutoAdmin">
+    <div data-role="panel" id="leftpanelRiepilogoVendutoAdmin" class="leftPanel" data-position="left" data-display="push" data-theme="a">
+       <!-- <h3>Left Panel: Push</h3>-->       
+        
+	</div><!-- /leftpanel2 -->     
+    <div data-role="header">
+            <h1 class="h1RiepilogoVendutoAdmin">Riepilogo Venduto</h1>           
+            <a href="#leftpanelRiepilogoVendutoAdmin" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-bars ui-btn-icon-left ui-btn-a ui-btn-active ui-btn-left ui-btnMedio">MENU</a>            
+        </div><!-- /header -->                
+
+        <div role="main" class="ui-content jqm-content">                
+                                   
+            <ul data-role="listview" data-filter="true" data-filter-placeholder="Cerca il Cliente..." data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+                <li><a href="javascript:VendutoPerTuttiDistributoriStampaAdmin(null, null);" class="ui-btn ui-btn-icon-right ui-icon-carat-r vociVenduto" >Venduto di tutti i Distributori - Solo totali</a></li>
+                <li><a href="javascript:VendutoPerTuttiDistributoriAdmin(null, null);" class="ui-btn ui-btn-icon-right ui-icon-carat-r vociVenduto" >Venduto di tutti i Distributori con dett. prod.</a></li>
+                <li><a href="javascript:VendutoPerDistributoreAdmin();" class="ui-btn ui-btn-icon-right ui-icon-carat-r vociVenduto" >Venduto Per Distributore</a></li>
+                <li><a href="javascript:VendutoPerClienteAdmin();" class="ui-btn ui-btn-icon-right ui-icon-carat-r vociVenduto" >Venduto Per Cliente</a></li>
+                <li><a href="javascript:VendutoPerProdottoAdmin();" class="ui-btn ui-btn-icon-right ui-icon-carat-r vociVenduto" >Venduto Per Prodotto</a></li>
+                <!--<li><a href="javascript:VendutoPerProdottoLotto();" class="ui-btn ui-btn-icon-right ui-icon-carat-r vociVenduto" >Venduto Per Prodotto (Lotto)</a></li>-->
+                <li><a href="javascript:VenditaDirettaAdmin(null, null);" class="ui-btn ui-btn-icon-right ui-icon-carat-r vociVenduto" >Vendita Diretta</a></li>
+            </ul>
+            
+            <div class="DettRiepilogoVendutoAdmin"></div>
 
         </div><!-- /content -->        
     
