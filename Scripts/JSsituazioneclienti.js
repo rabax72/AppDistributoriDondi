@@ -31,7 +31,7 @@ function GetStoricoVendutoInCliente(IdCliente, idProd, numeroLotto, numeroRecord
             var righe = '';
             for (var i = 0; i < risultati.length; i++) {
                 righe = righe + '<tr>';
-                righe = righe + '<td>' + parseJsonDateLettura(risultati[i].dataInserimento) + '</td>';
+                righe = righe + '<td>' + parseJsonDateSenzaTime(risultati[i].dataInserimento) + '</td>';
                 righe = righe + '<td>' + risultati[i].quantitaVenduto + '</td>';
                 righe = righe + '<td><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-active ui-btnCancella btnCancella" data-idVendita="' + risultati[i].IdVendita + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzoProdotto="' + risultati[i].prezzo + '" data-quantProdInCli="' + risultati[i].quantitaCliente + '" data-quantExVenduto="' + risultati[i].quantitaVenduto + '">Cancella</a></td>';
                 righe = righe + '</tr>';

@@ -123,7 +123,7 @@ function VenditaDiretta(DataDa, DataA) {
 
             $('.filtraProdottiVendutiDirettamente').click(function () {
                 var DataDa = stringToDate($('#ProdottiVendutiDirettamenteDataDa').val(), "dd-MM-yyyy", "-");
-                var DataA = stringToDate($('#ProdottiVendutiDirettamenteDataA').val(), "dd-MM-yyyy", "-");
+                var DataA = stringToDatePerDataA($('#ProdottiVendutiDirettamenteDataA').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 VenditaDiretta(DataDa, DataA);
             });
@@ -379,7 +379,7 @@ function GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, Da
             
             $('.filtraVendutiByIdProdotto').click(function () {
                 var DataDa = stringToDate($('#VendutiByIdProdottoDataDa').val(), "dd-MM-yyyy", "-");
-                var DataA = stringToDate($('#VendutiByIdProdottoDataA').val(), "dd-MM-yyyy", "-");
+                var DataA = stringToDatePerDataA($('#VendutiByIdProdottoDataA').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 GetVendutoByIdProdotto(idProdotto, numeroLotto, descrizione, DataDa, DataA);
             });
@@ -479,7 +479,7 @@ function VendutoPerTuttiDistributori(DataDa, DataA) {
 
             $('.filtraVendutoPerTuttiDitributori').click(function () {
                 var DataDa = stringToDate($('#VendutoPerTuttiDitributoriDataDa').val(), "dd-MM-yyyy", "-");
-                var DataA = stringToDate($('#VendutoPerTuttiDitributoriDataA').val(), "dd-MM-yyyy", "-");
+                var DataA = stringToDatePerDataA($('#VendutoPerTuttiDitributoriDataA').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 VendutoPerTuttiDistributori(DataDa, DataA);
             });
@@ -584,7 +584,7 @@ function VendutoPerTuttiDistributoriStampa(DataDa, DataA) {
 
             $('.filtraVendutoPerTuttiDitributoriStampa').click(function () {
                 var DataDa = stringToDate($('#VendutoPerTuttiDitributoriStampaDataDa').val(), "dd-MM-yyyy", "-");
-                var DataA = stringToDate($('#VendutoPerTuttiDitributoriStampaDataA').val(), "dd-MM-yyyy", "-");
+                var DataA = stringToDatePerDataA($('#VendutoPerTuttiDitributoriStampaDataA').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 VendutoPerTuttiDistributoriStampa(DataDa, DataA);
             });
@@ -745,7 +745,7 @@ function GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA) 
 
             $('.filtraVendutoDitributore').click(function () {
                 var DataDa = stringToDate($('#VendutoDitributoreDataDa').val(), "dd-MM-yyyy", "-");
-                var DataA = stringToDate($('#VendutoDitributoreDataA').val(), "dd-MM-yyyy", "-");
+                var DataA = stringToDatePerDataA($('#VendutoDitributoreDataA').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 GetVendutoByIdDistributore(idDistributore, descrizione, DataDa, DataA);
             });
@@ -888,7 +888,7 @@ function GetVendutoByIdCliente(idCliente, descrizione, DataDa, DataA) {
 
             $('.filtraVendutiByIdCliente').click(function () {
                 var DataDa = stringToDate($('#VendutiByIdClienteDataDa').val(), "dd-MM-yyyy", "-");
-                var DataA = stringToDate($('#VendutiByIdClienteDataA').val(), "dd-MM-yyyy", "-");
+                var DataA = stringToDatePerDataA($('#VendutiByIdClienteDataA').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 var desc = descrizione;
                 //desc = desc.replace("'", "\\'");
