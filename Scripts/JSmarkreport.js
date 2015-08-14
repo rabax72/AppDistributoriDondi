@@ -96,10 +96,11 @@ function GetMarkReport() {
             );
 
             $('.filtraMarkReport').click(function () {
-                var DataDa = stringToDate($('#MarkReportDataDa').val(), "dd-MM-yyyy", "-");
-                var DataA = stringToDate($('#MarkReportDataA').val(), "dd-MM-yyyy", "-");
-                //var DataDa = $('#MarkReportDataDa').val();
-                //var DataA = $('#MarkReportDataA').val();
+                //var DataDa = stringToDate($('#MarkReportDataDa').val(), "dd-MM-yyyy", "-");
+                //var DataA = stringToDate($('#MarkReportDataA').val(), "dd-MM-yyyy", "-");
+
+                var DataDa = $('#MarkReportDataDa').val();
+                var DataA = stringPerDataA($('#MarkReportDataA').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 filterMarkReport(DataDa, DataA);
             });
@@ -197,10 +198,10 @@ function filterMarkReport(DataDa, DataA) {
             );
 
             $('.filtraMarkReport').click(function () {
-                var DataDa = stringToDate($('#MarkReportDataDa').val(), "dd-MM-yyyy", "-");
-                var DataA = stringToDate($('#MarkReportDataA').val(), "dd-MM-yyyy", "-");
-                //var DataDa = $('#MarkReportDataDa').val();
-                //var DataA = $('#MarkReportDataA').val();
+                //var DataDa = stringToDate($('#MarkReportDataDa').val(), "dd-MM-yyyy", "-");
+                //var DataA = stringToDate($('#MarkReportDataA').val(), "dd-MM-yyyy", "-");
+                var DataDa = $('#MarkReportDataDa').val();
+                var DataA = stringPerDataA($('#MarkReportDataA').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 filterMarkReport(DataDa, DataA);
             });

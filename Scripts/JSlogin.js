@@ -1,5 +1,5 @@
 ﻿//Connessioni ai WebServices
-var tipoDiConn = "test";
+var tipoDiConn = "prod";
 var urlProd = 'http://www.giacomorabaglia.com/appdistributoridondi/';
 
 if (tipoDiConn != "prod") {
@@ -157,16 +157,21 @@ function stringToDate(_date, _format, _delimiter) {
     return formatedDate;
 }
 
-function stringToDatePerDataA(_date, _format, _delimiter) {
-    var formatLowerCase = _format.toLowerCase();
-    var formatItems = formatLowerCase.split(_delimiter);
-    var dateItems = _date.split(_delimiter);
-    var monthIndex = formatItems.indexOf("mm");
-    var dayIndex = formatItems.indexOf("dd");
-    var yearIndex = formatItems.indexOf("yyyy");
-    var month = parseInt(dateItems[monthIndex]);
-    month -= 1;
-    var formatedDate = new Date(dateItems[yearIndex], month, dateItems[dayIndex] + 1);
+function stringPerDataA(_date, _format, _delimiter) {
+    var formatedDate = '';
+    if (_date != '') {
+        var formatLowerCase = _format.toLowerCase();
+        var formatItems = formatLowerCase.split(_delimiter);
+        var dateItems = _date.split(_delimiter);
+        var monthIndex = formatItems.indexOf("mm");
+        var dayIndex = formatItems.indexOf("dd");
+        var yearIndex = formatItems.indexOf("yyyy");
+        var month = parseInt(dateItems[monthIndex]);
+        month -= 1;
+        formatedDate = new Date(dateItems[yearIndex], month, dateItems[dayIndex]);
+        formatedDate.setDate(formatedDate.getDate() + 1);
+        formatedDate = formatedDate.getDate() + '-' + (1 + formatedDate.getMonth()) + '-' + formatedDate.getFullYear();
+    }
     return formatedDate;
 }
 
