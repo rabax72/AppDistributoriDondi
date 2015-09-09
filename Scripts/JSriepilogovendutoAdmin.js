@@ -99,8 +99,10 @@ function VenditaDirettaAdmin(DataDa, DataA) {
             );
 
             $('.filtraProdottiVendutiDirettamenteAdmin').click(function () {
-                var DataDa = stringToDate($('#ProdottiVendutiDirettamenteDataDaAdmin').val(), "dd-MM-yyyy", "-");
-                var DataA = stringToDate($('#ProdottiVendutiDirettamenteDataAAdmin').val(), "dd-MM-yyyy", "-");
+                //var DataDa = stringToDate($('#ProdottiVendutiDirettamenteDataDaAdmin').val(), "dd-MM-yyyy", "-");
+                //var DataA = stringToDate($('#ProdottiVendutiDirettamenteDataAAdmin').val(), "dd-MM-yyyy", "-");
+                var DataDa = $('#ProdottiVendutiDirettamenteDataDaAdmin').val();
+                var DataA = stringPerDataA($('#ProdottiVendutiDirettamenteDataAAdmin').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 VenditaDirettaAdmin(DataDa, DataA);
             });
@@ -355,8 +357,10 @@ function GetVendutoByIdProdottoAdmin(idProdotto, numeroLotto, descrizione, DataD
             );
             
             $('.filtraVendutiByIdProdottoAdmin').click(function () {
-                var DataDa = stringToDate($('#VendutiByIdProdottoDataDaAdmin').val(), "dd-MM-yyyy", "-");
-                var DataA = stringToDate($('#VendutiByIdProdottoDataAAdmin').val(), "dd-MM-yyyy", "-");
+                //var DataDa = stringToDate($('#VendutiByIdProdottoDataDaAdmin').val(), "dd-MM-yyyy", "-");
+                //var DataA = stringToDate($('#VendutiByIdProdottoDataAAdmin').val(), "dd-MM-yyyy", "-");
+                var DataDa = $('#VendutiByIdProdottoDataDaAdmin').val();
+                var DataA = stringPerDataA($('#VendutiByIdProdottoDataAAdmin').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 GetVendutoByIdProdottoAdmin(idProdotto, numeroLotto, descrizione, DataDa, DataA);
             });
@@ -455,8 +459,10 @@ function VendutoPerTuttiDistributoriAdmin(DataDa, DataA) {
             );
 
             $('.filtraVendutoPerTuttiDitributoriAdmin').click(function () {
-                var DataDa = stringToDate($('#VendutoPerTuttiDitributoriDataDaAdmin').val(), "dd-MM-yyyy", "-");
-                var DataA = stringToDate($('#VendutoPerTuttiDitributoriDataAAdmin').val(), "dd-MM-yyyy", "-");
+                //var DataDa = stringToDate($('#VendutoPerTuttiDitributoriDataDaAdmin').val(), "dd-MM-yyyy", "-");
+                //var DataA = stringToDate($('#VendutoPerTuttiDitributoriDataAAdmin').val(), "dd-MM-yyyy", "-");
+                var DataDa = $('#VendutoPerTuttiDitributoriDataDaAdmin').val();
+                var DataA = stringPerDataA($('#VendutoPerTuttiDitributoriDataAAdmin').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 VendutoPerTuttiDistributoriAdmin(DataDa, DataA);
             });
@@ -484,7 +490,7 @@ function VendutoPerTuttiDistributoriStampaAdmin(DataDa, DataA) {
         complete: function () { $.mobile.loading('hide'); }, //Hide spinner
         success: function (response) {
             risultati = response.d;
-            //console.log(risultati);
+            console.log(risultati);
             var dettaglio = '<h1>Riepilogo Venduto per Tutti i Distributori</h1>' +
                             '<div>' +
                                 'Data Da <input type="text" id="VendutoPerTuttiDitributoriStampaDataDaAdmin"  class="calendario" data-theme="a" /> Data A <input type="text" id="VendutoPerTuttiDitributoriStampaDataAAdmin"  class="calendario" data-theme="a" /> <button id="filtraVendutoDitributoreStampa" value="Filtra" class="filtraVendutoPerTuttiDitributoriStampaAdmin">Filtra</button>' +
@@ -560,8 +566,10 @@ function VendutoPerTuttiDistributoriStampaAdmin(DataDa, DataA) {
             );
 
             $('.filtraVendutoPerTuttiDitributoriStampaAdmin').click(function () {
-                var DataDa = stringToDate($('#VendutoPerTuttiDitributoriStampaDataDaAdmin').val(), "dd-MM-yyyy", "-");
-                var DataA = stringToDate($('#VendutoPerTuttiDitributoriStampaDataAAdmin').val(), "dd-MM-yyyy", "-");
+                //var DataDa = stringToDate($('#VendutoPerTuttiDitributoriStampaDataDaAdmin').val(), "dd-MM-yyyy", "-");
+                //var DataA = stringToDate($('#VendutoPerTuttiDitributoriStampaDataAAdmin').val(), "dd-MM-yyyy", "-");
+                var DataDa = $('#VendutoPerTuttiDitributoriStampaDataDaAdmin').val();
+                var DataA = stringPerDataA($('#VendutoPerTuttiDitributoriStampaDataAAdmin').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 VendutoPerTuttiDistributoriStampaAdmin(DataDa, DataA);
             });
@@ -721,8 +729,10 @@ function GetVendutoByIdDistributoreAdmin(idDistributore, descrizione, DataDa, Da
             );
 
             $('.filtraVendutoDitributoreAdmin').click(function () {
-                var DataDa = stringToDate($('#VendutoDitributoreDataDaAdmin').val(), "dd-MM-yyyy", "-");
-                var DataA = stringToDate($('#VendutoDitributoreDataAAdmin').val(), "dd-MM-yyyy", "-");
+                //var DataDa = stringToDate($('#VendutoDitributoreDataDaAdmin').val(), "dd-MM-yyyy", "-");
+                //var DataA = stringToDate($('#VendutoDitributoreDataAAdmin').val(), "dd-MM-yyyy", "-");
+                var DataDa = $('#VendutoDitributoreDataDaAdmin').val();
+                var DataA = stringPerDataA($('#VendutoDitributoreDataAAdmin').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 GetVendutoByIdDistributoreAdmin(idDistributore, descrizione, DataDa, DataA);
             });
@@ -864,8 +874,10 @@ function GetVendutoByIdClienteAdmin(idCliente, descrizione, DataDa, DataA) {
             );
 
             $('.filtraVendutiByIdClienteAdmin').click(function () {
-                var DataDa = stringToDate($('#VendutiByIdClienteDataDaAdmin').val(), "dd-MM-yyyy", "-");
-                var DataA = stringToDate($('#VendutiByIdClienteDataAAdmin').val(), "dd-MM-yyyy", "-");
+                //var DataDa = stringToDate($('#VendutiByIdClienteDataDaAdmin').val(), "dd-MM-yyyy", "-");
+                //var DataA = stringToDate($('#VendutiByIdClienteDataAAdmin').val(), "dd-MM-yyyy", "-");
+                var DataDa = $('#VendutiByIdClienteDataDaAdmin').val();
+                var DataA = stringPerDataA($('#VendutiByIdClienteDataAAdmin').val(), "dd-MM-yyyy", "-");
                 //alert("filtraVendutiByIdProdotto" + DataDa + " " + DataA);
                 var desc = descrizione;
                 //desc = desc.replace("'", "\\'");
