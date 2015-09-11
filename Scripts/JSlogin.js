@@ -67,6 +67,8 @@ var urlResetEvidenzaMagazzino = urlProd + 'WebServiceAppDondi.asmx/ResetEvidenza
 var urlCorrezioneVendita = urlProd + 'WebServiceAppDondi.asmx/CorrezioneVendita';
 var urlGetMarkReport = urlProd + 'WebServiceAppDondi.asmx/GetMarkReport';
 var urlFilterMarkReport = urlProd + 'WebServiceAppDondi.asmx/FiltraMarkReport';
+var urlGetStoricoMagazzinoByIdProd = urlProd + 'WebServiceAppDondi.asmx/GetStoricoMagazzinoByIdProd';
+var urlCorrezioneMagazzinoByIdProd = urlProd + 'WebServiceAppDondi.asmx/CorrezioneMagazzinoByIdProd';
 
 $(function () {    
 
@@ -827,6 +829,31 @@ function CorrezioneVendita(idVendita) {
         async: true,
         //            data: "idDisciplina=" + idDisciplina,
         data: JSON.stringify({ idVendita: idVendita}),
+        error: function (data) {
+            console.log(data.responseText)
+        },
+        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+        success: function (response) {
+            risultati = response.d;
+
+            //console.log(risultati);     
+
+        }
+
+    });
+}
+
+function CorrezioneMagazzinoByIdProd(idMagazzino, idProdotto) {
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        url: urlCorrezioneMagazzinoByIdProd,
+        cache: false,
+        async: true,
+        //            data: "idDisciplina=" + idDisciplina,
+        data: JSON.stringify({ idMagazzino: idMagazzino, idProdotto: idProdotto }),
         error: function (data) {
             console.log(data.responseText)
         },

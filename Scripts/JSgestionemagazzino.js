@@ -27,7 +27,7 @@ function GestioneMagazzino() {
             var dettaglio = '<table id="tabellaProdottiDaGestire" class="display" cellspacing="0" width="100%">' +
                                         '<thead>' +
                                             '<tr>' +
-                                                '<th>Foto</th>' +
+                                                '<th  width="10%">Foto</th>' +
                                                 '<th>Desc.</th>' +
                                                 '<th>Prezzo</th>' +
                                                 '<th>Giacenza</th>' +
@@ -60,10 +60,10 @@ function GestioneMagazzino() {
             for (var i = 0; i < risultati.length; i++) {
                 colore = risultati[i].colore;
                 dettaglio = dettaglio + '<tr>';
-                dettaglio = dettaglio + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
+                dettaglio = dettaglio + '<td align="center"><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"><a href="#popUpStoricoMagazzino" data-rel="popup" data-position-to="window" class="storicoScaricatoInMagazzino" data-idProdotto="' + risultati[i].idProdotto + '" data-IdDistributore="' + risultati[i].IdDistributore + '" data-numeroLotto="' + parseJsonDateLettura(risultati[i].numeroLotto) + '"><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/info_40x40.png" border="0" alt="Storico Vendite" title="Storico Vendite"></a></td>';
                 dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
                 dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzo + ' €</td>';
-                dettaglio = dettaglio + '<td class="quantita ' + colore + '">' + risultati[i].quantitaMagazzino + '</td>';
+                dettaglio = dettaglio + '<td class="quantita ' + colore + ' quantMagazzino-' + risultati[i].idProdotto + '">' + risultati[i].quantitaMagazzino + '</td>';
                 dettaglio = dettaglio + '<td><input type="number" id="carica' + risultati[i].idProdotto + '" class="miniInput" min="0"><a href="#" data-descrizione="' + risultati[i].descrizione + '" data-idProdotto="' + risultati[i].idProdotto + '" data-foto="' + risultati[i].foto + '" data-quantita="' + risultati[i].quantitaMagazzino + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdottoInMagazzino ui-btnCarica">Carica</a></td>';
                 if (parseInt(risultati[i].quantitaMagazzino) > 0) {
                     dettaglio = dettaglio + '<td><input type="number" id="scarica' + risultati[i].idProdotto + '" class="miniInput" min="0"><a href="#" data-descrizione="' + risultati[i].descrizione + '" data-IdMagazzino="' + risultati[i].IdMagazzino + '"  data-idProdotto="' + risultati[i].idProdotto + '" data-quantita="' + risultati[i].quantitaMagazzino + '" data-prezzo="' + risultati[i].prezzo + '" data-foto="' + risultati[i].foto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scaricaProdottoDaMagazzino ui-btnScarica">Scarica</a> </td>';
@@ -77,6 +77,18 @@ function GestioneMagazzino() {
                 //dettaglio = dettaglio + '<br><p align="center"><input type="button" value="FINE GESTIONE MAGAZZINO" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti ui-btnCarica fineCarico" onclick="togliEvidenziatoMagazzino()" /></p>';
 
                 $('#elencoGestioneMagazzino').html(dettaglio);
+
+                $(".storicoScaricatoInMagazzino").on('click', function () {
+                    var idProdotto = $(this).attr('data-idProdotto');
+                    //var idDistributore = IdDistributore;
+                    //var numeroLotto = $(this).attr('data-numeroLotto');
+                    //console.log("numeroLotto=" + numeroLotto + "---");
+                    //numeroLotto = stringToDate(numeroLotto, 'dd/mm/yyyy', '/');
+                    //console.log("idDistributore=" + idDistributore + ", idProdotto=" + idProdotto + ", numeroLotto=" + numeroLotto);
+                    //GetStoricoVendutoInDistributore(idDistributore, idProdotto, numeroLotto, 10);
+                    GetStoricoMagazzinoByIdProd(idProdotto, 10);
+
+                });
 
                 var table = $('#tabellaProdottiDaGestire').DataTable(
                     { "paging": false, responsive: true }
@@ -147,6 +159,95 @@ function GestioneMagazzino() {
         }
     });
 
+}
+
+function GetStoricoMagazzinoByIdProd(idProd, numeroRecord) {
+    //console.log('idProd=' + idProd);
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        url: urlGetStoricoMagazzinoByIdProd,
+        cache: false,
+        //jsonpCallback: 'risposta',
+        // jsonp: 'callback',
+        // dataType: "jsonp",            
+        async: true,
+        //            data: "idDisciplina=" + idDisciplina,
+        data: JSON.stringify({ idProdotto: idProd, numeroRecord: numeroRecord }),
+        //data: { NomeOrdinanza: NomeOrdinanza, DataPubbDa: DataPubbDa, DataPubbA: DataPubbA, DataScadDa: DataScadDa, DataScadA: DataScadA },
+        error: function (data) {
+            console.log(data.responseText);
+            //$("#tuttiDistributori").html(data.responseText);
+            alert(data.responseText);
+        },
+        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+        success: function (response) {
+            risultati = response.d;
+            
+            var storicoQuantitaVendute = '<table class="storicoVendite"><tr><td><b>Data</b></td><td><b>Quantità</b></td><td>Ripristina</td></tr>';
+            
+            var righe = '';
+            for (var i = 0; i < risultati.length; i++) {
+                righe = righe + '<tr>';
+                righe = righe + '<td>' + parseJsonDateSenzaTime(risultati[i].dataInserimento) + '</td>';
+                righe = righe + '<td>' + risultati[i].quantitaMagazzino + '</td>';
+                if (i==0) {
+                    righe = righe + '<td><a href="#" class="ui-btn ui-corner-all ui-shadow ui-btn-active ui-btnCancella btnRipristina" data-idMagazzino="' + risultati[i].IdMagazzino + '" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzoProdotto="' + risultati[i].prezzo + '" data-quantExMagazzino="' + risultati[0].quantitaMagazzino + '">Ripristina</a></td>';
+                }else{
+                    righe = righe + '<td>&nbsp;</td>';
+                }
+                
+                righe = righe + '</tr>';
+            }
+            
+            storicoQuantitaVendute = storicoQuantitaVendute + righe + '</table>';
+
+            var datiPopUpStorico = '<div style="padding:10px 20px;">';
+            datiPopUpStorico = datiPopUpStorico + '<h2>Storico Magazzino</h2>';
+            datiPopUpStorico = datiPopUpStorico + storicoQuantitaVendute;
+            datiPopUpStorico = datiPopUpStorico + '</div>';
+            //console.log(datiPopUpStorico);
+            $("#popUpStoricoMagazzino").html(datiPopUpStorico);
+
+            $(".btnRipristina").on('click', function () {
+                var idMagazzino = $(this).attr('data-idMagazzino');
+                var idProdotto = $(this).attr('data-idProdotto');
+                //var prezzoProdotto = $(this).attr('data-prezzoProdotto');
+                //var quantProdInDist = $(this).attr('data-quantProdInDist');
+                var quantExMagazzino = $(this).attr('data-quantExMagazzino');
+                var idOperatore = localStorage.idOperatore;
+                //var quantitaRimasti = (parseInt(quantProdInDist) + parseInt(quantExVenduto));
+                //var prezzoTotaleRimasti = (quantitaRimasti * prezzoProdotto);
+                //console.log("idDistributore=" + idDistributore + ", idProdotto=" + idProdotto + ", numeroLotto=" + numeroLotto);
+                //GetStoricoVendutoInDistributore(idDistributore, idProdotto, numeroLotto, 10);
+
+                if (!confirm("Sicuro che vuoi procedere al ripristino di questa situazione di magazzino?")) return;
+
+                CorrezioneMagazzinoByIdProd(idMagazzino, idProdotto);
+
+                //CorrezioneVendita(idVendita);
+
+                //StoricizzoStatoProdottoInDistributore(IdDistributore, idProdotto, quantitaRimasti, prezzoTotaleRimasti, idOperatore);
+
+                //setTimeout(GetSituazioneDistributore(IdDistributore, descDistributore), 3000);                                                 
+
+                $("#popUpStoricoMagazzino").popup("close");
+
+                $("#popUpStoricoMagazzino").bind({
+                    popupafterclose: function (event, ui) {
+                        //alert('chiuso');
+                        //console.log(idProdotto);
+                        $(".quantMagazzino-" + idProdotto).html(quantExMagazzino);
+                    }
+                });
+                                
+               // GetStoricoVendutoInDistributore(IdDistributore, idProdotto, '', 10);
+            });
+        }
+
+    });
 }
 
 function cambiaQuantitaGiacente(obj) {
