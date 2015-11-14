@@ -23,6 +23,7 @@ var urlGetProdottiInMagazzinoResiFiltrato = urlProd + 'WebServiceAppDondi.asmx/G
 var urlStoricizzoProdottiInMagazzino = urlProd + 'WebServiceAppDondi.asmx/StoricizzoProdottoInMagazzino';
 var urlSmaltiscoProdottoInMagazzino = urlProd + 'WebServiceAppDondi.asmx/SmaltiscoProdottoInMagazzino';
 var urlSmaltiscoProdottoInMagazzinoV2 = urlProd + 'WebServiceAppDondi.asmx/SmaltiscoProdottoInMagazzinoV2';
+var urlSmaltiscoProdottoInMagazzinoV3 = urlProd + 'WebServiceAppDondi.asmx/SmaltiscoProdottoInMagazzinoV3';
 var urlQuantitaProdottiInMagazzino = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzino';
 var urlQuantitaProdottiInMagazzinoV2 = urlProd + 'WebServiceAppDondi.asmx/AggiornaQuantitaProdottiInMagazzinoV2';
 var urlGetProdottiSuCamion = urlProd + 'WebServiceAppDondi.asmx/GetProdottiInCamion';
@@ -69,6 +70,9 @@ var urlGetMarkReport = urlProd + 'WebServiceAppDondi.asmx/GetMarkReport';
 var urlFilterMarkReport = urlProd + 'WebServiceAppDondi.asmx/FiltraMarkReport';
 var urlGetStoricoMagazzinoByIdProd = urlProd + 'WebServiceAppDondi.asmx/GetStoricoMagazzinoByIdProd';
 var urlCorrezioneMagazzinoByIdProd = urlProd + 'WebServiceAppDondi.asmx/CorrezioneMagazzinoByIdProd';
+var urldisplayNumeriLottoMagazzino = urlProd + 'WebServiceAppDondi.asmx/displyaNumeriLottoMagazzino';
+var urldisplayNumeriLottoDistributore = urlProd + 'WebServiceAppDondi.asmx/displayNumeriLottoDistributore';
+var urlGetProdottiInMagazzinoByIdProdNumLotto = urlProd + 'WebServiceAppDondi.asmx/GetProdottiInMagazzinoByIdProdNumLotto';
 
 $(function () {    
 
@@ -232,7 +236,7 @@ function parseJsonDateLettura(jsonDate) {
     }
     mon = mon < 10 ? "0" + mon : mon;
    
-    return (date + "/" + mon + "/" + year);
+    return (date + "-" + mon + "-" + year);
 };
 
 function parseJsonDateSenzaTime(jsonDate) {
@@ -670,7 +674,7 @@ function AggiornaQuantitaProdottiInMagazzinoV2(idProdotto, quantitaRimasti, prez
 // *********************************************************************************
 
 //Inserisco la quantita di Prodotti Venduti
-function AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, idCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, VenditaDiretta) {
+function AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, idCliente, quantitaVenduti, prezzoTotaleVenduti, idOperatore, VenditaDiretta, numeroDDT, DataDDT, numeroLotto, dataScadenza, codiceLotto) {
     $.ajax({
         type: "POST",
         crossDomain: true,
@@ -680,7 +684,7 @@ function AggiornaQuantitaProdottiVenduti(idProdotto, idDistributore, idCliente, 
         cache: false,
         async: true,
         //            data: "idDisciplina=" + idDisciplina,
-        data: JSON.stringify({ idProdotto: idProdotto, idDistributore: idDistributore, idCliente: idCliente, quantita: quantitaVenduti, prezzoTotale: prezzoTotaleVenduti, idOperatore: idOperatore, VenditaDiretta: VenditaDiretta }),
+        data: JSON.stringify({ idProdotto: idProdotto, idDistributore: idDistributore, idCliente: idCliente, quantita: quantitaVenduti, prezzoTotale: prezzoTotaleVenduti, idOperatore: idOperatore, VenditaDiretta: VenditaDiretta, numeroDDT: numeroDDT, DataDDT: DataDDT, NumeroLotto: numeroLotto, dataScadenza: dataScadenza, codiceLotto: codiceLotto }),
         error: function (data) {
             console.log(data.responseText)
         },

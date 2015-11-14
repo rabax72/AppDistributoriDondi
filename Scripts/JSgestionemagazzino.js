@@ -31,6 +31,7 @@ function GestioneMagazzino() {
                                                 '<th>Desc.</th>' +
                                                 '<th>Prezzo</th>' +
                                                 '<th>Giacenza</th>' +
+                                                //'<th>Lotto</th>' +
                                                 '<th>Carica</th>' +
                                                 '<th>Scarica</th>' +
                                             '</tr>' +
@@ -41,7 +42,8 @@ function GestioneMagazzino() {
                                                 '<th>Desc.</th>' +
                                                 '<th>Prezzo</th>' +
                                                 '<th>Giacenza</th>' +
-                                                '<th>Carica</th>' +
+                                                //'<th>Lotto</th>' +
+                                                '<th>Carica</th>' +                                               
                                                 '<th>Scarica</th>' +
                                             '</tr>' +
                                         '</tfoot>' +
@@ -59,12 +61,18 @@ function GestioneMagazzino() {
             var q = 0;
             for (var i = 0; i < risultati.length; i++) {
                 colore = risultati[i].colore;
+                //var lotto = parseJsonDateLettura(risultati[i].numeroLotto);
+                //if (lotto == '02-01-1') {
+                //    lotto = '';
+                //}
                 dettaglio = dettaglio + '<tr>';
-                dettaglio = dettaglio + '<td align="center"><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"><a href="#popUpStoricoMagazzino" data-rel="popup" data-position-to="window" class="storicoScaricatoInMagazzino" data-idProdotto="' + risultati[i].idProdotto + '" data-IdDistributore="' + risultati[i].IdDistributore + '" data-numeroLotto="' + parseJsonDateLettura(risultati[i].numeroLotto) + '"><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/info_40x40.png" border="0" alt="Storico Vendite" title="Storico Vendite"></a></td>';
-                dettaglio = dettaglio + '<td>' + risultati[i].descrizione + '</td>';
+                dettaglio = dettaglio + '<td align="center"><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"><a href="#popUpStoricoMagazzino" data-rel="popup" data-position-to="window" class="storicoScaricatoInMagazzino" data-idProdotto="' + risultati[i].idProdotto + '" data-IdDistributore="' + risultati[i].IdDistributore + '"><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/info_40x40.png" border="0" alt="Storico Vendite" title="Storico Vendite"></a></td>';
+                dettaglio = dettaglio + '<td class="descrizione' + risultati[i].idProdotto + '">' + risultati[i].descrizione + '</td>';
                 dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzo + ' €</td>';
                 dettaglio = dettaglio + '<td class="quantita ' + colore + ' quantMagazzino-' + risultati[i].idProdotto + '">' + risultati[i].quantitaMagazzino + '</td>';
+                //dettaglio = dettaglio + '<td><input type="text" id="lotto' + risultati[i].idProdotto + '" class="miniInput calendario" min="0"></td>';
                 dettaglio = dettaglio + '<td><input type="number" id="carica' + risultati[i].idProdotto + '" class="miniInput" min="0"><a href="#" data-descrizione="' + risultati[i].descrizione + '" data-idProdotto="' + risultati[i].idProdotto + '" data-foto="' + risultati[i].foto + '" data-quantita="' + risultati[i].quantitaMagazzino + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdottoInMagazzino ui-btnCarica">Carica</a></td>';
+                
                 if (parseInt(risultati[i].quantitaMagazzino) > 0) {
                     dettaglio = dettaglio + '<td><input type="number" id="scarica' + risultati[i].idProdotto + '" class="miniInput" min="0"><a href="#" data-descrizione="' + risultati[i].descrizione + '" data-IdMagazzino="' + risultati[i].IdMagazzino + '"  data-idProdotto="' + risultati[i].idProdotto + '" data-quantita="' + risultati[i].quantitaMagazzino + '" data-prezzo="' + risultati[i].prezzo + '" data-foto="' + risultati[i].foto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scaricaProdottoDaMagazzino ui-btnScarica">Scarica</a> </td>';
                 }
@@ -76,7 +84,11 @@ function GestioneMagazzino() {
 
                 //dettaglio = dettaglio + '<br><p align="center"><input type="button" value="FINE GESTIONE MAGAZZINO" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti ui-btnCarica fineCarico" onclick="togliEvidenziatoMagazzino()" /></p>';
 
-                $('#elencoGestioneMagazzino').html(dettaglio);
+                $('#elencoGestioneMagazzino').html(dettaglio);                
+
+                $(".calendario").datepicker({
+                    dateFormat: "dd-mm-yy"
+                });
 
                 $(".storicoScaricatoInMagazzino").on('click', function () {
                     var idProdotto = $(this).attr('data-idProdotto');
@@ -101,6 +113,17 @@ function GestioneMagazzino() {
                     var quantitaAttuale = $(this).closest('td').prev('td').text();
                     var idOperatore = localStorage.idOperatore;
                     var quantitaCaricati = $('#carica' + idProdotto).val();
+                    //var numeroLotto = $('#lotto' + idProdotto).val();
+                    var foto = $(this).attr('data-foto');
+                    $(this).attr('data-rel', 'popup');
+                    $(this).attr('data-position-to', 'window');
+                    $(this).attr('href', '#popupCaricaMerceInMagazzino');
+                    
+                    //if (numeroLotto == '') {
+                    //    alert("Scegli un lotto prima di caricare!");
+                    //    return;
+                    //}
+                    //numeroLotto = stringToDate(numeroLotto, "dd-MM-yyyy", "-");
 
                     if (quantitaCaricati == '' || isInteroPositivo(parseInt(quantitaCaricati)) == false) {
                         alert("Scegli un valore Numerico prima di caricare");
@@ -109,25 +132,110 @@ function GestioneMagazzino() {
 
                     var quantitaTotale = (parseInt(quantitaAttuale) + parseInt(quantitaCaricati));
                     var prezzoTotaleCaricati = (prezzo * quantitaCaricati);
+                    
+                    var finestraDati = '<div style="padding:10px 20px;">';
+                    finestraDati = finestraDati + '<h3>Carica in Magazzino</h3>';
+                    finestraDati = finestraDati + '<img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + foto + '">';
+                    finestraDati = finestraDati + '<label for="quantitaProdDaCaricareInMagazzino">Quantita:</label>';
+                    finestraDati = finestraDati + '<input type="number" id="quantitaProdDaCaricareInMagazzino" data-theme="a" value="' + quantitaCaricati + '">';
+                    finestraDati = finestraDati + '<label for="codiceLottoDaCaricareInMagazzino">Codice Lotto</label>';
+                    finestraDati = finestraDati + '<input type="text" id="codiceLottoDaCaricareInMagazzino" data-theme="a">';
+                    finestraDati = finestraDati + '<label for="numeroLotttoCaricareinMagazzino">Numero Lotto</label>';
+                    finestraDati = finestraDati + '<input type="text" id="numeroLotttoCaricareinMagazzino" data-theme="a">';                    
+                    finestraDati = finestraDati + '<label for="dataScadenzaProdDaCaricareInMagazzino">Data Scadenza:</label>';
+                    finestraDati = finestraDati + '<input type="text" id="dataScadenzaProdDaCaricareInMagazzino" data-theme="a">';
+                    finestraDati = finestraDati + '<label for="noteCaricareinMagazzino">Note:</label>';
+                    finestraDati = finestraDati + '<textarea cols="40" rows="5" id="noteCaricareinMagazzino" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset"></textarea>';
+                    finestraDati = finestraDati + '<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdottoInMagazzino">Carica</a>';
+                    finestraDati = finestraDati + '</div>';
 
-                    CaricaProdottoInMagazzinoV2(idProdotto, quantitaCaricati, prezzoTotaleCaricati, idOperatore, 'azzurro');
+                    $("#popupCaricaMerceInMagazzino").html(finestraDati);
 
-                    tdQuantita.animate({
-                        backgroundColor: "#38c",
-                        color: "#000"
-                    }, 1000);
-                    tdQuantita.html(quantitaTotale);
+                    $("#dataScadenzaProdDaCaricareInMagazzino").datepicker({
+                        dateFormat: "dd-mm-yy"
+                    });
 
+                    $("#numeroLotttoCaricareinMagazzino").datepicker({
+                        dateFormat: "dd-mm-yy"
+                    });
+
+                    $(".caricaProdottoInMagazzino").on('click', function () {
+                        var numeroLotto = $("#numeroLotttoCaricareinMagazzino").val();                    
+                        var quantitaCaricati = $("#quantitaProdDaCaricareInMagazzino").val();
+                        var codiceLotto = $("#codiceLottoDaCaricareInMagazzino").val();
+                        var dataScadenza = $("#dataScadenzaProdDaCaricareInMagazzino").val();                        
+
+                        if (quantitaCaricati == '' || isInteroPositivo(parseInt(quantitaCaricati)) == false) {
+                            alert("Scegli un valore Numerico prima di caricare");
+                            return;
+                        }
+
+                        if (numeroLotto == '') {
+                            alert('Numero Lotto è un campo obbligatorio!');
+                            return;
+                        }
+                        if (numeroLotto != '') {
+                            numeroLotto = stringToDate(numeroLotto, "dd-MM-yyyy", "-");
+                        }
+
+                        if (dataScadenza == '') {
+                            alert('Data Scadenza è un campo obbligatorio!');
+                            return;
+                        }
+                        if (dataScadenza != '') {
+                            dataScadenza = stringToDate(dataScadenza, "dd-MM-yyyy", "-");
+                        }                        
+                                        
+                        var note = $("#noteCaricareinMagazzino").val();
+                        var quantitaTotale = (parseInt(quantitaAttuale) + parseInt(quantitaCaricati));
+                        //var quantitaVenduti = (quantitaAttuale - quantitaRimasti);
+                        //var prezzoTotaleRimasti = (prezzo * quantitaRimasti);
+                        var prezzoTotaleCaricati = (prezzo * quantitaCaricati);                    
+                                        
+                        //alert('idProdotto=' + idProdotto + ' quantitaCaricati=' + quantitaCaricati + ' prezzoTotaleCaricati=' + prezzoTotaleCaricati + ' numeroLotto=' + numeroLotto + ' dataDDT=' + dataDDT + ' numeroDDT=' + numeroDDT + ' idOperatore=' + idOperatore);
+                        //return;
+
+                        //CaricaProdottoInMagazzino(idProdotto, quantitaCaricati, prezzoTotaleCaricati, idOperatore, numeroLotto, numeroDDT, dataDDT, note);                    
+
+                        CaricaProdottoInMagazzino(idProdotto, quantitaCaricati, quantitaTotale, prezzoTotaleCaricati, idOperatore, codiceLotto, numeroLotto, dataScadenza, null, null, note, 'azzurro');
+                                            
+                        tdQuantita.animate({
+                            backgroundColor: "#38c",
+                            color: "#000"
+                        }, 1000);
+                        tdQuantita.html(quantitaTotale);
+
+                        $('#carica' + idProdotto).val('');
+
+                    });
+
+                    //CaricaProdottoInMagazzino(idProdotto, quantitaCaricati, quantitaTotale, prezzoTotaleCaricati, idOperatore, numeroLotto, null, null, '', 'azzurro');
+
+                    //tdQuantita.animate({
+                    //    backgroundColor: "#38c",
+                    //    color: "#000"
+                    //}, 1000);
+                    //tdQuantita.html(quantitaTotale);
+                    
                 });
 
 
                 $(".scaricaProdottoDaMagazzino").on('click', function () {
                     var idProdotto = $(this).attr('data-idProdotto');
                     var quantitaDaScaricare = $('#scarica' + idProdotto).val();
+
                     if (quantitaDaScaricare == "" || isInteroPositivo(parseInt(quantitaDaScaricare)) == false) {
                         alert("Scegli un valore Numerico prima di scaricare");
                         return;
                     }
+
+                    //var numeroLotto = $('#lotto' + idProdotto).val();
+
+                    //if (numeroLotto == '') {
+                    //    alert("Scegli un lotto prima di scaricare!");
+                    //    return;
+                    //}
+                    //numeroLotto = stringToDate(numeroLotto, "dd-MM-yyyy", "-");
 
                     var quantitaAttuale = $(this).closest('td').prev('td').prev('td');
                     var giacenza = $(this).closest('td').prev('td').prev('td').text();
@@ -139,10 +247,12 @@ function GestioneMagazzino() {
 
                     var quantitaTotale = (parseInt(giacenza) - parseInt(quantitaDaScaricare));
                     var prezzoTotale = (prezzo * quantitaTotale);
-
+                    var quantitaRimanente  = (parseInt(giacenza) - parseInt(quantitaDaScaricare));
                     var idOperatore = localStorage.idOperatore;
-
-                    SmaltiscoProdottiDaMagazzinoV2(idProdotto, quantitaTotale, prezzoTotale, idOperatore, true, "rosso");
+                    //SmaltiscoProdottiDaMagazzino(idProdotto, quantitaTotale, prezzoTotale, numeroLotto, idOperatore, null, null, '', true, "rosso");
+                   // SmaltiscoProdottiDaMagazzinoV2(idProdotto, quantitaTotale, prezzoTotale, idOperatore, true, "rosso");
+                   
+                    GetProdottiInMagazzinoByIdProdNumLotto(idProdotto, idOperatore, giacenza, quantitaDaScaricare, quantitaRimanente, prezzo, true, "rosso");
 
                     quantitaAttuale.animate({
                         backgroundColor: "red",
@@ -150,15 +260,108 @@ function GestioneMagazzino() {
                     }, 1000);
                     quantitaAttuale.html(quantitaTotale);
 
+                    
+
+                    //Non ricarica la pagina
+                    //setTimeout(GestioneMagazzino, 3000);
+                    
                 });
 
             }
+
+            displayNumeriLottoMagazzino(0, 0);
 
             var pulsanteFineGestMagazzino = '<br><p align="center"><input type="button" value="FINE" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti ui-btnCarica fineCarico" onclick="togliEvidenziatoMagazzino()" /></p>';
             tabellaGestioneMagazzino = $('#elencoGestioneMagazzino').append(pulsanteFineGestMagazzino);
         }
     });
 
+}
+
+function displayNumeriLottoMagazzino(idProdotto, quantitaAggiornata) {
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        url: urldisplayNumeriLottoMagazzino,
+        cache: false,
+        //jsonpCallback: 'risposta',
+        // jsonp: 'callback',
+        // dataType: "jsonp",            
+        async: true,
+        //            data: "idDisciplina=" + idDisciplina,
+        data: JSON.stringify({ idProdotto: idProdotto  }),        
+        error: function (data) {
+            console.log(data.responseText);            
+        },
+        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+        success: function (response) {
+            risultati = response.d;
+            $('#scarica' + idProdotto).val('');
+            if (quantitaAggiornata > 0) {
+                $('#quantMagazzino' + idProdotto).html(quantitaAggiornata);
+                $('#quantMagazzino' + idProdotto).attr('data-quantitamagazzino', quantitaAggiornata);
+                $('.lottoMag' + idProdotto).remove();
+            }
+            var idProd = 0;
+            var idProdottoOld = 0;
+            var numeroLotto = '';
+            var numeroLottoOld = '';
+            var quantitaLotto = 0;
+            var lotti = '';
+            var dataScadenza = '';
+            var dataScadenzaOld = '';
+            var rigaDettaglio = new Array();
+            for (var i = 0; i < risultati.length; i++) {                
+                numeroLotto = parseJsonDateLettura(risultati[i].numeroLotto);
+                dataScadenza = parseJsonDateLettura(risultati[i].dataScadenza);
+                idProd = risultati[i].idProdotto;
+
+                if (dataScadenza == dataScadenzaOld && idProd == idProdottoOld) {
+                    if (numeroLotto == '02-01-1' || numeroLotto == '02-01-1901') {
+                        numeroLotto = risultati[i].codiceLotto;
+                    }
+                    quantitaLotto = (parseInt(quantitaLotto) + parseInt(risultati[i].quantitaMagazzino));
+                    //$('.descrizione' + risultati[i].idProdotto).append('<div class="miniFont lottoMag' + risultati[i].idProdotto + '">' + quantitaLotto + ' - ' + parseJsonDateLettura(risultati[i].numeroLotto)+ '</div>');
+                    rigaDettaglio[i - 1] = '';
+                    rigaDettaglio[i] = '<div class="miniFont lottoMag' + risultati[i].idProdotto + '">' + quantitaLotto + ' - ' + dataScadenza + '</div>';
+                } else {
+                    if (numeroLotto == '02-01-1') {
+                        numeroLotto = risultati[i].codiceLotto;
+                    }
+                    if (idProd != idProdottoOld) {
+                        $('.lottoMag' + risultati[i].idProdotto).remove();
+                    }
+                    quantitaLotto = risultati[i].quantitaMagazzino;
+                    //$('.descrizione' + risultati[i].idProdotto).append('<div class="miniFont lottoMag' + risultati[i].idProdotto + '">' + risultati[i].quantitaMagazzino + ' - ' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div>');
+                    rigaDettaglio[i] = '<div class="miniFont lottoMag' + risultati[i].idProdotto + '">' + risultati[i].quantitaMagazzino + ' - ' + dataScadenza + '</div>';
+                }
+                numeroLottoOld = parseJsonDateLettura(risultati[i].numeroLotto);
+                dataScadenzaOld = parseJsonDateLettura(risultati[i].dataScadenza);
+                idProdottoOld = risultati[i].idProdotto;                                
+            }
+            for (var i = 0; i < risultati.length; i++) {
+                if (i == 0) {
+                    lotti =  rigaDettaglio[i];
+                }
+                if (risultati[i].idProdotto != idProdottoOld) {
+                    //lotti = lotti + rigaDettaglio[i];
+                    $('.descrizione' + idProdottoOld).append(lotti);
+                    if (i > 0) {
+                        lotti = '';
+                    }
+                    
+                }
+                if (i > 0) {
+                    lotti = lotti + rigaDettaglio[i];
+                }
+                
+                idProdottoOld = risultati[i].idProdotto;
+            }
+        }
+
+    });
 }
 
 function GetStoricoMagazzinoByIdProd(idProd, numeroRecord) {
@@ -383,7 +586,7 @@ function GetProdottiDaScaricareDaMagazzino(idProdotto, quantitaAttuale) {
                 numeroLotto = stringToDate(lottoSpecifico, 'dd/MM/yyyy', '/');
                 var idOperatore = localStorage.idOperatore;
 
-                SmaltiscoProdottiDaMagazzino(idProdotto, quantitaTotale, prezzoTotale, numeroLotto, idOperatore, numeroDDT, dataDDT, note, true);
+                SmaltiscoProdottiDaMagazzino(idProdotto, quantitaTotale, totaleAggiornato, prezzoTotale, numeroLotto, idOperatore, numeroDDT, dataDDT, note, true);
 
                 //dataDDT = null;
                 //console.log(' idProdotto=' + idProdotto + ' quantitaDaScaricare=' + quantitaDaScaricare + ' prezzoTotale=' + prezzoTotale + ' idOperatore=' + idOperatore + ' numeroLotto=' + numeroLotto + ' numeroDDT=' + numeroDDT + ' dataDDT=' + dataDDT + ' note=' + note);
@@ -728,7 +931,7 @@ function SituazioneMagazzino() {
 }
 
 
-function CaricaProdottoInMagazzino(idProdotto, quantitaCaricati, prezzoTotaleCaricati, idOperatore, numeroLotto, numeroDDT, dataDDT, note) {    
+function CaricaProdottoInMagazzino(idProdotto, quantitaCaricati, quantitaAggiornata, prezzoTotaleCaricati, idOperatore, codiceLotto, numeroLotto, dataScadenza, numeroDDT, dataDDT, note, colore) {    
 
     // Carico Prodotti in magazzino *********************************
     //note = '';
@@ -740,7 +943,7 @@ function CaricaProdottoInMagazzino(idProdotto, quantitaCaricati, prezzoTotaleCar
         url: urlCaricaProdottiInMagazzino,
         cache: false,
         async: true,        
-        data: JSON.stringify({ idProdotto: idProdotto, quantita: quantitaCaricati, prezzoTotale: prezzoTotaleCaricati, idOperatore: idOperatore, numeroLotto: numeroLotto, numeroDDT: numeroDDT, dataDDT: dataDDT, note: note }),        
+        data: JSON.stringify({ idProdotto: idProdotto, quantita: quantitaCaricati, prezzoTotale: prezzoTotaleCaricati, idOperatore: idOperatore, codiceLotto: codiceLotto, numeroLotto: numeroLotto, dataScadenza: dataScadenza, numeroDDT: numeroDDT, dataDDT: dataDDT, note: note, colore: colore }),
         error: function (data) {
             console.log(data.responseText)
         },
@@ -748,6 +951,8 @@ function CaricaProdottoInMagazzino(idProdotto, quantitaCaricati, prezzoTotaleCar
         complete: function () { $.mobile.loading('hide'); }, //Hide spinner
         success: function (response) {
             risultati = response.d;
+
+            displayNumeriLottoMagazzino(idProdotto, quantitaAggiornata);
 
             //console.log(risultati);
             //Ricarico i valori
@@ -790,18 +995,18 @@ function CaricaProdottoInMagazzinoV2(idProdotto, quantitaCaricati, prezzoTotaleC
 
 
 //smaltisco una determinata quantita di Prodotto
-function SmaltiscoProdottiDaMagazzino(IdProdotto, quantitaTotale, prezzoTotale, numeroLotto, IdOperatore, numeroDDT, dataDDT, note, smaltito) {
+function SmaltiscoProdottiDaMagazzino(IdProdotto, quantitaTotale, quantitaAggiornata, prezzoTotale, numeroLotto, IdOperatore, numeroDDT, dataDDT, note, smaltito, colore) {
 
     $.ajax({
         type: "POST",
         crossDomain: true,
         contentType: "application/json; charset=utf-8",
         //url: "http://www.giacomorabaglia.com/appdistributoridondi/WebServiceAppDondi.asmx/SmaltiscoProdottoInMagazzino",        
-        url: urlSmaltiscoProdottoInMagazzino,
+        url: urlSmaltiscoProdottoInMagazzinoV2,
         cache: false,
         async: true,
         //            data: "idDisciplina=" + idDisciplina,
-        data: JSON.stringify({ IdProdotto: IdProdotto, numeroLotto: numeroLotto, IdOperatore: IdOperatore, note: note, smaltito: smaltito }),
+        data: JSON.stringify({ IdProdotto: IdProdotto, IdOperatore: IdOperatore, smaltito: smaltito }),
         error: function (data) {
             console.log(data.responseText)
         },
@@ -810,8 +1015,8 @@ function SmaltiscoProdottiDaMagazzino(IdProdotto, quantitaTotale, prezzoTotale, 
         success: function (response) {
             risultati = response.d;
 
-            //console.log(risultati);
-            CaricaProdottoInMagazzino(IdProdotto, quantitaTotale, prezzoTotale, IdOperatore, numeroLotto, numeroDDT, dataDDT, note);
+            //console.log(risultati);            
+            CaricaProdottoInMagazzino(IdProdotto, quantitaTotale, quantitaAggiornata, prezzoTotale, IdOperatore, numeroLotto, numeroDDT, dataDDT, note, colore);
         }
 
     });
@@ -844,5 +1049,69 @@ function SmaltiscoProdottiDaMagazzinoV2(IdProdotto, quantitaTotale, prezzoTotale
     });
 }
 
+function GetProdottiInMagazzinoByIdProdNumLotto(idProdotto, idOperatore, quantitaAttuale, quantitaDaScaricare, quantitaRimanente, prezzo, smaltito, colore) {
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",        
+        url: urlGetProdottiInMagazzinoByIdProdNumLotto,
+        cache: false,
+        async: true,
+        //            data: "idDisciplina=" + idDisciplina,
+        data: JSON.stringify({ idProdotto: idProdotto, numeroLotto: null }),
+        error: function (data) {
+            console.log(data.responseText)
+        },
+        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+        success: function (response) {
+            risultati = response.d;
 
+            for (var i = 0; i < risultati.length; i++) {
+                var codiceLotto = risultati[i].codiceLotto;
+                var numLotto = parseJsonDateLettura(risultati[i].numeroLotto);
+                var dataScadenza = parseJsonDateLettura(risultati[i].dataScadenza);
+                numLotto = stringToDate(numLotto, 'dd-MM-yyyy', '-');
+                if (quantitaDaScaricare <= risultati[i].quantitaMagazzino) {
+                    
+                    SmaltiscoProdottoInMagazzinoV3(risultati[i].IdMagazzino, idProdotto, idOperatore, quantitaDaScaricare, parseInt(risultati[i].quantitaMagazzino), prezzo, quantitaAttuale, codiceLotto, numLotto, dataScadenza, smaltito, colore);
+                    break;
+                } else {
+                    SmaltiscoProdottoInMagazzinoV3(risultati[i].IdMagazzino, idProdotto, idOperatore, quantitaDaScaricare, parseInt(risultati[i].quantitaMagazzino), prezzo, quantitaAttuale, codiceLotto, numLotto, dataScadenza, smaltito, colore);
+                }
+                quantitaDaScaricare = parseInt(quantitaDaScaricare) - parseInt(risultati[i].quantitaMagazzino);
+            }
+            
+        }
+
+    });
+
+}
+         
+function SmaltiscoProdottoInMagazzinoV3(idMagazzino, idProdotto, idOperatore, quantitaDaSmaltire, quantitaRimanente, prezzoProdotto, quantitaAggiornata, codiceLotto, numeroLotto, dataScadenza, smaltito, colore) {
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        url: urlSmaltiscoProdottoInMagazzinoV3,
+        cache: false,
+        async: true,
+        //            data: "idDisciplina=" + idDisciplina,
+        data: JSON.stringify({ idMagazzino: idMagazzino, IdProdotto: idProdotto, IdOperatore: idOperatore, quantitaDaSmaltire: quantitaDaSmaltire, quantitaRimanente: quantitaRimanente, prezzoProdotto: prezzoProdotto, codiceLotto: codiceLotto, numeroLotto: numeroLotto, dataScadenza: dataScadenza, smaltito: smaltito, colore: colore }),
+        error: function (data) {
+            console.log(data.responseText)
+        },
+        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+        success: function (response) {
+            risultati = response.d;
+            //console.log(risultati);
+            //for (var i = 0; i < risultati.length; i++) {
+            //    SmaltiscoProdottoInMagazzinoV3(idProdotto, idOperatore, quantitaAttuale, quantitaDaScaricare, quantitaRimanente, prezzo, risultati[i].numeroLotto, smaltito, colore);
+            //}
+            displayNumeriLottoMagazzino(idProdotto, quantitaAggiornata);
+        }
+
+    });
+}
         

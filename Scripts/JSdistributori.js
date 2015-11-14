@@ -57,7 +57,7 @@ function ElencoDistributori() {
             //} else {
             //    $("#authResult").html('User o Password Errati!!!');
             //}
-
+           // console.log(distributori);
             $("#tuttiDistributori").html(distributori);
 
         }
