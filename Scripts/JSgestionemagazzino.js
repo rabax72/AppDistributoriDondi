@@ -170,8 +170,8 @@ function GestioneMagazzino() {
                             return;
                         }
 
-                        if (numeroLotto == '') {
-                            alert('Numero Lotto è un campo obbligatorio!');
+                        if (numeroLotto == '' && codiceLotto =='') {
+                            alert('Inserire il Codice Lotto o il Numero Lotto!');
                             return;
                         }
                         if (numeroLotto != '') {
