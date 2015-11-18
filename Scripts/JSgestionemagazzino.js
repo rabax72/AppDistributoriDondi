@@ -61,6 +61,7 @@ function GestioneMagazzino() {
             var q = 0;
             for (var i = 0; i < risultati.length; i++) {
                 colore = risultati[i].colore;
+                quantita = risultati[i].quantitaMagazzino;
                 //var lotto = parseJsonDateLettura(risultati[i].numeroLotto);
                 //if (lotto == '02-01-1') {
                 //    lotto = '';
@@ -69,12 +70,12 @@ function GestioneMagazzino() {
                 dettaglio = dettaglio + '<td align="center"><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"><a href="#popUpStoricoMagazzino" data-rel="popup" data-position-to="window" class="storicoScaricatoInMagazzino" data-idProdotto="' + risultati[i].idProdotto + '" data-IdDistributore="' + risultati[i].IdDistributore + '"><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/info_40x40.png" border="0" alt="Storico Vendite" title="Storico Vendite"></a></td>';
                 dettaglio = dettaglio + '<td class="descrizione' + risultati[i].idProdotto + '">' + risultati[i].descrizione + '</td>';
                 dettaglio = dettaglio + '<td class="medioGrande">' + risultati[i].prezzo + ' €</td>';
-                dettaglio = dettaglio + '<td class="quantita ' + colore + ' quantMagazzino-' + risultati[i].idProdotto + '">' + risultati[i].quantitaMagazzino + '</td>';
+                dettaglio = dettaglio + '<td class="quantita ' + colore + ' quantMagazzino-' + risultati[i].idProdotto + '">' + quantita + '</td>';
                 //dettaglio = dettaglio + '<td><input type="text" id="lotto' + risultati[i].idProdotto + '" class="miniInput calendario" min="0"></td>';
-                dettaglio = dettaglio + '<td><input type="number" id="carica' + risultati[i].idProdotto + '" class="miniInput" min="0"><a href="#" data-descrizione="' + risultati[i].descrizione + '" data-idProdotto="' + risultati[i].idProdotto + '" data-foto="' + risultati[i].foto + '" data-quantita="' + risultati[i].quantitaMagazzino + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdottoInMagazzino ui-btnCarica">Carica</a></td>';
+                dettaglio = dettaglio + '<td><input type="number" id="carica' + risultati[i].idProdotto + '" class="miniInput" min="0"><a href="#" data-descrizione="' + risultati[i].descrizione + '" data-idProdotto="' + risultati[i].idProdotto + '" data-foto="' + risultati[i].foto + '" data-quantita="' + quantita + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdottoInMagazzino ui-btnCarica">Carica</a></td>';
                 
-                if (parseInt(risultati[i].quantitaMagazzino) > 0) {
-                    dettaglio = dettaglio + '<td><input type="number" id="scarica' + risultati[i].idProdotto + '" class="miniInput" min="0"><a href="#" data-descrizione="' + risultati[i].descrizione + '" data-IdMagazzino="' + risultati[i].IdMagazzino + '"  data-idProdotto="' + risultati[i].idProdotto + '" data-quantita="' + risultati[i].quantitaMagazzino + '" data-prezzo="' + risultati[i].prezzo + '" data-foto="' + risultati[i].foto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scaricaProdottoDaMagazzino ui-btnScarica">Scarica</a> </td>';
+                if (parseInt(quantita) > 0) {
+                    dettaglio = dettaglio + '<td><input type="number" id="scarica' + risultati[i].idProdotto + '" class="miniInput" min="0"><a href="#" data-descrizione="' + risultati[i].descrizione + '" data-IdMagazzino="' + risultati[i].IdMagazzino + '"  data-idProdotto="' + risultati[i].idProdotto + '" data-quantita="' + quantita + '" data-prezzo="' + risultati[i].prezzo + '" data-foto="' + risultati[i].foto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active scaricaProdottoDaMagazzino ui-btnScarica">Scarica</a> </td>';
                 }
                 else {
                     dettaglio = dettaglio + '<td></td>';
@@ -313,7 +314,11 @@ function displayNumeriLottoMagazzino(idProdotto, quantitaAggiornata) {
             var dataScadenza = '';
             var dataScadenzaOld = '';
             var rigaDettaglio = new Array();
-            for (var i = 0; i < risultati.length; i++) {                
+            for (var i = 0; i < risultati.length; i++) {
+                if (idProdotto == 0 && quantitaAggiornata == 0) {
+                  
+                    $('.lottoMag' + risultati[i].idProdotto).remove();
+                }
                 numeroLotto = parseJsonDateLettura(risultati[i].numeroLotto);
                 dataScadenza = parseJsonDateLettura(risultati[i].dataScadenza);
                 idProd = risultati[i].idProdotto;
@@ -341,11 +346,14 @@ function displayNumeriLottoMagazzino(idProdotto, quantitaAggiornata) {
                 dataScadenzaOld = parseJsonDateLettura(risultati[i].dataScadenza);
                 idProdottoOld = risultati[i].idProdotto;                                
             }
+            idProdottoOld = 0;
+            var idProdNew = 0;
             for (var i = 0; i < risultati.length; i++) {
+                idProdNew = risultati[i].idProdotto;
                 if (i == 0) {
                     lotti =  rigaDettaglio[i];
                 }
-                if (risultati[i].idProdotto != idProdottoOld) {
+                if (idProdNew != idProdottoOld) {
                     //lotti = lotti + rigaDettaglio[i];
                     $('.descrizione' + idProdottoOld).append(lotti);
                     if (i > 0) {
@@ -353,11 +361,18 @@ function displayNumeriLottoMagazzino(idProdotto, quantitaAggiornata) {
                     }
                     
                 }
+
+                //per far vedere i lotti nell'ultimo prodotto
+                if (i == risultati.length - 1) {
+                    lotti = lotti + rigaDettaglio[i];
+                    $('.descrizione' + idProdNew).append(lotti);
+                }
+
                 if (i > 0) {
                     lotti = lotti + rigaDettaglio[i];
                 }
                 
-                idProdottoOld = risultati[i].idProdotto;
+                idProdottoOld = idProdNew;
             }
         }
 
