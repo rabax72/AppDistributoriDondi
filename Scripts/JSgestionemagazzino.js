@@ -134,7 +134,8 @@ function GestioneMagazzino() {
                     var quantitaTotale = (parseInt(quantitaAttuale) + parseInt(quantitaCaricati));
                     var prezzoTotaleCaricati = (prezzo * quantitaCaricati);
                     
-                    var finestraDati = '<div style="padding:10px 20px;">';
+                    var finestraDati = '';
+                    finestraDati = '<div style="padding:10px 20px;">';
                     finestraDati = finestraDati + '<h3>Carica in Magazzino</h3>';
                     finestraDati = finestraDati + '<img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + foto + '">';
                     finestraDati = finestraDati + '<label for="quantitaProdDaCaricareInMagazzino">Quantita:</label>';
@@ -147,10 +148,20 @@ function GestioneMagazzino() {
                     finestraDati = finestraDati + '<input type="text" id="dataScadenzaProdDaCaricareInMagazzino" data-theme="a">';
                     finestraDati = finestraDati + '<label for="noteCaricareinMagazzino">Note:</label>';
                     finestraDati = finestraDati + '<textarea cols="40" rows="5" id="noteCaricareinMagazzino" class="ui-input-text ui-body-c ui-corner-all ui-shadow-inset"></textarea>';
-                    finestraDati = finestraDati + '<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdottoInMagazzino">Carica</a>';
+                    finestraDati = finestraDati + '<a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-active caricaProdottoInMagazzinoDaPopUp">Carica</a>';
                     finestraDati = finestraDati + '</div>';
 
                     $("#popupCaricaMerceInMagazzino").html(finestraDati);
+
+                    $("#popupCaricaMerceInMagazzino").bind({
+                        popupafterclose: function (event, ui) {
+                            //alert('chiuso');
+                            //console.log(idProdotto);
+                            $("#popupCaricaMerceInMagazzino").html('');
+                            finestraDati = '';
+                            $("#carica" + idProdotto).val('');
+                        }
+                    });
 
                     $("#dataScadenzaProdDaCaricareInMagazzino").datepicker({
                         dateFormat: "dd-mm-yy"
@@ -160,7 +171,7 @@ function GestioneMagazzino() {
                         dateFormat: "dd-mm-yy"
                     });
 
-                    $(".caricaProdottoInMagazzino").on('click', function () {
+                    $(".caricaProdottoInMagazzinoDaPopUp").on('click', function () {
                         var numeroLotto = $("#numeroLotttoCaricareinMagazzino").val();                    
                         var quantitaCaricati = $("#quantitaProdDaCaricareInMagazzino").val();
                         var codiceLotto = $("#codiceLottoDaCaricareInMagazzino").val();
