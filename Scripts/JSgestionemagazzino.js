@@ -373,11 +373,11 @@ function displayNumeriLottoMagazzino(idProdotto, quantitaAggiornata) {
                     
                 }
 
-                //per far vedere i lotti nell'ultimo prodotto
-                if (i == risultati.length - 1) {
-                    lotti = lotti + rigaDettaglio[i];
-                    $('.descrizione' + idProdNew).append(lotti);
-                }
+                ////per far vedere i lotti nell'ultimo prodotto
+                //if (i == risultati.length - 1) {
+                //    lotti = lotti + rigaDettaglio[i];
+                //    $('.descrizione' + idProdNew).append(lotti);
+                //}
 
                 if (i > 0) {
                     lotti = lotti + rigaDettaglio[i];
@@ -385,6 +385,15 @@ function displayNumeriLottoMagazzino(idProdotto, quantitaAggiornata) {
                 
                 idProdottoOld = idProdNew;
             }
+
+            //Se aggiorno solo un prodotto
+            if (idProdotto != '') {
+                $('.lottoMag' + idProdotto).remove();               
+                $('.descrizione' + idProdotto).append(lotti);
+               
+            }
+            
+
         }
 
     });

@@ -402,7 +402,17 @@ function GetSituazioneDistributore(IdDistributore, descDistributore) {
                     return;
                 } else {
                     $(this).prev().removeClass("evidenziaErrore");
-                }                
+                }
+
+                if (isInteroPositivo(parseInt(quantMagazzino)) == false) {
+                    alert("Questo prodotto risulta esaurito in magazzino!");
+                    return;
+                }
+
+                if (parseInt(quantitaDaCaricare) > parseInt(quantMagazzino)) {
+                    alert("Non si possono caricare più prodotti di quelli presenti in magazzino!");                    
+                    return;
+                }
                
                 GetProdottiInMagazzinoPerCaricare(IdDistributore, idProdotto, quantitaDaCaricare, quantitaRimasti, quantitaAggiornataMagazzino, quantitaAggiornataDistributore, prezzoTotaleDaCaricare, prezzoTotaleRimasti, idOperatore);
 
@@ -584,9 +594,10 @@ function displayNumeriLottoDistributore(idDistributore, idProdotto, quantitaDist
                 idProdottoOld = risultati[i].idProdotto;
             }
 
-            //if (idProdotto != null) {
-            //    $('.quantProdInDist-' + idProdotto).append(lottiDist);
-            //}
+            if (idProdotto != '') {
+                $('.lottoDist' + idProdotto).remove();
+                $('.quantProdInDist-' + idProdotto).append(lotti);
+            }
             
         }
 
