@@ -71,6 +71,7 @@ var urlFilterMarkReport = urlProd + 'WebServiceAppDondi.asmx/FiltraMarkReport';
 var urlGetStoricoMagazzinoByIdProd = urlProd + 'WebServiceAppDondi.asmx/GetStoricoMagazzinoByIdProd';
 var urlCorrezioneMagazzinoByIdProd = urlProd + 'WebServiceAppDondi.asmx/CorrezioneMagazzinoByIdProd';
 var urldisplayNumeriLottoMagazzino = urlProd + 'WebServiceAppDondi.asmx/displyaNumeriLottoMagazzino';
+var urldisplayNumeriLottoMagazzinoResi = urlProd + 'WebServiceAppDondi.asmx/displyaNumeriLottoMagazzinoResi';
 var urldisplayNumeriLottoDistributore = urlProd + 'WebServiceAppDondi.asmx/displayNumeriLottoDistributore';
 var urlGetProdottiInMagazzinoByIdProdNumLotto = urlProd + 'WebServiceAppDondi.asmx/GetProdottiInMagazzinoByIdProdNumLotto';
 

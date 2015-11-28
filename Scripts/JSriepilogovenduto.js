@@ -914,6 +914,118 @@ function GetVendutoByIdCliente(idCliente, descrizione, DataDa, DataA) {
 
 }
 
+function displayNumeriLottoMagazzinoResi(idProdotto, quantitaAggiornata) {
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        url: urldisplayNumeriLottoMagazzinoResi,
+        cache: false,
+        //jsonpCallback: 'risposta',
+        // jsonp: 'callback',
+        // dataType: "jsonp",            
+        async: true,
+        //            data: "idDisciplina=" + idDisciplina,
+        data: JSON.stringify({ idProdotto: idProdotto }),
+        error: function (data) {
+            console.log(data.responseText);
+        },
+        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+        success: function (response) {
+            risultati = response.d;
+            //$('#scarica' + idProdotto).val('');
+            //if (quantitaAggiornata > 0) {
+            //    $('#quantMagazzino' + idProdotto).html(quantitaAggiornata);
+            //    $('#quantMagazzino' + idProdotto).attr('data-quantitamagazzino', quantitaAggiornata);
+            //    $('.lottoMagResi' + idProdotto).remove();
+            //}
+            var idProd = 0;
+            var idProdottoOld = 0;
+            var numeroLotto = '';
+            var numeroLottoOld = '';
+            var quantitaLotto = 0;
+            var lotti = '';
+            var dataScadenza = '';
+            var dataScadenzaOld = '';
+            var rigaDettaglio = new Array();
+            for (var i = 0; i < risultati.length; i++) {
+                if (idProdotto == 0 && quantitaAggiornata == 0) {
+
+                    $('.lottoMagResi' + risultati[i].idProdotto).remove();
+                }
+                numeroLotto = parseJsonDateLettura(risultati[i].numeroLotto);
+                dataScadenza = parseJsonDateLettura(risultati[i].dataScadenza);
+                idProd = risultati[i].idProdotto;
+
+                if (dataScadenza == dataScadenzaOld && idProd == idProdottoOld) {
+                    if (numeroLotto == '02-01-1' || numeroLotto == '02-01-1901') {
+                        numeroLotto = risultati[i].codiceLotto;
+                    }
+                    quantitaLotto = (parseInt(quantitaLotto) + parseInt(risultati[i].quantitaMagazzino));
+                    //$('.descrizione' + risultati[i].idProdotto).append('<div class="miniFont lottoMagResi' + risultati[i].idProdotto + '">' + quantitaLotto + ' - ' + parseJsonDateLettura(risultati[i].numeroLotto)+ '</div>');
+                    rigaDettaglio[i - 1] = '';
+                    rigaDettaglio[i] = '<div class="miniFont lottoMagResi' + risultati[i].idProdotto + '">' + quantitaLotto + ' / ' + dataScadenza + ' / L:' + numeroLotto + '</div>';
+                } else {
+                    if (numeroLotto == '02-01-1' || numeroLotto == '02-01-1901') {
+                        numeroLotto = risultati[i].codiceLotto;
+                    }
+                    if (idProd != idProdottoOld) {
+                        $('.lottoMagResi' + risultati[i].idProdotto).remove();
+                    }
+                    quantitaLotto = risultati[i].quantitaMagazzino;
+                    //$('.descrizione' + risultati[i].idProdotto).append('<div class="miniFont lottoMagResi' + risultati[i].idProdotto + '">' + risultati[i].quantitaMagazzino + ' - ' + parseJsonDateLettura(risultati[i].numeroLotto) + '</div>');
+                    rigaDettaglio[i] = '<div class="miniFont lottoMagResi' + risultati[i].idProdotto + '">' + risultati[i].quantitaMagazzino + ' / ' + dataScadenza + ' / L:' + numeroLotto + '</div>';
+                }
+                numeroLottoOld = parseJsonDateLettura(risultati[i].numeroLotto);
+                dataScadenzaOld = parseJsonDateLettura(risultati[i].dataScadenza);
+                idProdottoOld = risultati[i].idProdotto;
+            }
+            idProdottoOld = 0;
+            var idProdNew = 0;
+            for (var i = 0; i < risultati.length; i++) {
+                idProdNew = risultati[i].idProdotto;
+                if (i == 0) {
+                    lotti = rigaDettaglio[i];
+                }
+                if (idProdNew != idProdottoOld) {
+                    //lotti = lotti + rigaDettaglio[i];
+                    if (idProdottoOld == 0) {
+                        $('.descrizioneReso' + idProdNew).append(lotti);
+                    }
+                    $('.descrizioneReso' + idProdottoOld).append(lotti);
+                    if (i > 0) {
+                        lotti = '';
+                    }
+
+                }
+
+                ////per far vedere i lotti nell'ultimo prodotto
+                if (i == risultati.length - 1) {
+                    lotti = lotti + rigaDettaglio[i];
+                    $('.descrizioneReso' + idProdNew).append(lotti);
+                }
+
+                if (i > 0) {
+                    lotti = lotti + rigaDettaglio[i];
+                }
+
+                idProdottoOld = idProdNew;
+            }
+
+            //Se aggiorno solo un prodotto
+            if (idProdotto != '') {
+                $('.lottoMagResi' + idProdotto).remove();
+                $('.descrizioneReso' + idProdotto).append(lotti);
+
+            }
+
+
+        }
+
+    });
+}
+
 function GetProdottiInMagazzinoResi() {
 
     location.hash = "RiepilogoResi";
@@ -983,7 +1095,7 @@ function GetProdottiInMagazzinoResi() {
                     rigaDettaglio[i] = '<tr>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
                     //rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + ' (' + parseJsonDateLettura(risultati[i].numeroLotto) + ')</td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="descrizioneReso' + risultati[i].idProdotto + '">' + risultati[i].descrizione + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantitaMagazzinoResi + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + risultati[i].prezzoTotale + ' €</td>';
                     //rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + risultati[i].descrizioneDistributore + '</td>';
@@ -999,7 +1111,7 @@ function GetProdottiInMagazzinoResi() {
                     prezzoTotProd = prezzoTotProd + risultati[i].prezzoTotale;
                     rigaDettaglio[i] = '<tr>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td><img src="http://www.giacomorabaglia.com/public/appdistributoridoldi/fotoprodotti/' + risultati[i].foto + '"></td>';
-                    rigaDettaglio[i] = rigaDettaglio[i] + '<td>' + risultati[i].descrizione + '</td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="descrizioneReso' + risultati[i].idProdotto + '">' + risultati[i].descrizione + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + quantitaTot + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + Number(prezzoTotProd).toFixed(2) + ' €</td>';
                     //rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + risultati[i].descrizioneDistributore + '</td>';
@@ -1044,7 +1156,7 @@ function GetProdottiInMagazzinoResi() {
                 { "paging": false, responsive: true, dom: 'T<"clear">lfrtip' }
             );
 
-
+            displayNumeriLottoMagazzinoResi(0, 0);
         }
     });
 
