@@ -74,6 +74,7 @@ var urldisplayNumeriLottoMagazzino = urlProd + 'WebServiceAppDondi.asmx/displyaN
 var urldisplayNumeriLottoMagazzinoResi = urlProd + 'WebServiceAppDondi.asmx/displyaNumeriLottoMagazzinoResi';
 var urldisplayNumeriLottoDistributore = urlProd + 'WebServiceAppDondi.asmx/displayNumeriLottoDistributore';
 var urlGetProdottiInMagazzinoByIdProdNumLotto = urlProd + 'WebServiceAppDondi.asmx/GetProdottiInMagazzinoByIdProdNumLotto';
+var urlAzzeraProdottoInMagazzinoResi = urlProd + 'WebServiceAppDondi.asmx/AzzeraProdottoInMagazzinoResi';
 
 $(function () {    
 

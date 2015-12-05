@@ -919,7 +919,7 @@ function GetProdottiInMagazzinoResi() {
                                             '<th>Desc.</th>' +
                                             '<th>Quantità</th>' +
                                             '<th>Totale perso</th>' +
-                                            //'<th>Distributore</th>' +
+                                            '<th>Svuota</th>' +
                                             //'<th>Cliente</th>' +
                                             //'<th>Data Reso</th>' +
                                             //'<th>Operatore</th>' +
@@ -962,7 +962,7 @@ function GetProdottiInMagazzinoResi() {
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="descrizioneReso' + risultati[i].idProdotto + '">' + risultati[i].descrizione + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + risultati[i].quantitaMagazzinoResi + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + risultati[i].prezzoTotale + ' €</td>';
-                    //rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + risultati[i].descrizioneDistributore + '</td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto"><a href="#" data-idProdotto="' + risultati[i].idProdotto + '" data-prezzo="' + risultati[i].prezzo + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active rimasti ui-btnCarica">Svuota</a></td>';
                     //rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + risultati[i].descrizioneCliente + '</td>';
                     //rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataInserimento) + '</td>';
                     //rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
@@ -978,7 +978,7 @@ function GetProdottiInMagazzinoResi() {
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="descrizioneReso' + risultati[i].idProdotto + '">' + risultati[i].descrizione + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="quantita">' + quantitaTot + '</td>';
                     rigaDettaglio[i] = rigaDettaglio[i] + '<td class="medioGrande">' + Number(prezzoTotProd).toFixed(2) + ' €</td>';
-                    //rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + risultati[i].descrizioneDistributore + '</td>';
+                    rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto"><a href="#" data-idProdotto="' + risultati[i].idProdotto + '" class="ui-btn ui-corner-all ui-shadow ui-btn-active svuota ui-btnCarica">Svuota</a></td>';
                     //rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + risultati[i].descrizioneCliente + '</td>';
                     //rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + parseJsonDateSenzaTime(risultati[i].dataInserimento) + '</td>';
                     //rigaDettaglio[i] = rigaDettaglio[i] + '<td class="storicoVenduto">' + risultati[i].operatoreNome + ' ' + risultati[i].operatoreCognome + '</td>';
@@ -1007,7 +1007,7 @@ function GetProdottiInMagazzinoResi() {
                                             '<th>Desc.</th>' +
                                             '<th>Totale Quantità: ' + totaleQuantita + '</th>' +
                                             '<th>Totale Perso: ' + Number(prezzoTot).toFixed(2) + '€</th>' +
-                                            //'<th>Distributore</th>' +
+                                            '<th>Svuota</th>' +
                                             //'<th>Cliente</th>' +
                                             //'<th>Data Reso</th>' +
                                             //'<th>Operatore</th>' +
@@ -1020,10 +1020,42 @@ function GetProdottiInMagazzinoResi() {
                 { "paging": false, responsive: true, dom: 'T<"clear">lfrtip' }
             );
 
+            $(".svuota").on('click', function () {
+                
+                var idProdotto = $(this).attr('data-idProdotto');
+                var labelQuantita = $(this).closest('td').prev('td').prev('td');                
+                labelQuantita.html('0');
+                AzzeraProdottoInMagazzinoResi(idProdotto);
+
+            });
+
             displayNumeriLottoMagazzinoResi(0, 0);
         }
     });
 
+}
+
+function AzzeraProdottoInMagazzinoResi(idProdotto) {
+    $.ajax({
+        type: "POST",
+        crossDomain: true,
+        contentType: "application/json; charset=utf-8",
+        url: urlAzzeraProdottoInMagazzinoResi,
+        cache: false,
+        async: true,
+        data: JSON.stringify({ idProdotto: idProdotto }),
+        error: function (data) {
+            console.log(data.responseText)
+        },
+        beforeSend: function () { $.mobile.loading('show'); }, //Show spinner
+        complete: function () { $.mobile.loading('hide'); }, //Hide spinner
+        success: function (response) {
+            risultati = response.d;
+
+            //console.log(risultati);
+            displayNumeriLottoMagazzinoResi(idProdotto, 0);
+        }
+    });
 }
 
 function GetProdottiInMagazzinoResiFiltrato(dataDa, dataA){   
